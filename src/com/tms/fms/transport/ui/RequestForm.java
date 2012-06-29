@@ -1,17 +1,13 @@
 package com.tms.fms.transport.ui;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
-import java.util.TimeZone;
 
 import kacang.Application;
-import kacang.model.DaoException;
 import kacang.services.security.SecurityService;
 import kacang.stdui.Button;
 import kacang.stdui.ButtonGroup;
@@ -33,7 +29,6 @@ import com.tms.fms.engineering.model.Sequence;
 import com.tms.fms.register.model.FMSRegisterManager;
 import com.tms.fms.setup.model.SetupModule;
 import com.tms.fms.transport.model.OutsourceObject;
-import com.tms.fms.transport.model.RateCardObject;
 import com.tms.fms.transport.model.SetupObject;
 import com.tms.fms.transport.model.TransportModule;
 import com.tms.fms.transport.model.TransportRequest;
@@ -390,8 +385,6 @@ public class RequestForm extends Form {
 		SecurityService security = (SecurityService) Application.getInstance()
 				.getService(SecurityService.class);
 		
-		long day = 0;
-		String reqStatus = "";
 		// Date today = new Date();
 		Calendar today = Calendar.getInstance();
 		Calendar start = Calendar.getInstance();
@@ -710,7 +703,7 @@ public class RequestForm extends Form {
 
 				programL.setText(SM.selectProgName(transportRequest.getProgram()));
 
-				request = TM.getVehicles(id);
+				request = TM.getVehicles(id, true);
 				
 				String rate = transportRequest.getRate();
 				if(null == rate || "".equals(rate))
@@ -777,11 +770,11 @@ public class RequestForm extends Form {
 
 		TransportModule TM = (TransportModule) Application.getInstance().getModule(TransportModule.class);
 		outsourceObject = new OutsourceObject();
-		String outsourceId = "";
+		//String outsourceId = "";
 		try {
 
 			outsourceObject = TM.selectTransportOutsource(id);
-			outsourceId = outsourceObject.getId();
+			//outsourceId = outsourceObject.getId();
 
 			int veh = 0;
 			int dri = 0;

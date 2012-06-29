@@ -10,7 +10,6 @@ import kacang.stdui.CheckBox;
 import kacang.stdui.Form;
 import kacang.stdui.SelectBox;
 import kacang.stdui.TextField;
-import kacang.stdui.validator.ValidatorNotEmpty;
 import kacang.ui.Event;
 import kacang.ui.Forward;
 import kacang.util.Log;
@@ -71,14 +70,19 @@ public class TransportVehicle extends Form
 	    			SetupObject so = (SetupObject) it.next();
 	    			String id = so.getSetup_id();
 	    			String name = so.getName();
-	    			category.addOption(id, name);
+	    			String status = so.getStatus();
+	    			if (status.equals("1")) {
+	    				category.addOption(id, name);
+	    			}
 	    		}
+	    		
 	    		int i = 0;
-	    		request = tran.getVehicles(requestId);
+	    		request = tran.getVehicles(requestId, true);
 	    		deleteButton = new Button[request.size()];
 	    		for(Iterator it = request.iterator(); it.hasNext(); ){
 	    			VehicleRequest vr = (VehicleRequest) it.next();
 	    			String id = vr.getId();
+	    			
 	    			deleteButton[i] = new Button(id,"Delete");
 	    			addChild(deleteButton[i]);
 	    			i++;

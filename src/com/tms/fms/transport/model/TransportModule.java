@@ -483,10 +483,34 @@ public class TransportModule extends DefaultModule {
 	    {    	
 	    	
 		 	TransportDao dao = (TransportDao) getDao();       
-	        Collection col = dao.selectVehicles(reqId);
+	        Collection col = dao.selectVehicles(reqId, false);
 	         
 	        return col;
 	    }
+	 
+	public Collection getVehicles(String reqId, boolean showInvalid) throws DaoException {    	
+		TransportDao dao = (TransportDao) getDao();       
+		Collection col = dao.selectVehicles(reqId, showInvalid);
+		
+		// mark for inactive or invalid vehicles 
+		try {
+			for (Iterator iterator = col.iterator(); iterator.hasNext();) {
+				VehicleRequest vr = (VehicleRequest) iterator.next();
+				
+				String categoryStatus = (String) vr.getProperty("categoryStatus");
+				String type = vr.getType();
+	
+				if (categoryStatus == null || type == null) {
+					vr.setName(vr.getName() + " (invalid)");
+				} else if (categoryStatus != null && categoryStatus.equals("0")) {
+					vr.setName(vr.getName() + " (inactive)");
+				}
+			}
+		} catch (Exception e) {
+		}
+		
+		return col;
+	}
 	 
 	 public Collection getVehicleByType(String reqId, String type) throws DaoException
 	    {    	

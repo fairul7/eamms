@@ -1,6 +1,5 @@
 package com.tms.fms.facility.model;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.tms.fms.engineering.model.EngineeringModule;
@@ -28,7 +27,6 @@ public class FacilityObject extends DefaultDataObject{
 	private String have_child;
 	private String status;
 	private String createdby;
-	private String createdby_name;
 	private Date createdby_date;
 	private String updatedby;
 	private Date updatedby_date;
@@ -64,6 +62,9 @@ public class FacilityObject extends DefaultDataObject{
 	
 	private String takenBy;
 	private String preparedBy;
+	
+	private String requestedBy;
+	private String requestedByName;
 	
 	public String item;
 	
@@ -485,5 +486,27 @@ public class FacilityObject extends DefaultDataObject{
 	public String getStatusLabel() {
 		return (String)EngineeringModule.ASSIGNMENT_FACILITY_STATUS_MAP.get(status);
 	}
+
+	public String getRequestedBy() {
+		return requestedBy;
+	}
+
+	public void setRequestedBy(String requestedBy) {
+		this.requestedBy = requestedBy;
+	}
 	
+	public String getRequestedByName() {
+		return requestedByName;
+	}
+
+	public void setRequestedByName(String requestedByName) {
+		this.requestedByName = requestedByName;
+	}
+
+	public String getRequestedBySpecial() {
+		if (requestedByName != null && !requestedByName.trim().equals("")) {
+			return requestedByName;
+		}
+		return checkout_by;
+	}
 }

@@ -49,6 +49,11 @@ public class PrintInternalCheckOutForm extends Form {
         try{
         	userCheckout = security.getUser(fo.getCheckout_by()).getName();
         	fo.setCheckout_by(userCheckout);
+        	
+        	String requestedBy = fo.getRequestedBy();
+        	if (requestedBy != null) {
+        		fo.setRequestedByName(security.getUser(requestedBy).getName());
+        	}
         }catch(Exception e){
         	//Log.getLog(getClass()).error("Error getUser(1)", e);
         }

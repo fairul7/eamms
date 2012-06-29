@@ -2,6 +2,8 @@ Fixed #13440: Selecting a different facility does not update the Total
 Fixed #13583: Edit Link missing for FC
 Fixed #13570 - Fix performance issue when export to Excel
 Requirement #13512 - Auto Assignment
+Fixed #13607 - Transport - Total Amount shown as zero
+Fixed #13574 - Internal Check Out saves the Request By as the Check Out By
 
 fms_1.0.0_update (June 12 2012) V2.5
 -------------------------------------

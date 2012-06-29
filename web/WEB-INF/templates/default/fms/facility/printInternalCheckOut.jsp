@@ -18,7 +18,7 @@
 	<tr>
         <td width="25%" nowrap class="profileRow" style="font-size:10pt;" align="left" valign="top">
 				<b><fmt:message key="fms.facility.form.requestor"/></b>&nbsp;</td>
-        	<td width="75%" class="profileRow" style="font-size:10pt;" valign="top">:&nbsp;<c:out value="${widget.fo.checkout_by}"/></td>
+        	<td width="75%" class="profileRow" style="font-size:10pt;" valign="top">:&nbsp;<c:out value="${widget.fo.requestedBySpecial}"/></td>
     	</tr>
 	<tr>
         <td width="25%" nowrap class="profileRow" style="font-size:10pt;" align="left" valign="top">

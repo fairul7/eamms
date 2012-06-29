@@ -1,20 +1,16 @@
 package com.tms.fms.facility.ui;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
 import kacang.Application;
 import kacang.stdui.Button;
-import kacang.stdui.CheckBox;
 import kacang.stdui.Form;
 import kacang.stdui.Label;
 import kacang.stdui.Panel;
 import kacang.stdui.TextField;
-import kacang.stdui.TimeField;
-import kacang.stdui.validator.ValidatorNotEmpty;
 import kacang.ui.Event;
 import kacang.ui.Forward;
 import kacang.util.Log;
@@ -24,9 +20,6 @@ import com.tms.fms.facility.model.FacilityDao;
 import com.tms.fms.facility.model.FacilityModule;
 import com.tms.fms.facility.model.FacilityObject;
 import com.tms.fms.facility.model.SetupModule;
-import com.tms.fms.facility.model.WorkingProfile;
-import com.tms.fms.widgets.BoldLabel;
-
 
 public class CheckOutDetailsForm extends Form {
 	
@@ -82,7 +75,7 @@ public class CheckOutDetailsForm extends Form {
 				boolean update = false;
 				FacilityObject fo=(FacilityObject)itemList.iterator().next();
 				date=DateUtil.formatDate(SetupModule.DATE_TIME_FORMAT, fo.getCheckout_date());
-				requestor=fo.getCheckout_by();
+				requestor=fo.getRequestedBySpecial();
 				location=fo.getLocation();
 				purpose=fo.getPurpose();
 				
@@ -167,7 +160,7 @@ public class CheckOutDetailsForm extends Form {
 				}
 			}
 			
-			String fwd = "checkOutDetails.jsp?groupId=" + groupId;
+			//String fwd = "checkOutDetails.jsp?groupId=" + groupId;
 			
 			return new Forward("UPDATED");
 		} catch (Exception e) {

@@ -21,16 +21,9 @@ import kacang.stdui.TextField;
 import kacang.ui.Event;
 import kacang.ui.Forward;
 import kacang.util.Log;
-import kacang.util.UuidGenerator;
 
-import com.tms.fms.department.model.FMSDepartmentManager;
-import com.tms.fms.engineering.model.EngineeringModule;
-import com.tms.fms.register.model.FMSRegisterManager;
 import com.tms.fms.setup.model.SetupModule;
-import com.tms.fms.transport.model.FmsNotification;
-import com.tms.fms.transport.model.OutsourceObject;
 import com.tms.fms.transport.model.RateCardObject;
-import com.tms.fms.transport.model.SetupObject;
 import com.tms.fms.transport.model.TransportModule;
 import com.tms.fms.transport.model.TransportRequest;
 import com.tms.fms.transport.model.VehicleRequest;
@@ -407,7 +400,7 @@ public class AssignAssignmentForm extends Form {
 			 startTimeL.setText(time);
 			 
 			 requestId = tranreq.getRequestId();
-			 request = TM.getVehicles(requestId);
+			 request = TM.getVehicles(requestId, true);
 		    
 		 }catch(Exception er){
 			 Log.getLog(getClass()).error("Error converting SimpleDateFormat:"+er);

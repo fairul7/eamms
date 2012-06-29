@@ -331,7 +331,7 @@ public class TranAssignmentForm extends Form {
 				
 				statusL.setText(TM.selectStatus(tranreq.getStatus()));								
 				programL.setText(SM.selectProgName(tranreq.getProgram()));
-				request = TM.getVehicles(id);
+				request = TM.getVehicles(id, true);
 								
 				String requestName = security.getUser(tranreq.getRequestBy()).getName();
 				String approvedName = security.getUser(tranreq.getApprovedBy()).getName();

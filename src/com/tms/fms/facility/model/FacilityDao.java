@@ -114,6 +114,10 @@ public class FacilityDao extends DataSourceDao{
 		try{super.update("ALTER TABLE fms_facility_item_checkout ADD takenBy VARCHAR(255) NULL", null);
 		} catch (Exception e) {}
 		
+		try {
+			super.update("ALTER TABLE fms_facility_item_checkout ADD requestedBy VARCHAR(255) NULL", null);//TODO:
+		} catch (Exception e) {}
+		
 		try{super.update("ALTER TABLE fms_eng_assignment_equipment add utilized char(1) null", null);
 		} catch (Exception e) {}
 		
@@ -123,7 +127,6 @@ public class FacilityDao extends DataSourceDao{
 		try {
 			super.update("CREATE INDEX barcode ON fms_facility_item_checkout(barcode)", null);
 		} catch (Exception e) {}
-		
 		
 	}
 	
@@ -190,10 +193,10 @@ public class FacilityDao extends DataSourceDao{
 	public void insertCheckOut(FacilityObject o) throws DaoException {
 		String sql = "INSERT INTO fms_facility_item_checkout (id, checkout_date, " +
 				     "checkout_by, barcode, purpose, location, createdby, createdby_date, status,groupId, " +
-				     "takenBy, preparedBy) VALUES (#id#, " +
+				     "takenBy, preparedBy, requestedBy) VALUES (#id#, " +
 				     "#checkout_date#, #checkout_by#, #barcode#, #purpose#, #location#, " +
 				     "#createdby#, #createdby_date#, 'O',#groupId#," +
-				     "#takenBy#, #preparedBy#)";
+				     "#takenBy#, #preparedBy#, #requestedBy#)";
 		super.update(sql, o);
 	}
 	
@@ -235,11 +238,15 @@ public class FacilityDao extends DataSourceDao{
 		
 		String sql="SELECT c.id, c.checkout_date, c.checkout_by, c.checkin_date, c.checkin_by, c.barcode, c.purpose, c.status, " +
 				"c.createdby, c.createdby_date, c.updatedby, c.updatedby_date, c.location, c.groupId, c.takenBy, " +
+				"(u2.firstName + ' ' + u2.lastName) as requestedByName, " +
 				"(u.firstName + ' ' + u.lastName) as checkout_by, f.name as name" +
 				", loc.name AS location_name " +
-				" from fms_facility_item_checkout c INNER JOIN fms_facility_item i on c.barcode=i.barcode " +
+				"FROM fms_facility_item_checkout c " +
+				"INNER JOIN fms_facility_item i on c.barcode=i.barcode " +
 				"LEFT JOIN fms_facility_location loc ON (i.location_id = loc.setup_id) " +
-				"INNER JOIN fms_facility f on i.facility_id=f.id INNER JOIN security_user u on c.checkout_by=u.id " +
+				"INNER JOIN fms_facility f on i.facility_id=f.id " +
+				"INNER JOIN security_user u on c.checkout_by=u.id " +
+				"LEFT OUTER JOIN security_user u2 on c.requestedBy=u2.id " +
 				"WHERE c.groupId=? ";
 		params.add(groupId);
 		if(search!=null && !"".equals(search)){
@@ -581,9 +588,13 @@ public class FacilityDao extends DataSourceDao{
 	}
 	
 	public Collection selectCheckOutList(String search, Date fromDate, Date toDate, String sort,boolean desc,int start,int rows) throws DaoException{
-		String sql="Select groupId,checkout_date, u.firstName as checkout_by,location,purpose, count(groupId) as noOfCheckedOut," +
+		String sql="Select groupId,checkout_date, u.firstName as checkout_by, u2.firstName as requestedByName, " +
+				"location,purpose, count(groupId) as noOfCheckedOut," +
 				" (Select count(*) from fms_facility_item_checkout c1 where c1.groupId=c.groupId AND checkin_date is NOT NULL ) as noOfCheckedIn " +
-				" from fms_facility_item_checkout c INNER JOIN security_user u on u.id=c.checkout_by where 1=1 and c.groupId is not null ";
+				"FROM fms_facility_item_checkout c " +
+				"INNER JOIN security_user u on u.id=c.checkout_by " +
+				"LEFT OUTER JOIN security_user u2 on u2.id=c.requestedBy " +
+				"WHERE 1=1 and c.groupId is not null ";
 		ArrayList params=new ArrayList();
 		if(search!=null && !"".equals(search)){
 			sql+=" AND (u.firstName like '%"+search+"%' OR u.lastName like '%"+search+"%' OR location like '%"+search+"%' OR purpose like '%"+search+"%' ) ";
@@ -593,7 +604,7 @@ public class FacilityDao extends DataSourceDao{
 			params.add(fromDate);
 			params.add(toDate);
 		}
-		sql+=" GROUP BY groupId,checkout_date, u.firstName,location,purpose ";
+		sql+=" GROUP BY groupId, checkout_date, u.firstName, u2.firstName, location, purpose ";
 		if(sort!=null && !"".equals(sort)){
 			if(sort.equals("workingHours")){
 				sort="startTime";
@@ -1396,7 +1407,8 @@ public class FacilityDao extends DataSourceDao{
 		Collection col = new ArrayList();
 		
 		String sql = "SELECT TOP 1 ic.groupId, ic.location, ic.takenBy, ic.preparedBy, " +
-				"ic.purpose, loc.name as storeLocation,ic.checkout_by FROM fms_facility_item_checkout ic " +
+				"ic.purpose, loc.name as storeLocation, ic.checkout_by, ic.requestedBy " +
+				"FROM fms_facility_item_checkout ic " +
 				"LEFT JOIN fms_facility_item i ON ic.barcode = i.barcode " +
 				"LEFT JOIN fms_facility_location loc ON i.location_id = loc.setup_id " +
 				"WHERE ic.createdby = ? " +

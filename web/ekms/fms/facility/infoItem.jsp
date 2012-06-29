@@ -15,11 +15,12 @@
 		1.4 added "updated by" to facility item (2011-10-04)
 			added user to Internal Check Out
 			added status to Assignment Check Out & Internal Check Out
+		1.5 added Requested By to Internal Check Out
 			
 --%>
 
 <%!
-	public static final String CURRENT_VERSION = "1.4";
+	public static final String CURRENT_VERSION = "1.5";
 	public static final String DATE_TIME_PATTERN = "dd-MMM-yyyy hh:mm'&nbsp;'a";
 %>
 
@@ -130,10 +131,12 @@
 	try {
 		String sqlInternalCheckout = 
 				"SELECT " + topStr + " checkout_date, suOut.username AS checkout_username, checkin_date, suIn.username AS checkin_username, " + 
+				"       suReq.username AS requestedByUsername, " +
 				"       status, takenBy, purpose, groupId " + 
 				"FROM fms_facility_item_checkout c " + 
 				"LEFT OUTER JOIN security_user suOut ON (c.checkout_by = suOut.id) " +
 				"LEFT OUTER JOIN security_user suIn ON (c.checkin_by = suIn.id) " +
+				"LEFT OUTER JOIN security_user suReq ON (c.requestedBy = suReq.id) " +
 				"WHERE barcode = ? " + 
 				"ORDER BY checkout_date DESC ";
 		Collection colInternalCheckout = dao.select(sqlInternalCheckout, DefaultDataObject.class, new String[] {barcode}, 0, -1);
@@ -338,6 +341,7 @@
 					<td rowspan="2">Status</td>
 					<td rowspan="2">Taken By</td>
 					<td rowspan="2">Purpose</td>
+					<td rowspan="2">Requested By</td>
 					<td rowspan="2">Group ID</td>
 				</tr>
 				<tr>
@@ -367,6 +371,7 @@
 						<td><c:out value="${ic.propertyMap['status']}" /></td>
 						<td><c:out value="${ic.propertyMap['takenBy']}" />&nbsp;</td>
 						<td><c:out value="${ic.propertyMap['purpose']}" />&nbsp;</td>
+						<td><c:out value="${ic.propertyMap['requestedByUsername']}" />&nbsp;</td>
 						<td><a href="checkOutDetails.jsp?groupId=<c:out value="${ic.propertyMap['groupId']}" />"><c:out value="${ic.propertyMap['groupId']}" /></a></td>
 					</tr>
 				</c:forEach>

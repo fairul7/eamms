@@ -2,7 +2,6 @@ package com.tms.fms.transport.model;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -1343,12 +1342,16 @@ public class TransportDao extends DataSourceDao {
 						SetupObject.class, new String[] { id }, 0, -1);
 	}
 
-	public Collection selectVehicles(String reqId) throws DaoException {
+	public Collection selectVehicles(String reqId, boolean showInvalid) throws DaoException {
+		String join = "INNER JOIN";
+		if (showInvalid) {
+			join = "LEFT OUTER JOIN";
+		}
 		
-		String sql = "SELECT v.id, requestId, category_id, quantity, driver, c.name as name, r.type "+
+		String sql = "SELECT v.id, requestId, category_id, quantity, driver, c.name as name, c.status as categoryStatus, r.type "+
 					 "FROM fms_tran_request_vehicle v "+ 
-					 "inner join fms_tran_category c on v.category_id=c.setup_id "+  
-					 "inner join fms_tran_ratecard r on r.name=c.name "+
+					 join + " fms_tran_category c on v.category_id=c.setup_id "+  
+					 join + " fms_tran_ratecard r on r.name=c.name "+
 					 "where requestId = ?";	
 
 		return super.select(sql, VehicleRequest.class, new String[] { reqId },

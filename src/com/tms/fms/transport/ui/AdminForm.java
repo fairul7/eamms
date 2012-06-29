@@ -921,7 +921,7 @@ public class AdminForm extends Form {
 								
 				programL.setText(SM.selectProgName(transportRequest.getProgram()));			
 				
-				request = TM.getVehicles(id);
+				request = TM.getVehicles(id, true);
 				
 				String rate = transportRequest.getRate();
 				if(null == rate || "".equals(rate))
@@ -998,7 +998,7 @@ public class AdminForm extends Form {
 				
 				statusL.setText(TM.selectStatus(transportRequest.getStatus()));								
 				programL.setText(SM.selectProgName(transportRequest.getProgram()));
-				request = TM.getVehicles(id);
+				request = TM.getVehicles(id, true);
 								
 				String requestName = security.getUser(transportRequest.getRequestBy()).getName();
 				String approvedName = security.getUser(transportRequest.getApprovedBy()).getName();

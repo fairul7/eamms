@@ -59,7 +59,7 @@ public class CheckOutListTable extends Table {
 			checkout_date.setUrlParam("groupId");
 			addColumn(checkout_date);
 			
-			TableColumn checkout_by = new TableColumn("checkout_by", app.getMessage("fms.facility.form.requestor"));
+			TableColumn checkout_by = new TableColumn("requestedBySpecial", app.getMessage("fms.facility.form.requestor"));
 			addColumn(checkout_by);
 			
 			TableColumn location = new TableColumn("location", app.getMessage("fms.facility.table.location"));

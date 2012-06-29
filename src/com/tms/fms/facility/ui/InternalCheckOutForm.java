@@ -1,25 +1,13 @@
 package com.tms.fms.facility.ui;
 
-import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.namespace.QName;
-
-import org.apache.axis.client.Call;
-import org.apache.axis.client.Service;
 
 import com.metaparadigm.jsonrpc.JSONRPCBridge;
 import com.tms.fms.facility.model.*;
-import com.tms.fms.facility.ui.CategoryForm.ValidatorParentSelected;
 import com.tms.fms.facility.ui.validator.ValidatorItemBarcode;
-import com.tms.fms.transport.model.TransportModule;
-import com.tms.fms.transport.model.WriteoffObject;
 import com.tms.fms.widgets.ExtendedTextField;
-import com.tms.fms.department.model.*;
 import com.tms.fms.department.ui.PopupHODSelectBox;
 import com.tms.jsonUtil.JSONUtil;
 
@@ -89,11 +77,8 @@ public class InternalCheckOutForm extends Form{
 	
 	public void initForm() {
 		
-	    Application application = Application.getInstance();
 	    String msgNotEmpty  = Application.getInstance().getMessage("fms.tran.msg.mandatoryField", "Mandatory Field");
-	    String initialSelect = "-1="+Application.getInstance().getMessage("fms.tran.msg.initialSelect", "--- NONE ---");
-	    String msgIsNumberic = Application.getInstance().getMessage("fms.tran.msg.numbericField", "Numberic Field");
-
+	    
 	    removeChildren();
 	    setMethod("post");
 	    setColumns(2);
@@ -167,6 +152,8 @@ public class InternalCheckOutForm extends Form{
 		boolean success=true;
 		boolean empty=true;
 		
+		String userId = Application.getInstance().getCurrentUser().getId();
+		
 		String message ="";
 		FacilityModule mod = (FacilityModule)Application.getInstance().getModule(FacilityModule.class);
 		Date checkoutDate=new Date();
@@ -183,7 +170,8 @@ public class InternalCheckOutForm extends Form{
 						FacilityObject o = new FacilityObject();
 						o.setId(UuidGenerator.getInstance().getUuid());
 						o.setCheckout_date(checkoutDate);
-						o.setCheckout_by(psusbCheckOutBy.getId());
+						o.setCheckout_by(userId);
+						o.setRequestedBy(psusbCheckOutBy.getId());
 						o.setBarcode(code);
 						o.setTakenBy(takenBy.getValue().toString());
 						o.setPreparedBy(preparedBy.getValue().toString());
