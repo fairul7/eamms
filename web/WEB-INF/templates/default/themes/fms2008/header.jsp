@@ -121,16 +121,15 @@ function MM_preloadImages() { //v3.0
 	
 	boolean transRequest = service.hasPermission(userId, "com.tms.fms.transport.transportRequest", null, null);
 	boolean transAdmin = service.hasPermission(userId, "com.tms.fms.transport.admin", null, null);
-	boolean transManager = service.hasPermission(userId, "com.tms.fms.transport.manager", null, null);
-    
+	boolean transManager = service.hasPermission(userId, "com.tms.fms.transport.manager", null, null);    
 	boolean facilityRequest = service.hasPermission(userId, "com.tms.fms.facility.facilityRequest", null, null);	
 	boolean facilityAdmin = service.hasPermission(userId, "com.tms.fms.facility.admin", null, null);
-	boolean facilityManager = service.hasPermission(userId, "com.tms.fms.facility.manager", null, null);
-	
+	boolean facilityManager = service.hasPermission(userId, "com.tms.fms.facility.manager", null, null);	
 	boolean userView = service.hasPermission(userId, SecurityService.PERMISSION_USER_VIEW, null, null);
-	boolean groupView = service.hasPermission(userId, SecurityService.PERMISSION_GROUP_VIEW, null, null);
-	
+	boolean groupView = service.hasPermission(userId, SecurityService.PERMISSION_GROUP_VIEW, null, null);	
 	boolean designView = service.hasPermission(userId, "com.tms.cms.SiteDesign", null, null);
+	boolean wfuser = service.hasPermission(userId, "com.tms.workflow.WorkflowUser", null, null);
+	boolean wfadmin = service.hasPermission(userId, "com.tms.workflow.WorkflowAdministrator", null, null);
 	
 	String mainFolder = getMainFolder(request.getRequestURI());
 %>
@@ -244,7 +243,11 @@ function MM_preloadImages() { //v3.0
 		<%} %>
 	
 	<% } %>
-	
+		
+		<% if(wfuser || wfadmin){%>
+			<td width="150" align="center" class="menu-bg menu"><a href="/ekms/eamms/index.jsp">EAMMS</a></td>							
+			<td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
+		<%} %>    
 	
 	<td width="75" align="center" class="menu-bg menu">
 		<table border="0" align="center" cellpadding="0" cellspacing="0">

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<application>
+    <properties>
+        <property>
+            <name>com.tms.workflow.host</name>
+            <value>http://localhost:8080</value>
+        </property>
+        <property>
+            <name>com.tms.workflow.masterHash</name>
+            <value>E505CF727D214A68CB03DA25DA978500</value>
+        </property>
+    </properties>
+    <modules>
+        <module class="com.tms.workflow.JogetClientModule">
+        <!--
+            <dao-class></dao-class>
+            <datasource>defaultdb</datasource>
+        -->
+            <menu>
+                <menu-item>
+                    <order>142</order>
+                    <url>/ekms/workflow/menuMain.jsp</url>
+                </menu-item>
+            </menu>
+            <permission>com.tms.workflow.WorkflowUser</permission>
+            <permission>com.tms.workflow.WorkflowAdministrator</permission>
+        </module>
+    </modules>
+</application>
