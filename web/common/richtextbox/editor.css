@@ -1,0 +1,8 @@
+.btn     { width: 22px; height: 22px; border: 1px solid buttonface; margin: 0; padding: 0; }
+.btnOver { width: 22px; height: 22px; border: 1px outset; }
+.btnDown { width: 22px; height: 22px; border: 1px inset; background-color: buttonhighlight; }
+.btnNA   { width: 22px; height: 22px; border: 1px solid buttonface; filter: alpha(opacity=25); }
+.cMenu     { background-color: threedface; color: menutext; cursor: Default; font-family: MS Sans Serif; font-size: 8pt; padding: 2 12 2 16; }
+.cMenuOver { background-color: highlight; color: highlighttext; cursor: Default; font-family: MS Sans Serif; font-size: 8pt; padding: 2 12 2 16; }
+.cMenuDivOuter { background-color: threedface; height: 9 }
+.cMenuDivInner { margin: 0 4 0 4; border-width: 1; border-style: solid; border-color: threedshadow threedhighlight threedhighlight threedshadow; }

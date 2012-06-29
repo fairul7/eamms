@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<application>
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+        <module class="com.tms.ekmsadmin.ekplog.model.EkpLogModule">
+            <dao-class>com.tms.ekmsadmin.ekplog.model.EkpLogDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+    </modules>
+    
+    <!-- ========== Properties =============================== -->
+    <properties>
+    	<!-- Either ekplog.tomcat.folderName or ekplog.tomcat.externalLogFolder should be set 
+    		If both have values, ekplog.tomcat.folderName takes preceedence.
+    		If ekplog.tomcat.folderName is set, it means that the log files are stored in ekpDirectory/ekplog.tomcat.folderName/logs/ 
+    		If ekplog.tomcat.externalLogFolder is set, it means that log files are expected from the directory given, such as a network drive
+    		ekplog.tomcat.externalLogFolder is useful for clustered environment
+    	-->
+        <property>
+            <name>ekplog.tomcat.folderName</name>
+            <value>jakarta-tomcat</value>
+        </property>
+        <!-- 
+        <property>
+        	<name>ekplog.tomcat.externalLogFolder</name>
+        	<value>S:/tiensoon/tomcatLogs/</value>
+        </property>
+        -->
+        <property>
+            <name>ekplog.zipStorageClear.active</name>
+            <value>true</value>
+        </property>
+    </properties>
+</application>

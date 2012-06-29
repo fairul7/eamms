@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--<!DOCTYPE config SYSTEM "widgets.dtd">-->
+
+<config>
+
+    <page name="common" url="/">
+        <label name="headerMessage" text="Examples" />
+    </page>
+
+<!--
+    <page name="helloWorld" url="/demo/helloworld.jsp">
+        <label name="greeting" text="Hello World"/>
+        <form name="nameForm">
+            <textfield name="nameField" size="20">
+                <validator_notempty name="v1" text="Your Name Is Required :)"/>
+            </textfield>
+            <button name="submitButton" text="Submit"/>
+            <listener_form class="test.MyFormListener" />
+        </form>
+    </page>
+-->
+
+</config>

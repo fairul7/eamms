@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<application>
+    <modules>
+        <module class="com.tms.portlet.PortletHandler">
+            <!--<dao-class>com.tms.portlet.PortletDao</dao-class>-->
+            <dao-class>com.tms.portlet.PortletDaoMsSql</dao-class>
+            <!--<dao-class>com.tms.portlet.PortletDaoOracle</dao-class>-->
+			<!--<dao-class>com.tms.portlet.PortletDaoDB2</dao-class>-->
+			<!--<dao-class>com.tms.portlet.PortletDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <permission>com.tms.portlet.Portlet.view</permission>
+            <permission>com.tms.portlet.Portlet.add</permission>
+            <permission>com.tms.portlet.Portlet.edit</permission>
+            <permission>com.tms.portlet.Portlet.delete</permission>
+            <permission>com.tms.portlet.Theme.view</permission>
+            <permission>com.tms.portlet.Theme.add</permission>
+            <permission>com.tms.portlet.Theme.edit</permission>
+            <permission>com.tms.portlet.Theme.delete</permission>
+        </module>
+
+        <!-- ====== Portlets ====== -->
+        <module class="com.tms.portlet.portlets.notes.model.NotesModule">
+            <dao-class>com.tms.portlet.portlets.notes.model.NotesDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.ekms.statistics.StatisticsHandler">
+            <dao-class>com.tms.ekms.statistics.StatisticsDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.cms.syndication.model.SyndicationModule">
+            <dao-class>com.tms.cms.syndication.model.SyndicationDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+        <!-- ====== End Portlets ====== -->
+    </modules>
+    <properties>
+        <property>
+            <name>com.tms.portlet.default-theme</name>
+            <value>com.tms.portlet.theme.themes.Fms2008Theme</value>
+        </property>
+        <property>
+            <name>com.tms.portlet.portalServer.imagePath</name>
+            <value>/ekms/images/</value>
+        </property>
+
+        <!-- ====== Portlet Properties ====== -->
+        <property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.security.Login</name>
+            <value>1</value>
+        </property>
+		<property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.security.Logout</name>
+            <value>1</value>
+        </property>
+		<property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.security.Register</name>
+            <value>10</value>
+        </property>
+        <property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.security.UpdateProfile</name>
+            <value>3</value>
+        </property>
+        <property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.messaging.ActivateAccount</name>
+            <value>3</value>
+        </property>
+        <property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.messaging.SendMessage</name>
+            <value>2</value>
+        </property>
+        <property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.calendar.CreateEvent</name>
+            <value>3</value>
+        </property>
+		<property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.calendar.UpdatedEvent</name>
+            <value>1</value>
+        </property>
+            <property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.task.CreateTask</name>
+            <value>3</value>
+        </property>
+		<property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.task.UpdateTask</name>
+            <value>1</value>
+        </property>
+		<property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.task.UpdateProgress</name>
+            <value>1</value>
+        </property>
+		<property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.directory.CreateCompany</name>
+            <value>2</value>
+        </property>
+		<property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.directory.UpdateCompany</name>
+            <value>1</value>
+        </property>
+		<property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.directory.CreateContact</name>
+            <value>2</value>
+        </property>
+		<property>
+            <name>com.tms.ekms.statistics.Operation_kacang.services.log.directory.UpdateContact</name>
+            <value>1</value>
+        </property>
+        <!-- ====== End Portlet Properties ====== -->
+    </properties>
+</application>
+

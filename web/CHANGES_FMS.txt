@@ -1,0 +1,652 @@
+Fixed #13440: Selecting a different facility does not update the Total
+Fixed #13583: Edit Link missing for FC
+Fixed #13570 - Fix performance issue when export to Excel
+Requirement #13512 - Auto Assignment
+
+fms_1.0.0_update (June 12 2012) V2.5
+-------------------------------------
+Requirement #13515 - Transport Request – Total Cost Report
+Requirement #13513 - Store Today's Assignmnet Listing - To show the listing based on global setup
+Requirement #13510 - Resource Utilization Report – To add in filter by Request Status.
+Requirement #13511 - Check in by assignment ID, show list of check out items in the check in page.
+Requirement #13514 - Additional info in current Transport Request Module (Programme Name / Code)
+Requirement #13509 - Add internal check in history in facilities item details page
+
+fms_1.0.0_update (June 12 2012) V2.5
+-----------------------------------
+-Code Merged-
+Fixed - Choosing non-program does not clear program
+Fixed - Should not allow Edit Request link after required from date
+Fixed #13527 - Non-program should not been transferred in ABW
+
+fms_1.0.0_update (June 11 2012) V2.5
+-----------------------------------
+infoRequest v2.5
+
+fms_1.0.0_update (May 31 2012) V2.5
+-------------------------------------
+Requirement #13512 - Auto Assignment
+Fixed #13435 - Removed check for conflict items when edit or modify
+
+
+fms_1.0.0_update (May 29 2012) V2.5
+-------------------------------------
+Fixed #13447 - Assigned manpower disappear after modification
+Fixed #13435 - The booking does not include link equipments or link manpower.
+
+fms_1.0.0_update (April 10 2012) V2.5
+-------------------------------------
+Fixed #13001: Transport - Bulk Assignment Update
+Merge to Trunk
+
+
+fms_1.0.0_update (April 04 2012)
+--------------------------------
+Fixed #13069 - Merge codes:	HOD - Manpower Assignment Detail
+Fixed #12796 - Merge codes: Barcode Search show only one page
+Fixed #12675 - Transport Request Report shows "Pandu Sendiri" instead of Driver's Name
+create index for fms_eng_assignment_manpower(assignmentId, status)
+
+
+fms_1.0.0_update (March 22 2012 5PM)
+-----------------------------------
+Requirement #13063 : Email notification for Inactive Rate Card
+
+
+fms_1.0.0_update (March 16 2012 5PM)
+-----------------------------------
+Remove checking for numeric on abw_code since the code can be letter or number
+Sort abw_code numeric then alphabetically
+Fix cancellation remark 
+
+
+fms_1.0.0_update (March 15 2012 5PM)
+-----------------------------------
+Fixed #13021 : Rate Card Listing
+Fixed #13014 : Rate Card Update
+Fixed #13015 : Transfer Cost - block booking indicator should be Y or N 
+Fixed #13016 : Transfer Cost - should only transfer facilities related to program only
+Fixed #13019 : Transfer Cost - Cancellation charge createdDate should be the date when scheduler run
+Fixed #13018 : Transfer Cost - Cancellation charge required date from and to should be at the service level
+Fixed #13017 : Transfer Cost - Cancellation charge
+Fixed #13024 : An exception has occured in cancellation cost when adding decimal
+
+
+fms_1.0.0_update (March 15 2012)
+-----------------------------------
+Project code creation - unable to select on created program 	
+Engineer - ABW Transfer Cost Scheduled Task: to  - 'Engineering  - ABW Transfer Cost Scheduled Task:'
+SQL changed and used left join for department. So for ABW can manually update the department
+Change pfeCode to use head_project
+
+
+fms_1.0.0_update (March 12 2012)
+-----------------------------------
+Requirement #12996 : Changes in script to update backdated request
+
+
+fms_1.0.0_update (March 8 2012)
+-----------------------------------
+Fixed #12796: Barcode Search show only one page
+Fixed #12831: Unit Head Incoming Request show only one page
+
+
+fms_1.0.0_update (Mar 07 2012)
+-----------------------------------
+Fixed #12684 : Add new menu and setup form to store ABW admin email notification
+Requirement #12887 : Insert Addition field for rate_card table
+Requirement #12685 : Push the transfer cost of request which the 'required date to' = system -1
+Fixed #12922 : Same services must separate by different Facilities / Equipment
+
+
+fms_1.0.0_update (February 29 2012)
+-----------------------------------
+Fixed #12682 : Add new Menu for manage ABW Code and Code Setup form
+Requirement #12828    : Create a jsp page to run script to update backdated request
+Change Request #12685 : Push the transfer cost of request which the 'required date to' = system -1
+Change Request #12681 : Modify the rate card setup screen - add key and desc
+Change Request #12686 : Request Cancellation Charges
+
+
+fms_1.0.0_update (February 20 2012)
+-----------------------------------
+Change Request #12687 : Transport Rate Card new field and push data to Staging DB
+Change Request #12680 : Create a scheduled task and update to FMS program table. 
+Change Request #12681 : Modify the rate card setup screen
+Change Request #12682 : Add new Menu for manage ABW Code and Code Setup form
+Change Request #12684 : Add new menu and setup form to store ABW admin email notification
+Change Request #12683 : Push facilities data to Staging DB when FC perform insert new/update ratecard
+
+fms_1.0.0_update (February 02 2012)
+-----------------------------------
+Fixed #12623: Cancelled request leaves equipment still checked out
+More transaction logging: cancel request
+More transaction logging: cancel check out
+
+
+fms_1.0.0_update (January 20 2012)
+----------------------------------
+Fixed #12441: Manpower Holiday sorting not user friendly
+
+
+fms_1.0.0_update (January 13 2012) V2.4
+---------------------------------------
+Fixed #12275: Assignment Details not clearly showing filter type
+Fixed #12340: FC - Program Listing View
+Fixed: transport request not cleared after request is modified
+Fixed #12455: Search Roster query taking more than 10 minutes to run
+Fixed #12144: Programming listing format budget
+Fixed #12520: Assignment Listing in Facility Management is hogging the system
+Fixed: barcode seaching should always show all data
+create index for fms_facility_booking(facilityId, bookFrom, bookTo)
+create index for fms_tran_assignment(endDate, startDate)
+create index for fms_working_profile_duration(workingProfileDurationId, endDate, startDate)
+create index for fms_eng_assignment_manpower(userId, requiredTo, requiredFrom)
+create index for fms_tran_request_driver(manpowerId, assignmentId, requestId)
+create index for fms_eng_assignment(requestId, assignmentType, serviceType)
+
+
+fms_1.0.0_update (December 2 2011)
+----------------------------------
+Added transaction logging
+Add status trail for Prepare Assignment
+More transaction logging: undo check out
+More transaction logging: cancel assignment
+infoRequest v2.3
+create index for fms_eng_assignment(serviceId)
+create index for fms_eng_assignment_manpower(userId)
+create index for fms_eng_assignment_manpower_log(assignmentId)
+create index for fms_eng_request_notification(requestId)
+create index for fms_working_profile_duration(workingProfileId)
+create index for fms_working_profile_duration(startDate, endDate)
+create index for fms_working_profile_duration_manpower(userId)
+
+
+fms_1.0.0_update (November 11 2011)
+----------------------------------
+Fixed #11851: Services Required not cleared when modified before Prepare Assignment
+Enhancements:
+- Synchronized generate code
+- Consistency checking for FC edit mode
+- Change status to "Modified" for FC "Edit Request"
+
+
+fms_1.0.0_update (October 31 2011)
+----------------------------------
+Fixed #11797: Missing Email Notification for FC
+Fixed #11782: Assignment Check Out Details : Hide reprint function
+Fixed #11483: FC - Cancel assignment removes other bookings
+
+
+fms_1.0.0_update (October 17 2011)
+----------------------------------
+Fixed Bug #11684: Store Printing Problem
+create index for fms_eng_request_unit(requestId)
+create index for fms_eng_request_unit(rateCardId)	
+create index for fms_eng_resources_report(requestId)
+Fixed Bug #11430: Store Module - Check out not recorded
+create index for fms_facility_booking(requestId)
+Additional Fix for #10980 - Partial Assignment (handle conflict condition)
+Fixed Bug #11464: Cannot Check In or Check Out
+
+
+fms_1.0.0_update (September 27 2011 - 12PM)
+----------------------------------------
+Fixed Bug #11429: Store Module - Request Id on Check-out doc
+Fixed Bug #11439: Invalid Rate Card
+Fixed Bug #10980: Partial Assignment
+Change Request #10249: Change Media Prima logo with the new logo attached.
+ 
+
+fms_1.0.0_update (August 24 2011 - 12PM)
+----------------------------------------
+Fixed Bug #10192: History Assignment is empty
+Fixed Bug #11226: FC dont want to click on modify request
+Fixed Bug #11097: Today assignment: Quantity in the bracket
+Fixed Requirement #11108 : Add permission for active/inactive facility and delete rate card
+Change Request #10963: Checking on Rate Card & items
+Support #10995: Checking for inactive rate card should check for future request/date
+Requirement #10990: Merging codes 2A and 2B
+Fixed Bug #10906: Script for fixing manpower 
+Change Request #10963: Checking on Rate Card & items
+Fixed Bug #10695: Conflict Page: Conflict Page: Duplicate request in the check availability
+Fixed Bug #10313: Check sound dubbing 3 – Muzik Muzik Book FCP34 but appear in Sound Dubbing 3? MM did not book any services for 13 May 2011. 
+Requirement #10639: Changes on Required Time when 'Required Time From' and 'Required To' are same dates
+Fixed Bug #10312: Producer Usrah booked P2 172 tapi dalam check availability request dia muncul pulak dalam P2 202
+Fixed Bug #10277: Fix booking process when fc click accept button
+
+fms_1.0.0_update (May 28 2011 - 8.30PM)
+----------------------------------------
+Fixed Bug #10180 : Audit Trail - History log
+Fixed Bug #10183 - New Request
+Change Request #10182 - Package Quantity
+Fixed Bug #10196 : CR 2A 1: Prompt did not show up if user dit not select any request (point No.3)
+
+fms_1.0.0_update (May 20 2011 - 11.00AM)
+----------------------------------------
+Change Request #9752 : Batch 2B Issue 3
+
+fms_1.0.0_update (May 16 2011 - 03.30PM)
+----------------------------------------
+Fixed Bug #10099 : Open time beyond 0000hrs
+Fixed Bug #10128 - Reprint check out list/Today assignment/assignment listing - the date should show the the lasted scan out date not reprint date
+Fixed Change Request #9608 : Batch 2B Issue 1
+
+fms_1.0.0_update (May 9 2011 - 05.00PM)
+----------------------------------------
+Change Request #9753 : Batch 2b issues 5 (hide button Not Utilized after the request is not utilized)
+Fixed Bug #10108 : Cancel Request Button having error.
+Fixed Bug #10086 : Facility Management: Check out filter for the date did not work properly
+Change Request #9608 : Batch 2B Issue 1
+
+fms_1.0.0_update (May 4 2011 - 06.40PM)
+----------------------------------------
+Fixed Bug #10084 : Master Template CR 2A : Having problem when view in IE7
+Fixed Bug #10086 : Facility Management: Check out filter for the date did not work properly
+Fixed delete assignment bug in copy request template
+Change Request #9610 : Batch 2B Issue 4
+
+fms_1.0.0_update (April 27 2011 - 05.10PM)
+----------------------------------------
+Fix Bug #9982 : Email notification not sent on transport completion
+Fixed Bug #9817 : Request has been cancelled by FC but it still show in Check Avaibility
+
+fms_1.0.0_update (April 25 2011 - 05.10PM)
+----------------------------------------
+Fixed Bug #9886 : fms slow
+Fixed Bug #9875 : report - Summary Resource Listing of Equipment Utilization
+
+fms_1.0.0_update (April 21 2011 - 10.00AM)
+----------------------------------------
+Fixed Bug #9796 : Error 2. Able to print check out list but information does not exist in checkout list (retrieve) (error 2.doc)
+
+fms_1.0.0_update (April 20 2011 - 10.50AM)
+----------------------------------------
+Change Request #9781 : batch 2b issues 6
+Fixed Bug #9800 : Facility Request: Modify Request> Remove button Save As Draft to avoid confusion to the user
+Requirement #9470 : To allow requestor to create their own master template
+Fixed Bug #9812 : Facility Request - Add New Request
+Fixed Bug #9855 : Store: Check Out Item using function copy request having problem
+Fixed Bug #9817 : Request has been cancelled by FC but it still show in Check Avaibility
+
+fms_1.0.0_update (April 6 2011)
+-----------------------------------------
+Change Request #9752 : Batch 2B Issue 3
+Change Request #9539 : Requiremetn Item 2 [Modify Request]
+Change Request #9753 - To provide some indicator for store admin to state the item whether being utilized or not
+
+fms_1.0.0_update (March 23 2011)
+--------------------------
+Fixed Bug #9691 : Facility : Unit Head cannot assign manpower
+Fixed Bug #9603: Transport Report Format: not follow the requirement.
+
+
+fms_1.0.0_update (March 14 2011)
+------
+Change Request #9611 : Batch 2B Issue 7 - Store – Today assignment + Assignment Listing :: order by earliest required time  
+Change Request #9609 : Batch 2B Issue 2 
+Fixed Bug #9603: Transport Report Format: not follow the requirement.
+Change Request #9612 : Batch 2B Issue 8 - If requestor didn’t submit request for selected service type, reject the whole request.
+
+fms_1.0.0_update (March 09 2011)
+------
+Change Request #9539 : Requiremetn Item 2 [Modify Request]
+Fixed Bug #9603: Transport Report Format: not follow the requirement.
+
+fms_1.0.0_update (March 04 2011)
+------
+Fixed Bug #9577 : Transport Report Format: not follow the requirement.
+
+fms_1.0.0_update (February 25 2011)
+------
+Change Request #9395 : To provide the reprint option for the selected request
+Change Request #9396 : Store – Internal check out print out to follow assignment check out print out
+Change Request #9296: Report
+Fixed Bug #9149 : Check Availability cordless lavalier mic
+Fixed Bug #9345 : FMS tomcat become 98%
+Fixed Bug #9367 : Transport: Wrong Assignment Date on Incoming request
+Requirement #9470 : To allow requestor to create their own master template
+
+fms_1.0.0_update (January 25 2011)
+------
+Fixed Bug #9200 : Assignment Cancelation:When FC cancel on one assignment, it should be only that particular assignment being cancelled. The rest should be remain. 
+Change Request #9297 : modfiy request 
+
+fms_1.0.0_update (January 12 2011)
+------
+Fixed Bug #9178 : Unit Head>Request Listing> When UnitHead want to re-assigned the manpower, he see Null title.
+Requirement #9170 Check availability: to make default time 00:00 to 23:45
+Fixed Bug #9121 Transport Request: Edit button not functioning.
+
+fms_1.0.0_update (January 5 2011)
+------
+Fixed Bug #8365 Facility Report: Wrong calculation for Total facility cost
+Fixed Bug #9122 - Error on history tracking for driver
+Fixed Bug #9123 : Resource Utilization Report and Request Listing Report : Change Request id to capital letter for i
+Fixed Bug #9124 : Duty Roster> Add the Request ID for each assignment detail page.
+Fixed Bug #9137 : Staff ID not included in the all popup for user selection.
+Fixed Bug #9125 - Fix my duty roster not showing days on end of month
+Fixed Bug #9119 : Resource Utilization Report: Status filter is not working e.g Rejected/Canceled
+Fixed Bug #9142:  Cancel Request: No notification been sent out after any facilities been canceled.
+
+fms_1.0.0_update (December 28 2010)
+------
+Fixed Bug #9099 : Transport Report - Paging not functioning well. On the last page is blank.
+Fixed Bug #9103 : Transport Request: Field Export to excel did not follow field in the system.
+Fixed Bug #9102 : Resource Utilization Report: Some service/equipment did not appear in the report
+Fixed Bug #9082 : FC Request Listing return blank page when 2nd click on Print button
+
+
+fms_1.0.0_update (December 22 2010)
+=======
+Fixed Bug #8955 - solving negative issue
+Fixed Bug #8956 - solving excel issue showing incorrect values
+Fixed Bug #9075 - Unit Head- Manpower assignment that has cancel and has been Modified to different date should not be see by Unit Head
+Fixed Bug #8956 - solving excel issue showing incorrect values
+Fixed Bug #8959 : fix numbering for pending incoming request
+Fixed Bug #9053 : Request Listing - Date in assignment jumble up.
+
+
+fms_1.0.0_update (December 15 2010)
+--------------
+Change Request #8579 - Add new cancel status for facility cancellation request 
+Change Request #8574 - Delete Ob Van request in transport table
+
+
+fms_1.0.0_update (December 10 2010)
+--------------------------------------
+Fixed Bug #8959 : FC Pending Incoming Request Listing: Cancelled request should not be appeared in this listing - Take out CANCELLED from filter
+Fixed Bug #8955 : Transport Rate Card: Change Formula from per day to per hour
+
+fms_1.0.0_update (December 9 2010)
+--------------------------------------
+Fixed Bug #8977 : Manpower Assignment - Audio
+Fixed Bug #8956 : ENG-Report
+
+fms_1.0.0_update (December 3 2010)
+--------------------------------------
+Fixed Bug #8964 : Duty Roster > My Assignment Filter base on assigned and latest date
+Fixed Bug #8959 : FC Pending Incoming Request Listing: Cancelled request should not be appeared in this listing.
+Fixed Bug #8993 : Assignment BillBoard: E20091205416 assignment did not show in the LIVE billboard.
+Fixed Bug #8954 : Transport Feedback Form: Completed Request for Selfdriven car did not send any feedback form notification
+
+
+fms_1.0.0_update (November 29 2010)
+--------------------------------------
+Fixed Bug #8930 : Outsource: When requestor applied for cancellation for outsource request, FC shouldnt see the cancelation charges button.
+Fixed Bug #8922 :Rate Card: Need to add a pop up message when deleting the rate card.
+Fixed Bug #8925 :Store: Request ID field for store been left out.
+Fixed Bug #8942 : Transport Module: Transport Admin cannot complete assignment for Driver after vehicle assignment has been completed.
+
+
+fms_1.0.0_update (November 23 2010)
+--------------------------------------
+Change Request #8574 : FC allowed cancel assigned request
+Change Request #8575 : Calculate Cancellation cost
+Change Request #8577 - For assigned status still can modify request [FC]
+Change Request #8712 : Transport Request Report CR3
+Change Request #8714 : Resource Utilization Report
+Resource Utilization Report : Facility Request Report
+Fixed Bug #8707 : Unit Head- Today Assignment- Post Production/NLE should be included in this listing to be completed
+Change Request #8710 : Transport Request Report CR1
+Support #8885 : Missing permission setup for duty roster
+
+fms_1.0.0_update (November 16 2010)
+--------------------------------------
+Fixed Bug #8683 : All budget input must be decimal ONLY
+Fixed Bug #8620 : Assignment Listing loading too long
+Fixed : Add link and status completed
+Fixed Bug #8636 : Facility Management (Internal Check Out List)
+Change Request #8711 : Transport Request Report CR2
+Change Request #8579 : Audit Trail [for facilities request & assignment cancellation]
+
+fms_1.0.0_update (November 10 2010)
+--------------------------------------
+Fixed #8505 - Transport charges amount problem
+Fixed Rohaidah cannot see button problem
+
+fms_1.0.0_update (November 3rd 2010)
+--------------------------------------
+- Fixed Bug #8576 : Request Report
+- Fixed Bug #8365 : Facility Report: Wrong calculation for Total facility cost
+- Fixed Bug #8544 - Errors in ENG Report
+- Change Request #8578 : Notification to manpower
+
+fms_1.0.0_update (November 1st 2010)
+--------------------------------------
+- Fixed Bug #8543 : filter can't search by staff ID in the user listing
+
+fms_1.0.0_update (October 27th 2010)
+--------------------------------------
+Change Request #8441 - FC allowed to make changes of request after Accepted
+
+
+fms_1.0.0_update (October 25th 2010)
+--------------------------------------
+- Fixed Bug #8404 : Change the Status as listed in the description.
+- Change Request #8443 : Changes of registration requestor - Profile,Add/Edit User,Registration Application
+- Fixed Bug #8473 : My assignment [Duty Roaster] Filter Problem
+- Change Request #8444 : history of shift amendment
+- Fixed Bug #8505 : Transport Module: System having problem in assigning vehicle when user add in same category (fix vehicle counter)
+- Fixed Bug #8365 : Facility Report: Wrong calculation for Total facility cost - Change calculation on date 
+- Fixed Bug #8509 : Assignment Check Out List: Paging has error. Numbering is not correct.
+- Fixed Bug #8510 : Inventory Management: Check Availability not displaying the true result.
+
+fms_1.0.0_update (October 20th 2010)
+--------------------------------------
+- Fixed Bug #8404 : Change the Status as listed in the description.
+
+fms_1.0.0_update (October 18th 2010)
+--------------------------------------
+- Requirement #8381 : Report : manpower
+- Requirement #8205 : Report : Engineering Resource Summary Report
+- Change Request #8384 : Set date and time default - follow user request 
+- Fixed Bug #8353 : Listing should be filter base on alphabetical order.
+- Requirement #8383:Transport Request Feedback Form[Feedback Form]
+- Fixed Bug #8399 : Pop-up alert message came out of no where.
+- Requirement #8382 : Transport Request Feedback Form[Email Notification]  
+- Fixed Bug #8360 : Filter for View List base on alphabetical order & date from
+- Change Request #8385 : To add column for location for manpower/equipment 
+
+fms_1.0.0_update (October 8th 2010)
+--------------------------------------
+- Fixed Bug #8362 : Transport report: Total mileage calculation to be Meter End – Meter Start
+- Fixed Bug #8360 : Filter for View List base on alphabetical order
+- Fixed Bug #8352 : Registration Application: Take out inactive department from department filter.
+- Fixed Bug #8351 : Filter for User Listing and Group Listing base on Aphabetical order
+- Fixed Bug #8349 : Using Internal Check-In for Assignment Check-Out causes inconsistency
+- Fixed Bug #8355 : Filter for leave type base on alphabetical order
+- Fixed Bug #8356 : Filter for working profile base on alphabetical order
+- Fixed Bug #8357 : Filter for Outsource panel setup base on alphabetical order
+- Fixed Bug #8354 : Filter for Manage Competencies base on alphabetical order
+- Fixed Bug #8353 : Filter for Unit Listing, Add status filter
+- Fixed Bug #8361 : Paging error for Assignment listing
+- Fixed Bug #8358 : Filter for holiday listing base on date
+- Fixed Bug #8359 : Filter for Manpower Setup base on alphabetical order and Filter dropdown menu base on alphabetical order.
+- Fixed Bug #8363 : Transport report: the status does not change to Batal for request that has assignment created and rejected.
+- Requirement #8205 - Engineering Summary Resource Report 
+
+fms_1.0.0_update (October 5th 2010)
+--------------------------------------
+- Fixed Bug #8303 : Internal Check Out print form still remain old format.
+- Fixed bug #8347 : Barcode Search Null Pointer Exception
+
+fms_1.0.0_update (October 2nd 2010)
+--------------------------------------
+- Fixed : modified codes to  fix pagination for Facility Request
+
+fms_1.0.0_update (October 1st 2010)
+--------------------------------------	
+- Fixed Bug #7827 : FC :Check avialbility screen
+- Fixed : (Report) - Transport Request - changes made on Vehicle Status, Vehicle Assigned and Driver Status column
+- Fixed : (Report) to fix column Request Type and filter Request Type
+
+fms_1.0.0_update (September 29th 2010)
+--------------------------------------
+- Fixed bug #8283 : Outsource for Transport not working.
+- Fixed Bug #7942 : FC-All request listing
+- Fixed Bug #7830 : Store - check out screen
+- Add a filter search criteria (channel and vehicle category)
+- Fixed Bug #7833 : Transport Module : Requestor Module/Incoming 
+
+fms_1.0.0_update (September 21st 2010)
+--------------------------------------
+1. To include additional column after requestor name  and named the column as assignment date in Transport Request Report.
+2. : to introduce a new status to differentiate the term of HOD Process 
+       The status will be TA process and the current status for HOD Process will be changed to HOD Processed
+       
+
+fms_1.0.0_update (September 6th 2010)
+----------------------------------
+- Fixed pagination Transport Request
+- Fixed time 00:00 to 24:00 - Resource Utilization
+
+
+fms_1.0.0_update (September 2nd 2010)
+----------------------------------
+- Report - Transport Request    - add Filter Request Type (Check Box)
+							    - modified driver status
+		 - Resource Utilization - Sort Filter program
+		                        - change Filter Service Type(SelectBox) to ComboSelectBox 
+		 - Facility Request    - add Filter Request Type (Check Box)					 
+
+fms_1.0.0_update (July 5th 2010)
+----------------------------------
+- Fixed pagination Report - Resource Utilization
+- Fixed empty column Report - Facilites Request
+
+
+fms_1.0.1_update - V2.3 (August 3rd 2010)
+----------------------------------
+-Fixed : Sorting department filter alphabetically
+-Fixed : Few issues on Transport Module (checkout, check-in, and unfulfilled Assignment)
+-Fixed : Issue on Transport Module - Bulk Assignment Update 
+-Fixed : Issue on check availability for facility (total in pool, total booked, and total available)
+
+fms_1.0.0_update (July 22nd 2010)
+----------------------------------
+-Fixed : Issue #7647 : sort program name alphabetically on Transport module (Bulk assignment update)
+-Fixed : Issue #7646 : fix filtering and sorting on Transport module :Incoming request (create assignment - select manpower)
+-Fixed : Issue #7645 : sort department alphabetically, set default status to 'HOD process' and range date : 7 days from today date.
+-Added : open text filtering to search by Assignment ID, vehicle number, request by, and destination on Today Assignment table.
+-Added : required date column on Transport Admin - Request Listing
+
+fms_1.0.0_update (June 2nd 2010)
+----------------------------------
+- Fixed date filter function at : Resource Util Report 
+
+
+fms_1.0.0_update (May 25th 2010)
+----------------------------------
+-fix date format at Transport Request Report
+-change label Request to Facility Request at menu.
+
+fms_1.0.0_update (May 25th 2010)
+----------------------------------
+-Fixes on Report - Transport Request, Request and Resource Utilization
+
+fms_1.0.0_update (May 24th 2010)
+----------------------------------
+-Added Report (Module) for Transport, Request and Resource Utilization
+
+fms_1.0.0_update (May 20th 2010)
+----------------------------------
+-Transport Admin - Incoming Request - add Required Date Field
+
+fms_1.0.0_update (May 19th 2010)
+----------------------------------
+-Screen: (Facilities Request - Pending Incoming Request) Incoming Request - Fixed filter
+-Screen: (Transport Request - Transport Admin) Incoming Request - Fixed filter
+-Screen: (Facilities Request - Pending Incoming Request) Incoming Request - Add filter Required Date From, Required Date To, Department
+-Screen: (Facilities Request - Facilities Coordinator) Request Listing - Add filter Required Date From, Required Date To, Department
+-Screen: (Facilities Request - Facilities Coordinator) Incoming Request - Add filter Required Date To
+-Screen: (Facilities Request - Unit Head) Incoming Request - Add filter Required Date To
+-Screen: (Facilities Request - Unit Head) Request Listing - Add filter Required Date To
+-Screen: (Transport Request - Transport Admin) Request Listing - Add filter Required Date From, Required Date To, Department
+
+fms_1.0.0_update (May 11th 2010)
+----------------------------------
+-Internal Checkout List - modify to remove displaying total checkout 0 and sorting 
+
+fms_1.0.0_update (May 10th 2010)
+----------------------------------
+-Added Prepare Check Out at status Filter - Equipment Listing
+-Changes at Today's Assignment - fix Prepare Checkout Button
+-Added filter Department and Status at Transport Admin - Request Listing
+
+
+fms_1.0.0_update (May 6th 2010)
+----------------------------------
+- Change #178: add indicator Manpower assigned or not at Incoming Request for HOD section
+               - modify method
+- Changes at screen Request Listing(Facilities Coordinator) - add filter Required Date To and sort listing by status 
+- Changes at screen Incoming Requests(Transport Admin) - add filter Required Date To and sort listing by status
+
+fms_1.0.0_update (May 5th 2010)
+----------------------------------
+- Change #178: add indicator Manpower assigned or not at Incoming Request for HOD section
+               - modify methos
+               
+               
+fms_1.0.0_update (May 4th 2010)
+----------------------------------
+- Change #158: Change label alignment on print Checkout Item
+- Change #169: Added status column on Requested Item at Check out Item screen
+- Change #188: Sort by Total Check in at Checkout List screen
+- Change #178: add indicator Manpower assigned or not at Incoming Request for HOD section
+
+fms_1.0.0_update (April 7th 2010)
+----------------------------------
+- Fixed : change status table filter on FC Assignment Listing
+- Change Request #6326 / #173 : Fixed block booking assignment.
+- Change Request #6328 : Unit Head Incoming Request Listing based on assignment status. 
+		If any status of assignments is New then will appear on Unit Head Incoming Request Listing. 
+
+fms_1.0.0_update (April 5th 2010)
+----------------------------------
+- Updated method for Unit Head Listing to improve performance.
+- Remove Item Name from Today's Assignment Listing
+
+fms_1.0.0_update (April 2nd 2010)
+----------------------------------
+- Change Request #6323 : Simplify the current store screen process - update hide prepare check out button when once clicked checkp out button
+                                                                   - modify checkout function 
+                                                                   - modify alert message.
+- Updated VTR_FORMAT_MAP (Server)
+
+fms_1.0.0_update (March 29th 2010)
+----------------------------------
+- Start FMS - Version : 1.0.0
+- Change Request #6325 : Assignment Check Out List
+- Change Request #6323 : Simplify the current store screen process.
+- Change Request #6613 : Cosmetic changes on assignment information (Duty Roster)
+- Bug #6612 : Added producer name (updated the query & EngineeringRequest object).
+
+Update March 4th 2010
+-------------------------
+- New feature #6321 (198) : To show assignment information (today + 2 days in advance) Duty Roster, see http://{address}/assignmentInformation.jsp
+- CR #6322 (140) : Add remarks at transport admin screen
+- CR #6326 (173) : 
+	System will check whether block booking option is checked or not. If block
+	booking is checked, system will prompt a message to ask whether to assign
+	same manpower to all the assignment.
+- CR #6327 (#177,#195,#196) : Added sorting filter
+- Fixed #6319 : Assignment - date of assignment is jumble up
+
+Update January 29th 2010
+-------------------------
+- Fixed #6115 : Add checking on service required date
+- Fixed #6116 : Add Assignment Id for FC Assignment Listing
+- Fixed #6126
+
+Update January 22nd 2010
+-------------------------
+- Fixed (Support) #6098 : Fixing InactiveReason.jsp permission (Facility Inventory Setup permission)
+
+Update January 20th 2010
+-------------------------
+- Fixed : CheckAvailability block booking, actually the problem is on FC Accept process
+
+Update January 18th 2010
+-------------------------
+- Fixed : CheckAvailability counting problem

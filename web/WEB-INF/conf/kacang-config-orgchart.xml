@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<application>
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+        <module class="com.tms.hr.orgChart.model.OrgChartHandler">
+            <dao-class>com.tms.hr.orgChart.model.OrgChartDao</dao-class>
+            <datasource>defaultdb</datasource>
+           <permission>orgChart.permission.manage</permission>
+            <menu>
+                <menu-item>
+                    <order>80</order>
+                    <url>/ekms/orgChart/menuMain.jsp</url>
+                </menu-item>
+            </menu>
+        </module>
+    </modules>
+</application>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<application>
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+        <module class="com.tms.hr.employee.model.EmployeeModule">
+            <!--<dao-class>com.tms.hr.employee.model.EmployeeDao</dao-class>-->
+		    <!--<dao-class>com.tms.hr.employee.model.EmployeeDaoDB2</dao-class> -->
+		    <dao-class>com.tms.hr.employee.model.EmployeeDaoMsSql</dao-class>
+			<!--<dao-class>com.tms.hr.employee.model.EmployeeDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <!-- <permission>com.tms.hr.employee.ManageEmployee</permission> -->
+        </module>
+    </modules>
+</application>

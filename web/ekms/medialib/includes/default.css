@@ -1,0 +1,19 @@
+.albumName {
+	font-weight:bold; 
+	font-size:13; 
+	color:#666666;
+}
+
+.thumbnailBorder {
+	border:solid 1px #bbd5f2;
+	text-align:center;
+	background-color: white;
+}
+
+.notificationMessageBody {
+	border-left: 1px solid #96965E;
+	border-right: 1px solid #96965E;
+	border-top: 1px solid #96965E;
+	border-bottom: 1px solid #96965E;
+	background-color: #FFFFCC;
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<application>
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+        <module class="com.tms.cms.medialib.model.LibraryModule">
+            <dao-class>com.tms.cms.medialib.model.LibraryDao</dao-class>
+            <!--<dao-class>com.tms.cms.medialib.model.LibraryDaoDB2</dao-class>-->
+            <!--<dao-class>com.tms.cms.medialib.model.LibraryDaoMsSql</dao-class>-->
+			<!--<dao-class>com.tms.cms.medialib.model.LibraryDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+			<!-- <permission>com.tms.cms.medialib.CreateLibrary</permission> -->
+			<menu>
+                <menu-item>
+                    <order>45</order>
+                    <url>/ekms/medialib/menuMain.jsp</url>
+                </menu-item>
+            </menu>
+        </module>
+    </modules>
+
+    <modules>
+        <module class="com.tms.cms.medialib.model.AlbumModule">
+            <dao-class>com.tms.cms.medialib.model.AlbumDao</dao-class>
+            <!--<dao-class>com.tms.cms.medialib.model.AlbumDaoDB2</dao-class>-->
+            <!--<dao-class>com.tms.cms.medialib.model.AlbumDaoMsSql</dao-class>-->
+			<!--<dao-class>com.tms.cms.medialib.model.AlbumDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+    </modules>
+
+    <modules>
+        <module class="com.tms.cms.medialib.model.MediaModule">
+            <dao-class>com.tms.cms.medialib.model.MediaDao</dao-class>
+            <!--<dao-class>com.tms.cms.medialib.model.MediaDaoDB2</dao-class>-->
+            <!--<dao-class>com.tms.cms.medialib.model.MediaDaoMsSql</dao-class>-->
+			<!--<dao-class>com.tms.cms.medialib.model.MediaDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+    </modules>
+    
+    <!-- Media Lib -->
+	<!-- 
+    <properties>
+		<property>
+			<name>extraAllowedMediaTypes</name>
+			<value>.txt,.zip</value>
+		</property>
+    </properties>
+    -->
+</application>

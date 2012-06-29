@@ -1,0 +1,201 @@
+/*
+Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.2.2
+*/
+
+
+
+.yui-overlay .hd { 
+
+}
+.yui-overlay .hd span { 
+	vertical-align:middle; 
+	line-height:22px; 
+}
+
+
+.yui-overlay .hd .tr { 
+	width:7px; 
+	height:22px; 
+	top:0; 
+	right:0; 
+	background:transparent url(/js/assets/img/aqua-hd-rt.gif); 
+	position:absolute; 
+}
+
+.yui-overlay .bd { 
+	overflow:hidden; 
+	padding:0px;
+	margin-left:0px; 
+	margin-right:0px;
+	margin-top:0px;
+	border:1px solid #aeaeae; 
+	background-color:#FFFFFF;
+}
+
+.yui-overlay .ft { 
+	font-size:75%; 
+	color:#666; 
+	padding:2px; 
+	overflow:hidden; 
+	border:0px solid #aeaeae; 
+	border-top:none; 
+	background-color:#dfdfdf; 
+}
+	
+.yui-tt {
+	visibility:hidden;
+	position:absolute;
+	color:#333;
+	background-color:#FDFFB4;
+	font-family:arial,helvetica,verdana,sans-serif;
+	padding:2px;
+	border:1px solid #FCC90D;
+	font:100% sans-serif;
+	width:auto;
+}
+
+* html body.masked select {
+	visibility:hidden;
+}
+
+* html div.yui-panel-container select {
+	visibility:inherit;
+}
+
+* html div.drag select {
+	visibility:hidden;
+}
+
+* html div.hide-select select {
+	visibility:hidden;
+}
+
+.mask {
+    z-index:0;
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+    -moz-opacity: 0.5;
+    opacity:.50;
+    filter: alpha(opacity=50);
+    background-color:#CCC;
+}
+
+.yui-panel-container.shadow .underlay {
+	position:absolute;
+	z-index:0;
+	width:100%;
+	height:100%;
+	zoom:1;
+}
+
+.hide-scrollbars * {
+	overflow:hidden;
+}
+
+.hide-scrollbars textarea, .hide-scrollbars select {
+	overflow:hidden;
+	display:none;
+}
+
+.show-scrollbars textarea, .show-scrollbars select {
+	overflow:visible;
+}
+
+.yui-panel-container {
+	position:absolute;
+	background-color:transparent;
+	z-index:6;
+	padding:0px;
+	visibility:hidden;
+	overflow:visible;
+	width:auto;
+}
+
+.yui-panel-container.focused {
+}
+
+
+.yui-panel-container.matte {
+	padding:3px;
+	background-color:#FFF;
+}
+
+.yui-panel-container.matte .underlay {
+	display:none;
+}
+
+.yui-panel {
+	visibility:hidden;
+	border-collapse:separate;
+	position:relative;
+	left:0px;top:0px;
+	font:1em Arial;
+	background-color:#FFF;
+	border:1px solid #000;
+	z-index:1;
+	overflow:hidden;
+	padding:0px;
+}
+
+.yui-panel .hd {
+	border:none; 
+	background:transparent url(/ekms/images/ekp2005/hd_bg.gif); 
+	height:22px; 
+	margin-left:0px; 
+	margin-right:0px; 
+	text-align:center; 
+	overflow:visible; 
+	color:#FFF;
+	font-size:100%;
+	line-height:100%;
+	border:1px solid #FFF;
+	border-bottom:1px solid #000;
+	font-weight:bold;
+	padding:4px;
+}
+
+.yui-panel .bd {
+	overflow:hidden;
+	padding:2px;
+}
+
+.yui-panel .bd p {
+	margin:0 0 1em;
+}
+
+.yui-panel .container-close {
+	top:8px; 
+	right:4px; 
+	height:18px; 
+	width:17px; 
+	position:absolute;
+	z-index:6;
+	margin:2px;
+	padding:2px;
+	background:url(/ekms/images/ekp2005/ic_closewindow.gif) no-repeat;
+	cursor:pointer;
+	visibility:inherit;
+}
+
+.yui-overlay .hd .tl {
+	top:4px; 
+	left:4px; 
+	height:18px; 
+	width:17px; 
+	position:absolute;
+	z-index:6;
+	margin:2px;
+	padding:2px;
+	background:url(/ekms/images/ekp2005/hd_icon.gif) no-repeat;
+	visibility:inherit;
+}
+
+.yui-panel .ft {
+	padding:4px;
+	overflow:hidden;
+}

@@ -1,0 +1,2 @@
+<%@ include file="/common/header.jsp" %>
+<iframe id="statusPortlet" src="<c:url value="/ekms/qmessaging/status.jsp"/>" width="100%" height="35" frameborder="0" marginheight="0" marginwidth="0" scrolling="no"></iframe>

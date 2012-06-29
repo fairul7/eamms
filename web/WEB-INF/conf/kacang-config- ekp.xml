@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<application>
+
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+
+        <!-- ========== Core Content Modules ========== -->
+        <module class="com.tms.cms.core.model.ContentManager">
+            <!--<dao-class>com.tms.cms.core.model.ContentManagerDao</dao-class>-->
+            <dao-class>com.tms.cms.core.model.ContentManagerDaoMsSql</dao-class>
+  	        <!--<dao-class>com.tms.cms.core.model.ContentManagerDaoOracle</dao-class>-->
+		    <!--<dao-class>com.tms.cms.core.model.ContentManagerDaoDB2</dao-class>-->
+			<!--<dao-class>com.tms.cms.core.model.ContentManagerDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <permission>com.tms.cms.ManageContent</permission>
+            <permission>com.tms.cms.FrontEndEdit</permission>
+            <permission>com.tms.cms.SubscribeContent</permission>
+            <permission>com.tms.cms.ManageSubscribeContent</permission>
+            <permission>com.tms.cms.ManageKeywords</permission>
+            <permission>com.tms.cms.SystemSettings</permission>
+            <permission>com.tms.cms.SiteDesign</permission>
+            <permission>com.tms.cms.Mobile</permission>
+            <permission>com.tms.cms.ScheduledTasks</permission>
+            <permission>com.tms.cms.AccessRecycleBin</permission>
+            <permission>com.tms.cms.ManageRecycleBin</permission>
+            <permission>com.tms.cms.ManageProfile</permission>
+            <permission>com.tms.cms.AccessReports</permission>
+			<menu>
+				<menu-item>
+					<order>10</order>
+					<url>/ekms/menuMain.jsp</url>
+				</menu-item>
+			</menu>
+        </module>
+        <module class="com.tms.cms.core.model.ContentPublisher">
+            <!--<dao-class>com.tms.cms.core.model.ContentPublisherDao</dao-class>-->
+            <dao-class>com.tms.cms.core.model.ContentPublisherDaoMsSql</dao-class>
+            <!--<dao-class>com.tms.cms.core.model.ContentPublisherDaoOracle</dao-class>-->
+			<!--<dao-class>com.tms.cms.core.model.ContentPublisherDaoDB2</dao-class>-->
+			<!--<dao-class>com.tms.cms.core.model.ContentPublisherDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.cms.core.model.ContentAuditor">
+            <dao-class>com.tms.cms.core.model.ContentAuditorDao</dao-class>
+  	        <!--<dao-class>com.tms.cms.core.model.ContentAuditorDaoOracle</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.cms.core.model.ContentReporter">
+            <dao-class>com.tms.cms.core.model.ContentReporterDao</dao-class>
+	        <!--<dao-class>com.tms.cms.core.model.ContentReporterDaoOracle</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.cms.profile.model.ContentProfileModule">
+            <!--<dao-class>com.tms.cms.profile.model.ContentProfileDao</dao-class>-->
+            <!--<dao-class>com.tms.cms.profile.model.ContentProfileDaoOracle</dao-class>-->
+			<!--<dao-class>com.tms.cms.profile.model.ContentProfileDaoDB2</dao-class>-->
+		    <dao-class>com.tms.cms.profile.model.ContentProfileDaoMsSql</dao-class>
+			<!--<dao-class>com.tms.cms.profile.model.ContentProfileDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.cms.section.SectionModule">
+            <dao-class>com.tms.cms.section.SectionModuleDao</dao-class>
+            <!--<dao-class>com.tms.cms.section.SectionModuleDaoOracle</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.cms.article.ArticleModule">
+            <dao-class>com.tms.cms.article.ArticleModuleDao</dao-class>
+	    	<!--<dao-class>com.tms.cms.article.ArticleModuleDaoOracle</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.cms.document.DocumentModule">
+            <dao-class>com.tms.cms.document.DocumentModuleDao</dao-class>
+            <!--<dao-class>com.tms.cms.document.DocumentModuleDaoOracle</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.cms.image.ImageModule">
+            <dao-class>com.tms.cms.image.ImageModuleDao</dao-class>
+	    	<!--<dao-class>com.tms.cms.image.ImageModuleDaoOracle</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.cms.bookmark.BookmarkModule">
+            <dao-class>com.tms.cms.bookmark.BookmarkModuleDao</dao-class>
+	    	<!--<dao-class>com.tms.cms.bookmark.BookmarkModuleDaoOracle</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.cms.vsection.VSectionModule">
+            <dao-class>com.tms.cms.vsection.VSectionModuleDao</dao-class>
+	    	<!--<dao-class>com.tms.cms.vsection.VSectionModuleDaoOracle</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.cms.comment.CommentModule">
+            <dao-class>com.tms.cms.comment.CommentModuleDao</dao-class>
+            <!--<dao-class>com.tms.cms.comment.CommentModuleDaoOracle</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.cms.spot.SpotModule">
+            <dao-class>com.tms.cms.spot.SpotModuleDao</dao-class>
+            <!--<dao-class>com.tms.cms.spot.SpotModuleDaoOracle</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.cms.page.PageModule">
+            <dao-class>com.tms.cms.page.PageModuleDao</dao-class>
+            <!--<dao-class>com.tms.cms.page.PageModuleDaoOracle</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.ekms.setup.model.SetupModule">
+            <dao-class>com.tms.ekms.setup.model.SetupDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+        <!-- ========== End Core Content Modules ========== -->
+
+        <!-- ========== Content Mobile Module ========== -->
+        <module class="com.tms.cms.mobile.model.MobileModule">
+            <dao-class>com.tms.cms.mobile.model.MobileDao</dao-class>
+  		<!-- <dao-class>com.tms.cms.mobile.model.MobileDaoDB2</dao-class> -->
+            <datasource>defaultdb</datasource>
+        </module>
+        <!-- ========== End Content Mobile Module ========== -->
+
+        <!-- ========== Ad Module ========== -->
+        <module class="com.tms.cms.ad.model.AdModule">
+            <!--<dao-class>com.tms.cms.ad.model.AdDao</dao-class>-->
+            <dao-class>com.tms.cms.ad.model.AdDaoMsSql</dao-class>
+			<!--<dao-class>com.tms.cms.ad.model.AdDaoDB2</dao-class>-->
+			<!--<dao-class>com.tms.cms.ad.model.AdDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <!--<permission>com.tms.cms.ad.ManageAds</permission>-->
+        </module>
+        <!-- ========== End Ad Module ========== -->
+
+        <!-- ========== Mailing List Module ========== -->
+        <module class="com.tms.cms.maillist.model.MailListModule">
+            <dao-class>com.tms.cms.maillist.model.MailListDao</dao-class>
+			<!--<dao-class>com.tms.cms.maillist.model.MailListDaoDB2</dao-class> -->
+            <datasource>defaultdb</datasource>
+            <permission>com.tms.cms.maillist.ManageMailList</permission>
+        </module>
+        <!-- ========== End Mailing List Module ========== -->
+
+        <!-- ========== Vote Module ========== -->
+        <!--<module class="com.tms.collab.vote.model.PollModule">-->
+            <!--<dao-class>com.tms.collab.vote.model.PollDao</dao-class>-->
+			<!--<dao-class>com.tms.collab.vote.model.PollDaoDB2</dao-class>-->
+			<!--<dao-class>com.tms.collab.vote.model.PollDaoSybase</dao-class>-->
+            <!--<datasource>defaultdb</datasource>-->
+            <!--<permission>com.tms.collab.vote.ManageVotes</permission>-->
+        <!--</module>-->
+        <!-- ========== End Vote Module ========== -->
+
+        <!-- ========== Weblog Module ========== -->
+        <!--<module class="com.tms.collab.weblog.model.WeblogModule">-->
+            <!--<dao-class>com.tms.collab.weblog.model.WeblogDao</dao-class>-->
+            <!--<datasource>defaultdb</datasource>-->
+            <!--<permission>com.tms.collab.weblog.CreateBlog</permission>-->
+            <!--<permission>com.tms.collab.weblog.ManageBlog</permission>-->
+            <!--<permission>com.tms.collab.weblog.DeleteBlog</permission>-->
+        <!--</module>-->
+        <!-- ========== End Weblog Module ========== -->
+
+        <!-- ========== Personalization Module ========== -->
+        <module class="com.tms.cms.personalization.PersonalizationHandler">
+            <dao-class>com.tms.cms.personalization.PersonalizationDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+        <!-- ========== End Personalization Module ========== -->
+
+        <!-- ========== Core Collaboration Modules ========== -->
+        <module class="com.tms.collab.calendar.model.CalendarModule">
+            <dao-class>com.tms.collab.calendar.model.CalendarDao</dao-class>
+            <!--<dao-class>com.tms.collab.calendar.model.CalendarDaoOracle</dao-class>-->
+			<!--<dao-class>com.tms.collab.calendar.model.CalendarDaoDB2</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <permission>com.tms.collab.calendar.Calendaring</permission>
+            <permission>com.tms.collab.calendar.ManageEvents</permission>
+            <permission>com.tms.collab.calendar.EditEvents</permission>
+            <permission>com.tms.collab.calendar.DeleteEvents</permission>
+           
+        </module>
+        <module class="com.tms.collab.forum.model.ForumModule">
+            <dao-class>com.tms.collab.forum.model.ForumDao</dao-class>
+            <dao-class>com.tms.collab.forum.model.ForumDaoMsSql</dao-class>
+	    	<dao-class>com.tms.collab.forum.model.ForumDaoOracle</dao-class>
+			<dao-class>com.tms.collab.forum.model.ForumDaoDB2</dao-class>
+			<dao-class>com.tms.collab.forum.model.ForumDaoSybase</dao-class>
+            <datasource>defaultdb</datasource>
+            <permission>com.tms.collab.forum.ManageForums</permission>
+        </module>
+        <module class="com.tms.collab.formwizard.model.FormModule">
+            <!--<dao-class>com.tms.collab.formwizard.model.FormDao</dao-class>-->
+            <dao-class>com.tms.collab.formwizard.model.FormDaoMsSql</dao-class>
+	    	<!--<dao-class>com.tms.collab.formwizard.model.FormDaoOracle</dao-class>-->
+	    	<!--<dao-class>com.tms.collab.formwizard.model.FormDaoDB2</dao-class>-->
+			<!--<dao-class>com.tms.collab.formwizard.model.FormDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <permission>com.tms.collab.formwizard.Add</permission>
+            <permission>com.tms.collab.formwizard.Edit</permission>
+            <permission>com.tms.collab.formwizard.Delete</permission>
+        </module>
+        <module class="com.tms.collab.messaging.model.MessagingModule">
+            <!--<dao-class>com.tms.collab.messaging.model.MessagingDao</dao-class>-->
+	    	<!--<dao-class>com.tms.collab.messaging.model.MessagingDaoOracle</dao-class>-->
+			<!--<dao-class>com.tms.collab.messaging.model.MessagingDaoDB2</dao-class>-->
+			<dao-class>com.tms.collab.messaging.model.MessagingDaoMsSql</dao-class>
+			<!--<dao-class>com.tms.collab.messaging.model.MessagingDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <permission>com.tms.collab.messaging.Quota</permission>
+        </module>
+        <module class="com.tms.collab.directory.model.AddressBookModule">
+            <dao-class>com.tms.collab.directory.model.AddressBookDao</dao-class>
+			<!--<dao-class>com.tms.collab.directory.model.AddressBookDaoOracle</dao-class>-->
+			<!--<dao-class>com.tms.collab.directory.model.AddressBookDaoDB2</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <!--<module class="com.tms.collab.directory.model.DirectoryModule">-->
+           <!--<dao-class>com.tms.collab.directory.model.DirectoryDao</dao-class>-->
+			<!--<dao-class>com.tms.collab.directory.model.DirectoryDaoOracle</dao-class>-->
+			<!--<dao-class>com.tms.collab.directory.model.DirectoryDaoDB2</dao-class>-->
+            <!--<permission>com.tms.collab.directory.EditContacts</permission>-->
+            <!--<permission>com.tms.collab.directory.EditCompanies</permission>-->
+            <!--<permission>com.tms.collab.directory.ManageContacts</permission>-->
+            <!--<permission>com.tms.collab.directory.ManageCompanies</permission>-->
+            <!--<permission>com.tms.collab.directory.ManageFolders</permission>-->
+            <!--<datasource>defaultdb</datasource>-->
+        <!--</module>-->
+        <module class="com.tms.collab.directory.model.CompanyModule">
+            <dao-class>com.tms.collab.directory.model.CompanyDao</dao-class>
+			<!--<dao-class>com.tms.collab.directory.model.CompanyDaoOracle</dao-class>-->
+			<!--<dao-class>com.tms.collab.directory.model.CompanyDaoDB2</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.collab.directory.model.SecuritySearchModule" />
+        <module class="com.tms.collab.taskmanager.model.TaskManager">
+            <!--<dao-class>com.tms.collab.taskmanager.model.TaskManagerDao</dao-class>-->
+			<!--<dao-class>com.tms.collab.taskmanager.model.TaskManagerDaoDB2</dao-class>-->
+			<dao-class>com.tms.collab.taskmanager.model.TaskManagerDaoMsSql</dao-class>
+			<!--<dao-class>com.tms.collab.taskmanager.model.TaskManagerDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <permission>com.tms.collab.taskmanager.ManageTask</permission>
+        </module>
+        <module class="com.tms.collab.emeeting.MeetingHandler">
+            <dao-class>com.tms.collab.emeeting.MeetingDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.collab.resourcemanager.model.ResourceManager">
+            <!--<dao-class>com.tms.collab.resourcemanager.model.ResourceManagerDao</dao-class> -->
+			<!--<dao-class>com.tms.collab.resourcemanager.model.ResourceManagerDaoDB2</dao-class> -->
+			<dao-class>com.tms.collab.resourcemanager.model.ResourceManagerDaoMsSql</dao-class>
+			<!--<dao-class>com.tms.collab.resourcemanager.model.ResourceManagerDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <permission>com.tms.collab.resourcemanager.AddResource</permission>
+            <permission>com.tms.collab.resourcemanager.ApproveResource</permission>
+            <permission>com.tms.collab.resourcemanager.EditResource</permission>
+            <permission>com.tms.collab.resourcemanager.ActivateResource</permission>
+            <permission>com.tms.collab.resourcemanager.InactivateResource</permission>
+            <permission>com.tms.collab.resourcemanager.DiscardResource</permission>
+            <permission>com.tms.collab.resourcemanager.ApproveBooking</permission>
+        </module>
+        <module class="com.tms.report.model.ReportModule">
+            <dao-class>com.tms.report.model.ReportDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+        <!-- ========== End Core Collaboration Modules ========== -->
+    </modules>
+
+
+    <properties>
+        <!-- ========== Core Content Properties ========== -->
+        <property>
+            <name>cms.notification.email</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>cms.content.subscription</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>cms.admin.reader.disabled</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>cms.auditing.disabled</name>
+            <value>false</value>
+        </property>
+        <property>
+            <name>cms.statistics.disabled</name>
+            <value>false</value>
+        </property>
+        <property>
+            <name>cms.content.profile</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>cms.content.profile.compulsory</name>
+            <value>false</value>
+        </property>
+        <property>
+            <name>cms.content.profile.classes</name>
+            <value>
+                com.tms.cms.document.Document,
+                com.tms.cms.article.Article
+            </value>
+        </property>
+        <property>
+            <name>cms.allowed.classes.com.tms.cms.section.Section</name>
+            <value>
+                com.tms.cms.section.Section,
+                com.tms.cms.article.Article,
+                com.tms.cms.document.Document,
+                com.tms.cms.image.Image,
+                com.tms.cms.bookmark.Bookmark,
+                com.tms.cms.vsection.VSection,
+                com.tms.cms.comment.Commentary,
+                com.tms.cms.spot.Spot,
+                com.tms.cms.page.Page
+            </value>
+        </property>
+        <property>
+            <name>cms.allowed.classes.com.tms.cms.article.Article</name>
+            <value>
+                com.tms.cms.comment.Commentary
+            </value>
+        </property>
+        <property>
+            <name>cms.allowed.classes.com.tms.cms.document.Document</name>
+            <value>
+                com.tms.cms.comment.Commentary
+            </value>
+        </property>
+        <property>
+            <name>cms.allowed.classes.com.tms.cms.comment.Commentary</name>
+            <value>
+                com.tms.cms.comment.Comment
+            </value>
+        </property>
+        <property>
+            <name>cms.allowed.classes.com.tms.cms.comment.Comment</name>
+            <value>
+                com.tms.cms.comment.Comment
+            </value>
+        </property>
+        <!-- ========== End Core Content Properties ========== -->
+
+        <!-- ========== Core Collaboration Properties ========== -->
+        <property>
+            <name>com.tms.collab.calendar.selection.Appointment</name>
+            <value>appointmentform.jsp</value>
+         </property>
+         <property>
+            <name>com.tms.collab.calendar.selection.To Do Task</name>
+            <value>todotaskform.jsp</value>
+        </property>
+        <property>
+            <name>com.tms.collab.calendar.selection.Event</name>
+            <value>eventform.jsp</value>
+        </property>
+        <property>
+            <name>com.tms.collab.calendar.selection.Meeting</name>
+            <value>emeetingform.jsp</value>
+        </property>
+         <property>
+            <name>com.tms.collab.calendar.ui.CalendarForm.recurrenceMax</name>
+             <value>12</value>
+        </property>
+        <property>
+            <name>contextPath</name>
+            <value>/ekms/formwizard</value>
+         </property>
+        <property>
+            <name>com.tms.collab.formwizard.memo</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>messaging.connection.timeout</name>
+            <value>30000</value>
+        </property>
+        <property>
+            <name>messaging.autoComplete.maxMessages</name>
+            <value>100</value>
+        </property>
+        <property>
+            <name>messaging.autoComplete.maxAddresses</name>
+            <value>100</value>
+        </property>
+        <property>
+            <name>messaging.dragDrop.enabled</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>messaging.jobCount.download</name>
+            <value>5</value>
+        </property>
+        <property>
+            <name>messaging.jobCount.check</name>
+            <value>5</value>
+        </property>
+        <property>
+            <name>messaging.jobCount.send</name>
+            <value>1</value>
+        </property>
+        <property>
+            <name>messaging.schedule.interval</name>
+            <value>5</value>
+        </property>
+        <property>
+            <!-- quota is in KB -->
+            <name>messaging.defaultQuota</name>
+            <value>1024000</value>
+        </property>
+
+        <!-- ========== End Core Collaboration Properties ========== -->
+
+		<property>
+            <name>help.root</name>
+            <value>/help/</value>
+        </property>
+
+		<property>
+            <name>cluster.showServerDetail</name>
+            <value>true</value>
+        </property>
+
+        <!-- (20050713) add on for task - get priority list -->
+        <property>
+            <name>com.tms.collab.taskmanager.taskpriority</name>
+            <value>1-High,3-Normal,5-Low,7-Ongoing</value>
+        </property>
+        <property>
+            <name>com.tms.collab.taskmanager.defaultpriority</name>
+            <value>3</value>
+        </property>
+
+        <property>
+        	<name>resource.schedule.starttime</name>
+			<value>8</value>
+		</property>
+		<property>
+			<name>resource.schedule.endtime</name>
+			<value>23</value>
+		</property>
+
+    </properties>
+</application>
+

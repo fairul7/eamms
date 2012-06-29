@@ -1,0 +1,17 @@
+<!DOCTYPE dwr PUBLIC
+	"-//GetAhead Limited//DTD Direct Web Remoting 1.0//EN"
+    "http://www.getahead.ltd.uk/dwr/dwr10.dtd">
+
+<dwr>
+	<allow>
+		<create creator="new" javascript="TimeSheetModule">
+			<param name="class" value="com.tms.collab.timesheet.model.TimeSheetDWRModule"/>
+		</create>
+		<create creator="new" javascript="MessageDWRModule">
+			<param name="class" value="com.tms.collab.messenger.MessageDWRModule"/>
+		</create>
+		<convert converter="bean" match="com.tms.collab.messenger.Message"/>
+		<convert converter="bean" match="com.tms.collab.messenger.MessageInfo"/>
+		<convert converter="bean" match="kacang.services.security.User"/>
+	</allow>
+</dwr>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<application>
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+        <module class="com.tms.collab.myfolder.model.MyFolderModule">
+            <dao-class>com.tms.collab.myfolder.model.MyFolderDao</dao-class>
+            <!--<dao-class>com.tms.collab.myfolder.model.MyFolderDaoDB2</dao-class>-->
+            <!--<dao-class>com.tms.collab.myfolder.model.MyFolderDaoMsSql</dao-class>-->
+			<!--<dao-class>com.tms.collab.myfolder.model.MyFolderDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+	    
+	    <!-- <permission>com.tms.collab.myfolder.quota</permission> -->
+	    <!-- <permission>com.tms.collab.myfolder.deletedUser</permission> -->
+        
+            <menu>
+		<menu-item>
+		    <order>70</order>
+		    <url>/ekms/myfolder/menuMain.jsp</url>
+	        </menu-item>
+	    </menu>
+        
+        </module>
+    </modules>
+    <properties>
+	<property>
+	    <name>myfolder.upload.quota</name>
+	    <value>5</value>
+	</property>
+	
+	<property>
+	    <name>myfolder.space.quota</name>
+	    <value>7</value>
+	</property>
+
+    </properties>
+
+
+
+	
+</application>

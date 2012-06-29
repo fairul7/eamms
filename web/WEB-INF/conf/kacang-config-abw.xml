@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<application>
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+        <module class="com.tms.fms.abw.model.AbwModule">
+            <dao-class>com.tms.fms.abw.model.AbwDao</dao-class>
+            <datasource>transactiondb</datasource>	   
+        </module>
+   </modules>
+       
+</application>
+
+

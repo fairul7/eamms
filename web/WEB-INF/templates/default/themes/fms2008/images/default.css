@@ -1,0 +1,390 @@
+/* General Style */
+body,td {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333333;
+}
+a:link {
+	font-size: 11px;
+	color: #333;
+	text-decoration: underline;
+}
+a:hover {
+	font-size: 11px;
+	color: #d00a00;
+	text-decoration: none;
+}
+.bg { background-color: #f8f5ec; }
+.field {
+	font-family: verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333333;
+}
+a.shortcut_link {
+	font-size: 11px;
+	color: #d00a00;
+	text-decoration: underline;
+}
+a.shortcut_link:hover {
+	font-size: 11px;
+	color: #d00a00;
+	text-decoration: none;
+}
+.text {
+	font-size: 11px;
+	color: #d00a00;
+	text-decoration: none;
+	font-weight: bold;
+}
+.text_link1{
+	font-size: 11px;
+	color: #000000;
+	text-decoration: none;
+}
+a.text_link1{
+	font-size: 11px;
+	color: #000000;
+	text-decoration: none;
+}
+a.text_link1:hover{
+	font-size: 11px;
+	color: #000000;
+	text-decoration: underline;
+}
+.date {
+	font-size: 11px;
+	color: #666666;
+}
+.section-title {
+	font-size: 12px;
+	color: #FFFFFF;
+	font-weight: bold;
+	text-decoration: none;
+}
+.text_link2{
+	font-size: 11px;
+	color: #333;
+	text-decoration: none;
+}
+a.text_link2{
+	font-size: 11px;
+	color: #333;
+	text-decoration: none;
+}
+a.text_link2:hover{
+	font-size: 11px;
+	color: #d00a00;
+	text-decoration: underline;
+}
+.h1{
+	font-size: 22px;
+	color: #d00a00;
+	text-decoration: none;
+}
+.bar_bottombg {
+	background-color: #3F3E3C;
+	background-image: url(bar_bottombg.gif);
+	background-repeat: repeat-y;
+}
+.leftpanel_bg {
+	background-color: #F0EBE7;
+	background-image: url(leftpanel_bg.gif);
+	background-repeat: repeat-y;
+	background-position: right;
+}
+.overdue_link {
+	font-size: 11px;
+	color: #FF474D;
+	text-decoration: none;
+}
+a.overdue_link {
+	font-size: 11px;
+	color: #FF474D;
+	text-decoration: underline;
+}
+a.overdue_link:hover {
+	font-size: 11px;
+	color: #FF474D;
+	text-decoration: none;
+}
+.ongoing_link {
+	font-size: 11px;
+	color: #0088A6;
+	text-decoration: none;
+}
+a.ongoing_link {
+	font-size: 11px;
+	color: #0088A6;
+	text-decoration: underline;
+}
+a.ongoing_link:hover {
+	font-size: 11px;
+	color: #0088A6;
+	text-decoration: none;
+}
+.completed_link {
+	font-size: 11px;
+	color: #458800;
+	text-decoration: none;
+}
+a.completed_link {
+	font-size: 11px;
+	color: #458800;
+	text-decoration: underline;
+}
+a.completed_link:hover {
+	font-size: 11px;
+	color: #458800;
+	text-decoration:none;
+}
+.headline_bar {
+	font-size: 11px;
+	font-weight: bold;
+	color: #ffffff;
+	text-decoration: none;
+	background-image: url(headlinebar_bg.gif);
+	background-repeat: repeat-x;
+}
+
+.button {
+	font-size: 12px;
+	color: #000;
+}
+.table_title_border {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #d1dc96;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #d1dc96;
+}
+
+.table_border_bottom {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #d1dc96;
+}
+
+
+
+/* Login Style */
+
+.login-title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	color: #e3ebcf;
+	text-decoration: none;
+}
+.login-text {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.login-bg {
+	background-image: url(login_bg.jpg);
+	background-repeat: no-repeat;
+}
+.login-smalltext a {
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 11px;	
+	color: #fff;
+	text-decoration: underline;
+}
+.login-smalltext a:hover {
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 11px;	
+	color: #fff;
+	text-decoration: none;
+}
+.login-field {
+	font-family: verdana, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #333333;
+	height: 22px;
+	padding: 3px;
+	background-color: #e9eccd;
+	border: 1px solid #72990d;
+}
+
+
+
+/* header Style */
+.header_bg {
+	background-color: #cb111f;
+	background-image: url(header_bg.jpg);
+	background-repeat: no-repeat;
+}
+.header_title{
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 22px;
+	color: #FFFFFF;
+}
+.header-login {
+	font-size: 10px;
+	color: #fff;
+	text-decoration: none;
+}
+.header-login a {
+	font-size: 10px;
+	color: #fff;
+	text-decoration: underline;
+}
+.header-login a:hover {
+	font-size: 10px;
+	color: #fff;
+	text-decoration: none;
+}
+	.menu-bg {
+		background-image: url(menu_bg.gif);
+		background-repeat: repeat-x;
+	}
+	.menu A {
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 14px;
+		color: #fff;
+		font-weight: bold;
+		text-decoration: none;
+	}
+	.menu A:hover{
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 14px;
+		color: #fff;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	.menu-dashboard {
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 14px;
+		color: #565656;
+		font-weight: normal;
+		text-decoration: none;
+	}
+	.menu-dashboard A {
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 12px;
+		color: #333;
+		font-weight: bold;
+		text-decoration: none;
+	}
+	.menu-dashboard A:hover{
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 12px;
+		color: #333;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/* menu active/current */
+	.menubg-current {
+		background-image: url(menu_roll.gif);
+		background-repeat: repeat-x;
+	}
+	.menu-current A {
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 14px;
+		color: #333;
+		font-weight: bold;
+		text-decoration: none;
+	}
+	.menu-current A:hover {
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 14px;
+		color: #333;
+		font-weight: bold;
+		text-decoration: none;
+	}
+
+
+
+/*Announcement*/
+.announcement_bg {
+	background-image: url(portlet_announcementBG.gif);
+	background-repeat: repeat-x;
+	background-color: #aecc2e;
+}
+
+
+
+/*Portlet*/
+/* ---------- Portlet Classes ---------- */
+.portletBackground {background-image: url('/ekms/images/fms2008/portlet_bg.gif'); background-color:#f0f6dd; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt;}
+.portletHeader {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 8pt;font-weight:bold;color:#FFFFFF}
+.portletTableHeader { background-color:#aecc2e; font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 8pt;font-weight:bold;color:#000000}
+.portletRow {background-color: #aecc2e; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.portletLabel {background-color: #aecc2e; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.portletFooter {background-color: #f0f6dd; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt;}
+.portletPreferenceBackground {background-color:#BBD5F2; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.portletPreferenceHeader {background-color: #BBD5F2; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #000000; font-weight:bold}
+.portletPreferenceRow {background-color: #aecc2e; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.portletBody {background-color:#f0f6dd; font-family: Arial, Helvetica, sans-serif;font-size: 9pt;color:#000000;font-weight:normal}
+.portletHeaderLine { background:#6A9DD4 }
+.portletHeaderTitle { background:#aecc2e }
+.portletBorder { border: 1px solid #aecc2e;}
+
+/* Panel Classes */
+.panelHeaderSelected {border:1px solid #CCCCCC; margin:4; padding:5; background-color: #BBD5F2; font-weight: bold}
+.panelHeader {border:1px solid #CCCCCC; margin:4; padding:5; background-color: #FFFFFF}
+.panelRow {border: 1px solid #FFFFFF; padding:2; margin:0}
+.panelHeaderText {color: #0033FF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; font-weight:normal}
+.panelHeaderSelectedText {color: #000000; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; font-weight:bold}
+
+/*calendar*/
+.header {background-image: url('/ekms/images/fms2008/portlet_bg.gif'); font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 8pt;font-weight:normal;color:#ffffff; text-decoration:none}
+.calendarFont { font-size: 12px; font-weight:normal; color:#ffffff; }
+.calendarWeekendHeader {background:#c8dd90}
+.calendarWeekdayHeader {background:#d2e59d}
+.calendarWeekHeader {text-decoration:none}
+.calendarWeekendBg {background:#dfedb5; color:#565656}
+.calendarWeekdayBg {background:#edf6d1; color:#565656}
+a.calendarTextlink {text-decoration:underline; color:#767676; font-weight:normal}
+a.calendarTextlink:hover {text-decoration:underline; color:#333; font-weight:normal}
+a.calendarDatelink {text-decoration:none; color:#333; font-weight:normal}
+a.calendarDatelink:hover {text-decoration:underline; color: #000; font-weight:normal}
+.textsmall2 { font-weight:normal; color: #767676}
+/* ------------------------------------ */
+.calendarHeader {background-color: #aecc2e; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; color: #ffffff; font-weight:bold}
+.calendarMonthBgColor {background-color: #666666}
+.calendarMonthFont {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 10pt}
+.calendarBgColor {background-color: #f0f6dd}
+.calendarContentFont {font-family: Arial, Helvetica, sans-serif; font-size: 9pt}
+.calendarBackground {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.calendarLabel {background-color: #E6E6CA; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.calendarRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.calendarRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.calendarRowSmall {background-color: #EEEEDD; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7pt; font-weight:normal}
+.calendarFooter {background-color: #dfedb5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.calendarFooterLabel {background-color: #E6E6CA; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.calendarSubheader {background-color: #dfedb5; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+
+/* footer Style */
+.footer {
+	font-size: 10px;
+	color: #FFFFFF;
+	font-weight: bold;
+	background-image: url(footer_bg.gif);
+	background-repeat: repeat-x;
+}
+
+/* Quick Messaging Classes */
+.qMessagingRowHeader {background-color: #f0f6dd; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight:bold}
+.qMessagingRowLabel {background-color: #f0f6dd; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.qMessagingRow {background-color: #f0f6dd; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.qMessagingRowFooter {background-color: #aecc2e; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight:bold}
+.qMessagingTextHeader {background-color: #aecc2e; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; font-weight:bold}
+
+.contentBgColor {background-color:#f0f6dd; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.contentTitleFont {background-color:#aecc2e; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 10pt; color: #ffffff; font-weight:bold}
+.contentStrapColor {background-color:#f0f6dd; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.dashboardModuleMenu { background:#f0f6dd;border: 1px solid #aecc2e }
+
+
+/* Table Widget Classes */
+.tableButton { cursor:hand; cursor:pointer; BORDER-RIGHT: #aaaaaa 1pt solid; BORDER-TOP: #DEF2FF 1pt solid; FONT-WEIGHT: normal; FONT-SIZE: 7pt; BORDER-LEFT: #DEF2FF 1pt solid; BORDER-BOTTOM: #aaaaaa 1pt solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff; TEXT-DECORATION: none}
+.tableHeader {  background-color: #e9eccd; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 11pt; color: black; font-weight:normal; text-decoration:none }
+.tableHeader td {background-color: #e9eccd; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; color: black; font-weight:normal; text-decoration:none }
+.tableBackground {background-color: #F0F6DD; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt}
+.tableRow {border-bottom:1px solid #D1DC96; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.tableHeaderStyle {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; color: black; font-weight:normal; text-decoration:none }
+.table_border_bottom {border-bottom:1px solid #D1DC96;}
+

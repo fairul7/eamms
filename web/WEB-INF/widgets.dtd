@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT config (page)*>
+
+<!ELEMENT page (panel|form|portlet|tabbedpanel|label|link)*>
+<!ATTLIST page
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    url CDATA #REQUIRED
+>
+
+<!ELEMENT panel (panel|form|portlet|tabbedpanel|label|link)*>
+<!ATTLIST panel
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    text CDATA #IMPLIED
+    columns CDATA #IMPLIED
+    width CDATA #IMPLIED
+>
+
+<!ELEMENT form (label|link|textfield|password|textbox|richtextbox|selectbox|checkbox|radio|datefield|button)*>
+<!ATTLIST form
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    columns CDATA #IMPLIED
+    width CDATA #IMPLIED
+>
+
+<!ELEMENT portlet (panel|form|portlet|tabbedpanel|label|link)*>
+<!ATTLIST portlet
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    text CDATA #IMPLIED
+    columns CDATA #IMPLIED
+    width CDATA #IMPLIED
+    minimized CDATA #IMPLIED
+>
+
+<!ELEMENT tabbedpanel (panel)*>
+<!ATTLIST tabbedpanel
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    selectedName CDATA #IMPLIED
+    width CDATA #IMPLIED
+>
+
+<!ELEMENT label EMPTY>
+<!ATTLIST label
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    text CDATA #IMPLIED
+>
+
+<!ELEMENT link EMPTY>
+<!ATTLIST link
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    url CDATA #REQUIRED
+    text CDATA #IMPLIED
+>
+
+<!ELEMENT calendarbox EMPTY>
+<!ATTLIST calendarbox
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+>
+
+<!ELEMENT textfield EMPTY>
+<!ATTLIST textfield
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    value CDATA #IMPLIED
+>
+
+<!ELEMENT password EMPTY>
+<!ATTLIST password
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    value CDATA #IMPLIED
+>
+
+<!ELEMENT textbox EMPTY>
+<!ATTLIST textbox
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    value CDATA #IMPLIED
+>
+
+<!ELEMENT richtextbox EMPTY>
+<!ATTLIST richtextbox
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    value CDATA #IMPLIED
+>
+
+<!ELEMENT selectbox EMPTY>
+<!ATTLIST selectbox
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    options CDATA #IMPLIED
+    multiple CDATA #IMPLIED
+    value CDATA #IMPLIED
+>
+
+<!ELEMENT checkbox EMPTY>
+<!ATTLIST checkbox
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    checked CDATA #IMPLIED
+    groupName CDATA #IMPLIED
+    value CDATA #IMPLIED
+>
+
+<!ELEMENT radio EMPTY>
+<!ATTLIST radio
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    checked CDATA #IMPLIED
+    groupName CDATA #IMPLIED
+    value CDATA #IMPLIED
+>
+
+<!ELEMENT datefield EMPTY>
+<!ATTLIST datefield
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    value CDATA #IMPLIED
+>
+
+<!ELEMENT button EMPTY>
+<!ATTLIST button
+    name CDATA #REQUIRED
+    stateless CDATA #IMPLIED
+    text CDATA #IMPLIED
+    value CDATA #IMPLIED
+>
+
+<!ENTITY % validators ()>
+

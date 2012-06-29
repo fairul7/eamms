@@ -1,0 +1,232 @@
+div {
+    border: solid 0px silver;
+    font: normal 8.5pt Verdana,Arial;
+}
+body {
+    font: normal 8.5pt Verdana,Arial;
+}
+td {
+    font: normal 8.5pt Verdana,Arial;
+}
+
+.siteHeader {}
+.siteHeaderSpot {}
+.siteBody {
+    position: absolute;
+    left: 300px;
+    top: 300px;
+}
+.siteBodyHeader {
+    width: 100%;
+    background: #666666;
+    color: #ffffcc;
+    font: bold 9pt Verdana;
+    border: none;
+    padding: 4px;
+}
+.siteFooter {}
+.siteFooterSpot {}
+.sitePages {
+    padding: 5px;
+}
+.sitePageLink {
+    margin-right: 50px;
+}
+.siteSearchSpot {}
+.siteSearch { width: 300px }
+.siteSearchText {}
+.siteSearchButton {}
+.siteUserOptions {}
+.siteUserLogin {}
+.siteUserLoginButton { font-size: 7pt }
+.siteUserLoginLink { font-size: 7pt }
+.siteUsername {}
+.siteBannerAd {}
+.siteButtonAd {}
+.siteMenu {}
+.siteMenuSpot {}
+.siteFeatureSpot {}
+.siteFeaturedContentSpot {}
+.siteEventSpot {}
+
+
+.featureHeadline {
+    font-weight: bold;
+    border-top: dotted 1px silver;
+    padding-top: 10px;
+    width: 100%;
+}
+
+.contentPathLink {
+    font: normal 8pt;
+    text-decoration: none;
+    color: #669999;
+}
+.contentPathLinkSelected {
+    font: bold 8pt;
+    text-decoration: none;
+    color: #669999;
+}
+.contentName {
+    font: bold 12pt Arial;
+}
+.contentDate {}
+.contentAuthor {}
+.contentBody {}
+.contentHeader {
+    padding: 5px;
+    background: #dddddd;
+}
+.contentSubheader {}
+.contentFooter {}
+.contentOption {}
+.contentChildName {
+    font-weight: bold;
+    color: black;
+    border-top: dotted 1px silver;
+    padding-top: 10px;
+    width: 100%;
+}
+.contentChildDate {
+    font-size: 7pt;
+}
+.contentChildAuthor {}
+.contentChildSummary {
+    font-size: 8pt;
+}
+.contentPaging {}
+.contentPageLink {}
+.contentTreeNode {
+    border:solid 1px gray;
+    margin:0px;
+    padding: 2px;
+    text-align: center;
+    width:14px;
+    font-size:12px;
+    line-height: 6px;
+    background: #cccccc;
+    color: black;
+}
+.contentTreeLink {
+    text-decoration: none;
+    color: black;
+    font: bold 7.5pt Verdana
+}
+.contentTreeSeparator {
+    width: 100%;
+    height: 10px;
+    border-top: dotted 1px black;
+}
+
+.voteButton {
+    font-size: 7pt;
+}
+
+.loginTable {}
+.loginLabel {}
+.loginError {
+    color: red;
+}
+
+.profileTable {
+    width: 98%;
+}
+.profileHeader {
+    padding: 5px;
+    font-weight:bold;
+    background-color:#cccccc
+}
+.profileRow {}
+.profileError {
+    color: red;
+}
+
+.forgetPasswordLabel {}
+.forgetPasswordError {
+    color: red;
+}
+
+.personalizationTable {
+    width: 98%;
+}
+.personalizationHeader {
+    padding: 5px;
+    font-weight: bold;
+    background-color: #cccccc;
+    color: white;
+}
+.personalizationRow {
+    padding: 5px;
+}
+.personalizationLink {}
+.personalizationLink:hover {}
+.personalizationLabel {}
+.personalizationError {
+    color: red
+}
+
+.subscriptionListTable {
+    padding: 5px;
+    width: 98%;
+}
+.subscriptionListLabel {}
+.subscriptionListRow {}
+.subscriptionCartHeader {
+    padding: 5px;
+    font-weight: bold;
+    background-color:#cccccc
+}
+.subscriptionCartTable {
+    width: 98%;
+}
+
+.forumTreeNode {
+    border:solid 1px gray;
+    margin:0px;
+    padding: 2px;
+    text-align:center;
+    width:14px;
+    font-size:12px;
+    line-height: 6px;
+    background: #dddddd;
+    color: black;
+}
+.forumTreeLink {
+    text-decoration: none;
+    color: black;
+    font: normal 7.5pt Verdana
+}
+.forumTreeLinkSelected {
+    text-decoration: none;
+    color: black;
+    font: bold 7.5pt Verdana
+}
+.forumTreeSeparator {
+    width: 100%;
+    height: 10px;
+    border-top: none 1px black;
+}
+
+.voteButton {border-width:1pt; background-color:#E1E1E1; border-style:solid; border-color:#AAAAAA; text-decoration:none; font-family:Arial, Verdana, Helvetica, sans-serif;font-size:7pt; font-weight:normal; cursor:hand}
+.voteAnswer {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.voteCount {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; font-weight:normal}
+.voteResult {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; font-weight:bold}
+.voteTotal {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+
+.forumBackground {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.forumHeader {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #000000; font-weight:bold}
+.forumLabel {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.forumRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.forumRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.forumRowSmall {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7pt; font-weight:normal}
+.forumFooter {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.forumFooterLabel {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+a.forumLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold; color:#000000}
+a.forumLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold; color:#999999}
+.forumList1 {background-color: #CCCCCC; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.forumList2 {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.forumListSmall {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7pt; font-weight:normal}
+a.forumHeaderLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: black; font-weight:bold}
+a.forumHeaderLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; black; font-weight:bold}
+
+.button {border-width:1pt; background-color:#E1E1E1; border-style:solid; border-color:#AAAAAA; text-decoration:none; font-family:Arial, Verdana, Helvetica, sans-serif;font-size:7pt; font-weight:normal; cursor:hand}

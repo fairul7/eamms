@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<application>
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+        <!-- New Leave Module -->
+        <module class="com.tms.hr.leave.model.LeaveModule">
+            <dao-class>com.tms.hr.leave.model.LeaveDao</dao-class>
+		<!--<dao-class>com.tms.hr.leave.model.LeaveDaoDB2</dao-class>-->
+		<!--<dao-class>com.tms.hr.leave.model.LeaveDaoMsSql</dao-class>-->
+            <!--<dao-class>com.tms.hr.leave.model.LeaveDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <!-- <permission>com.tms.cms.leave.ManageLeaves</permission> -->
+            <!-- <permission>com.tms.cms.leave.Leaves</permission> -->
+            <menu>
+                <menu-item>
+                    <order>30</order>
+                    <url>/ekms/hrleave/menuMain.jsp</url>
+                </menu-item>
+            </menu>
+        </module>
+    </modules>
+    <properties>
+<!--
+        <property>
+            <name>hr.leave.calculator</name>
+            <value>com.tms.hr.leave.model.LeaveCalculator</value>
+        </property>
+        <property>
+            <name>hr.leave.annualLeave</name>
+            <value>Annual</value>
+        </property>
+-->
+    </properties>
+</application>

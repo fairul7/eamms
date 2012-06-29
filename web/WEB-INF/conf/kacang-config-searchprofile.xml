@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<application>
+    <modules>
+        <module class="com.tms.ekms.search.model.SearchProfileModule">
+            <dao-class>com.tms.ekms.search.model.SearchProfileDao</dao-class>
+            <!-- <dao-class>com.tms.ekms.search.model.SearchProfileDaoMsSql</dao-class> -->
+			<!-- <dao-class>com.tms.ekms.search.model.SearchProfileDaoSybase</dao-class> -->
+            <datasource>defaultdb</datasource>
+        </module>
+    </modules>
+    <properties>
+        <property>
+            <name>searchProfile.context</name>
+            <value>/ekms/search/searchProfileView.jsp</value>
+        </property>
+    </properties>
+</application>
+

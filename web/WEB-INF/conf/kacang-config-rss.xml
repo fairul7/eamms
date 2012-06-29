@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<application>
+    <modules>
+        <module class="com.tms.collab.rss.model.RssHandler">
+            <dao-class>com.tms.collab.rss.model.RssDao</dao-class>
+            <datasource>defaultdb</datasource> 
+            
+			<menu>
+                <menu-item>
+                    <order>101</order>
+                    <url>/ekms/rss/menuMain.jsp</url>
+                </menu-item>
+            </menu>
+        </module>
+        <module class="com.tms.collab.rss.model.ContentHomeHandler">
+            <dao-class>com.tms.collab.rss.model.RssDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.collab.rss.model.ForumHandler">
+            <dao-class>com.tms.collab.rss.model.RssDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+<!--
+        <module class="com.tms.collab.rss.model.ProjectHandler">
+            <dao-class>com.tms.collab.rss.model.RssDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.collab.rss.model.TmsNewsHandler">
+            <dao-class>com.tms.collab.rss.model.RssDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.collab.rss.model.ForumTestHandler">
+            <dao-class>com.tms.collab.rss.model.RssDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+-->        
+    </modules>
+</application>
+

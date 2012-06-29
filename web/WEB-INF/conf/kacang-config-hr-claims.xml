@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<application>
+
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+        <module class="com.tms.hr.claim.model.ClaimStandardTypeModule">
+            <dao-class>com.tms.hr.claim.model.ClaimStandardTypeDao</dao-class>
+	    <!--<dao-class>com.tms.hr.claim.model.ClaimStandardTypeDaoOracle</dao-class>-->
+		<!--<dao-class>com.tms.hr.claim.model.ClaimStandardTypeDaoDB2</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.hr.claim.model.ClaimProjectModule">
+            <dao-class>com.tms.hr.claim.model.ClaimProjectDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.hr.claim.model.ClaimFormItemCategoryModule">
+            <dao-class>com.tms.hr.claim.model.ClaimFormItemCategoryDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.hr.claim.model.ClaimFormIndexModule">
+            <dao-class>com.tms.hr.claim.model.ClaimFormIndexDao</dao-class>
+            <!--<dao-class>com.tms.hr.claim.model.ClaimFormIndexDaoMsSql</dao-class>-->
+			<!--<dao-class>com.tms.hr.claim.model.ClaimFormIndexDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.hr.claim.model.ClaimFormItemModule">
+            <dao-class>com.tms.hr.claim.model.ClaimFormItemDao</dao-class>
+		    <!--<dao-class>com.tms.hr.claim.model.ClaimFormItemDaoDB2</dao-class>-->
+		    <!--<dao-class>com.tms.hr.claim.model.ClaimFormItemDaoMsSql</dao-class>-->
+			<!--<dao-class>com.tms.hr.claim.model.ClaimFormItemDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+        <module class="com.tms.hr.claim.model.ClaimConfigTypeModule">
+            <dao-class>com.tms.hr.claim.model.ClaimConfigTypeDao</dao-class>
+		    <!--<dao-class>com.tms.hr.claim.model.ClaimConfigTypeDaoDB2</dao-class>-->
+		    <!--<dao-class>com.tms.hr.claim.model.ClaimConfigTypeDaoMsSql</dao-class>-->
+			<!--<dao-class>com.tms.hr.claim.model.ClaimConfigTypeDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+        </module>
+
+
+        <module class="com.tms.hr.claim.model.ClaimConfigModule">
+            <dao-class>com.tms.hr.claim.model.ClaimConfigDao</dao-class>
+            <datasource>defaultdb</datasource>
+            <!-- <permission>com.tms.hr.claim.model.Admin</permission> -->
+            <!-- <permission>com.tms.hr.claim.model.Access</permission> -->
+            <menu>
+                <menu-item>
+                    <order>40</order>
+                    <url>/ekms/claim/menuMain.jsp</url>
+                </menu-item>
+            </menu>
+        </module>
+    </modules>
+
+</application>
+

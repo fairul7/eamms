@@ -1,0 +1,36 @@
+.calendarContentFont {FONT-SIZE: 9pt; FONT-FAMILY: Arial, Helvetica, sans-serif}
+.calendarBackground {FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff}
+.calendarLabel {FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #e6e6ca}
+.calendarRow {	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff}
+.calendarRowLabel {	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff}
+.calendarRowSmall {	FONT-WEIGHT: normal; FONT-SIZE: 7pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #eeeedd}
+.calendarFooter {	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #bbd5f2}
+.calendarFooterLabel {	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #e6e6ca}
+.highlight {	COLOR: #ff0000}
+.contentBgColor {	FONT-SIZE: 12pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #e9f5ff}
+.contentFont {	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Helvetica, sans-serif}
+.f01 {	FONT-SIZE: 12px; COLOR: #cccccc; LINE-HEIGHT: 16px; FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif}
+.f02 {	FONT-SIZE: 12px; COLOR: #666666; LINE-HEIGHT: 16px; FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif}
+.f03 {	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #99cc33; LINE-HEIGHT: 16px; FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif}
+.f04 {	FONT-SIZE: 12px; COLOR: #666666; LINE-HEIGHT: 16px; FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif}
+.f05 {	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #99cc33; LINE-HEIGHT: 16px; FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif}
+.f06 {	FONT-SIZE: 12px; LINE-HEIGHT: 16px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif}
+.f07 {	FONT-SIZE: 12px; LINE-HEIGHT: 16px; FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif}
+
+.login_box {	BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; BACKGROUND: #f2f2f2; FONT: 12px/12px Verdana; BORDER-LEFT: #999999 1px solid; WIDTH: 85px; COLOR: #666666; BORDER-BOTTOM: #999999 1px solid}
+.text_box {	BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; BACKGROUND: #f2f2f2; FONT: 12px/12px Verdana; BORDER-LEFT: #999999 1px solid; COLOR: #666666; BORDER-BOTTOM: #999999 1px solid}
+.login_button {	BACKGROUND: #6584CD;	FONT: 9px/10px Verdana;	WIDTH: 50px;	COLOR: #FFFFFF;	HEIGHT: 16px;	border: 1px solid #6060D2;}
+.buttoncolor {	BACKGROUND: #6584CD;	FONT-WEIGHT: bold;	FONT: 9px/10px Verdana;	WIDTH: 20px;	COLOR: #FFFFFF;	HEIGHT: 16px;	border: 1px solid #6060D2;}
+
+.calendarHeader {background-color: #BBD5F2; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 11pt; color: #000000; LINE-HEIGHT: 16px}
+.calendarSubheader {background-color: #BBD5F2; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:normal}
+.calendarRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 11pt; font-weight:normal}
+.calendarRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 11pt; font-weight:bold}
+.emeetingHeader {background-color: #BBD5F2; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 11pt; color: #000000; LINE-HEIGHT: 16px}
+.emeetingRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 11pt; font-weight:normal}
+.emeetingRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 11pt; font-weight:bold}
+.emeetingFooter {background-color: #BBD5F2; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 11pt; color: #000000; LINE-HEIGHT: 16px}
+.emeetingBackground {background-color: #BBD5F2; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 11pt; color: #000000; LINE-HEIGHT: 16px}
+.emeetingSmall {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 10pt; color: #000000 }
+.tableHeader {background-color: #BBD5F2; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 11pt; color: black; font-weight:normal; text-decoration:none }
+.tableRow {background-color: #E3EDFB; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:normal}

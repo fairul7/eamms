@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--<!DOCTYPE application SYSTEM "kacang-config.dtd">-->
+
+<application>
+
+    <!-- ========== Application Definition =============================== -->
+    <name>Sample Application</name>
+    <content-type>text/html;charset=UTF-8</content-type>
+    <character-encoding>UTF-8</character-encoding>
+    <locale language="en" country="US"/>
+<!--    <resource-bundle>/messages</resource-bundle>-->
+    <resource-bundle>kacang.util.ApplicationResourceBundle</resource-bundle>
+
+    <!-- ========== Services Definition =============================== -->
+    <services>
+        <service class="kacang.services.security.SecurityService">
+            <dao-class>kacang.services.security.SecurityDao</dao-class>
+            <datasource>defaultdb</datasource>
+            <permission>kacang.services.security.User.add</permission>
+            <permission>kacang.services.security.User.update</permission>
+            <permission>kacang.services.security.User.delete</permission>
+            <permission>kacang.services.security.User.view</permission>
+            <permission>kacang.services.security.Group.add</permission>
+            <permission>kacang.services.security.Group.update</permission>
+            <permission>kacang.services.security.Group.delete</permission>
+            <permission>kacang.services.security.Group.view</permission>
+            <permission>kacang.services.security.ekms.ekmsUser</permission>
+            <permission>com.tms.cms.ManageContentAcl</permission>
+        </service>
+	    <service class="kacang.services.session.SessionService">
+            <dao-class>kacang.services.session.SessionDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </service>
+        <service class="kacang.services.indexing.IndexingService">
+            <dao-class>kacang.services.indexing.IndexingDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </service>
+        <service class="kacang.services.storage.StorageService">
+            <dao-class>kacang.services.storage.StorageDaoFileSystem</dao-class>
+        </service>
+        <service class="kacang.services.scheduling.SchedulingService">
+            <dao-class>kacang.services.scheduling.SchedulingDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </service>
+        <service class="kacang.services.presence.PresenceService">
+            <dao-class>kacang.services.presence.PresenceDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </service>
+		<service class="kacang.services.log.LogService">
+            <dao-class>kacang.services.log.LogDao</dao-class>
+            <datasource>defaultdb</datasource>
+			<permission>kacang.services.log.Entry.view</permission>
+            <permission>kacang.services.log.Entry.delete</permission>
+        </service>
+    </services>
+
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+        <module class="kacang.peanut.model.PeanutModule">
+            <dao-class>kacang.peanut.model.PeanutDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+    </modules>
+
+    <!-- ========== Properties Definition =============================== -->
+    <properties>
+		<!-- this property is used in the kacang.model.operator.OperatorLike to enable db2 case insensitive search -->
+		<property>
+            <name>kacang.model.operator.operatorLike.db2</name>
+            <value>false</value>
+        </property> 
+        <property>
+            <name>kacang.services.security.ekms.ekmsUser</name>
+            <value>kacang.services.security.ekms.ekmsUser</value>
+        </property>
+        <property>
+            <name>kacang.runtime.userLocale</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>kacang.runtime.slowRequestLogThreshold</name>
+            <value>10000</value>
+        </property>
+        <property>
+            <name>kacang.runtime.slowEventLogThreshold</name>
+            <value>2000</value>
+        </property>
+        <property>
+            <name>kacang.jdbc.util.class</name>
+            <value>kacang.util.JdbcUtilMetaDataImpl</value>
+<!--            <value>com.tms.ekms.util.JdbcUtilOracle</value>-->
+<!--            <value>com.tms.ekms.util.JdbcUtilDB2</value>-->
+<!--			<value>com.tms.ekms.util.JdbcUtilMsSql</value>-->
+        </property>
+        <!-- Indexing Service Properties -->
+        <property>
+            <name>services.indexing.start-indexing-thread</name>
+            <value>true</value>
+        </property>
+<!--
+        <property>
+            <name>kacang.services.indexing.filters</name>
+            <value>kacang.services.indexing.filters.ThaiWordFilter</value>
+        </property>
+-->
+<!--
+        <property>
+            <name>services.indexing.index-base-path</name>
+            <value>C:/Temp/DefaultIndex/</value>
+        </property>
+        <property>
+            <name>services.storage.root</name>
+            <value>C:/Temp/DefaultStorageRoot/</value>
+        </property>
+-->
+        <property>
+            <name>kacang.ui.template:/ekms</name>
+            <value>ekms</value>
+        </property>
+        <property>
+            <name>kacang.ui.template:/mekms</name>
+            <value>mekms</value>
+        </property>
+        <property>
+            <name>kacang.ui.template:/partners</name>
+            <value>ekms</value>
+        </property>
+        <property>
+            <name>kacang.ui.template:/cmsadmin</name>
+            <value>default</value>
+        </property>
+        <property>
+            <name>services.security.default-group</name>
+            <value>Users</value>
+        </property>
+        <property>
+            <name>services.security.default-state</name>
+            <value>0</value>
+        </property>
+        <property>
+            <name>services.security.user-popup</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>services.security.permission-cache-duration</name>
+            <value>300</value>
+        </property>
+        <property>
+            <name>kacang.services.security.profilers</name>
+            <value>com.tms.mugshot.ui.MugshotForm,com.tms.collab.forum.ui.ForumSubscription,com.tms.tmsPIMSync.ui.SyncProfile</value>
+ <!--           <value>com.tms.mugshot.ui.MugshotForm,com.tms.collab.forum.ui.ForumSubscription,com.tms.hr.competency.ui.UserCompetencyForm,com.tms.tmsPIMSync.ui.SyncProfile</value>-->
+        </property>
+<!--
+        <property>
+            <name>util.mailer.smtp</name>
+            <value>mail.tmsasia.com</value>
+        </property>
+        <property>
+            <name>util.mailer.sender</name>
+            <value>support@tmsasia.com</value>
+        </property>
+        <property>
+            <name>util.mailer.port</name>
+            <value>25</value>
+        </property>
+        <property>
+            <name>util.mailer.authenticate</name>
+            <value>false</value>
+        </property>
+        <property>
+            <name>util.mailer.user</name>
+            <value>user</value>
+        </property>
+        <property>
+            <name>util.mailer.password</name>
+            <value>password</value>
+        </property>
+-->
+        <!-- Presence Service Properties -->
+        <property>
+            <name>kacang.services.presence.ApplicationId</name>
+            <value>kacang</value>
+        </property>
+        <property>
+            <name>kacang.services.presence.Checker</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>kacang.services.presence.ConcurrentLogin</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>kacang.services.presence.TimeoutLength</name>
+            <value>30</value>
+        </property>
+        <property>
+            <name>kacang.services.presence.DaemonDelay</name>
+            <value>30</value>
+        </property>
+        <property>
+            <name>services.security.user-popup</name>
+            <value>false</value>
+        </property>
+        <!-- Scheduling Service Properties -->
+        <property>
+            <name>org.quartz.scheduler.instanceName</name>
+            <value>Sched1</value>
+        </property>
+        <property>
+            <name>org.quartz.scheduler.instanceId</name>
+            <value>AUTO</value>
+        </property>
+        <property>
+            <name>org.quartz.threadPool.class</name>
+            <value>org.quartz.simpl.SimpleThreadPool</value>
+<!--
+            <value>kacang.services.scheduling.DummyThreadPool</value>
+-->
+        </property>
+        <property>
+            <name>org.quartz.threadPool.threadCount</name>
+            <value>15</value>
+        </property>
+        <property>
+            <name>org.quartz.threadPool.threadPriority</name>
+            <value>4</value>
+        </property>
+        <property>
+            <name>org.quartz.threadPool.makeThreadsDaemons</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>org.quartz.jobStore.class</name>
+            <value>kacang.services.scheduling.JobStore</value>
+        </property>
+        <property>
+            <name>org.quartz.jobStore.driverDelegateClass</name>
+            <value>org.quartz.impl.jdbcjobstore.StdJDBCDelegate</value>
+<!--
+            <value>org.quartz.impl.jdbcjobstore.MSSQLDelegate</value>
+            <value>org.quartz.impl.jdbcjobstore.PostgreSQLDelegate</value>
+            <value>org.quartz.impl.jdbcjobstore.oracle.OracleDelegate</value>
+-->
+        </property>
+        <property>
+            <name>org.quartz.jobStore.dataSource</name>
+            <value>CUSTOM</value>
+        </property>
+        <property>
+            <name>org.quartz.jobStore.tablePrefix</name>
+            <value>QRTZ_</value>
+        </property>
+        <property>
+            <name>org.quartz.jobStore.isClustered</name>
+            <value>false</value>
+        </property>
+        <!-- Default Date and Time Formats -->
+        <property>
+            <name>globalDateLong</name>
+            <value>dd MMM yyyy</value>
+        </property>
+        <property>
+            <name>globalDateShort</name>
+            <value>dd-MM-yy</value>
+        </property>
+        <property>
+            <name>globalDatetimeLong</name>
+            <value>dd MMM yyyy hh:mm a</value>
+        </property>
+        <property>
+            <name>globalDatetimeShort</name>
+            <value>dd/MM/yy H:mm</value>
+        </property>
+        <property>
+            <name>globalTimeLong</name>
+            <value>hh:mm a</value>
+        </property>
+        <property>
+            <name>clusterNodeName</name>
+            <value>Server 1</value>
+        </property>
+    </properties>
+</application>

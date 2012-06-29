@@ -1,0 +1,11 @@
+.frontedit {
+    background:#ddddff;
+    border: solid 1px silver;
+    font-family: arial;
+    font-size: 7pt;
+    font-weight: bold;
+    color: blue;
+    text-decoration: none;
+    padding: 2;
+    margin: 0;
+}

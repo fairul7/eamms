@@ -1,0 +1,230 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<!-- Copyright 2000 Microsoft Corporation. All rights reserved. -->
+<HTML>
+<HEAD>
+<TITLE>Enter Table Information</TITLE>
+
+<STYLE TYPE="text/css">
+ BODY   {margin-left:10; font-family:Verdana; font-size:12; background:white}
+ BUTTON {width:5em}
+ TABLE  {font-family:Verdana; font-size:12}
+ P      {text-align:center}
+</STYLE>
+
+<SCRIPT LANGUAGE=JavaScript>
+<!--
+function IsDigit()
+{
+  return ((event.keyCode >= 48) && (event.keyCode <= 57))
+}
+// -->
+</SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript FOR=Ok EVENT=onclick>
+<!--
+  var tabAttrs = "width=\"" + tablefrm.width.value + "\" border=\"" + tablefrm.border.value + "\" bordercolor=\"" + tablefrm.bordercolor.value + "\" bgcolor=\"" + tablefrm.bgcolor.value + "\" cellpadding=\"" + tablefrm.padding.value + "\" cellspacing=\"" + tablefrm.spacing.value + "\" style=\"" + tablefrm.color.value + "\"";
+  var colAttrs = "style=\"color:" + tablefrm.color.value + "\"";
+
+  var arr = new Array();
+  arr["NumRows"] = tablefrm.rows.value;
+  arr["NumCols"] = tablefrm.cols.value;
+  arr["TableAttrs"] = tabAttrs;
+  arr["CellAttrs"] = colAttrs;
+  arr["Caption"] = "";
+  window.returnValue = arr;
+  window.close();
+  return false;
+// -->
+</SCRIPT>
+
+</HEAD>
+
+<BODY>
+
+
+<html>
+<head>
+	<title>Insert Table</title>
+<script>
+
+	function updateStyle() {
+		tbl.setAttribute("border",tablefrm.border.value);
+		tbl.style.borderColor = tablefrm.bordercolor.value;
+		tbl.style.backgroundColor =  tablefrm.bgcolor.value;
+		tbl.style.color = tablefrm.color.value;
+	}
+</script>
+
+<style type="text/css">
+	TD.Styled   {font-family:Tahoma,verdana,arial; font-size:8pt; background:white;}
+	A {
+		color : 1d039e;
+		text-decoration : none;
+		font-family:Verdana,arial;
+		font-size:10pt;
+	}
+	A:Hover {
+		text-decoration : underline;
+		font-family:Verdana,arial;
+		font-size:10pt;
+	}
+
+</style>
+</head>
+
+<body topmargin="0" onload="updateStyle()">
+
+<center><span style="font:bold 10pt Verdana,Arial">Insert Table</span></center>
+
+<table cellpadding="1" cellspacing="3" border="0">
+<tr>
+<form name="tablefrm">
+	<td class="styled">
+		<span style="font-size:10pt">Rows:</span>
+	</td>
+	<td>
+		<input type="text" name="rows" size="4" value="3">
+	</td>
+	<td rowspan="6">
+		<table cellpadding="2" cellspacing="0" width="220" height="100%" id="tbl">
+			<tr>
+				<td align="center">
+						<span style="font:10pt Verdana;">Table Style Preview</span>
+				</td>
+
+		</table>
+	</td>
+</tr><tr>
+	<td class="styled">
+		<span style="font-size:10pt">Columns:</span>
+	</td>
+	<td>
+		<input type="text" name="cols" size="4" value="3">
+	</td>
+</tr><tr>
+	<td class="styled">
+		<span style="font-size:10pt">Width:</span>
+	</td>
+	<td>
+		<input type="text" name="width" size="4" value="">
+	</td>
+</tr><tr>
+	<td class="styled">
+		<span style="font-size:10pt">Cell Spacing:</span>
+	</td>
+	<td>
+		<input type="text" name="spacing" size="4" value="0">
+	</td>
+</tr><tr>
+	<td class="styled">
+		<span style="font-size:10pt">Cell Padding:</span>
+	</td>
+	<td>
+		<input type="text" name="padding" size="4" value="2">
+	</td>
+</tr><tr>
+	<td class="styled">
+		<span style="font-size:10pt">Border:</span>
+	</td>
+	<td>
+		<select name="border" style="width:100;font-weight:bold;font-family:Tohama" onchange="updateStyle()">
+			<option value="0">0
+			<option value="1" selected>1
+			<option value="2">2
+			<option value="3">3
+			<option value="4">4
+			<option value="5">5
+		</select>
+	</td>
+</tr>
+<tr>
+	<td class="styled">
+		<span style="font-size:10pt">Border Color:</span>
+	</td>
+	<td>
+		<select name="bordercolor" style="width:100;font-weight:bold;font-family:Tohama" onchange="updateStyle()">
+			<option value="black" selected style="color:black;">Black</option>
+			<option value="white" style="color:black;">White</option>
+			<option value="silver" style="color:silver">Silver
+			<option value="navy" style="color:navy">Navy
+			<option value="maroon" style="color:maroon">Maroon
+			<option value="red" style="color:red">Red
+			<option value="blue" style="color:blue">Blue
+			<option value="gray" style="color:gray">Gray
+			<option value="green" style="color:green">Green
+			<option value="purple" style="color:purple">Purple
+			<option value="fuchsia" style="color:fuchsia">Fuchsia
+			<option value="lime" style="color:lime">Lime
+			<option value="olive" style="color:olive">Olive
+			<option value="yellow" style="color:yellow">Yellow
+			<option value="teal" style="color:teal">Teal
+			<option value="aqua" style="color:aqua">Aqua
+		</select>
+	</td>
+</tr>
+<tr>
+	<td class="styled">
+		<span style="font-size:10pt">Background Color:</span>
+	</td>
+	<td>
+		<select name="bgcolor" style="width:100;font-weight:bold;font-family:Tohama" onchange="updateStyle()">
+			<option value="" selected style="color:black;">Transparent</option>
+			<option value="black" style="color:black;">Black</option>
+			<option value="white" style="color:black;">White</option>
+			<option value="silver" style="color:silver">Silver
+			<option value="navy" style="color:navy">Navy
+			<option value="maroon" style="color:maroon">Maroon
+			<option value="red" style="color:red">Red
+			<option value="blue" style="color:blue">Blue
+			<option value="gray" style="color:gray">Gray
+			<option value="green" style="color:green">Green
+			<option value="purple" style="color:purple">Purple
+			<option value="fuchsia" style="color:fuchsia">Fuchsia
+			<option value="lime" style="color:lime">Lime
+			<option value="olive" style="color:olive">Olive
+			<option value="yellow" style="color:yellow">Yellow
+			<option value="teal" style="color:teal">Teal
+			<option value="aqua" style="color:aqua">Aqua
+		</select>
+	</td>
+</tr>
+<tr>
+	<td class="styled">
+		<span style="font-size:10pt">Text Color:</span>
+	</td>
+	<td>
+		<select name="color" style="width:100;font-weight:bold;font-family:Tohama" onchange="updateStyle()">
+			<option value="black" selected style="color:black;">Black</option>
+			<option value="white" style="color:black;">White</option>
+			<option value="silver" style="color:silver">Silver
+			<option value="navy" style="color:navy">Navy
+			<option value="maroon" style="color:maroon">Maroon
+			<option value="red" style="color:red">Red
+			<option value="blue" style="color:blue">Blue
+			<option value="gray" style="color:gray">Gray
+			<option value="green" style="color:green">Green
+			<option value="purple" style="color:purple">Purple
+			<option value="fuchsia" style="color:fuchsia">Fuchsia
+			<option value="lime" style="color:lime">Lime
+			<option value="olive" style="color:olive">Olive
+			<option value="yellow" style="color:yellow">Yellow
+			<option value="teal" style="color:teal">Teal
+			<option value="aqua" style="color:aqua">Aqua
+		</select>
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<center>
+            <BUTTON ID="Ok" type="submit" class="button">OK</BUTTON>
+            <BUTTON ONCLICK="window.close();">Cancel</BUTTON>
+		</center>
+	</td>
+</tr>
+</table>
+</form>
+</body>
+</html>
+
+</BODY>
+</HTML>

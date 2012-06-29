@@ -1,0 +1,642 @@
+.textField {
+	BORDER-TOP-WIDTH: 1.5pt; FONT-WEIGHT: normal; BORDER-LEFT-WIDTH: 1.5pt; FONT-SIZE: 8.5pt; BORDER-BOTTOM-WIDTH: 1.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff; BORDER-RIGHT-WIDTH: 1.5pt; TEXT-DECORATION: none
+}
+.buttonBigClass {
+	BORDER-TOP-WIDTH: 1.5pt; FONT-WEIGHT: normal; BORDER-LEFT-WIDTH: 1.5pt; FONT-SIZE: 7.5pt; BORDER-BOTTOM-WIDTH: 1.5pt; CURSOR: hand; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #e1e1e1; BORDER-RIGHT-WIDTH: 1.5pt; TEXT-DECORATION: none
+}
+.buttonClass {
+	BORDER-RIGHT: #aaaaaa 1pt solid; BORDER-TOP: #aaaaaa 1pt solid; FONT-WEIGHT: normal; FONT-SIZE: 7pt; BORDER-LEFT: #aaaaaa 1pt solid; CURSOR: hand; BORDER-BOTTOM: #aaaaaa 1pt solid; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #e1e1e1; TEXT-DECORATION: none
+}
+A:link {
+	TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #9900cc; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #0000ff
+}
+A:hover {
+	TEXT-DECORATION: underline
+}
+INPUT {
+	FONT-SIZE: 9pt; FONT-FAMILY: "Courier New", Courier, mono
+}
+TD {
+	FONT-SIZE: 8pt
+}
+.titleTop {
+	BACKGROUND-COLOR: #0099cc
+}
+.titleMenu {
+	BACKGROUND-COLOR: #993300
+}
+.titleMenuSmall {
+	FONT-SIZE: 7pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.titleMenuTop {
+	BACKGROUND-COLOR: #66ccff
+}
+.titleMenuBottom {
+	BACKGROUND-COLOR: #003366
+}
+.titleMenuFont {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; COLOR: #ffffff; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.logoTitleBgColor {
+	BACKGROUND-COLOR: #ffffcc
+}
+.searchBgColor {
+	BACKGROUND-COLOR: #F0CDF8
+}
+.dateFont {
+	FONT-SIZE: 7.5pt; COLOR: #000000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.companyTitleFont {
+	FONT-SIZE: 10pt; COLOR: #ff6633; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.companyTitleBgColor {
+	BACKGROUND-COLOR: #ffffcc
+}
+.desktopFont {
+	FONT-SIZE: 9pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.desktopBgColor {
+	BACKGROUND-COLOR: #ff9966
+}
+.highlight {
+	COLOR: #ff0000
+}
+.menuFont {
+	FONT-SIZE: 7.5pt; COLOR: #333333; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.menuBgColor {
+	BACKGROUND-COLOR: #F0CDF8
+}
+.menuBgBackground {
+	BACKGROUND-COLOR: #ffffff
+}
+.menuBgColorHighlight {
+	BACKGROUND-COLOR: #ffffff
+}
+.menuBgColorShadow {
+	BACKGROUND-COLOR: #D8A9E2
+}
+.contentBgColor {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.contentFont {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.contentTitleFont {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.contentStrapColor {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.sideTitleFont {
+	FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.sideTitleBgBorderColor {
+	BACKGROUND-COLOR: #cccc99
+}
+.sideBodyFontAndBgColor {
+	FONT-SIZE: 8pt; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.textFont {
+	COLOR: #0065ce
+}
+.contentBgColorAlternate {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #e1e1c1
+}
+.hpTitleFont {
+	FONT-SIZE: 16pt; COLOR: #666666
+}
+.hpMenuFont {
+	FONT-SIZE: 10pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ccccff
+}
+.hpContentFont {
+	COLOR: #006699
+}
+.hpContentHeaderFont {
+	
+}
+.hpMenuTitleFont {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffcc99
+}
+.copyright {
+	FONT-SIZE: 10pt; COLOR: #666666; FONT-FAMILY: "Courier New", Courier, mono
+}
+.emeetingPrintOutline {
+	BACKGROUND-COLOR: #cccccc
+}
+.emeetingPrintBackground {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.emeetingPrintHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #e5e5e5
+}
+.emeetingPrintRow {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.emeetingPrintRowLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.emeetingPrintSmall {
+	FONT-WEIGHT: normal; FONT-SIZE: 7pt; TEXT-TRANSFORM: uppercase; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.forumBackground {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.forumHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.forumRow {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.forumRowSmall {
+	FONT-WEIGHT: normal; FONT-SIZE: 7pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.forumFooter {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.forumFooterLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+A.forumLink {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; COLOR: #000000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+A.forumLink:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; COLOR: #999999; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.forumList1 {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.forumList2 {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #F0CDF8
+}
+.forumListSmall {
+	FONT-WEIGHT: normal; FONT-SIZE: 7pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+A.forumHeaderLink {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+A.forumHeaderLink:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.button {
+	BORDER-RIGHT: #aaaaaa 1pt solid; BORDER-TOP: #aaaaaa 1pt solid; FONT-WEIGHT: normal; FONT-SIZE: 7pt; BORDER-LEFT: #aaaaaa 1pt solid; CURSOR: hand; BORDER-BOTTOM: #aaaaaa 1pt solid; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #e1e1e1; TEXT-DECORATION: none
+}
+.contentPath {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #999999; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.contentBody {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.contentLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #cccccc
+}
+.contentTreeNode {
+	BORDER-RIGHT: #666666 1px solid; PADDING-RIGHT: 1px; BORDER-TOP: #666666 1px solid; PADDING-LEFT: 1px; FONT-WEIGHT: bold; FONT-SIZE: 12px; BACKGROUND: #cccccc; PADDING-BOTTOM: 1px; MARGIN: 0px; BORDER-LEFT: #666666 1px solid; WIDTH: 12px; COLOR: #000000; LINE-HEIGHT: 6px; PADDING-TOP: 1px; BORDER-BOTTOM: #666666 1px solid; TEXT-ALIGN: center
+}
+.contentPathLink {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; COLOR: #999999; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.contentPathLink:visited {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; COLOR: #999999; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.contentPathLinkSelected {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; COLOR: #999999; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.contentPathLinkSelected:visited {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; COLOR: #999999; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.contentName {
+	FONT: bold 13pt Arial; WIDTH: 100%
+}
+.contentDate {
+	FONT-WEIGHT: normal; FONT-SIZE: 7pt; FONT-STYLE: italic; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.contentAuthor {
+	FONT-WEIGHT: normal; FONT-SIZE: 7.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.contentSubheader {
+	
+}
+.contentFooter {
+	
+}
+.contentOption {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.contentChildName {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.contentChildDate {
+	FONT-WEIGHT: normal; FONT-SIZE: 7pt; FONT-STYLE: italic; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.contentChildAuthor {
+	FONT-WEIGHT: normal; FONT-SIZE: 7.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.contentChildSummary {
+	FONT-SIZE: 8pt
+}
+.contentPaging {
+	
+}
+.contentPageLink {
+	
+}
+.contentTreeLink {
+	FONT: bold 7.5pt Verdana; COLOR: black; TEXT-DECORATION: none
+}
+.contentTreeSeparator {
+	BORDER-TOP: black 1px dotted; WIDTH: 100%; HEIGHT: 10px
+}
+.contentTreeLinkLite {
+	FONT: 7.5pt Verdana; COLOR: black; TEXT-DECORATION: none
+}
+.voteButton {
+	BORDER-RIGHT: #aaaaaa 1pt solid; BORDER-TOP: #aaaaaa 1pt solid; FONT-WEIGHT: normal; FONT-SIZE: 7pt; BORDER-LEFT: #aaaaaa 1pt solid; CURSOR: hand; BORDER-BOTTOM: #aaaaaa 1pt solid; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #e1e1e1; TEXT-DECORATION: none
+}
+.voteAnswer {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.voteCount {
+	FONT-WEIGHT: normal; FONT-SIZE: 7.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.voteResult {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.voteTotal {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.loginHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #003366
+}
+.loginLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; COLOR: white; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #993300
+}
+.loginRow {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; COLOR: white; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #993300
+}
+.loginError {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; COLOR: #bbbbbb; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #993300
+}
+.themeButton {
+	BORDER-RIGHT: #999999 1pt solid; BORDER-TOP: #999999 1pt solid; FONT-WEIGHT: normal; FONT-SIZE: 7pt; BORDER-LEFT: #999999 1pt solid; COLOR: #666666; BORDER-BOTTOM: #999999 1pt solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; HEIGHT: 11pt; BACKGROUND-COLOR: #e5e5e5; TEXT-DECORATION: none
+}
+.taskPortletFont {
+	FONT-WEIGHT: normal; FONT-SIZE: 7.5pt; COLOR: #000000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.topMenuBg {
+	BACKGROUND-COLOR: #8B00BE
+}
+.topMenuOutline {
+	BACKGROUND-COLOR: #8B00BE
+}
+.topMenuHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.topMenuRow {
+	BACKGROUND-COLOR: #F0CDF8
+}
+.topMenuImageColumn {
+	BACKGROUND-COLOR: #cccccc
+}
+.topMenuMouseOver {
+	BORDER-RIGHT: #8B00BE 1pt solid; BORDER-TOP: #8B00BE 1pt solid; BORDER-LEFT: #8B00BE 1pt solid; CURSOR: hand; BORDER-BOTTOM: #8B00BE 1pt solid; BACKGROUND-COLOR: #DEAEE8
+}
+.topMenuMouseOut {
+	BORDER-RIGHT: #F0CDF8 1pt solid; BORDER-TOP: #F0CDF8 1pt solid; BORDER-LEFT: #F0CDF8 1pt solid; BORDER-BOTTOM: #F0CDF8 1pt solid; BACKGROUND-COLOR: #F0CDF8
+}
+.topMenuLink {
+	FONT-WEIGHT: normal; FONT-SIZE: 8pt; COLOR: #333333; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.topMenuHR {
+	COLOR: #cccccc
+}
+.aTopMenulink {
+	FONT-WEIGHT: bold; FONT-SIZE: 9px; COLOR: #8E4A9D; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.sideMenuMouseOver {
+	BACKGROUND-COLOR: #D068E7
+}
+.sideMenuMouseOut {
+	COLOR: #000000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8E4A9D
+}
+.topMenuButtonMouseOver {
+	BORDER-RIGHT: 1px groove; BORDER-TOP: 1px groove; BORDER-LEFT: 1px groove; BORDER-BOTTOM: 1px groove; BACKGROUND-COLOR: #f7f4e6
+}
+.topMenuButtonMouseOut {
+	BACKGROUND-COLOR: #F0CDF8
+}
+.tableButton {
+	BORDER-RIGHT: #aaaaaa 1pt solid; BORDER-TOP: #aaaaaa 1pt solid; FONT-WEIGHT: normal; FONT-SIZE: 7pt; BORDER-LEFT: #aaaaaa 1pt solid; BORDER-BOTTOM: #aaaaaa 1pt solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #e1e1e1; TEXT-DECORATION: none
+}
+.tableBackground {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.tableRow {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #F0CDF8
+}
+.verticalCalendarBackground {
+	BACKGROUND-COLOR: #D8A9E2
+}
+.verticalCalendarHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.verticalCalendarSubheaderWeekend {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; COLOR: #000000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #F0CDF8
+}
+.verticalCalendarSubheaderWeekday {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; COLOR: #000000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #F0CDF8
+}
+.verticalCalendarRow {
+	FONT-WEIGHT: normal; FONT-SIZE: 7.5pt; COLOR: #000000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.qMessagingRowHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.qMessagingRowLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.qMessagingRow {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.qMessagingRowFooter {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.qMessagingTextHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.qMessagingOutline {
+	BACKGROUND-COLOR: #8B00BE
+}
+.qMessagingBackground {
+	BACKGROUND-COLOR: #FEE0FF
+}
+.calendarMonthBgColor {
+	BACKGROUND-COLOR: #8B00BE
+}
+.calendarMonthWeekendFont {
+	FONT-SIZE: 8.5pt; COLOR: #ff0000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.calendarMonthWeekdayFont {
+	FONT-SIZE: 8.5pt; COLOR: #000000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.calendarBgColor {
+	BACKGROUND-COLOR: #FEE0FF
+}
+.calendarContentFont {
+	FONT-SIZE: 9pt; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.calendarBackground {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.calendarLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.calendarRow {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.calendarRowLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.calendarRowSmall {
+	FONT-WEIGHT: normal; FONT-SIZE: 7pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.calendarFooter {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.calendarSubheader {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; COLOR: #000000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #F0CDF8
+}
+.calendarFooterLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.calendarHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.portletBackground {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.portletHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.portletRow {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.portletLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.portletFooter {
+	FONT-SIZE: 8.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #F0CDF8
+}
+.portletPreferenceBackground {
+	FONT-SIZE: 8.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.portletPreferenceHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.portletPreferenceRow {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.profileHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.profileRow {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.profileFooter {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.profileError {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; COLOR: #ff0000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.emeetingBackground {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.emeetingHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.emeetingRow {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.emeetingRowLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.emeetingLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.emeetingCaption {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.emeetingFooter {
+	FONT-SIZE: 8.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.emeetingSmall {
+	FONT-SIZE: 7pt; TEXT-TRANSFORM: uppercase; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.menuHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.menuBgOutline {
+	BACKGROUND-COLOR: #8B00BE
+}
+.contentHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.tableHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.forumRowLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.forumLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.articleBackground {
+	FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.articleHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.articleBody {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.articleLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.articleRow {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.articleRowLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.articleFooter {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.articleSmall {
+	FONT-WEIGHT: normal; FONT-SIZE: 7.5pt; COLOR: #666666; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.articleRead {
+	FONT-WEIGHT: normal; COLOR: #ff0000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.bookmarkHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.bookmarkRowLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.bookmarkRow {
+	FONT-WEIGHT: normal; FONT-SIZE: 8pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.radioHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.radioRow {
+	FONT-WEIGHT: normal; FONT-SIZE: 8pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+A.searchLink {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #000000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+A.searchLink:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #999999; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.searchRow {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #000000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff; TEXT-DECORATION: none
+}
+.classBackground {
+	BACKGROUND-COLOR: #ffffff
+}
+.classHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.classRow {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.classRowLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.classRowFaded {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; COLOR: #999999; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.classRowLabelFaded {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; COLOR: #999999; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #FEE0FF
+}
+.classFooter {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #8B00BE
+}
+.classText {
+	FONT-WEIGHT: normal; FONT-SIZE: 8pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.classTextSmall {
+	FONT-WEIGHT: normal; FONT-SIZE: 7.5pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.panelHeaderSelected {
+	BORDER-RIGHT: #8B00BE 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #8B00BE 1px solid; PADDING-LEFT: 5px; FONT-WEIGHT: bold; PADDING-BOTTOM: 5px; MARGIN: 4px; BORDER-LEFT: #8B00BE 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #8B00BE 1px solid; BACKGROUND-COLOR: #8B00BE
+}
+.panelHeader {
+	BORDER-RIGHT: #8B00BE 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #8B00BE 1px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; MARGIN: 4px; BORDER-LEFT: #8B00BE 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #8B00BE 1px solid; BACKGROUND-COLOR: #F0CDF8
+}
+.panelRow {
+	BORDER-RIGHT: #FEE0FF 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #FEE0FF 1px solid; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; MARGIN: 0px; BORDER-LEFT: #FEE0FF 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: #FEE0FF 1px solid
+}
+.panelHeaderText {
+	FONT-WEIGHT: normal; FONT-SIZE: 8pt; COLOR: #666666; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.panelHeaderSelectedText {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.blogBackground {
+	FONT-SIZE: 9pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.blogHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #000000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.blogLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 8.5pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.blogRow {
+	FONT-WEIGHT: normal; FONT-SIZE: 8.5pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.blogRowLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.blogRowSmall {
+	FONT-WEIGHT: normal; FONT-SIZE: 9pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.blogFooter {
+	FONT-WEIGHT: normal; FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.blogFooterLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+.blogLink {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.blogLink:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; COLOR: #999999; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.blogList1 {
+	FONT-WEIGHT: normal; FONT-SIZE: 9pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #dddddd
+}
+.blogList2 {
+	FONT-WEIGHT: normal; FONT-SIZE: 9pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif; BACKGROUND-COLOR: #eeeeee
+}
+.blogListSmall {
+	FONT-WEIGHT: normal; FONT-SIZE: 9pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.blogHeaderLink {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.blogHeaderLink:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; COLOR: #ff0000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.blogPathLink {
+	FONT-WEIGHT: normal; FONT-SIZE: 9pt; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}
+.blogPathLink:hover {
+	FONT-WEIGHT: normal; FONT-SIZE: 9pt; COLOR: #ff0000; FONT-FAMILY: Arial, Verdana, Helvetica, sans-serif
+}

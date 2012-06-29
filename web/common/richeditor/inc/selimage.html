@@ -1,0 +1,38 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<!-- Copyright 2000 Microsoft Corporation. All rights reserved. -->
+<HTML>
+<HEAD>
+<TITLE>Select Image</TITLE>
+
+<STYLE TYPE="text/css">
+ BODY   {margin-left:10; font-family:Verdana; font-size:12; background:menu}
+ BUTTON {width:5em}
+ P      {text-align:center}
+ TABLE  {cursor:hand}
+</STYLE>
+
+<SCRIPT LANGUAGE=JavaScript FOR=Ok EVENT=onclick>
+<!--
+  window.returnValue = ImageUrl.value;
+  window.close();
+// -->
+</SCRIPT>
+
+</HEAD>
+
+<!-- Copyright 2000 Microsoft Corporation. All rights reserved. -->
+<BODY onload="ImageUrl.focus()">
+
+<DIV> &nbsp; </DIV>
+
+<P>
+<LABEL FOR=ImageUrl>Image URL:</LABEL>
+<INPUT TYPE=TEXT SIZE=20 ID=ImageUrl value="http://">
+<BR>
+
+<P>
+<BUTTON ID=Ok TYPE=SUBMIT>OK</BUTTON>
+<BUTTON ONCLICK="window.close();">Cancel</BUTTON>
+
+</BODY>
+</HTML>

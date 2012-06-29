@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<application>
+    <modules>
+        <module class="com.tms.hr.competency.CompetencyHandler">
+            <!--<dao-class>com.tms.hr.competency.CompetencyDao</dao-class>-->
+		    <!--<dao-class>com.tms.hr.competency.CompetencyDaoDB2</dao-class>-->
+		    <dao-class>com.tms.hr.competency.CompetencyDaoMsSql</dao-class>
+			<!--<dao-class>com.tms.hr.competency.CompetencyDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <permission>com.tms.hr.competency.Competency.add</permission>
+            <permission>com.tms.hr.competency.Competency.update</permission>
+            <permission>com.tms.hr.competency.Competency.delete</permission>
+            <permission>com.tms.hr.competency.Competency.view</permission>
+        </module>
+        <module class="com.tms.collab.project.WormsHandler">
+            <!--<dao-class>com.tms.collab.project.WormsDao</dao-class>-->
+		    <!--<dao-class>com.tms.collab.project.WormsDaoDB2</dao-class>-->
+		    <dao-class>com.tms.collab.project.WormsDaoMsSql</dao-class>
+			<!--<dao-class>com.tms.collab.project.WormsDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <!--<permission>com.tms.worms.project.Project.view</permission>-->
+            <!--<permission>com.tms.worms.project.Project.add</permission>-->
+            <!--<permission>com.tms.worms.project.Project.edit</permission>-->
+            <!--<permission>com.tms.worms.project.Project.delete</permission>-->
+            <!--<permission>com.tms.worms.project.Project.report</permission>-->
+            <!--<permission>com.tms.worms.project.Project.administer</permission>  -->        
+            
+        </module>
+
+        <!-- ========== Time Sheet Module ======================= -->
+        <module class="com.tms.collab.timesheet.model.TimeSheetModule">
+            <dao-class>com.tms.collab.timesheet.model.TimeSheetDao</dao-class>
+		    <!--<dao-class>com.tms.collab.timesheet.model.TimeSheetDaoDB2</dao-class>-->
+		    <!--<dao-class>com.tms.collab.timesheet.model.TimeSheetDaoMsSql</dao-class>-->
+			<!--<dao-class>com.tms.collab.timesheet.model.TimeSheetDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <!--<permission>com.tms.collab.timesheet.ViewProjects</permission>-->
+        </module>
+    </modules>
+    <properties>
+        <property>
+            <name>com.tms.hr.competency.CompetencyLevels</name>
+            <value>Expert (5), Advanced (4), Proficient (3), Trained (2), Beginner (1)</value>
+        </property>
+        <property>
+            <name>com.tms.worms.wormsUser</name>
+            <value>kacang.services.security.ekms.ekmsUser</value>
+        </property>
+
+        <!-- ========== Time Sheet Module ======== -->
+        <property>
+            <name>com.tms.collab.timesheet</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>com.tms.collab.timesheetWorkingHour</name>
+            <value>8</value>
+        </property>
+        <property>
+            <name>com.tms.worms.currencyType</name>
+            <value>AED,AFA,ALL,AMD,ANG,AOA,ARS,AUD,AWG,AZM,BAM,BBD,BDT,BGN,BHD,BIF,BMD,BND,BOB,BRL,BSD,BTN,BWP,BYR,BZD,CAD,CDF,CHF,CLP,CNY,COP,CRC,CSD,CUP,CVE,CYP,CZK,DJF,DKK,DOP,DZD,EEK,EGP,ERN,ETB,EUR,FJD,FKP,GBP,GEL,GGP,GHC,GIP,GMD,GNF,GTQ,GYD,HKD,HNL,HRK,HTG,HUF,IDR,ILS,IMP,INR,IQD,IRR,ISK,JEP,JMD,JOD,JPY,KES,KGS,KHR,KMF,KPW,KRW,KWD,KYD,KZT,LAK,LBP,LKR,LRD,LSL,LTL,LVL,LYD,MAD,MDL,MGA,MKD,MMK,MNT,MOP,MRO,MTL,MUR,MVR,MWK,MXN,MYR,MZM,NAD,NGN,NIO,NOK,NPR,NZD,OMR,PAB,PEN,PGK,PHP,PKR,PLN,PYG,QAR,ROL,RUB,RWF,SAR,SBD,SCR,SDD,SEK,SGD,SHP,SIT,SKK,SLL,SOS,SPL,SRD,STD,SVC,SYP,SZL,THB,TJS,TMM,TND,TOP,TRL,TRY,TTD,TVD,TWD,TZS,UAH,UGX,USD,UYU,UZS,VEB,VND,VUV,WST,XAF,XAG,XAU,XCD,XDR,XOF,XPD,XPF,XPT,YER,ZAR,ZMK,ZWD</value>
+        </property>
+    </properties>
+</application>
+

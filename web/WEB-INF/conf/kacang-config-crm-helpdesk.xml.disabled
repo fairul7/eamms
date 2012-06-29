@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<application>
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+        <module class="com.tms.crm.helpdesk.HelpdeskHandler">
+            <dao-class>com.tms.crm.helpdesk.HelpdeskDao</dao-class>
+	    	<!--<dao-class>com.tms.crm.helpdesk.HelpdeskDaoOracle</dao-class>-->
+	    	<!--<dao-class>com.tms.crm.helpdesk.HelpdeskDaoDB2</dao-class>-->
+	    	<!--<dao-class>com.tms.crm.helpdesk.HelpdeskDaoMsSql</dao-class>-->
+			<!--<dao-class>com.tms.crm.helpdesk.HelpdeskDaoSybase</dao-class>-->
+            <datasource>defaultdb</datasource>
+            <!-- <permission>com.tms.crm.helpdesk.Admin</permission> -->
+            <!-- <permission>com.tms.crm.helpdesk.User</permission> -->
+            <menu>
+                <menu-item>
+                    <order>60</order>
+                    <url>/ekms/helpdesk/menuMain.jsp</url>
+                </menu-item>
+            </menu>
+        </module>
+    </modules>
+
+	<modules>
+		<!--	Alert Notification Module & Dao Registration	-->
+		 <module class="com.tms.crm.helpdesk.NotificationModule">
+            <dao-class>com.tms.crm.helpdesk.NotificationDao</dao-class>
+            <!-- <dao-class>com.tms.crm.helpdesk.NotificationDaoDB2</dao-class> -->
+            <!-- <dao-class>com.tms.crm.helpdesk.NotificationDaoMsSql</dao-class> -->
+			<!-- <dao-class>com.tms.crm.helpdesk.NotificationDaoSybase</dao-class> -->
+            <datasource>defaultdb</datasource>
+        </module>
+	</modules>
+
+    <properties>
+		<property>
+	    	<name>helpdesk.portlet.mri</name>
+		    <value>5</value>
+		</property>
+	
+		<property>
+	    	<name>helpdesk.portlet.oui</name>
+		    <value>5</value>
+		</property>
+		
+		<property>
+	    	<name>helpdesk.portlet.lui</name>
+		    <value>5</value>
+		</property>
+		
+		<property>
+	    	<name>helpdesk.portlet.ouirbm</name>
+		    <value>5</value>
+		</property>
+
+    </properties>
+    
+</application>

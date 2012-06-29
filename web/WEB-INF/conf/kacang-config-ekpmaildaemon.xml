@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<application>
+    <modules>
+        <module class="com.tms.ekms.ekpmaildaemon.model.EkpMailDaemonModule">
+            <dao-class>com.tms.ekms.ekpmaildaemon.model.EkpMailDaemonDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+    </modules>
+    <properties>
+
+        <property>
+             <name>ekpmail_daemon.activation</name>
+             <value>false</value>
+        </property>
+
+        <property>
+            <name>ekpmaildaemon.allowed.classes</name>
+            <value>com.tms.ekms.ekpmaildaemon.model.stub.AddAppointment,com.tms.ekms.ekpmaildaemon.model.stub.ListAppointment,com.tms.ekms.ekpmaildaemon.model.stub.AddArticle,com.tms.ekms.ekpmaildaemon.model.stub.AddDocument,com.tms.ekms.ekpmaildaemon.model.stub.AddLeave,com.tms.ekms.ekpmaildaemon.model.stub.AddToDo,com.tms.ekms.ekpmaildaemon.model.stub.ListToDo</value>
+        </property>
+        <property>
+            <name>ekpmaildaemon.mail.account.name</name>
+            <value>test2@tmsasia.com</value>
+        </property>
+        <property>
+            <name>ekpmaildaemon.mail.password</name>
+            <value>tms</value>
+        </property>
+
+        <property>
+            <name>ekpmaildaemon.mail.smtp</name>
+            <value>mail.tmsasia.com</value>
+        </property>
+
+        <property>
+            <name>ekpmaildaemon.mail.pop</name>
+            <value>mail.tmsasia.com</value>
+        </property>
+
+
+
+    </properties>
+</application>

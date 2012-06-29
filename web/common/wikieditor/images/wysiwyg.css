@@ -1,0 +1,52 @@
+
+#toolbar 	{	
+			margin: 0;
+			padding: 0;
+			width:750px;
+			background: buttonface;
+			border-top: 1px solid buttonhighlight;
+			border-left: 1px solid buttonhighlight;
+			border-bottom: 1px solid buttonshadow;
+			border-right: 1px solid buttonshadow;
+			text-align:right;
+			vertical-align: bottom;
+		  	}
+			
+.button 		{
+			background: buttonface; 
+			border: 1px solid buttonface;
+			margin: 1px; 
+			}
+
+.select		{
+			border: 1px solid buttonface;
+			margin: 1px; 
+			width: 100px;
+			background-color: infobackground; 
+			font-size: 8pt;
+			font-family: courier; 
+			}
+			
+.raised		{ 
+			border-top: 1px solid buttonhighlight;
+			border-left: 1px solid buttonhighlight;
+			border-bottom: 1px solid buttonshadow;
+			border-right: 1px solid buttonshadow;
+			background: buttonface;
+			margin: 1px;
+			}
+			
+.pressed		{
+			border-top: 1px solid buttonshadow;
+			border-left: 1px solid buttonshadow;
+			border-bottom: 1px solid buttonhighlight;
+			border-right: 1px solid buttonhighlight;
+			background: buttonface;
+			margin: 1px;
+			}
+
+.img			{
+			cursor: normal;
+			height: 22px; 
+			width: 23px;
+			}

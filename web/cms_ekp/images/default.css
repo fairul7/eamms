@@ -1,0 +1,108 @@
+.tsHeader {
+	FONT-SIZE: 9pt; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.tsRowTable {
+	BACKGROUND-COLOR: #ffffff
+}
+.tsRowHeader1 {
+	BACKGROUND-COLOR: #003031
+}
+.tsRowHeader2 {
+	BACKGROUND-COLOR: #669999
+}
+.tsRow1 {
+	BACKGROUND-COLOR: #eeeeee
+}
+.tsRow2 {
+	BACKGROUND-COLOR: #dddddd
+}
+.tsRowLink1 {
+	
+}
+.tsRowLink2 {
+	
+}
+.titleheading {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #66cccc; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.titledate {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.sectionname {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #33cccc; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.subsectionname {
+	FONT-SIZE: 10pt; COLOR: #ffcc00; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.tableheading {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffcc00; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.otherheading {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffcc00; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.copyright {
+	FONT-SIZE: 7.5pt; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.featurearticleSectionHeading {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: #ffffcc; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.featurearticleheading {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: #cc0000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.byline {
+	FONT-WEIGHT: normal; FONT-SIZE: 7.5pt; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.titleTRbgcolor {
+	BACKGROUND-COLOR: #336666
+}
+.titleAdTDbgcolor {
+	BACKGROUND-COLOR: #99cccc
+}
+.sectionTDbgcolor {
+	BACKGROUND-COLOR: #003031
+}
+.sectionTRbgcolor {
+	BACKGROUND-COLOR: #ffffcc
+}
+.tableHeadingTRbgcolor {
+	BACKGROUND-COLOR: #669999
+}
+.tableLoginLineTDbgcolor {
+	BACKGROUND-COLOR: #669999
+}
+.tableLoginContentTRbgcolor {
+	BACKGROUND-COLOR: #336666
+}
+.tableContentTRbgcolor {
+	BACKGROUND-COLOR: #cccccc
+}
+.columnRightTDbgcolor {
+	BACKGROUND-COLOR: #ffffff
+}
+.columnLeftTDbgcolor {
+	BACKGROUND-COLOR: #ffffff
+}
+.columnCenterTDbgcolor {
+	BACKGROUND-COLOR: #ffffff
+}
+.featurearticleSectionHeadingTDbgcolor {
+	FONT-WEIGHT: bold; BACKGROUND-COLOR: #669999
+}
+.featurearticleSectionHeadingTDbulletbgcolor {
+	FONT-WEIGHT: bold; BACKGROUND-COLOR: #330000
+}
+.otherheadingbgcolor {
+	BACKGROUND-COLOR: #003333
+}
+.titleLineTDbgcolor {
+	BACKGROUND-COLOR: #000000
+}
+.sectionFont {
+	FONT-WEIGHT: bold; FONT-SIZE: 7.5pt; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.tableContentFont {
+	FONT-WEIGHT: normal; FONT-SIZE: 7.5pt; COLOR: #003333; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.generalContentFont {
+	FONT-SIZE: 7.5pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}

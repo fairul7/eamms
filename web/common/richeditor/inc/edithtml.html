@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>Edit HTML</title>
+<style>
+.form {font-family:ms sans serif,arial;font-size:8pt;}
+</style>	
+</head>
+
+<SCRIPT>
+function loadhtml(){
+	htmlcodeform.html.value = window.opener.tbContentElement.DOM.body.innerHTML;
+}
+function save() {
+	if (htmlcodeform.html.value.length > 0) {
+		window.opener.tbContentElement.DOM.body.innerHTML=htmlcodeform.html.value;
+	}
+	else {
+		window.opener.tbContentElement.DOM.body.innerHTML=" ";
+	}
+	window.close();
+}
+</SCRIPT>
+
+<body bgcolor="buttonface" topmargin="0" leftmargin="0">
+
+<center>
+<form name="htmlcodeform">
+<textarea cols="75" rows="25" name="html"> </textarea>
+<p>
+<input type="button" class="button" value="  OK  " onclick="save()" class="form"> &nbsp;&nbsp; <input  class="form" type="button" class="button" value=" Cancel " onclick="self.close()">
+</p>
+</form>
+</center>
+
+<SCRIPT  LANGUAGE="javascript" FOR="window" EVENT="onload">loadhtml();</SCRIPT>
+
+</body>
+</html>

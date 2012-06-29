@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<application>
+
+    <modules>    					
+        <module class="com.tms.fms.department.model.FMSDepartmentManager">
+            <dao-class>com.tms.fms.department.model.FMSDepartmentDao</dao-class>			
+            <datasource>defaultdb</datasource>             
+        </module>
+	      	
+        <module class="com.tms.fms.register.model.FMSRegisterManager">
+            <dao-class>com.tms.fms.register.model.FMSRegisterDao</dao-class>			
+            <datasource>defaultdb</datasource>             
+        </module>      
+
+    </modules>
+    
+    <properties>    	
+    	<property>
+    		<name>AD.Url</name>
+    		<value>LDAP://192.168.200.69:389</value>
+    	</property>
+    	<property>
+    		<name>AD.Principal</name>
+    		<value>Administrator</value>
+    	</property>
+    	<property>
+    		<name>AD.Credentials</name>
+    		<value>tms2020</value>
+    	</property>
+    	<property>
+    		<name>AD.Context</name>
+    		<value>DC=exchange,DC=tmsasia,DC=com</value>
+    	</property>    	
+		<property>
+			<name>FMSUserGroup</name>
+			<value>kacang.service.security.Group_FMS_User</value>
+		</property>
+		<property>
+			<name>TransportDepartment</name>
+			<value>D0101</value>
+		</property>
+    </properties>
+    
+</application>

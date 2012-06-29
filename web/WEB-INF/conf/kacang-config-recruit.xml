@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<application>
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+        <module class="com.tms.hr.recruit.model.RecruitModule">
+            <dao-class>com.tms.hr.recruit.model.RecruitDao</dao-class>
+            <datasource>defaultdb</datasource>
+            <menu>
+                <menu-item>
+                    <order>150</order>
+                    <url>/ekms/recruit/menuMain.jsp</url>
+                </menu-item>
+            </menu>
+        </module>
+        
+        <module class="com.tms.hr.recruit.model.RecruitAppModule">
+           <dao-class>com.tms.hr.recruit.model.RecruitAppDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+        
+                
+    </modules>
+    
+     <properties>
+        <property>
+            <name>com.tms.hr.recruit.ui.closeDate</name>
+            <value>10</value>
+        </property>
+    </properties>
+    
+    
+    
+</application>

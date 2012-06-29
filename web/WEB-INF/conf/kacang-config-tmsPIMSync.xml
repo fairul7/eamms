@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<application>
+    <!-- modules>
+        <module class="com.tms.tmsPIMSync.model.PIMSyncModule">
+            <dao-class>com.tms.tmsPIMSync.model.PIMSyncDao</dao-class>
+            <datasource>funamboldb</datasource>
+        </module>
+    </modules-->
+    <modules>
+        <module class="com.tms.tmsPIMSync.model.TaskMasker">
+            <dao-class>com.tms.tmsPIMSync.model.TaskMaskerDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+    </modules>
+    <modules>
+        <module class="com.tms.tmsPIMSync.model.SyncTransactionModule">
+            <dao-class>com.tms.tmsPIMSync.model.SyncTransactionDao</dao-class>
+            <datasource>defaultdb</datasource>
+        </module>
+    </modules>
+
+</application>
+

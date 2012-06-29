@@ -1,0 +1,59 @@
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c-rt" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="kacang.tld" prefix="x" %>
+
+<c:set var="widget" value="${widget}"/>
+<jsp:include page="../../form_header.jsp" flush="true"/>
+<x:display name="${widget.panel.absoluteName}" body="custom">
+<br>
+<c:set var="colSpanValue" value="11"/>
+<table align="center" class="borderTable" cellpadding="3" cellspacing="1" width="95%">
+	<tr>
+		<th><fmt:message key="fms.facility.label.sNo"/></th>
+		<th><fmt:message key="fms.facility.label.facility"/></th>
+		<th><fmt:message key="fms.facility.label.requiredDate"/></th>
+		<th><fmt:message key="fms.facility.label.departureTime"/></th>
+		<th><fmt:message key="fms.facility.label.blockBooking"/></th>  
+		<th><fmt:message key="fms.facility.table.location"/></th>
+		<th><fmt:message key="fms.facility.label.segment"/></th>
+		<th><fmt:message key="fms.facility.label.settingTime"/></th>
+		<th><fmt:message key="fms.facility.label.rehearsalTime"/></th>
+		<th><fmt:message key="fms.facility.label.recordingTime"/></th>
+		<c:if test="${widget.viewMode eq 'false'}">
+			<th><x:display name="${widget.delete.absoluteName}"/></th>
+			<c:set var="colSpanValue" value="11"/>
+		</c:if>
+	</tr>
+    	<c:forEach items="${widget.services}" var="obj" varStatus="sNo">
+    	<tr>
+    	    <td class="profileRow" align="right"><c:out value="${(sNo.index+1)}"/></td>
+            <td class="profileRow"><c:out value="${obj.facility}" escapeXml="false"/></td>
+            <td class="profileRow" align="center">
+            	<fmt:formatDate value="${obj.requiredFrom}" pattern="${globalDateLong}"/> - 
+				<fmt:formatDate value="${obj.requiredTo}" pattern="${globalDateLong}"/>
+			</td>
+            <td class="profileRow" align="center"><c:out value="${obj.departureTime}"/></td>
+			<td class="profileRow" align="center"><c:out value="${obj.blockBooking}"/></td>
+            <td class="profileRow"><c:out value="${obj.location}"/></td>
+            <td class="profileRow"><c:out value="${obj.segment}"/></td>
+            <td class="profileRow" align="center"><c:out value="${obj.settingFrom}"/> - <c:out value="${obj.settingTo}"/></td>
+            <td class="profileRow" align="center"><c:out value="${obj.rehearsalFrom}"/> - <c:out value="${obj.rehearsalTo}"/></td>
+            <td class="profileRow" align="center"><c:out value="${obj.recordingFrom}"/> - <c:out value="${obj.recordingTo}"/></td>
+            <c:if test="${widget.viewMode eq 'false'}">
+				<td class="profileRow" align="center">&nbsp;
+					<c:forEach items="${widget.checkBoxes}" var="check" varStatus="checkStatus">
+						<c:if test="${checkStatus.index eq sNo.index}">
+							<x:display name="${check.absoluteName}"/>
+						</c:if>
+					</c:forEach>
+				</td>
+			</c:if>
+		</tr>
+        </c:forEach>
+    
+    <tr><td class="profileFooter" colspan='<c:out value="${colSpanValue}"/>'><x:display name="${widget.add.absoluteName}"/></td></tr>
+</table><br>
+</x:display>
+<jsp:include page="../../form_footer.jsp" flush="true"/>
+

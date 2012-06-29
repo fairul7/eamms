@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<application>
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+        <!-- New wiki Module -->
+        <module class="com.tms.wiki.model.WikiModule">
+            <dao-class>com.tms.wiki.model.WikiDao</dao-class>
+            <datasource>defaultdb</datasource>     
+        </module>       
+
+    </modules>
+</application>

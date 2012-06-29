@@ -1,0 +1,390 @@
+/* Application Styles */
+div {
+    border: solid 0px silver;
+    font: normal 10pt Arial;
+}
+body {
+    font: normal 10pt Arial;
+}
+td {
+    font: normal 10pt Arial;
+}
+
+.siteHeader {}
+.siteHeaderSpot {}
+.siteBody {
+    position: absolute;
+    left: 300px;
+    top: 300px;
+}
+.siteBodyHeader {
+    width: 100%;
+    background: #666666;
+    color: #ffffcc;
+    border: none;
+    padding: 4px;
+}
+.siteFooter {}
+.siteFooterSpot {}
+.sitePages {
+    padding: 5px;
+}
+.sitePageLink {
+    margin-right: 50px;
+}
+.siteSearchSpot {}
+.siteSearch { width: 300px }
+.siteSearchText {}
+.siteSearchButton {}
+.siteUserOptions {}
+.siteUserLogin {}
+.siteUserLoginButton { font-size: 7pt }
+.siteUserLoginLink { font-size: 7pt }
+.siteUsername {}
+.siteBannerAd {}
+.siteButtonAd {}
+.siteMenu {}
+.siteMenuSpot {}
+.siteFeatureSpot {}
+.siteFeaturedContentSpot {}
+.siteEventSpot {}
+
+.contentPathLink {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#333333;font-weight:normal}
+.contentPathLink:hover {text-decoration:underline}
+.contentPathLinkSelected {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#333333;font-weight:normal}
+.contentPathLinkSelected:hover {text-decoration:underline}
+.contentName {font: bold 12pt Arial;}
+.contentDate {}
+.contentAuthor {}
+.contentBody {}
+.contentHeader {padding: 5px; font-weight:bold}
+.contentSubheader { font-size: 8pt; }
+.contentFooter {}
+.contentOption {}
+.contentOptionLink {font-size: 8pt;}
+.contentOptionDiv {padding-bottom: 8px; border-bottom: solid 1px silver;}
+.contentChildName {font-weight: normal; font-size: 10pt; color: #990000;}
+.contentChildDate {font-size: 7pt;}
+.contentChildAuthor {font-size: 7pt;}
+.contentChildSummary {font-size: 8pt;}
+.contentPaging {}
+.contentPageLink {}
+.contentTreeNode {
+    border:solid 1px gray;
+    margin:0px;
+    padding: 2px;
+    text-align: center;
+    width:14px;
+    font-size:12px;
+    line-height: 6px;
+    background: #cccccc;
+    color: black;
+}
+.contentTreeLink {
+    text-decoration: none;
+    color: black;
+    font: bold 7.5pt Verdana
+}
+.contentTreeSeparator {
+    width: 100%;
+    height: 10px;
+    border-top: dotted 1px black;
+}
+
+.voteButton {border-width:1pt; background-color:#E1E1E1; border-style:solid; border-color:#AAAAAA; text-decoration:none; font-family:Arial, Verdana, Helvetica, sans-serif;font-size:8pt; font-weight:normal; cursor:pointer; cursor:hand}
+.button {border-width:1pt; background-color:#E1E1E1; border-style:solid; border-color:#AAAAAA; text-decoration:none; font-family:Arial, Verdana, Helvetica, sans-serif;font-size:8pt; font-weight:normal; cursor:pointer; cursor:hand}
+
+.loginTable {}
+.loginLabel {font-family: Arial, Helvetica, sans-serif;font-size: 8pt;color:#333333; line-height:15px}
+.loginError {color: red;}
+
+.profileTable {
+    width: 98%;
+}
+.profileHeader {
+    padding: 5px;
+    font-weight:bold;
+    background-color:#cccccc
+}
+.profileRow {}
+.profileError {
+    color: red;
+}
+
+.forgetPasswordLabel {}
+.forgetPasswordError {
+    color: red;
+}
+
+.personalizationTable {
+    width: 98%;
+}
+.personalizationHeader {
+    padding: 5px;
+    font-weight: bold;
+    background-color: #cccccc;
+    color: white;
+}
+.personalizationRow {
+    padding: 5px;
+}
+.personalizationLink {}
+.personalizationLink:hover {}
+.personalizationLabel {}
+.personalizationError {
+    color: red
+}
+
+.subscriptionListTable {
+    padding: 5px;
+    width: 98%;
+}
+.subscriptionListLabel {}
+.subscriptionListRow {}
+.subscriptionCartHeader {
+    padding: 5px;
+    font-weight: bold;
+    background-color:#cccccc
+}
+.subscriptionCartTable {
+    width: 98%;
+}
+
+.forumBackground {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt}
+.forumHeader {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #000000; font-weight:bold}
+.forumLabel {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.forumRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.forumRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.forumRowSmall {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.forumFooter {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal; color: #000000}
+.forumFooterLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.forumLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.forumLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold; color:#999999}
+.forumList1 {background-color: #DDDDDD; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.forumList2 {background-color: #EEEEEE; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.forumListSmall {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.forumHeaderLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.forumHeaderLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold; color:#ff0000}
+.forumPathLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.forumPathLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal; color:#ff0000}
+
+.blogBackground {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt}
+.blogHeader {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #000000; font-weight:bold}
+.blogLabel {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.blogRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.blogRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.blogRowSmall {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.blogFooter {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal; color: #000000}
+.blogFooterLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.blogLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.blogLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold; color:#999999}
+.blogList1 {background-color: #DDDDDD; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.blogList2 {background-color: #EEEEEE; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.blogListSmall {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.blogHeaderLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.blogHeaderLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold; color:#ff0000}
+.blogPathLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.blogPathLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal; color:#ff0000}
+
+
+.voteAnswer {}
+.voteCount {}
+.voteResult {}
+.voteTotal {}
+
+
+
+
+/* Template Styles */
+.menulink {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#0099CC;font-weight:normal}
+a.menulink {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#0099CC;font-weight:normal}
+a.menulink:hover {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#CC0000;font-weight:normal}
+
+.menulink2 {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#993333;font-weight:normal}
+a.menulink2 {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#993333;font-weight:normal}
+a.menulink2:hover {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#666666;font-weight:normal}
+
+.submenulink {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#000000;font-weight:normal}
+a.submenulink {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#000000;font-weight:normal}
+a.submenulink:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#000000;font-weight:normal}
+
+a.topmenu {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#cc0000;font-weight:bold}
+a.topmenu:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#ffffff;font-weight:bold}
+
+a.topmenu01 {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#000000;font-weight:normal}
+a.topmenu01:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#ff0000;font-weight:normal}
+
+a.topmenu02 {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#000000;font-weight:normal}
+a.topmenu02:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#ff0000;font-weight:normal}
+
+a.articlelink {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#990000;font-weight:bold}
+a.articlelink:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#000000;font-weight:bold}
+
+a.newslink {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:10pt;color:#000000;font-weight:normal}
+a.newslink:hover {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:10pt;color:#000000;font-weight:normal}
+
+a.forumlink {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:8.5pt;color:#000000;font-weight:bold}
+a.forumlink:hover {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:8.5pt;color:#666666;font-weight:bold}
+
+a.featurelink {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:8.5pt;color:#FF0000;font-weight:bold; line-height:16px}
+a.featurelink:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:8.5pt;color:#000000;font-weight:bold; line-height:16px}
+
+a.bodylink {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#7D8B53;font-weight:normal}
+a.bodylink:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#666666;font-weight:normal}
+
+a.categorylink {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#0099CC;font-weight:bold}
+a.categorylink:hover {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#000000;font-weight:bold}
+
+a.featurelink1 {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#ffffff;font-weight:normal}
+a.featurelink1:hover {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#000000;font-weight:normal}
+
+a.featurelink2 {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#006699;font-weight:normal}
+a.featurelink2:hover {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#000000;font-weight:normal}
+
+a.downloadlink {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#990000;font-weight:normal}
+a.downloadlink:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#000000;font-weight:normal}
+
+a.sectionheading2 {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:10pt;color:#006666;font-weight:bold}
+a.sectionheading2:hover {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:10pt;color:#333333;font-weight:bold}
+
+a.subsectionheading {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#333333;font-weight:normal}
+a.subsectionheading:hover {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#333333;font-weight:normal}
+ 
+a.subHeaderLink {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:13pt;color:#EE9833;font-weight:bold}
+a.subHeaderLink:hover {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:13pt;color:#333333;font-weight:bold}
+
+a.blogHeaderLink {text-decoration:none; font: bold 9pt Verdana;color: #ffffcc;font-weight:bold}
+a.blogHeaderLink:hover {text-decoration:underline;font: bold 9pt Verdana;color: #ffffcc;font-weight:bold}
+
+a.tablefontLink {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#000000;font-weight:bold}
+a.tablefontLink:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#ff0000;font-weight:bold}
+
+a.tablefontLink2 {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#000000;font-weight:bold}
+a.tablefontLink2:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:9pt;color:#ff0000;font-weight:bold}
+
+a.smalllink {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:7.5pt;color:#692F08;font-weight:normal}
+a.smalllink:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:7.5pt;color:#cccccc;font-weight:normal}
+
+a.smalllink2 {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:7.5pt;color:#A5E3FF;font-weight:normal}
+a.smalllink2:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:7.5pt;color:#ffffff;font-weight:normal}
+
+a.smalllink3 {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:7.5pt;color:#000000;font-weight:normal}
+a.smalllink3:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:7.5pt;color:#ff0000;font-weight:normal}
+
+a.smalllink4 {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#003399;font-weight:normal}
+a.smalllink4:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#000000;font-weight:normal}
+
+a.smalllink5 {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:7.5pt;color:#333333;font-weight:normal}
+a.smalllink5:hover {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:7.5pt;color:#cccccc;font-weight:normal}
+
+a.smalllink6 {text-decoration:underline;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#ffffff;font-weight:normal}
+a.smalllink6:hover {text-decoration:none;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#FF6600;font-weight:normal}
+
+
+.tsBody { font-family: Arial, Helvetica, sans-serif;font-size: 9pt;color:#6C6C6C; line-height:16px}
+.tsBody2 { font-family: Arial, Helvetica, sans-serif;font-size: 9pt;color:#000000; line-height:15px}
+.tsBody3 { font-family: Arial, Helvetica, sans-serif;font-size: 8pt;color:#333333; line-height:15px}
+.footer { font-family: Arial, Helvetica, sans-serif;font-size: 7.5pt;color:#ffffff}
+.votefont { font-family: Arial, Helvetica, sans-serif;font-size: 9pt;color:#000000}
+.VoteanswerFont { font-family: Arial, Helvetica, sans-serif;font-size: 9pt;color:#006699}
+.datefont { font-family: Arial, Helvetica, sans-serif;font-size: 7.5pt;color:#000000}
+.scrolltext { font-family: Arial, Helvetica, sans-serif;font-size: 10pt;font-weight:normal;color:#000000}
+
+.smalldateFont { font-family: Arial, Helvetica, sans-serif;font-size: 7.5pt;font-weight:normal;color:#999999}
+.tableHeaderFont { font-family: Arial, Helvetica, sans-serif;font-size: 8.5pt;font-weight:normal;color:#ffffff}
+.tableSmallFont { font-family: Arial, Helvetica, sans-serif;font-size: 8pt;font-weight:normal;color:#000000}
+.tableSmallFont2 { font-family: Arial, Helvetica, sans-serif;font-size: 8pt;font-weight:normal;color:#ffffff}
+.tableSmallFont3 { font-family: Arial, Helvetica, sans-serif;font-size: 9pt;font-weight:bold;color:#ffffff}
+.menuFont { font-family: Arial, Helvetica, sans-serif;font-size: 9pt;font-weight:normal;color:#000000}
+.textsmall { font-family: Arial, Helvetica, sans-serif;font-size: 8pt;font-weight:normal;color:#000000}
+.textsmall2 { font-family: Arial, Helvetica, sans-serif;font-size: 8pt;font-weight:normal;color:#666666}
+.textsmall3 { font-family: Arial, Helvetica, sans-serif;font-size: 8.5pt;font-weight:normal;color:#990000}
+.textsmall4 { font-family: Arial, Verdana, Helvetica; font-size: 7.5pt; font-weight: normal; text-decoration: none; color=#ffffff}
+.textsmall5 { font-family: Arial, Verdana, Helvetica; font-size: 8.5pt; font-weight: normal; text-decoration: none; color=#cccccc}
+.gapline { font-family: Arial, Helvetica, sans-serif;font-size: 10pt;font-weight:bold;color:#000000}
+
+.SearchFont { font-family: Arial, Helvetica, sans-serif;font-size: 8.5pt;font-weight:bold;color:#397480}
+.chartFont2 { font-family: Arial, Helvetica, sans-serif;font-size: 8pt;font-weight:bold;color:#990000}
+.highlightHeader { font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 8pt;font-weight:bold;color:#000000}
+.subHeader { font-family: Arial, Helvetica, sans-serif;font-size: 11pt;font-weight:bold;color:#648736}
+.sectionHeader { font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 11pt;font-weight:bold;color:#000000}
+.sectionHeader2 { font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10pt;font-weight:normal;color:#666666}
+.featureabstract { font-family: Arial, Helvetica, sans-serif;font-size: 10pt;font-weight:bold;color:#000000}
+.article { font-family: Arial, Helvetica, sans-serif;font-size: 10pt;font-weight:normal;color:#000000}
+.articleheadline { font-family: Arial, Helvetica, sans-serif;font-size: 13pt;font-weight:bold;color:#006699}
+.articleheadline2 { font-family: Arial, Helvetica, sans-serif;font-size: 11pt;font-weight:bold;color:#000000}
+.abstract { font-family: Arial, Helvetica, sans-serif;font-size: 9pt;font-weight:normal;color:#333333; line-height:16px}
+.abstract2 { font-family: Arial, Helvetica, sans-serif;font-size: 9pt;font-weight:normal;color:#333333; line-height:16px}
+
+.tsHeader { font-family:Arial, Helvetica; font-size: 11pt; font-weight: bold; color:#000000; text-decoration: none}
+.tsHeader2 { font-family: Arial, Verdana, Helvetica; font-size: 10.5pt; font-weight: bold; color:#999966; text-decoration: none}
+.tsText { font-family: Arial, Verdana, Helvetica; font-size: 10pt; font-weight: none; text-decoration: none; color=#000000}
+.tsTextBold { font-family: Verdana, Arial, Verdana, Helvetica; font-size: 7.5pt; font-weight: Bold; text-decoration: none; color=#339999}
+.tsTextItalic { font-family: Arial, Verdana, Helvetica; font-size: 8pt; font-weight: none; text-decoration: none}
+.tsTextList { font-family: Arial, Helvetica, sans-serif; font-size: 9pt; text-decoration: none;  color=#996600}
+.tsTextListBold { font-family: Arial, Helvetica, sans-serif; font-weight: bold}
+.tsTextListItalic { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9pt}
+.tsTextSmall { font-family: Verdana, Arial, Helvetica, sans-serif}
+.tsArticleHeadline { font-family: Arial, Verdana, Helvetica; font-size: 12pt; font-weight: bold; text-decoration: none}
+.tsArticleSubhead { font-family: Arial, Verdana, Helvetica; font-size: 10pt; font-weight: normal; text-decoration: none}
+.tsArticleByline { font-family: Arial, Verdana, Helvetica; color: #666666; font-size: 7pt; font-weight: none; text-decoration: none}
+.tsArticleHeadline2 { font-family: Arial, Verdana, Helvetica; font-size: 12pt; font-weight: bold; text-decoration: none}
+.tsArticleByline2 { }
+.tsArticleMore { font-family: Verdana, Helvetica; color:#006699; font-size: 8pt; font-weight: bold; text-decoration: none}
+.tsArticleHeadline3 { font-family: Arial, Verdana, Helvetica; font-size: 12pt; font-weight: bold; text-decoration: none}
+.tsArticleByline3 { font-family: Arial, Verdana, Helvetica; font-size: 7pt; font-weight: italic; text-decoration: none}
+.tsVoteBar { color: #FFFFFF; background-color: #cccccc}
+
+
+
+
+/* CoolMenus 4 - default styles - do not edit */
+.clCMAbs{position:absolute; visibility:hidden; left:0; top:0}
+/* CoolMenus 4 - default styles - end */
+
+/*Style for the background-bar*/
+.clBar{position:absolute; width:10; height:10; background-color:#white; layer-background-color:#white; visibility:hidden}
+
+/*Styles for level 0*/
+.clLevel0 {position:absolute; padding:1px; font-family:Arial; font-size:12px; text-align:left; background-color: #F1F1F1; color:#0077AA}
+.clLevel0over{position:absolute; padding:1px; font-family:Arial; font-size:12px; text-align:left; background-color: #C1C1C1; color:#0099CC; cursor:pointer; cursor:hand; text-decoration: underline}
+.clLevel0border{position:absolute; visibility:hidden; background-color:none;}
+
+
+/*Styles for level 1*/
+.clLevel1, .clLevel1over{position:absolute; padding:2px; color: #000000; font-family:Arial; font-size:11px; text-align: left}
+.clLevel1{background-color:#FFEE9C; layer-background-color:#FFEE9C;}
+.clLevel1over{cursor:pointer; cursor:hand;}
+.clLevel1border{position:absolute; visibility:hidden; background-color:#E7CB45; layer-background-color:#E7CB45}
+
+
+
+/*Styles for level 2*/
+.clLevel2, .clLevel2over{position:absolute; padding:2px; color: #000000; font-family:Arial,helvetica; font-size:11px; font-weight:normal}
+.clLevel2{background-color:#DDDDDD; layer-background-color:DDDDDD;}
+.clLevel2over{background-color:#ABABAB; layer-background-color:#ABABAB; cursor:pointer; cursor:hand; }
+.clLevel2border{position:absolute; visibility:hidden; background-color:#787878; layer-background-color:#787878}
+
+/*wiki*/
+.font_category {
+	FONT-WEIGHT:bold; FONT-SIZE: 7pt; COLOR: #669933; FONT-FAMILY: Tahoma, Arial, Verdana, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+
+.font_text {
+	FONT-SIZE: 8.5pt; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif;TEXT-DECORATION: none
+}
+A.tag {
+	FONT-WEIGHT: normal; FONT-SIZE: 7pt; COLOR: #f58335; FONT-FAMILY: Tahoma, Arial, Verdana, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+
+.discusson1 {
+	BORDER-COLOR: #000000;BORDER_WIDTH=1px;border-style: outset;BACKGROUND-COLOR: #ffffff
+}
+
+.discusson_td {
+	border-style: none;BACKGROUND-COLOR: #ffffff
+}
+
+a.wikiMenu { font-family:Arial; font-size:12px; text-align:left; background-color: #F1F1F1; color:#0077AA}
+a.wikiMenu:hover { font-family:Arial; font-size:12px; text-align:left; background-color: #C1C1C1; color:#0099CC; cursor:pointer; cursor:hand; text-decoration: underline}
+

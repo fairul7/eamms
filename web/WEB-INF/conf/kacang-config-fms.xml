@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<application>
+    <!-- ========== Modules Definition =============================== -->
+    <modules>
+        <module class="com.tms.fms.transport.model.TransportModule">
+            <dao-class>com.tms.fms.transport.model.TransportDao</dao-class>
+            <datasource>defaultdb</datasource>
+	    <permission>com.tms.fms.transport.admin</permission>  
+	    <permission>com.tms.fms.transport.manager</permission>  
+	    <permission>com.tms.fms.transport.transportRequest</permission>
+	    <permission>com.tms.fms.transport.transportAdmin</permission>
+	    <permission>com.tms.fms.transport.transportAssignment</permission>	    
+	    
+	    <menu>
+		<menu-item>
+		    <order>70</order>
+		    <url>/ekms/fms/transport/index.jsp</url>
+	        </menu-item>
+	    </menu> 
+        </module>
+ 
+    
+    
+        <module class="com.tms.fms.facility.model.FacilityModule">
+            <dao-class>com.tms.fms.facility.model.FacilityDao</dao-class>
+            <datasource>defaultdb</datasource>
+
+		<permission>com.tms.fms.facility.permission.fmsAdmin</permission>
+		<permission>com.tms.fms.facility.facilityRequest</permission>
+		<!-- <permission>com.tms.fms.facility.permission.facilityControllerHead</permission> -->
+		<permission>com.tms.fms.facility.permission.facilityController</permission>
+		<permission>com.tms.fms.facility.permission.batchAssignmentUpdate</permission>
+		<permission>com.tms.fms.facility.permission.rateCard</permission>
+	    <permission>com.tms.fms.facility.admin</permission>
+	    <permission>com.tms.fms.facility.manager</permission>  
+	    <permission>com.tms.fms.facility.permission.assignDiffManpower</permission>
+	    <permission>com.tms.fms.facility.permission.storeManagement</permission>
+	    <permission>com.tms.fms.facility.permission.newsManagementInternal</permission>
+	    <permission>com.tms.fms.facility.permission.inventoryManagement</permission>
+	    <permission>com.tms.fms.facility.permission.activeInactiveFacility</permission>
+	    <permission>com.tms.fms.facility.permission.deleteRateCard</permission>
+	    <permission>com.tms.fms.facility.undoCheckOut</permission>
+	    
+	    <menu>
+		<menu-item>
+		    <order>75</order>
+		    <url>/ekms/fms/facility/index.jsp</url>
+	        </menu-item>
+	    </menu>
+        </module>
+      
+        <module class="com.tms.fms.setup.model.SetupModule">
+            <dao-class>com.tms.fms.setup.model.SetupDao</dao-class>			
+            <datasource>defaultdb</datasource>
+        <menu>
+		<menu-item>
+		    <order>80</order>
+		    <url>/ekms/fms/setup/index.jsp</url>
+	    </menu-item>
+	    </menu>              
+        </module>  
+
+        <module class="com.tms.ekms.manpowertemp.model.ManpowerModule">
+            <dao-class>com.tms.ekms.manpowertemp.model.ManpowerDao</dao-class>			
+            <datasource>defaultdb</datasource>
+            <permission>com.tms.fms.transport.uploadDuty</permission>
+            <permission>com.tms.fms.transport.viewAllManpowerDuty</permission>
+        <menu>
+		<menu-item>
+		    <order>85</order>
+		    <url>/ekms/fms/manpower/index.jsp</url>
+	        </menu-item>
+	    </menu>              
+        </module>  
+    
+        <module class="com.tms.fms.engineering.model.EngineeringModule">
+            <dao-class>com.tms.fms.engineering.model.EngineeringDao</dao-class>			
+            <datasource>defaultdb</datasource>
+        </module>
+        
+        <module class="com.tms.fms.engineering.model.UnitHeadModule">
+            <dao-class>com.tms.fms.engineering.model.UnitHeadDao</dao-class>			
+            <datasource>defaultdb</datasource>
+        </module>    
+
+	        <module class="com.tms.fms.facility.model.RequestModule">
+	            <dao-class>com.tms.fms.facility.model.RequestDao</dao-class>
+	            <datasource>defaultdb</datasource>
+	        </module>
+
+	        <module class="com.tms.fms.facility.model.SetupModule">
+	            <dao-class>com.tms.fms.facility.model.SetupDao</dao-class>
+	            <datasource>defaultdb</datasource>
+	        </module>
+
+	        <module class="com.tms.fms.engineering.model.FacilitiesCoordinatorModule">
+	            <dao-class>com.tms.fms.engineering.model.FacilitiesCoordinatorDao</dao-class>
+	            <datasource>defaultdb</datasource>
+	        </module>
+	        
+	        <module class="com.tms.fms.engineering.model.CheckAvailabilityModule">
+	            <dao-class>com.tms.fms.engineering.model.CheckAvailabilityDao</dao-class>
+	            <datasource>defaultdb</datasource>
+	        </module>
+	        
+        <module class="com.tms.fms.register.model.FMSRegisterManager">
+            <dao-class>com.tms.fms.register.model.FMSRegisterDao</dao-class>			
+            <datasource>defaultdb</datasource>             
+        </module>
+        
+        <module class="com.tms.fms.reports.model.ReportsFmsModule">
+            <dao-class>com.tms.fms.reports.model.ReportsFmsDao</dao-class>			
+            <datasource>defaultdb</datasource>          
+        </module>  
+        <module class="com.tms.fms.transport.model.TransportFeedbackModule">
+            <dao-class>com.tms.fms.transport.model.TransportFeedbackDao</dao-class>			
+            <datasource>defaultdb</datasource>          
+        </module>  
+         <module class="com.tms.fms.engineering.model.AssignmentLogModule">
+            <dao-class>com.tms.fms.engineering.model.AssignmentLogDao</dao-class>			
+            <datasource>defaultdb</datasource>          
+        </module>  
+	  </modules>
+	  
+	  
+	  
+	  <properties>
+        <!-- ========== Service Properties ========== -->
+        <property>
+            <name>fms.facilities.engineering.services</name>
+            <value>1=SCP/MCP/OB/SNG/VSAT</value>
+        </property>
+        <property>
+            <name>fms.facilities.engineering.engineeringDepartmentId</name>
+            <value>D0014</value>
+        </property>                
+        <property>
+        	<name>fms.facilities.engineering.engineeringUnitId</name>
+        	<value>UN0007</value>
+        </property>
+        <property>
+        	<name>fms.facilities.engineering.fcGroupId</name>
+        	<value>kacang.services.security.Group_fc</value>
+        </property>
+        <property>
+            <name>smtp.server</name>
+            <value>127.0.0.1</value>
+            <!-- <value>10.3.3.129</value> -->
+        </property>
+        <property>
+            <name>admin.email</name>
+            <value>fmsadmin@mediaprima.com.my</value>
+        </property>
+        
+        <property>
+            <name>check.list</name>
+            <value>/fmsExcel/Template.xls</value>
+        </property>
+        
+        <property>
+			<name>ManagementService</name>
+			<value>D0021</value>
+		</property>
+		
+		<property>
+			<name>fms.facilities.engineering.allowAcceptWithInvalidRateCards</name>
+			<value>1</value>
+			<!-- 0=do not allow (default), 1=allow accept with invalid rate cards -->
+		</property>
+        
+       </properties>
+       
+       
+</application>
+
+

@@ -1,0 +1,287 @@
+/* ------------- Text Field Style ------------------- */
+.textField {border-width:1.5pt; background-color:#FFFFFF; text-decoration:none; font-family:Arial, Verdana, Helvetica, sans-serif;font-size:8.5pt; font-weight:normal}
+
+/* ------------- Big Button Style ------------------- */
+.buttonBigClass {border-width:1.5pt; background-color:#E1E1E1; text-decoration:none; font-family:Arial, Verdana, Helvetica, sans-serif;font-size:7.5pt; font-weight:normal; cursor:hand}
+
+/* ------------- Button Style ------------------- */
+.buttonClass {border-width:1pt; background-color:#E1E1E1; border-style:solid; border-color:#AAAAAA; text-decoration:none; font-family:Arial, Verdana, Helvetica, sans-serif;font-size:7pt; font-weight:normal; cursor:hand}
+
+/* ------------- Page Style ------------------- */
+a:link {text-decoration: none}
+a:visited {text-decoration: none; color: #9900CC}
+a:active {color: #0000FF}
+a:hover {text-decoration: underline}
+input {font-family: "Courier New", Courier, mono; font-size: 9pt}
+td {font-size: 8pt}
+
+/* ------------------------------------ */
+.titleTop {background-color: #0099CC}
+.titleMenu {background-color: #0099CC}
+.titleMenuSmall {color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt}
+.titleMenuTop {background-color: #66CCFF}
+.titleMenuBottom {background-color: #003366}
+.titleMenuFont {color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight: bold}
+
+/* ------------------------------------ */
+.logoTitleBgColor {background-color: #FFFFCC}
+.searchBgColor {background-color: #F0EEDC}
+.dateFont {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #000000}
+.footerFont {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #000000}
+a.footerFont {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #000000; text-decoration:none}
+a.footerFont:visited {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #000000; text-decoration:none}
+a.footerFont:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #CCCCCC; text-decoration:none}
+
+/* ------------------------------------ */
+.companyTitleFont {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 10pt ; color: #FF6633}
+.companyTitleBgColor {background-color: #FFFFCC}
+
+/* ------------------------------------ */
+.desktopFont {color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt}
+.desktopBgColor {background-color: #FF9966}
+
+.sfaHeader {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight: bold}
+.sfaBgColor {background-color: #E4E4CB}
+.sfaBackground  {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.sfaLabel  {background-color: #E6E6CA; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.sfaRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.sfaRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.sfaRowSmall {background-color: #EEEEDD; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7pt; font-weight:normal}
+.sfaFooter {background-color: #166AEE; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.sfaFooterLabel {background-color: #166AEE font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal; color:#FFFFFF}
+
+
+
+/* ------------------------------------ */
+.calendarHeader {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight: bold}
+.calendarMonthBgColor {background-color: #666666}
+.calendarMonthFont {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 10pt}
+.calendarBgColor {background-color: #E4E4CB}
+.calendarContentFont {font-family: Arial, Helvetica, sans-serif; font-size: 9pt}
+.calendarBackground {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.calendarLabel {background-color: #E6E6CA; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.calendarRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.calendarRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.calendarRowSmall {background-color: #EEEEDD; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7pt; font-weight:normal}
+.calendarFooter {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.calendarFooterLabel {background-color: #E6E6CA; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+
+/* ------------------------------------ */
+.highlight {color: #FF0000}
+
+/* ------------------------------------ */
+.menuFont {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #333333}
+.menuHeader {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight: bold}
+.menuBgColor {background-color: #F0EEDC}
+.menuBgOutline {background-color: #16AEEE}
+.menuBgBackground {background-color: #FFFFFF}
+.menuBgColorHighlight {background-color: #FFFFFF}
+.menuBgColorShadow {background-color: #CCCCCC}
+.menuHeaderSection {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #EEEEFF; font-weight: bold}
+
+/* ------------------------------------ */
+.contentBgColor {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.contentFont {font-family: Arial, Helvetica, sans-serif; font-size: 8.5pt}
+.contentTitleFont {background-color:#166AEE; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; color: #FFFFFF; font-weight:bold}
+.contentStrapColor {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+
+/* ------------------------------------ */
+.sideTitleFont {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #FFFFFF}
+.sideTitleBgBorderColor {background-color: #CCCC99}
+.sideBodyFontAndBgColor {font-family: Arial, Helvetica, sans-serif;  font-size: 8pt}
+
+.textFont {color: #0065CE}
+.contentBgColorAlternate {background-color: #E1E1C1; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.hpTitleFont {font-size: 16pt; color: #666666}
+.hpMenuFont {background-color: #CCCCFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 10pt}
+.hpContentFont {color: #006699}
+.hpContentHeaderFont {  }
+.hpMenuTitleFont {font-weight: bold; background-color: #FFCC99; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 10pt}
+.copyright {font-family: "Courier New", Courier, mono; font-size: 10pt; color: #666666}
+
+/* ---------- Portlet Classes ---------- */
+.portletBackground {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.portletHeader {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight: bold}
+.portletRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.portletLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.portletFooter {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt;}
+.portletPreferenceBackground {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.portletPreferenceHeader {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight: bold}
+.portletPreferenceRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+
+.emeetingBackground {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.emeetingHeader {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight: bold}
+.emeetingRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.emeetingRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.emeetingLabel {background-color: #E6E6CA; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.emeetingCaption {background-color: #EEEEDD; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.emeetingFooter {background-color: #166AEE; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.emeetingSmall {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7pt; text-transform: uppercase }
+
+.emeetingPrintOutline {background-color:#CCCCCC}
+.emeetingPrintBackground {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.emeetingPrintHeader {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.emeetingPrintRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.emeetingPrintRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.emeetingPrintSmall {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7pt; text-transform: uppercase; font-weight:normal}
+
+.forumBackground {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.forumHeader {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight: bold}
+.forumLabel {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.forumRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.forumRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.forumRowSmall {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7pt; font-weight:normal}
+.forumFooter {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.forumFooterLabel {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+a.forumLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold; color:#000000}
+a.forumLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold; color:#999999}
+.forumList1 {background-color: #CCCCCC; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.forumList2 {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.forumListSmall {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7pt; font-weight:normal}
+a.forumHeaderLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #FFFFFF; font-weight:bold}
+a.forumHeaderLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #FFFFFF; font-weight:bold}
+
+.button {border-width:1pt; background-color:#E1E1E1; border-style:solid; border-color:#AAAAAA; text-decoration:none; font-family:Arial, Verdana, Helvetica, sans-serif;font-size:7pt; font-weight:normal; cursor:hand}
+
+.articleBackground {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt}
+.articleHeader {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight: bold}
+.articleBody {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.articleLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.articleRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.articleRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.articleFooter {background-color: #166AEE; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.articleSmall {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; font-weight:normal; color: #666666}
+.articleRead {font-family: Arial, Verdana, Helvetica, sans-serif; font-weight:normal; color: #FF0000}
+
+.contentPath {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #999999; font-weight:bold}
+.contentBody {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.contentLabel {background-color: #CCCCCC; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.contentTreeNode {border:solid 1px #666666; margin:0px; padding: 1px; text-align: center; width:12px; font-size:12px; font-weight:bold; line-height: 6px; background: #CCCCCC; color: #000000;}
+.contentPathLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight: normal; color:#999999}
+.contentPathLink:visited {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight: normal; color:#999999}
+.contentPathLinkSelected {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight: bold; color:#999999}
+.contentPathLinkSelected:visited {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight: bold; color:#999999}
+.contentName {font: bold 13pt Arial; width: 100%}
+.contentDate {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7pt; font-weight:normal; font-style:italic}
+.contentAuthor {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; font-weight:normal}
+.contentHeader {background-color: #166AEE; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #FFFFFF; font-weight:bold}
+.contentSubheader {}
+.contentFooter {}
+.contentOption {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.contentChildName {font-family: Arial, Verdana, Helvetica, sans-serif; font-size:9pt; font-weight:bold}
+.contentChildDate {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7pt; font-weight:normal; font-style:italic}
+.contentChildAuthor {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; font-weight:normal}
+.contentChildSummary {font-size: 8pt;}
+.contentPaging {}
+.contentPageLink {}
+.contentTreeLink {text-decoration: none; color: black; font: bold 7.5pt Verdana}
+.contentTreeSeparator {width: 100%; height: 10px; border-top: dotted 1px black;}
+.contentTreeLinkLite {text-decoration: none; color: black; font: normal 7.5pt Verdana}
+
+.voteButton {border-width:1pt; background-color:#E1E1E1; border-style:solid; border-color:#AAAAAA; text-decoration:none; font-family:Arial, Verdana, Helvetica, sans-serif;font-size:7pt; font-weight:normal; cursor:hand}
+.voteAnswer {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.voteCount {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; font-weight:normal}
+.voteResult {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; font-weight:bold}
+.voteTotal {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+
+.loginHeader {background-color: #003366; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #FFFFFF; font-weight:bold}
+.loginLabel {background-color: #0099CC; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold; color:white}
+.loginRow { background-color: #0099CC; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal; color:white}
+.loginError {background-color: #0099CC; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold; color:#BBBBBB}
+
+.profileHeader {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight: bold}
+.profileRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.profileFooter {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.profileError {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal; color:#FF0000}
+
+.themeButton {height:11pt; border-width:1pt; background-color:#E5E5E5; border-style:solid; border-color:#999999; text-decoration:none; font-family:Verdana, Arial, Helvetica, sans-serif;font-size:7pt; font-weight:normal; color:#666666}
+
+.taskPortletFont {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #000000; font-weight:normal}
+
+/* Top Menu Classes */
+.aTopMenuLink {font-family: Arial, Helvetica, sans-serif; font-size: 9.5px; font-weight: bold; color: #003366; }
+.topMenuBg {background-color: #166AEE}
+.topMenuOutline {background-color: #166AEE}
+.topMenuHeader {background-color: #166AEE; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; color: #FFFFFF; font-weight: bold}
+.topMenuRow {background-color: #FFFFFF}
+.topMenuImageColumn {background-color: #CCCCCC}
+.topMenuMouseOver { cursor: hand; border: 1px; background-color: #E5E5E5; border-width:1pt; border-style:solid; border-color:#CCCCCC}
+.topMenuMouseOut { border: 1px; background-color: #FFFFFF; border-width:1pt; border-style:solid; border-color:#FFFFFF}
+.topMenuLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #333333; font-weight:normal; text-decoration: none}
+.sideMenuMouseOver {background-color: #EFEFEF}
+.sideMenuMouseOut {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; color:#000000}
+.topMenuButtonMouseOver {background-color: #F0EEDC; border-style: inset; border-width: 1px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #000000; font-weight: bold; cursor: hand}
+.topMenuButtonMouseOut {background-color: #F0EEDC; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #000000; font-weight:bold; cursor: hand}
+a.aTopMenuLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #000000; font-weight:bold; text-decoration:none}
+a.aTopMenuLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #000000; font-weight:bold; text-decoration:none}
+
+/* Table Widget Classes */
+.tableButton {border-width:1pt; background-color:#E1E1E1; border-style:solid; border-color:#AAAAAA; text-decoration:none; font-family:Verdana, Arial, Helvetica, sans-serif;font-size:7pt; font-weight:normal}
+.tableHeader {background-color: #166AEE; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #FFFFFF; font-weight:bold}
+.tableBackground {background-color: #F0EEDC; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt}
+.tableRow {background-color: #F0EEDC; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+
+.calendarSubheader { background: #F0EEDC; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; }
+.verticalCalendarBackground {background-color: #FFFFFF}
+.verticalCalendarHeader {background-color: #166AEE; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #FFFFFF; font-weight:bold}
+.verticalCalendarSubheaderWeekend {background-color: #F0EEDC; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #000000; font-weight:bold}
+.verticalCalendarSubheaderWeekday {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #000000; font-weight:bold}
+.verticalCalendarRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; color: #000000; font-weight:normal}
+.verticalCalendarScrollbar {scrollbar-3dlight-color:#CCCCCC;scrollbar-arrow-color:#CCCCCC;scrollbar-base-color:#E5E5E5;scrollbar-darkshadow-color:#E5E5E5;scrollbar-face-color:#E5E5E5;scrollbar-highlight-color:#EFEFEF;scrollbar-shadow-color:#CCCCCC; scrollbar-track-color:#FFFFFF}
+
+a.searchLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; font-weight:bold; color:#000000; text-decoration:none}
+a.searchLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; font-weight:bold; color:#999999; text-decoration:none}
+.searchRow {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; font-weight:bold; color:#000000; text-decoration:none}
+
+.radioHeader {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight: bold}
+.radioRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; font-weight:normal}
+
+/* Quick Messaging Classes */
+.qMessagingRowHeader {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight: bold}
+.qMessagingRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.qMessagingRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.qMessagingRowFooter {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #000000; font-weight:bold}
+.qMessagingTextHeader {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; font-weight:bold}
+
+/* Bookmark Portlet */
+.bookmarkHeader {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight: bold}
+.bookmarkRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; font-weight:bold}
+.bookmarkRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; font-weight:normal}
+
+/* Generic Classes */
+.classBackground {background-color: #FFFFFF}
+.classHeader {background-image: url('/ekms/images/windows/bg_low.gif'); height:22px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #FFFFFF; font-weight: bold}
+.classRow {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.classRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.classRowFaded {background-color: #FFFFFF; color: #999999; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.classRowLabelFaded {background-color: #FFFFFF; color: #999999; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.classFooter {background-color: #E5E5E5; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #000000; font-weight:bold}
+.classText {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; font-weight:normal}
+.classTextSmall {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 7.5pt; font-weight:normal}
+
+
+/* Panel Classes */
+.panelHeaderSelected {border:1px solid #CCCCCC; margin:4; padding:5; background-color: #E5E5E5; font-weight: bold}
+.panelHeader {border:1px solid #CCCCCC; margin:4; padding:5; background-color: #FFFFFF}
+.panelRow {border: 1px solid #FFFFFF; padding:2; margin:0}
+.panelHeaderText {color: #0033FF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; font-weight:normal}
+.panelHeaderSelectedText {color: #000000; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; font-weight:bold}
+
+/* Weblog Classes */
+.blogBackground {background-color:#FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt}
+.blogHeader {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 8pt; color: #000000; font-weight:bold}
+.blogLabel {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.blogRow {background-color: #FFFFFF; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.blogRowLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.blogRowSmall {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.blogFooter {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal; color: #000000}
+.blogFooterLabel {background-color: #FFFFFF; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.blogLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.blogLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold; color:#999999}
+.blogList1 {background-color: #DDDDDD; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.blogList2 {background-color: #EEEEEE; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.blogListSmall {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.blogHeaderLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold}
+.blogHeaderLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:bold; color:#ff0000}
+.blogPathLink {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal}
+.blogPathLink:hover {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 9pt; font-weight:normal; color:#ff0000}

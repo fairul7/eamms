@@ -1,0 +1,598 @@
+<%@ page import="java.util.Set,
+              com.tms.collab.calendar.ui.ConflictForm,
+              java.util.Collection,
+              java.util.Iterator,
+              com.tms.collab.resourcemanager.model.ResourceBooking"%>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c-rt" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="kacang.tld" prefix="x" %>
+<c:set var="view" value="${widget}"/>
+<c:set var="event" value="${view.meeting.event}"/>
+<table cellpadding="0" cellspacing="1" width="100%">
+    <jsp:include page="../form_header.jsp" flush="true"/>
+    <tr><td colspan="2" align="left" valign="top" class="title"><fmt:message key="calendar.label.Title"/> : </td></tr>
+    <tr><td colspan="2" align="left" valign="top" class="data"><c:out value="${event.title}"/></td></tr>
+    <tr><td colspan="2" align="left" valign="top" class="title"><fmt:message key="calendar.label.StartDate"/> : </td></tr>
+    <tr><td colspan="2" align="left" valign="top" class="data"><fmt:formatDate value="${event.startDate}" pattern="${globalDatetimeShort}" /></td></tr>
+    <tr><td colspan="2" align="left" valign="top" class="title"><fmt:message key="calendar.label.EndDate"/> : </td></tr>
+    <tr><td colspan="2" align="left" valign="top" class="data"><fmt:formatDate value="${event.endDate}" pattern="${globalDatetimeShort}" /></td></tr>
+    <tr><td colspan="2" align="left" valign="top" class="title"><fmt:message key="calendar.label.conflicts"/> : </td></tr>
+    <c:set var="conflictAttendees" value="${view.conflictAttendees}"/>
+    <%
+        Set conflictAttendees = (Set)pageContext.getAttribute("conflictAttendees");
+        String userId;
+    %>
+    <c:if test="${!widget.ownerExcluded}" >
+        <c:set var="userId" value="${event.userId}"/>
+        <%
+            userId = (String)pageContext.getAttribute("userId");
+            if(conflictAttendees.contains(userId))
+                pageContext.setAttribute("hasConflict",Boolean.TRUE);
+            else
+                pageContext.setAttribute("hasConflict",Boolean.FALSE);
+        %>
+        <c:choose>
+            <c:when test="${hasConflict}">
+                <c:set var="attFound" value="1"/>
+                <tr>
+                    <td class="data" align="left" width="2" valign="top"><input type="checkbox" name="comAttendeesCB" value="<c:out value="${event.userId}"/>" checked></td>
+                    <td class="data" align="left"><font color="FF0000"><c:out value="${event.userName}"/></font></td>
+                </tr>
+            </c:when>
+            <c:otherwise>
+                <input type="checkbox" name="comAttendeesCB" value="<c:out value="${event.userId}"/>" style="display:none; visibility:hidden" checked>
+            </c:otherwise>
+        </c:choose>
+    </c:if>
+    <c:forEach items="${event.attendees}" var="att" varStatus="status"  >
+        <c:if test="${att.compulsory&&att.userId!=event.userId}" >
+            <c:set var="userId" value="${att.userId}"/>
+            <%
+                userId = (String)pageContext.getAttribute("userId");
+                if(conflictAttendees.contains(userId))
+                    pageContext.setAttribute("hasConflict",Boolean.TRUE);
+                else
+                    pageContext.setAttribute("hasConflict",Boolean.FALSE);
+            %>
+            <c:choose>
+                <c:when test="${hasConflict}">
+                    <c:set var="attFound" value="1"/>
+                    <tr>
+                        <td class="calendarRow" align="left" width="10%" valign="top" valign="top"><input type="checkbox" name="comAttendeesCB" value="<c:out value="${att.userId}"/>" checked></td>
+                        <td class="data" align="left" valign="top" valign="top"><font color="FF0000"><c:out value="${att.name}"/></font></td>
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                    <input type="checkbox" name="comAttendeesCB" value="<c:out value="${att.userId}"/>" style="display:none" checked>
+                </c:otherwise>
+            </c:choose>
+        </c:if>
+    </c:forEach>
+    <c:forEach items="${event.attendees}" var="att" varStatus="status"  >
+        <c:if test="${!att.compulsory}">
+            <c:set var="userId" value="${att.userId}"/>
+            <%
+                userId = (String)pageContext.getAttribute("userId");
+                if(conflictAttendees.contains(userId))
+                    pageContext.setAttribute("hasConflict",Boolean.TRUE);
+                else
+                    pageContext.setAttribute("hasConflict",Boolean.FALSE);
+            %>
+            <c:choose>
+                <c:when test="${hasConflict}">
+                    <c:set var="attFound" value="1"/>
+                    <tr>
+                        <td class="data" align="left" width="10%" valign="top" valign="top"><input type="checkbox" name="opAttendeesCB" value="<c:out value="${att.userId}"/> " CHECKED></td>
+                        <td class="data" align="left" valign="top" valign="top"><font color="FF0000"><c:out value="${att.name}"/></font></td>
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                    <input type="checkbox" name="opAttendeesCB" value="<c:out value="${att.userId}"/> " style="display:none" checked>
+                </c:otherwise>
+            </c:choose>
+        </c:if>
+    </c:forEach>
+    <c:if test="${attFound == '0'}">
+        <tr><td colspan="2" align="left" valign="top" class="data">-</td></tr>
+    </c:if>
+    <c:set var="resourceFound" value="0"/>
+    <tr><td colspan="2" align="left" valign="top" class="title"><fmt:message key="calendar.label.Resources"/> : </td></tr>
+    <c:forEach items="${event.resources}" var="resource" >
+        <c:set var="resourceId" value="${resource.id}"/>
+        <c:set var="resourceList" value="${view.resourceConflicts}"/>
+        <%
+            pageContext.setAttribute("hasConflict",Boolean.FALSE);
+            String resourceId = (String)pageContext.getAttribute("resourceId");
+            Collection conflicts = (Collection)pageContext.getAttribute("resourceList");
+            for (Iterator iterator = conflicts.iterator(); iterator.hasNext();)
+            {
+                ResourceBooking resourceBooking = (ResourceBooking) iterator.next();
+                if(resourceBooking.getResourceId().equals(resourceId)){
+                    pageContext.setAttribute("hasConflict",Boolean.TRUE);
+                    break;
+                }else {
+                    pageContext.setAttribute("hasConflict",Boolean.FALSE);
+                }
+            }
+        %>
+        <c:choose>
+            <c:when test="${hasConflict}">
+                <c:set var="resourceFound" value="1"/>
+                <tr>
+                    <td class="data" align="left"><input type="checkbox" name="resourcesCB" value="<c:out value="${resource.id}"/>" checked></td>
+                    <td class="data" align="left"><font color="FF0000"><c:out value="${resource.name}"/></font></td>
+                </tr>
+            </c:when>
+            <c:otherwise>
+                <input type="checkbox" name="resourcesCB" value="<c:out value="${resource.id}"/>" style="display:none" checked>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+    <c:if test="${resourceFound == '0'}">
+        <tr><td colspan="2" align="left" valign="top" class="data">-</td></tr>
+    </c:if>
+    <tr>
+        <td class="data" colspan="2" align="left">
+            <x:display name="${view.addButton.absoluteName}"/> <x:display name="${view.cancelButton.absoluteName}"/>
+        </td>
+    </tr>
+    <jsp:include page="../form_footer.jsp" flush="true"/>
+</table>
+
+
+<%--<%@ page import="java.util.Set,
+                 com.tms.collab.calendar.ui.ConflictForm,
+                 java.util.Collection,
+                 java.util.Iterator,
+                 com.tms.collab.resourcemanager.model.ResourceBooking"%>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c-rt" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="kacang.tld" prefix="x" %>
+
+
+<c:set var="view" value="${widget}"/>
+<c:set var="event" value="${view.meeting.event}"/>
+      <jsp:include page="../form_header.jsp" flush="true"/>
+
+<table  cellpadding="4" cellspacing="1" class="forumBackground" width="100%">
+
+<tr><Td ALIGN="LEFT" class="CalendarHeader" colspan="3"><B><fmt:message key='emeeting.label.conflictsDetected'/></B>
+</td></tr>
+
+<tr>
+    <td class="calendarRow" colspan="3" align="center"><b>
+    <c:out value="${view.header}" />
+    </b>
+</tr>
+
+<tr>
+    <td class="calendarRowLabel" align="right"><fmt:message key='emeeting.label.title'/>    </td>
+    <td align="left" class="calendarRow" colspan="2">
+           <FONT COLOR="#FF0000">
+               <c:out value="${event.title}"/>
+           </FONT>
+    </td>
+</tr>
+
+<tr>
+    <td class="calendarRowLabel" align="right"><fmt:message key='emeeting.label.date'/>    </td>
+    <td align="left" class="calendarRow" colspan="2">
+           <FONT COLOR="#FF0000">     <fmt:formatDate value="${event.startDate}" pattern="${globalDateLong}" /> -
+                                            <fmt:formatDate value="${event.endDate}" pattern="${globalDateLong}" />
+           </FONT>
+    </td>
+</tr>
+
+
+<tr>
+    <td class="calendarRowLabel" align="right"><fmt:message key='emeeting.label.time'/>    </td>
+    <td align="left" class="calendarRow" colspan="2">
+           <FONT COLOR="#FF0000">     <fmt:formatDate value="${event.startDate}" pattern="h:mm a" /> -
+                                            <fmt:formatDate value="${event.endDate}" pattern="h:mm a" />
+           </FONT>
+    </td>
+</tr>
+
+ <tr>
+    <td class="calendarRowLabel" align="right"><fmt:message key='emeeting.label.description'/>    </td>
+    <td align="left" class="calendarRow" colspan="2">
+           <FONT COLOR="#FF0000">
+            <c:choose>
+                <c:when test="${view.header=='E-Meeting'}" >
+                    <c:out value="${event.description}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:out value="${event.description}"/>
+                </c:otherwise>
+            </c:choose>
+           </FONT>
+    </td>
+ </tr>
+
+ <tr>
+    <Td class="calendarRow" colspan="3" align="center">
+       <x:event name="${widget.absoluteName}" type="<%=ConflictForm.EVENT_TYPE_VIEW_ALL%>"  ><fmt:message key='emeeting.label.viewAllConflicts'/></x:event>
+    </td>
+ </tr>
+
+ <tr>
+    <td class="calendarRow" colspan="3">
+        &nbsp;
+    </td>
+  </tr>
+          <c:set var="conflictAttendees" value="${view.conflictAttendees}"/>
+ <%
+     Set conflictAttendees = (Set)pageContext.getAttribute("conflictAttendees");
+     String userId;
+ %>
+<c:if test="${!widget.ownerExcluded}" >
+ <tr>
+    <td class="calendarFooter" align="left"  width="30%">
+        <b><fmt:message key='emeeting.label.scheduler'/></b>
+    </td>
+
+    <td class="calendarFooter" align="left">
+       <b> <fmt:message key='emeeting.label.status'/> </b>
+    </td>
+
+    <td class="calendarFooter" align="left">
+        <b> <fmt:message key='emeeting.label.confirm?'/>?    </b>
+    </td>
+ </tr>
+
+
+
+         <c:set var="userId" value="${event.userId}"/>
+        <%
+            userId = (String)pageContext.getAttribute("userId");
+            if(conflictAttendees.contains(userId))
+                pageContext.setAttribute("hasConflict",Boolean.TRUE);
+            else
+                pageContext.setAttribute("hasConflict",Boolean.FALSE);
+        %>
+
+
+  <tr>
+    <td class="calendarRow" align="left" valign="top">   &nbsp;
+    <c:if test="${hasConflict}" >
+        <x:event name="${widget.absoluteName}" type="<%=ConflictForm.EVENT_TYPE_VIEW_USER%>" param="userId=${userId}">
+        <c:out value="${event.userName}"/></x:event>
+    </c:if>
+    <c:if test="${!hasConflict}" >
+        <c:out value="${event.userName}"/>
+    </c:if>
+    </td>
+
+    <td class="calendarRow" align="left">
+    <c:if test="${hasConflict}">
+            <FONT COLOR="#FF0000"> <fmt:message key='emeeting.label.conflict'/></FONT>
+             <c:forEach items="${event.attendees}" var="att" varStatus="status"  >
+                <c:if test="${att.userId==event.userId}" >
+                    <c:if test="${!empty att.propertyMap['conflicts']}">
+                        <table width="90%" align="right">
+                            <tr>
+                                <td style="text-decoration:underline" width="5%"><fmt:message key="general.label.number"/></td>
+                                <td style="text-decoration:underline" width="60%"><fmt:message key="calendar.label.title"/></td>
+                                <td style="text-decoration:underline" width="35%"><fmt:message key="calendar.label.scheduledby"/></td>
+                            </tr>
+                            <c:forEach items="${att.propertyMap['conflicts']}" var="conflictEvent" varStatus="stat">
+                            <tr>
+                                <td><c:out value="${stat.index+1}"/></td>
+                                <td><c:out value="${conflictEvent.title}"/></td>
+                                <td><c:out value="${conflictEvent.userName}"/></td>
+                            </tr>
+                            </c:forEach>
+                        </table>
+                    </c:if>
+                </c:if>
+            </c:forEach>
+         </c:if>
+        <c:if test="${!hasConflict}"><fmt:message key='emeeting.label.oK'/>         </c:if>
+
+    </td>
+
+    <td class="calendarRow" align="left" width="10%" valign="top">
+     <c:if test="${hasConflict}">
+        <input type="checkbox" name="comAttendeesCB" value="<c:out value="${event.userId}"/> " CHECKED>
+      </c:if>
+            <c:if test="${!hasConflict}">
+        <input type="checkbox" name="comAttendeesCB" value="<c:out value="${event.userId}"/> " style="display:none" CHECKED>
+      </c:if>
+
+      </td>
+ </tr>
+ <tr>
+    <td class="calendarRow" colspan="3">
+        &nbsp;
+    </td>
+  </tr>
+ </c:if>
+
+ <%int i = 0;%>
+ <c:forEach items="${event.attendees}" var="att" varStatus="status"  >
+    <c:if test="${att.compulsory&&att.userId!=event.userId}" >
+       <% if(i==0){%>
+        <tr>
+            <td class="calendarFooter" align="left" width="30%">
+              <b><fmt:message key='emeeting.label.compulsoryAttendees'/> </b>
+            </td>
+
+            <td class="calendarFooter" align="left">
+               <b> <fmt:message key='emeeting.label.status'/></b>
+            </td >
+
+            <td class="calendarFooter" align="left">
+              <b>  <fmt:message key='emeeting.label.confirm?'/>?</b>
+             </td>
+        </tr>
+       <%}%>
+       <tr>
+               <c:set var="userId" value="${att.userId}"/>
+
+        <%
+            userId = (String)pageContext.getAttribute("userId");
+            if(conflictAttendees.contains(userId))
+                pageContext.setAttribute("hasConflict",Boolean.TRUE);
+            else
+                pageContext.setAttribute("hasConflict",Boolean.FALSE);
+        %>
+
+    <td class="calendarRow" align="left" valign="top"> &nbsp;
+    <c:if test="${hasConflict}" >
+        <x:event name="${widget.absoluteName}" type="<%=ConflictForm.EVENT_TYPE_VIEW_USER%>" param="userId=${att.userId}">
+        <c:out value="${att.name}"/></x:event>
+    </c:if>
+    <c:if test="${!hasConflict}" >
+        <c:out value="${att.name}"/>
+    </c:if>
+
+    </td>
+
+    <td class="calendarRow" align="left">
+        <c:if test="${hasConflict}">
+            <FONT COLOR="#FF0000"> <fmt:message key='emeeting.label.conflict'/></FONT>
+            <c:if test="${!empty att.propertyMap['conflicts']}">
+            <table width="90%" align="right">
+                <tr>
+                    <td style="text-decoration:underline" width="5%"><fmt:message key="general.label.number"/></td>
+                    <td style="text-decoration:underline" width="60%"><fmt:message key="calendar.label.title"/></td>
+                    <td style="text-decoration:underline" width="35%"><fmt:message key="calendar.label.scheduledby"/></td>
+                </tr>
+                <c:forEach items="${att.propertyMap['conflicts']}" var="conflictEvent" varStatus="stat">
+                <tr>
+                    <td><c:out value="${stat.index+1}"/></td>
+                    <td><c:out value="${conflictEvent.title}"/></td>
+                    <td><c:out value="${conflictEvent.userName}"/></td>
+                </tr>
+                </c:forEach>
+            </table>
+            </c:if>
+         </c:if>
+        <c:if test="${!hasConflict}"><fmt:message key='emeeting.label.oK'/>         </c:if>
+    </td>
+
+    <td class="calendarRow" align="left" width="10%" valign="top">
+     <c:if test="${hasConflict}">
+        <input type="checkbox" name="comAttendeesCB" value="<c:out value="${att.userId}"/> " CHECKED>
+      </c:if>
+      <c:if test="${!hasConflict}">
+        <input type="checkbox" name="comAttendeesCB" value="<c:out value="${att.userId}"/> " style="display:none" CHECKED>
+      </c:if>
+
+    </td>
+       </tr>
+       <%i++;%>
+    </c:if>
+    <c:if test="${status.last}" >
+ <%if(i>0){%>
+  <tr>
+    <td class="calendarRow" colspan="3">
+        &nbsp;
+    </td>
+  </tr>
+  <%}%>
+ </c:if>
+ </c:forEach>
+
+
+
+  <% i=0;%>
+ <c:forEach items="${event.attendees}" var="att" varStatus="status"  >
+    <c:if test="${!att.compulsory}" >
+       <% if(i==0){%>
+        <tr>
+            <Td class="calendarFooter" align="left">
+              <b><fmt:message key='emeeting.label.optionalAttendees'/> </b>
+            </td>
+
+            <td class="calendarFooter" align="left">
+              <b> <fmt:message key='emeeting.label.status'/></b>
+            </td >
+
+            <td class="calendarFooter" align="left">
+            <b>  <fmt:message key='emeeting.label.confirm?'/>?</b>
+             </td>
+        </tr>
+       <%}%>
+
+
+    <tr>
+     <c:set var="userId" value="${att.userId}"/>
+
+        <%
+            userId = (String)pageContext.getAttribute("userId");
+            if(conflictAttendees.contains(userId))
+                pageContext.setAttribute("hasConflict",Boolean.TRUE);
+            else
+                pageContext.setAttribute("hasConflict",Boolean.FALSE);
+        %>
+
+
+       <td class="calendarRow" align="left" valign="top">    &nbsp;
+            <c:if test="${hasConflict}" >
+        <x:event name="${widget.absoluteName}" type="<%=ConflictForm.EVENT_TYPE_VIEW_USER%>" param="userId=${att.userId}">
+        <c:out value="${att.name}"/></x:event>
+    </c:if>
+    <c:if test="${!hasConflict}" >
+        <c:out value="${att.name}"/>
+    </c:if>
+
+    </td>
+
+
+
+    <td class="calendarRow" align="left">
+        <c:if test="${hasConflict}">
+            <FONT COLOR="#FF0000"> <fmt:message key='emeeting.label.conflict'/></FONT>
+            <c:if test="${!empty att.propertyMap['conflicts']}">
+            <table width="90%" align="right">
+                <tr>
+                    <td style="text-decoration:underline" width="5%"><fmt:message key="general.label.number"/></td>
+                    <td style="text-decoration:underline" width="60%"><fmt:message key="calendar.label.title"/></td>
+                    <td style="text-decoration:underline" width="35%"><fmt:message key="calendar.label.scheduledby"/></td>
+                </tr>
+                <c:forEach items="${att.propertyMap['conflicts']}" var="conflictEvent" varStatus="stat">
+                <tr>
+                    <td><c:out value="${stat.index+1}"/></td>
+                    <td><c:out value="${conflictEvent.title}"/></td>
+                    <td><c:out value="${conflictEvent.userName}"/></td>
+                </tr>
+                </c:forEach>
+            </table>
+            </c:if>
+         </c:if>
+        <c:if test="${!hasConflict}"><fmt:message key='emeeting.label.oK'/>         </c:if>
+    </td>
+
+    <td class="calendarRow" align="left" width="10%" valign="top">
+         <c:if test="${hasConflict}">
+        <input type="checkbox" name="opAttendeesCB" value="<c:out value="${att.userId}"/> " CHECKED>
+      </c:if>
+      <c:if test="${!hasConflict}">
+        <input type="checkbox" name="opAttendeesCB" value="<c:out value="${att.userId}"/> " style="display:none" CHECKED>
+      </c:if>
+
+    </td>
+       </tr>
+       <%i++;%>
+    </c:if>
+    <c:if test="${status.last}" >
+  <%if(i>0){%>
+   <tr>
+    <td class="calendarRow" colspan="3">
+        &nbsp;
+    </td>
+  </tr>
+         <%}%>
+</c:if>
+
+ </c:forEach>
+
+
+
+
+ <% i=0;%>
+ <c:forEach items="${event.resources}" var="resource" >
+
+       <% if(i==0){%>
+        <tr>
+            <Td class="calendarFooter" align="left"  width="30%">
+              <b><fmt:message key='emeeting.label.resources'/> </b>
+            </td>
+
+            <td class="calendarFooter" align="left">
+              <b> <fmt:message key='emeeting.label.status'/></b>
+            </td >
+
+            <td class="calendarFooter" align="left">
+            <b>  <fmt:message key='emeeting.label.confirm?'/>?</b>
+             </td>
+        </tr>
+       <%}%>
+
+       <c:set var="resourceId" value="${resource.id}"/>
+       <c:set var="resourceList" value="${view.resourceConflicts}"/>
+        <%
+            String resourceId = (String)pageContext.getAttribute("resourceId");
+            Collection conflicts = (Collection)pageContext.getAttribute("resourceList");
+            for (Iterator iterator = conflicts.iterator(); iterator.hasNext();)
+            {
+                ResourceBooking resourceBooking = (ResourceBooking) iterator.next();
+                if(resourceBooking.getResourceId().equals(resourceId)){
+                    pageContext.setAttribute("hasConflict",Boolean.TRUE);
+                    break;
+                }else {
+                    pageContext.setAttribute("hasConflict",Boolean.FALSE);
+                }
+            }
+
+        %>
+
+
+       <tr>
+        <td class="calendarRow" align="left">
+        <c:if test="${hasConflict}" >
+           &nbsp; <x:event name="${widget.absoluteName}" type="<%=ConflictForm.EVENT_TYPE_VIEW_RESOURCE%>" param="resourceId=${resource.id}">
+            <c:out value="${resource.name}"/></x:event>
+         </c:if>
+        <c:if test="${!hasConflict}" >
+            &nbsp;<c:out value="${resource.name}"/>
+         </c:if>
+        </td>
+
+        <td class="calendarRow" align="left">
+       <c:if test="${hasConflict}">
+            <FONT COLOR="#FF0000"> <fmt:message key='emeeting.label.conflict'/></FONT>
+         </c:if>
+        <c:if test="${!hasConflict}"><fmt:message key='emeeting.label.oK'/>         </c:if> </td>
+
+        <td class="calendarRow" align="left">
+
+         <c:if test="${hasConflict}">
+        <input type="checkbox" name="resourcesCB" value="<c:out value="${resource.id}"/> " CHECKED>
+      </c:if>
+      <c:if test="${!hasConflict}">
+        <input type="checkbox" name="resourcesCB" value="<c:out value="${resource.id}"/> " style="display:none" CHECKED>
+      </c:if>
+       </td>
+
+       <%i++;%>
+
+</c:forEach>
+
+
+ <tr>
+    <td class="calendarRow" colspan="3">
+        &nbsp;
+    </td>
+ </tr>
+
+ <tr>   <td class="calendarRow">
+        &nbsp;
+    </td>
+    <td class="calendarRow" colspan="2">
+       <x:display name="${view.addButton.absoluteName}" /> <x:display name="${view.cancelButton.absoluteName}" ></x:display>
+    </td>
+ </tr>
+ <tr>
+    <td class="calendarFooter" colspan="3">
+        &nbsp;
+    </td>
+ </tr><jsp:include page="../form_footer.jsp" flush="true"/>
+
+</table>--%>
+
+<%--
+<tr><td><fmt:message key='emeeting.label.theappointmentyouaregoingtomakehastime/resourceconflictwiththefollowingappointment(s)'/>:
+</td></tr>
+<tr><td><ul>
+<c:forEach items="${conflict.conflictList}" var="conflict" >
+    <li><a href="" onClick="javascript:window.open('appointmentview.jsp?id=<c:out value="${conflict.eventId}" />&instanceId=<c:out value="${conflict.instanceId}" />','aview','scrollbars=yes,resizable=yes,width=450,height=380'); return false;"><c:out value="${conflict.description}"/> </a>
+ (<fmt:formatDate value="${conflict.startDate}" pattern="MMM d, yyyy h:mma"/> - <fmt:formatDate value="${conflict.endDate}" pattern="MMM d, yyyy h:mma"/>)</li><br>
+
+ </c:forEach></ul></td></tr></table>
+<hr>--%>
+
+

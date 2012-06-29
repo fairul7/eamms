@@ -1,0 +1,82 @@
+/* ------------- Text Field Style ------------------- */
+.textField {border-width:1.5pt; background-color:#FFFFFF; text-decoration:none; font-family:Verdana, Arial, Helvetica, sans-serif;font-size:8.5pt; font-weight:normal}
+
+/* ------------- Big Button Style ------------------- */
+.buttonBigClass {border-width:1.5pt; background-color:#E1E1E1; text-decoration:none; font-family:Verdana, Arial, Helvetica, sans-serif;font-size:7.5pt; font-weight:normal}
+
+/* ------------- Button Style ------------------- */
+.buttonClass {border-width:1pt; background-color:#E1E1E1; border-style:solid; border-color:#AAAAAA; text-decoration:none; font-family:Verdana, Arial, Helvetica, sans-serif;font-size:7pt; font-weight:normal}
+
+/* ------------- Page Style ------------------- */
+a:link {  text-decoration: none}
+a:visited { text-decoration: none; color: #9900CC}
+a:active {  color: #0000FF}
+a:hover { text-decoration: underline}
+input {  font-family: "Courier New", Courier, mono; font-size: 9pt}
+
+
+.sfaHeader {background-color: #003366; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7.5pt; color: #FFFFFF; font-weight:bold}
+.sfaBgColor {background-color: #E4E4CB}
+.sfaBackground {background-color:#FFFFFF; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt}
+.sfaLabel {background-color: #E6E6CA; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.sfaRow {background-color: #EEEEDD; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.sfaRowLabel {background-color: #EEEEDD; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.sfaRowSmall {background-color: #EEEEDD; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; font-weight:normal}
+.sfaFooter {background-color: #E6E6CA; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+.sfaFooterLabel {background-color: #E6E6CA; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt; font-weight:bold}
+.sfaSubheader {background-color: #E6E6CA; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt; font-weight:normal}
+
+/* ------------------------------------ */
+.titleTop {  background-color: #0099CC}
+.titleMenu {  background-color: #0099CC}
+.titleMenuTop {  background-color: #66CCFF}
+.titleMenuBottom {  background-color: #003366}
+.titleMenuFont { color: #FFFFFF; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7.5pt}
+
+/* ------------------------------------ */
+.logoTitleBgColor { background-color: #FFFFCC}
+.searchBgColor { background-color: #FF9966}
+.dateFont {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7.5pt; color: #FFFF99}
+
+/* ------------------------------------ */
+.companyTitleFont { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt ; color: #FF6633}
+.companyTitleBgColor { background-color: #FFFFCC}
+
+/* ------------------------------------ */
+.desktopFont {  color: #FFFF99; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9pt}
+.desktopBgColor { background-color: #FF9966}
+
+/* ------------------------------------ */
+.calendarMonthBgColor {  background-color: #5C5C2E}
+.calendarMonthFont { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt}
+.calendarBgColor {  background-color: #E4E4CB}
+.calendarContentFont { font-family: Arial, Helvetica, sans-serif; font-size: 9pt}
+
+/* ------------------------------------ */
+.highlight {  color: #FF0000}
+
+/* ------------------------------------ */
+.menuFont {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7.5pt; color: #434321}
+.menuBgColor {  background-color: #CCCC99}
+.menuBgColorHighlight { background-color: #E4E4CB}
+.menuBgColorShadow { background-color: #77773C}
+
+/* ------------------------------------ */
+.contentBgColor {  background-color: #EEEEDD; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt}
+.contentFont { font-family: Arial, Helvetica, sans-serif; font-size: 8.5pt}
+.contentTitleFont { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7.5pt; color: #FFFFFF; background-color: #003366;}
+.contentStrapColor { background-color: #E6E6CA; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt;}
+
+/* ------------------------------------ */
+.sideTitleFont {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7.5pt; color: #FFFFFF}
+.sideTitleBgBorderColor {  background-color: #CCCC99}
+.sideBodyFontAndBgColor {  font-family: Arial, Helvetica, sans-serif;  font-size: 8pt}
+
+.textFont {  color: #0065CE}
+.contentBgColorAlternate { background-color: #E1E1C1; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8.5pt}
+.hpTitleFont {  font-size: 16pt; color: #666666}
+.hpMenuFont {  background-color: #CCCCFF; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt}
+.hpContentFont {  color: #006699}
+.hpContentHeaderFont {  }
+.hpMenuTitleFont {  font-weight: bold; background-color: #FFCC99; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt}
+.copyright {  font-family: "Courier New", Courier, mono; font-size: 10pt; color: #666666}
