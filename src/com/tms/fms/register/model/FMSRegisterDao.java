@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import kacang.Application;
 import kacang.model.DaoException;
@@ -15,6 +16,8 @@ import kacang.services.security.Group;
 import kacang.services.security.SecurityDao;
 import kacang.services.security.User;
 import kacang.util.Log;
+
+import org.apache.commons.collections.SequencedHashMap;
 
 import com.tms.ekms.manpowertemp.model.ManpowerAssignmentObject;
 
@@ -224,6 +227,33 @@ public class FMSRegisterDao extends SecurityDao {
             	group.setProperty("active","1");        	         	
             	storeGroup(group);	                
             }
+            
+            
+            Map eammsGroups = new SequencedHashMap();
+            eammsGroups.put(Application.getInstance().getProperty("SuperAdministrator"), FMSRegisterManager.GROUP_EAMMS_SUPER_ADMINISTRATOR);
+            eammsGroups.put(Application.getInstance().getProperty("Administrator"), FMSRegisterManager.GROUP_EAMMS_ADMINISTRATOR);
+            eammsGroups.put(Application.getInstance().getProperty("UnitHead"), FMSRegisterManager.GROUP_EAMMS_UNIT_HEAD);
+            eammsGroups.put(Application.getInstance().getProperty("SeniorEngineer"), FMSRegisterManager.GROUP_EAMMS_SENIOR_ENGINEER);
+            eammsGroups.put(Application.getInstance().getProperty("Engineer"), FMSRegisterManager.GROUP_EAMMS_ENGINEER);
+            eammsGroups.put(Application.getInstance().getProperty("NormalUser"), FMSRegisterManager.GROUP_EAMMS_NORMAL_USER);
+            eammsGroups.put(Application.getInstance().getProperty("NetworkEngineer"), FMSRegisterManager.GROUP_EAMMS_NETWORK_ENGINEER);
+            eammsGroups.put(Application.getInstance().getProperty("NetworkSuperUser"), FMSRegisterManager.GROUP_EAMMS_NETWORK_SUPER_USER);
+            eammsGroups.put(Application.getInstance().getProperty("NetworkUser"), FMSRegisterManager.GROUP_EAMMS_NETWORK_USER);
+            
+            for (Iterator i = eammsGroups.keySet().iterator(); i.hasNext();) {    
+            	String id = (String) i.next();
+            	String groupName = (String) eammsGroups.get(id);
+	        	Collection checkEammsGroup = super.select("SELECT id FROM security_group WHERE id=?", HashMap.class, new Object[] { id }, 0, 1);
+	        	if(checkEammsGroup == null || checkEammsGroup.size() == 0){
+	        			Log.getLog(getClass()).info("ADD: "+ id + "||"+groupName);
+	        			Group group = new Group();	            	
+	                	group.setId(id);
+	                	group.setGroupName(groupName);
+	                	group.setProperty("active","1");        	         	
+	                	storeGroup(group);		    
+            	 }
+            }
+           
         }
         
         public User selectUser(String userId) throws DaoException, DataObjectNotFoundException {

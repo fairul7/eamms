@@ -20,6 +20,16 @@ public class FMSRegisterManager extends DefaultModule {
 	protected Log log;
 	public static final String GROUP_FMS_USER = "Default FMS User Group";
 	
+	public static final String GROUP_EAMMS_SUPER_ADMINISTRATOR = Application.getInstance().getMessage("eamms.group.superAdministrator");
+	public static final String GROUP_EAMMS_ADMINISTRATOR = Application.getInstance().getMessage("eamms.group.administrator");
+	public static final String GROUP_EAMMS_UNIT_HEAD = Application.getInstance().getMessage("eamms.group.unitHead");
+	public static final String GROUP_EAMMS_SENIOR_ENGINEER = Application.getInstance().getMessage("eamms.group.seniorEngineer");
+	public static final String GROUP_EAMMS_ENGINEER = Application.getInstance().getMessage("eamms.group.engineer");
+	public static final String GROUP_EAMMS_NORMAL_USER = Application.getInstance().getMessage("eamms.group.normalUser");
+	public static final String GROUP_EAMMS_NETWORK_ENGINEER = Application.getInstance().getMessage("eamms.group.networkEngineer");
+	public static final String GROUP_EAMMS_NETWORK_SUPER_USER = Application.getInstance().getMessage("eamms.group.networkSuperUser");
+	public static final String GROUP_EAMMS_NETWORK_USER = Application.getInstance().getMessage("eamms.group.networkUser");
+	
 	public static final String PENDING_FMS_USER = "0";
 	public static final String ACCEPTED_FMS_USER = "1";
 	public static final String REJECTED_FMS_USER = "2";

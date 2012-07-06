@@ -6,10 +6,57 @@
             <name>com.tms.workflow.host</name>
             <value>http://localhost:8080</value>
         </property>
+        
         <property>
             <name>com.tms.workflow.masterHash</name>
             <value>E505CF727D214A68CB03DA25DA978500</value>
         </property>
+        
+        <property>
+			<name>SuperAdministrator</name>
+			<value>kacang.service.security.Group_Super_Administrator</value>
+		</property>
+		
+		 <property>
+			<name>Administrator</name>
+			<value>kacang.service.security.Group_Administrator</value>
+		</property>
+		
+		<property>
+			<name>UnitHead</name>
+			<value>kacang.service.security.Group_Unit_Head</value>
+		</property>
+		
+		<property>
+			<name>SeniorEngineer</name>
+			<value>kacang.service.security.Group_Senior_Engineer</value>
+		</property>
+		
+		<property>
+			<name>Engineer</name>
+			<value>kacang.service.security.Group_Engineer</value>
+		</property>
+		
+		<property>
+			<name>NormalUser</name>
+			<value>kacang.service.security.Group_Normal_User</value>
+		</property>
+		
+		<property>
+			<name>NetworkEngineer</name>
+			<value>kacang.service.security.Group_Network_Engineer</value>
+		</property>
+		
+		<property>
+			<name>NetworkSuperUser</name>
+			<value>kacang.service.security.Group_Network_Super_User</value>
+		</property>
+		
+		<property>
+			<name>NetworkUser</name>
+			<value>kacang.service.security.Group_Network_User</value>
+		</property>
+		
     </properties>
     <modules>
         <module class="com.tms.workflow.JogetClientModule">
