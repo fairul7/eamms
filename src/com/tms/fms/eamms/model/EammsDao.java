@@ -47,6 +47,22 @@ public class EammsDao extends DataSourceDao {
 			Collection col = super.select(sql, DefaultDataObject.class, null, 0, -1);
 			return col;
 	}
+	
+	public Collection getOverdueItemsListing() throws DaoException {
+		String sql = " SELECT c_rentalId AS rentalId FROM  app_fd_eamms_asset_rental " +
+				" WHERE Convert(datetime,c_toDate) < getdate()AND c_status='Rent Out' " ;    	
+		
+			Collection col = super.select(sql, DefaultDataObject.class, null, 0, -1);
+			return col;
+	}
+	
+	public void insertRentalStatusTrail(DefaultDataObject obj) throws DaoException {
+		String sql = " INSERT INTO app_fd_eamms_asset_rental_status(id,rentalId,status,createdBy,dateCreated) " +
+				" VALUES (#id#,#rentalId#,#status#,#createdBy#,getdate()) ";
+		
+		super.update(sql, obj);
+		
+	}
 
 
 	

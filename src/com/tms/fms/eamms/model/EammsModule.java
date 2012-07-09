@@ -37,8 +37,8 @@ public class EammsModule extends DefaultModule {
 		String taskName = "setOverdueStatus";
 		String taskGroup ="rentalprocess";
 		String taskDesc="To set rental status due to overdue";
-		int hour=14; //default 0 set up to midnight
-		int min =47; //default 1
+		int hour=0; //default 0 set up to midnight
+		int min =1; //default 1
 		JobUtil.removeTask(taskName, taskGroup, jobSetOverdueStatus);
 		JobUtil.scheduleDailyTask(taskName, taskGroup, taskDesc, jobSetOverdueStatus, hour, min);
 		
@@ -102,6 +102,27 @@ public class EammsModule extends DefaultModule {
 		} catch (DaoException e) {
 			Log.getLog(getClass()).error(e.toString(), e);
 			return new ArrayList();
+		}
+	}
+	
+	public Collection getOverdueItemsListing() {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			return dao.getOverdueItemsListing();
+			
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
+			return new ArrayList();
+		}
+	}
+	
+	public void insertRentalStatusTrail(DefaultDataObject obj) {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			dao.insertRentalStatusTrail(obj);
+			
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
 		}
 	}
 
