@@ -133,7 +133,39 @@ function MM_preloadImages() { //v3.0
 	
 	String mainFolder = getMainFolder(request.getRequestURI());
 %>
-	<% if (mainFolder.equals("transport")) { %>
+        
+	<% if (mainFolder.equals("eamms")) { %>
+        <% if(wfuser || wfadmin){%>
+        <td width="150" align="center" class="menubg-current menu-current"><a href="/ekms/fms/eamms/"><fmt:message key="theme.fms2008.eamms"/></a></td>    
+        <td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
+        <%} %>
+    
+        <%if (facilityRequest){ %>
+        <td width="160" align="center" class="menu-bg menu"><a href="/ekms/fms/engineering/"><fmt:message key="theme.fms2008.facilitiesRequest"/></a></td>
+        <td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
+        <%} %>
+        
+        <% if (transRequest){%>
+        <td width="160" align="center" class="menu-bg menu"><a href="/ekms/fms/transport/request"><fmt:message key="theme.fms2008.transportRequest"/></a></td>  
+        <td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
+        <%} %>
+        
+        <% if(transAdmin || transManager){%>
+        <td width="190" align="center" class="menu-bg menu"><a href="/ekms/fms/transport"><fmt:message key="theme.fms2008.transportManagement"/></a></td>
+        <td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
+        <%} %>
+        
+        <% if(facilityAdmin || facilityManager){%>
+        <td width="190" align="center" class="menu-bg menu"><a href="/ekms/fms/facility"><fmt:message key="theme.fms2008.facilitiesManagement"/></a></td>       
+        <td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>    
+        <%} %>
+        
+    <% } else if (mainFolder.equals("transport")) { %>
+	    <% if(wfuser || wfadmin){%>
+        <td width="150" align="center" class="menu-bg menu"><a href="/ekms/fms/eamms/"><fmt:message key="theme.fms2008.eamms"/></a></td>    
+        <td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
+        <%} %>
+    
 		<%if (facilityRequest){ %>
 		<td width="160" align="center" class="menu-bg menu"><a href="/ekms/fms/engineering/"><fmt:message key="theme.fms2008.facilitiesRequest"/></a></td>
 		<td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
@@ -154,7 +186,12 @@ function MM_preloadImages() { //v3.0
 		<td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>    
 		<%} %>
 		
-	<% } else if (mainFolder.equals("facility")) { %>     
+	<% } else if (mainFolder.equals("facility")) { %>    
+	
+	    <% if(wfuser || wfadmin){%>
+        <td width="150" align="center" class="menu-bg menu"><a href="/ekms/fms/eamms/"><fmt:message key="theme.fms2008.eamms"/></a></td>    
+        <td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
+        <%} %> 
     
 		<%if (facilityRequest){ %>
 		<td width="160" align="center" class="menu-bg menu"><a href="/ekms/fms/engineering/"><fmt:message key="theme.fms2008.facilitiesRequest"/></a></td>
@@ -178,6 +215,11 @@ function MM_preloadImages() { //v3.0
 		
 	<% } else if (mainFolder.equals("transport/request")) { %> 
     
+        <% if(wfuser || wfadmin){%>
+        <td width="150" align="center" class="menu-bg menu"><a href="/ekms/fms/eamms/"><fmt:message key="theme.fms2008.eamms"/></a></td>    
+        <td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
+        <%} %>
+    
 		<%if (facilityRequest){ %>
 		<td width="160" align="center" class="menu-bg menu"><a href="/ekms/fms/engineering/"><fmt:message key="theme.fms2008.facilitiesRequest"/></a></td>
 		<td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
@@ -199,6 +241,11 @@ function MM_preloadImages() { //v3.0
 		<%} %>
 		
 	<% } else if (mainFolder.equals("engineering")) { %>           
+    
+        <% if(wfuser || wfadmin){%>
+        <td width="150" align="center" class="menu-bg menu"><a href="/ekms/fms/eamms/"><fmt:message key="theme.fms2008.eamms"/></a></td>    
+        <td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
+        <%} %>
     
 		<%if (facilityRequest){ %>
 		<td width="160" align="center" class="menubg-current menu-current"><a href="/ekms/fms/engineering/"><fmt:message key="theme.fms2008.facilitiesRequest"/></a></td>
@@ -222,6 +269,11 @@ function MM_preloadImages() { //v3.0
 	
 	<% } else { %>
 	
+	    <% if(wfuser || wfadmin){%>
+        <td width="150" align="center" class="menu-bg menu"><a href="/ekms/fms/eamms/"><fmt:message key="theme.fms2008.eamms"/></a></td>    
+        <td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
+        <%} %>
+        
     	<%if (facilityRequest){ %>
 		<td width="160" align="center" class="menu-bg menu"><a href="/ekms/fms/engineering/"><fmt:message key="theme.fms2008.facilitiesRequest"/></a></td>
 		<td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
@@ -243,11 +295,6 @@ function MM_preloadImages() { //v3.0
 		<%} %>
 	
 	<% } %>
-		
-		<% if(wfuser || wfadmin){%>
-			<td width="150" align="center" class="menu-bg menu"><a href="/ekms/eamms/index.jsp">EAMMS</a></td>							
-			<td width="2"><img src="<%= request.getContextPath() %>/ekms/images/fms2008/spacer.gif" width="2" height="1"></td>
-		<%} %>    
 	
 	<td width="75" align="center" class="menu-bg menu">
 		<table border="0" align="center" cellpadding="0" cellspacing="0">

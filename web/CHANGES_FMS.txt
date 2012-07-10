@@ -1,3 +1,5 @@
+
+Requirement #13657 Landing Page
 Fixed #13440: Selecting a different facility does not update the Total
 Fixed #13583: Edit Link missing for FC
 Fixed #13570 - Fix performance issue when export to Excel

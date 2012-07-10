@@ -72,6 +72,9 @@
             </menu>
             <permission>com.tms.workflow.WorkflowUser</permission>
             <permission>com.tms.workflow.WorkflowAdministrator</permission>
+            <permission>com.tms.workflow.workOrder.permission.woSubmit</permission>
+            <permission>com.tms.workflow.workOrder.permission.woAssigned</permission>
+            <permission>com.tms.workflow.workOrder.permission.woAll</permission>
         </module>
     </modules>
 </application>
