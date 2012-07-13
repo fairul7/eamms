@@ -6,6 +6,7 @@
     Application app = Application.getInstance();
     SecurityService service = (SecurityService) app.getService(SecurityService.class);
     String userId = service.getCurrentUser(request).getId();
+    String workflowURL = app.getInstance().getProperty("com.tms.workflow.host");
     
     boolean wfAdmin = service.hasPermission(userId, "com.tms.workflow.WorkflowAdministrator", null, null);
     boolean wfUsr = service.hasPermission(userId, "com.tms.workflow.WorkflowUser", null, null);
@@ -23,9 +24,10 @@ function noPermission1()
 }
 </script>
 
+<c-rt:set var="wurl" value="<%= workflowURL %>"/>
 <c:choose>
     <c:when test="${param.addr eq 'myTask'}">
-        <c:set var="address1" value="http://localhost:8080/jw/web/console/home"/>
+        <c:set var="address1" value="${wurl}/jw/web/console/home"/>
         <c:if test="<%=!wfAdmin && !wfUsr%>">
             <script>
                 noPermission1();
@@ -33,7 +35,7 @@ function noPermission1()
         </c:if>
     </c:when>
     <c:when test="${param.addr eq 'workLoad'}">
-        <c:set var="address1" value="http://localhost:8080/jw/web/console/home"/>
+        <c:set var="address1" value="${wurl}/jw/web/console/home"/>
         <c:if test="<%=!wfAdmin && !wfUsr%>">
             <script>
                 noPermission1();
@@ -41,7 +43,7 @@ function noPermission1()
         </c:if>
     </c:when>
     <c:when test="${param.addr eq 'wo01'}">
-        <c:set var="address1" value="http://localhost:8080/jw/web/userview/EAMMS/work_order_userview//wo_new"/>
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/work_order_userview//wo_new"/>
         <c:if test="<%=!woSubmit%>">
             <script>
                 noPermission1();
@@ -49,7 +51,7 @@ function noPermission1()
         </c:if>
     </c:when>
     <c:when test="${param.addr eq 'wo02'}">
-        <c:set var="address1" value="http://localhost:8080/jw/web/userview/EAMMS/work_order_userview//wo_list_assigned"/>
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/work_order_userview//wo_list_assigned"/>
         <c:if test="<%=!woSubmit%>">
             <script>
                 noPermission1();
@@ -57,7 +59,7 @@ function noPermission1()
         </c:if>
     </c:when>
     <c:when test="${param.addr eq 'wo03'}">
-        <c:set var="address1" value="http://localhost:8080/jw/web/userview/EAMMS/work_order_userview//wo_list_assigned"/>
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/work_order_userview//wo_list_assigned"/>
         <c:if test="<%=!woAssigned%>">
             <script>
                 noPermission1();
@@ -65,7 +67,7 @@ function noPermission1()
         </c:if>
     </c:when>
     <c:when test="${param.addr eq 'wo04'}">
-        <c:set var="address1" value="http://localhost:8080/jw/web/userview/EAMMS/work_order_userview//wo_list_all"/>
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/work_order_userview//wo_list_all"/>
         <c:if test="<%=!woAll%>">
             <script>
                 noPermission1();
