@@ -6,6 +6,8 @@ Fixed #13570 - Fix performance issue when export to Excel
 Requirement #13512 - Auto Assignment
 Fixed #13607 - Transport - Total Amount shown as zero
 Fixed #13574 - Internal Check Out saves the Request By as the Check Out By
+Requirement #13613 : Preventive Maintenance - scheduler
+
 
 fms_1.0.0_update (June 12 2012) V2.5
 -------------------------------------
