@@ -63,6 +63,25 @@ public class EammsDao extends DataSourceDao {
 		super.update(sql, obj);
 		
 	}
+	
+	//-------- PM -------------------
+	public Collection getPMOverdueItemsListing() throws DaoException {
+		String sql = "SELECT c_pmRequestId,c_status, c_endDate " +
+			"FROM app_fd_eamms_pm_request " +
+			"WHERE CONVERT(datetime,c_endDate,103) <= getdate() " +
+			"AND c_status = 'N' OR c_status = 'P'" ;    	
+		
+		Collection col = super.select(sql, DefaultDataObject.class, null, 0, -1);
+		return col;
+	}
+	
+	public void setPMOverdueStatus(DefaultDataObject obj) throws DaoException {
+		String sql = "UPDATE app_fd_eamms_pm_request SET " +
+				"c_status = #c_status#," +
+				"dateModified = #dateModified# " +
+				"WHERE c_pmRequestId = #c_pmRequestId#";
+		super.update(sql, obj);
+	}
 
 
 	

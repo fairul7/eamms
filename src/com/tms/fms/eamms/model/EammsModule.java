@@ -16,11 +16,13 @@ import kacang.util.Mailer;
 public class EammsModule extends DefaultModule {
 	public void init() {
 		scheduleDailyTask();
+		scheduleDailyTaskPM();
 		super.init();
 	}
 	
 	private static RentalOverdue  jobSetOverdueStatus; 
 	private static RentalDueReminder jobSendMailDueReminder;
+	private static PMOverdue jobSetPMOverdueStatus; 
 	
 	public void setOverdueStatus() {
 		EammsDao dao = (EammsDao) getDao();
@@ -49,6 +51,17 @@ public class EammsModule extends DefaultModule {
 		JobUtil.removeTask(taskName1, taskGroup1, jobSetOverdueStatus);
 		JobUtil.scheduleDailyTask(taskName1, taskGroup1, taskDesc1, jobSendMailDueReminder, hour, min);
 		
+	}
+	
+	public void scheduleDailyTaskPM(){
+		jobSetPMOverdueStatus = new PMOverdue();
+		String taskName = "setPMOverdueStatus";
+		String taskGroup ="preventiveMaintenance";
+		String taskDesc="To set Preventive Maintenance status due to overdue";
+		int hour=11; //default 0 set up to midnight
+		int min =27; //default 1
+		JobUtil.removeTask(taskName, taskGroup, jobSetPMOverdueStatus);
+		JobUtil.scheduleDailyTask(taskName, taskGroup, taskDesc, jobSetPMOverdueStatus, hour, min);
 	}
 	
 	public void sendEmailRentalDueReminder(String id)
@@ -125,5 +138,24 @@ public class EammsModule extends DefaultModule {
 			Log.getLog(getClass()).error(e.toString(), e);
 		}
 	}
+	
+	public Collection getPMOverdueItemsListing() {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			return dao.getPMOverdueItemsListing();
+			
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
+			return new ArrayList();
+		}
+	}
 
+	public void setPMOverdueStatus(DefaultDataObject obj) {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			dao.setPMOverdueStatus(obj);
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
+		}
+	}
 }
