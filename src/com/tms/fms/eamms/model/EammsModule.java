@@ -17,12 +17,14 @@ public class EammsModule extends DefaultModule {
 	public void init() {
 		scheduleDailyTask();
 		scheduleDailyTaskPM();
+		scheduleDailyTaskSoftware();
 		super.init();
 	}
 	
 	private static RentalOverdue  jobSetOverdueStatus; 
 	private static RentalDueReminder jobSendMailDueReminder;
 	private static PMOverdue jobSetPMOverdueStatus; 
+	private static SoftwareExpiredDate jobSetSoftwareExpired; 
 	
 	public void setOverdueStatus() {
 		EammsDao dao = (EammsDao) getDao();
@@ -62,6 +64,17 @@ public class EammsModule extends DefaultModule {
 		int min =27; //default 1
 		JobUtil.removeTask(taskName, taskGroup, jobSetPMOverdueStatus);
 		JobUtil.scheduleDailyTask(taskName, taskGroup, taskDesc, jobSetPMOverdueStatus, hour, min);
+	}
+	
+	public void scheduleDailyTaskSoftware(){
+		jobSetSoftwareExpired = new SoftwareExpiredDate();
+		String taskName = "setSoftwareExpiryDate";
+		String taskGroup ="software";
+		String taskDesc="To set status of the software to Expired";
+		int hour=10; //default 0 set up to midnight TODO change the time
+		int min =41; //default 1
+		JobUtil.removeTask(taskName, taskGroup, jobSetSoftwareExpired);
+		JobUtil.scheduleDailyTask(taskName, taskGroup, taskDesc, jobSetSoftwareExpired, hour, min);
 	}
 	
 	public void sendEmailRentalDueReminder(String id)
@@ -156,6 +169,26 @@ public class EammsModule extends DefaultModule {
 			dao.setPMOverdueStatus(obj);
 		} catch (DaoException e) {
 			Log.getLog(getClass()).error(e.toString(), e);
+		}
+	}
+	
+	public void setSoftwareExpiredStatus(DefaultDataObject obj) {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			dao.setSoftwareExpiredStatus(obj);
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
+		}
+	}
+	
+	public Collection getSoftwareExpiredDate() {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			return dao.getSoftwareExpiredDate();
+			
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
+			return new ArrayList();
 		}
 	}
 }

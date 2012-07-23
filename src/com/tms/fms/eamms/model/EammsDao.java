@@ -82,6 +82,23 @@ public class EammsDao extends DataSourceDao {
 				"WHERE c_pmRequestId = #c_pmRequestId#";
 		super.update(sql, obj);
 	}
+	
+	public void setSoftwareExpiredStatus(DefaultDataObject obj) throws DaoException {
+		String sql = "UPDATE app_fd_eamms_asset_sw SET " +
+				"c_status = #c_status#," +
+				"dateModified = #dateModified# " +
+				"WHERE id = #id#";
+		super.update(sql, obj);
+	}
+	
+	public Collection getSoftwareExpiredDate() throws DaoException {
+		String sql = "SELECT id from app_fd_eamms_asset_sw "+ 
+					"WHERE CONVERT(datetime,c_licenseExpiryDate,103) <= getdate() "+
+					"and c_status <> ? ";
+							
+		Collection col = super.select(sql, DefaultDataObject.class, new String[]{SoftwareExpiredDate.EXPIRED_STATUS}, 0, -1);
+		return col;
+	}
 
 
 	

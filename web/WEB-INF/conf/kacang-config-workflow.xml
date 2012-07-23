@@ -60,10 +60,7 @@
     </properties>
     <modules>
         <module class="com.tms.workflow.JogetClientModule">
-        <!--
-            <dao-class></dao-class>
-            <datasource>defaultdb</datasource>
-        -->
+       
             <menu>
                 <menu-item>
                     <order>142</order>
@@ -75,6 +72,11 @@
             <permission>com.tms.workflow.workOrder.permission.woSubmit</permission>
             <permission>com.tms.workflow.workOrder.permission.woAssigned</permission>
             <permission>com.tms.workflow.workOrder.permission.woAll</permission>
+        </module>
+        
+        <module class="com.tms.fms.eamms.model.EammsModule">
+            <dao-class>com.tms.fms.eamms.model.EammsDao</dao-class>
+            <datasource>jogetdb</datasource>	   
         </module>
     </modules>
 </application>
