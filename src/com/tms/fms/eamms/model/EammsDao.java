@@ -100,7 +100,36 @@ public class EammsDao extends DataSourceDao {
 		return col;
 	}
 
-
+	public Collection getPMReqestDueReminderListing() throws DaoException {
+		String sql = "SELECT id " +
+				"FROM app_fd_eamms_pm_request " +
+				"WHERE CONVERT(datetime,c_endDate,103) = CONVERT(datetime,DATEADD(day, 7, DATEDIFF(dd, 0, GETDATE())),103)" ;
+		
+		Collection col = super.select(sql, DefaultDataObject.class, null, 0, -1);
+		return col;
+	}
+	
+	public DefaultDataObject getPMInfo(String id) throws DaoException {
+		String sql = "SELECT s1.firstName +' '+ s1.lastName AS engName1,s1.email1 AS emailEng1," +
+							"s2.firstName +' '+ s2.lastName AS engName2,s2.email1 AS emailEng2," +
+							"s3.firstName +' '+ s3.lastName AS engName3,s3.email1 AS emailEng3," +
+							"s4.firstName +' '+ s4.lastName AS engName4,s4.email1 AS emailEng4," +
+							"c_pmRequestId,c_endDate," +
+							"s.firstName +' '+ s.lastName AS requestorName,s.email1 AS requestorEmail " +
+							"FROM app_fd_eamms_pm_request r " +
+							"LEFT JOIN security_user s ON (s.username=c_createdBy) " +
+							"LEFT JOIN security_user s1 ON (s1.username=c_engineer1UserId) " +
+							"LEFT JOIN security_user s2 ON (s2.username=c_engineer2UserId) " +
+							"LEFT JOIN security_user s3 ON (s3.username=c_engineer3UserId) " +
+							"LEFT JOIN security_user s4 ON (s4.username=c_engineer4UserId) " +
+							"WHERE r.id=?" ;    	
+		
+			Collection col = super.select(sql, DefaultDataObject.class, new String[]{id}, 0, 1);
+			if (col.size() == 1){
+				return (DefaultDataObject) col.iterator().next();
+			}				
+		return new DefaultDataObject();
+	}
 	
 
 }

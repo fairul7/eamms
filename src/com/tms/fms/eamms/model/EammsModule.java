@@ -2,16 +2,18 @@ package com.tms.fms.eamms.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
-import com.tms.fms.util.JobUtil;
-import com.tms.util.MailUtil;
-
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import kacang.Application;
 import kacang.model.DaoException;
 import kacang.model.DefaultDataObject;
 import kacang.model.DefaultModule;
 import kacang.util.Log;
 import kacang.util.Mailer;
+import com.tms.fms.util.JobUtil;
+import com.tms.util.MailUtil;
+
 
 public class EammsModule extends DefaultModule {
 	public void init() {
@@ -25,6 +27,7 @@ public class EammsModule extends DefaultModule {
 	private static RentalDueReminder jobSendMailDueReminder;
 	private static PMOverdue jobSetPMOverdueStatus; 
 	private static SoftwareExpiredDate jobSetSoftwareExpired; 
+	private static PMDueReminder jobPMSendMailDueReminder; 
 	
 	public void setOverdueStatus() {
 		EammsDao dao = (EammsDao) getDao();
@@ -60,10 +63,17 @@ public class EammsModule extends DefaultModule {
 		String taskName = "setPMOverdueStatus";
 		String taskGroup ="preventiveMaintenance";
 		String taskDesc="To set Preventive Maintenance status due to overdue";
-		int hour=11; //default 0 set up to midnight
-		int min =27; //default 1
+		int hour = 0; //default 0 set up to midnight
+		int min  = 1; //default 1
 		JobUtil.removeTask(taskName, taskGroup, jobSetPMOverdueStatus);
 		JobUtil.scheduleDailyTask(taskName, taskGroup, taskDesc, jobSetPMOverdueStatus, hour, min);
+		
+		jobPMSendMailDueReminder = new PMDueReminder();
+		String taskName1 = "jobPMSendMailDueReminder";
+		String taskGroup1 ="pmProcess";
+		String taskDesc1="To send mail due reminder for PM process";		
+		JobUtil.removeTask(taskName1, taskGroup1, jobPMSendMailDueReminder);
+		JobUtil.scheduleDailyTask(taskName1, taskGroup1, taskDesc1, jobPMSendMailDueReminder, hour, min);
 	}
 	
 	public void scheduleDailyTaskSoftware(){
@@ -189,6 +199,57 @@ public class EammsModule extends DefaultModule {
 		} catch (DaoException e) {
 			Log.getLog(getClass()).error(e.toString(), e);
 			return new ArrayList();
+		}
+	}
+	
+	public Collection getPMReqestDueReminderListing() {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			return dao.getPMReqestDueReminderListing();
+			
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
+			return new ArrayList();
+		}
+	}
+	
+	public void sendEmailPMDueReminder(String id) {
+		String smtpServer = Application.getInstance().getProperty("smtp.server");
+		String adminEmail = Application.getInstance().getProperty("admin.email");
+		
+		String pmRequestId = "";
+		String requestorEmail ="";
+		String endDate = "";
+		String engineerName="";
+		String engineerEmail="";
+		
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			DefaultDataObject reqInfo = dao.getPMInfo(id);
+			if(reqInfo !=null){
+				pmRequestId = (String)reqInfo.getProperty("c_pmRequestId");
+				requestorEmail = (String)reqInfo.getProperty("requestorEmail");
+				endDate = (String)reqInfo.getProperty("c_endDate");
+				
+				for(int i = 1; i<= 4; i++){
+					engineerName = (String)reqInfo.getProperty("engName"+i);
+					engineerEmail = (String)reqInfo.getProperty("emailEng"+i);
+					
+					if(Mailer.isValidEmail(requestorEmail)){
+						String[] subjectArgs = new String[] {pmRequestId};
+				        String subject = Application.getInstance().getMessage("eamms.pm.emailDueReminder.subject", subjectArgs);
+				        
+						String[] contentArgs = new String[] {engineerName, pmRequestId, endDate};
+				        String content = Application.getInstance().getMessage("eamms.pm.emailDueReminder.content", contentArgs);
+				         
+				        MailUtil.sendEmail(smtpServer, true, adminEmail, engineerEmail, requestorEmail, null,  subject , content);
+				        Log.getLog(getClass()).info("sending mail to " + requestorEmail + " subject : " + subject);
+					} 
+				}
+			}
+			
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
 		}
 	}
 }
