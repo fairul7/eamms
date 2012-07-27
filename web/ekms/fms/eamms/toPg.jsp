@@ -74,6 +74,119 @@ function noPermission1()
             </script>
         </c:if>
     </c:when>
+    <c:when test="${param.addr eq 'sw01'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//listingSoftware"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'sw02'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//listingSoftware"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>   
+   <c:when test="${param.addr eq 'hw01'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//3DD8F78CF07C4536ACC353E16AB2F50B"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'hw02'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//hardware"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'fs01'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//2BCEE34F26A64B4182BDD8649DA8B605"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'fs02'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//2BCEE34F26A64B4182BDD8649DA8B605"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'ss01'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/supplierSetup//supplierList"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'ss02'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/supplierSetup//supplierList"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    
+    <c:when test="${param.addr eq 'sp01'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/sparePart//spList"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'sp02'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/sparePart//spListLow"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'sp03'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/sparePart//spListHigh"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'sp04'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/sparePart//spInventoryHistoryList"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'rs01'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//RentalRequest"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'rs02'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//RentalListing"/>
+        <c:if test="<%=!woAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
     <c:otherwise>
         <script>
             window.close();

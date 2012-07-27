@@ -71,7 +71,25 @@
             <permission>com.tms.workflow.WorkflowAdministrator</permission>
             <permission>com.tms.workflow.workOrder.permission.woSubmit</permission>
             <permission>com.tms.workflow.workOrder.permission.woAssigned</permission>
-            <permission>com.tms.workflow.workOrder.permission.woAll</permission>
+            <permission>com.tms.workflow.workOrder.permission.woAll</permission>               
+            <permission>com.tms.workflow.permission.viewHardwareListing</permission>
+            <permission>com.tms.workflow.permission.manageHardware</permission>                  
+            <permission>com.tms.workflow.permission.viewSoftwareListing</permission>
+            <permission>com.tms.workflow.permission.manageSoftware</permission>
+            <permission>com.tms.workflow.permission.viewFacilitySetup</permission>
+            <permission>com.tms.workflow.permission.manageFacility</permission>
+            <permission>com.tms.workflow.permission.viewSupplier</permission>
+            <permission>com.tms.workflow.permission.manageSupplier</permission>
+            <permission>com.tms.workflow.permission.viewSparePart</permission>
+            <permission>com.tms.workflow.permission.manageSparePart</permission>
+            
+            <permission>com.tms.workflow.permission.submitRentalRequest</permission>
+            <permission>com.tms.workflow.permission.verifyApproveAssign</permission>
+            <permission>com.tms.workflow.permission.viewUpdate</permission>
+            <permission>com.tms.workflow.permission.updateRentalRequest</permission>
+            <permission>com.tms.workflow.permission.viewRentalRequest</permission>
+            <permission>com.tms.workflow.permission.reassignEngineer</permission>
+                        
         </module>
         
         <module class="com.tms.fms.eamms.model.EammsModule">
