@@ -22,9 +22,10 @@
 %>
 
 <%
-    boolean woSubmit = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woSubmit", null, null);
+	boolean woSubmit = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woSubmit", null, null);
 	boolean woAssigned = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woAssigned", null, null);
-	boolean woAll = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woAll", null, null);	
+	boolean woAll = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woAll", null, null);
+
 	boolean hwViewList = service.hasPermission(userId, "com.tms.workflow.permission.viewHardwareListing", null, null);
 	boolean hwManage = service.hasPermission(userId, "com.tms.workflow.permission.manageHardware", null, null);	
 	boolean swViewList = service.hasPermission(userId, "com.tms.workflow.permission.viewSoftwareListing", null, null);
@@ -96,6 +97,7 @@
     if(supplierManage)
     	items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.manageSupplier"), "index.jsp?addr=ss01", null, null, null, null));
     	
+    //-- work Order start
     if(woSubmit || woAssigned || woAll)
 	{
 	    items.add(new MenuItem(app.getMessage("com.tms.workflow.workOrder.wo"), null, null, null, null, null));
@@ -116,6 +118,15 @@
     {
         items.add(new MenuItem(app.getMessage("com.tms.workflow.workOrder.woAllList"), "index.jsp?addr=wo04", null, null, null, null));
     }
+    //-- work Order end
+    
+    //--dailly feeds start
+    items.add(new MenuItem(app.getMessage("eamms.feed.msg.dailyFeeds"), null, null, null, null, null));
+    items.add(new MenuItem(app.getMessage("eamms.feed.msg.dailyFeedsListing"), "#", null, null, null, null));
+    items.add(new MenuItem(app.getMessage("eamms.feed.msg.allFeedsListing"), "#", null, null, null, null));
+    items.add(new MenuItem(app.getMessage("eamms.feed.msg.feedsHistory"), "#", null, null, null, null));
+    items.add(new MenuItem(app.getMessage("eamms.feed.msg.dailyFeedsLog"), "#", null, null, null, null));
+    //--dailly feeds end
 %>
 
 <%    
