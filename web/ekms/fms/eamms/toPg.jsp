@@ -91,7 +91,7 @@ function noPermission1()
         </c:if>
     </c:when>   
    <c:when test="${param.addr eq 'hw01'}">
-        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//3DD8F78CF07C4536ACC353E16AB2F50B"/>
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//hardwareViewList"/>
         <c:if test="<%=!woAll%>">
             <script>
                 noPermission1();
