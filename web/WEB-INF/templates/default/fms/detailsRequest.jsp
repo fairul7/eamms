@@ -248,7 +248,9 @@
         	
             <input value="<fmt:message key='fms.tran.rejectRequest'/>" type="button" class="button" onClick="window.open('/ekms/fms/transport/request/rejectRequest.jsp?id=<c:out value="${form.id}" />','rejectform','scrollbars=yes,resizable=yes,width=400,height=200');return false;"/>
             <x:display name="${form.outsourceButton.absoluteName}" />&nbsp;
+            <c:if test="${not assignment}">
             <input value="<fmt:message key='fms.tran.edit'/>" type="button" class="button" onClick="document.location='<c:url value="/ekms/fms/transport/request/"/>editRequest.jsp?id=<c:out value="${id}" />';"/>
+            </c:if>
 			
 			<x:display name="${form.backToListButton.absoluteName}" />
            
