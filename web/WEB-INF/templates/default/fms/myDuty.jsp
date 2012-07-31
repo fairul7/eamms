@@ -112,6 +112,7 @@
 										<c:set var="title" value="${duty.requestTitle}" />
 										<c:set var="destination" value="${duty.destination}" />
 										<c:set var="id" value="${duty.id}" />
+										<c:set var="assignmentId" value="${duty.propertyMap['assignmentId']}" />
 										<c:set var="workProfile" value="${duty.workingProfileCode}" />
 																																								
 										<c:set var="dutyStarts" value="${duty.workStart}" scope="page"/>
@@ -211,7 +212,7 @@
 																<br/>[<c:out value="${destination}"/>]
 															</c:if>
  																							
-															<li><a href="viewAssignment.jsp?id=<c:out value="${id}"/> &userId=<c:out value="${record.key.id}"/>" class="calendarWeeklink">										              		
+															<li><a href="viewAssignment.jsp?id=<c:out value="${id}"/>&userId=<c:out value="${record.key.id}"/>&assignmentId=<c:out value="${assignmentId}"/>" class="calendarWeeklink">										              		
 																<c:out value="${title}"/>&nbsp;
 															</a></li><br/> 				
 											    <%wp="Yes"; } %>  																																					           

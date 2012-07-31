@@ -1508,12 +1508,18 @@ public class TransportModule extends DefaultModule {
 
 		return col;
 	}
+	
+	public String getDriverAssignmentIdByRequestId(String requestId, String userId)throws DaoException {
+		TransportDao dao = (TransportDao) getDao();  
+		
+		return dao.getDriverAssignmentIdByRequestId(requestId, userId, null);
+	}
 	 
-	 public String getDriverAssignmentIdByRequestId(String requestId, String userId)throws DaoException {
-	 	TransportDao dao = (TransportDao) getDao();  
-	 	
-	 	return dao.getDriverAssignmentIdByRequestId(requestId, userId);
-	 }
+	public String getDriverAssignmentIdByRequestId(String requestId, String userId, String assignmentId) throws DaoException {
+		TransportDao dao = (TransportDao) getDao();  
+			
+		return dao.getDriverAssignmentIdByRequestId(requestId, userId, assignmentId);
+	}
 
 	 public TransportRequest getDriverAssignment(String requestId, String userId)throws DaoException{
 		 

@@ -173,6 +173,7 @@
 													<c:set var="requestId" value="${duty.requestId}"/>
 													<c:set var="destination" value="${duty.destination}" />
 													<c:set var="id" value="${duty.id}" />
+													<c:set var="assignmentId" value="${duty.propertyMap['assignmentId']}" />
 													<c:set var="workProfile" value="${duty.workingProfileCode}" />
 																														
 													<c:set var="dutyStarts" value="${duty.workStart}" scope="page"/>
@@ -276,7 +277,7 @@
 																	<c:if test="${not empty(destination)}">
 																		<br/>[<c:out value="${destination}"/>]
 																	</c:if>
-		 															<a href="viewAssignment.jsp?id=<c:out value="${id}"/> &userId=<c:out value="${record.key.id}"/>" class="calendarWeeklink">										              		
+		 															<a href="viewAssignment.jsp?id=<c:out value="${id}"/>&userId=<c:out value="${record.key.id}"/>&assignmentId=<c:out value="${assignmentId}"/>" class="calendarWeeklink">										              		
 																		<c:out value="${id}"/>&nbsp;
 																	</a><br/> 								
 																	<c:out value="${title}"/>&nbsp;

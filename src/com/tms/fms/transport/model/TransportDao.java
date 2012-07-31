@@ -2019,7 +2019,9 @@ public class TransportDao extends DataSourceDao {
 		 */
 
 		String sql = "SELECT DISTINCT A.id, R.requestTitle, D.manpowerId, D.requestId as id, "
-				+ "A.startDate, A.endDate, R.destination FROM fms_tran_request_driver D	 "
+				+ "D.assignmentId, "
+				+ "A.startDate, A.endDate, R.destination "
+				+ "FROM fms_tran_request_driver D "
 				+ "INNER JOIN fms_tran_assignment A ON A.id = D.assignmentId 	"
 				+ "INNER JOIN fms_tran_request R ON D.requestId = R.id	"
 				+ "WHERE 1=1 AND  D.manpowerId = ?  " + filterDate;
@@ -2034,8 +2036,10 @@ public class TransportDao extends DataSourceDao {
 		String filterDate = "AND M.requiredFrom <= ? AND M.requiredTo >= ? ";
 		Object arg[] = new Object[] { userId, end, start };
 		
-		String sql = "SELECT R.requestId as id, R.title as requestTitle,M.userId,M.requiredFrom as startDate,M.requiredTo as endDate, "
-				+ "M.fromTime as startTime, M.toTime as endTime  FROM fms_eng_request R	 "
+		String sql = "SELECT R.requestId as id, R.title as requestTitle, A.assignmentId, "
+				+ "M.userId,M.requiredFrom as startDate,M.requiredTo as endDate, "
+				+ "M.fromTime as startTime, M.toTime as endTime "
+				+ "FROM fms_eng_request R "
 				+ "INNER JOIN fms_eng_assignment A ON R.requestId=A.requestId  	"
 				+ "INNER JOIN fms_eng_assignment_manpower M ON A.assignmentId = M.assignmentId   "
 				+ "WHERE 1=1 AND M.userId = ? " + filterDate;
@@ -3251,13 +3255,21 @@ public class TransportDao extends DataSourceDao {
 
 	}
 	
-	public String getDriverAssignmentIdByRequestId(String requestId, String userId)throws DaoException{
+	public String getDriverAssignmentIdByRequestId(String requestId, String userId, String assignmentId) throws DaoException {
+		ArrayList args = new ArrayList();
 		String sql = 
 			"SELECT assignmentId " +
 			"FROM fms_tran_request_driver " +
 			"WHERE requestId = ? AND manpowerId = ? ";
+		args.add(requestId);
+		args.add(userId);
 		
-		Collection col = super.select(sql,HashMap.class,new String[]{requestId, userId},0,-1);
+		if (assignmentId != null && !assignmentId.equals("")) {
+			sql += "AND assignmentId = ? ";
+			args.add(assignmentId);
+		}
+		
+		Collection col = super.select(sql, HashMap.class, args.toArray(), 0, 1);
 		if(col.size()>0){
 			Map map = (Map) col.iterator().next();
 			return (String) map.get("assignmentId");		

@@ -18,7 +18,6 @@ import kacang.stdui.FileUpload;
 import kacang.stdui.Form;
 import kacang.stdui.Label;
 import kacang.stdui.Link;
-import kacang.stdui.Panel;
 import kacang.stdui.TextBox;
 import kacang.stdui.TimeField;
 import kacang.ui.Event;
@@ -36,10 +35,8 @@ import com.tms.fms.engineering.model.AssignmentLog;
 import com.tms.fms.engineering.model.AssignmentLogModule;
 import com.tms.fms.engineering.model.EngineeringModule;
 import com.tms.fms.engineering.model.EngineeringRequest;
-import com.tms.fms.engineering.model.VtrService;
 import com.tms.fms.register.model.FMSRegisterManager;
 import com.tms.fms.setup.model.SetupModule;
-import com.tms.fms.transport.model.AssignmentObject;
 import com.tms.fms.transport.model.TransportModule;
 import com.tms.fms.transport.model.TransportRequest;
 
@@ -273,19 +270,21 @@ public class DriverAssignmentForm extends Form
     	status = "new";
     	String manpowerId = null;
     	manpowerId = event.getRequest().getParameter("userId");
-    	if(!(manpowerId == null))
-    		dutyView(id, manpowerId);
-    	else{
-    	init();
-    	if(VIEW_MODE.equals(mode))
-    		//populateView(id);
-    		populateForm(id);
+    	String optionalAssignmentId = event.getRequest().getParameter("assignmentId");
     	
-    	if(EDIT_MODE.equals(mode))
-    		populateEditForm(id);
-    	
-    	if(COMPLETE_MODE.equals(mode))
-    		populateEditForm(id);
+    	if(!(manpowerId == null)) {
+    		dutyView(id, manpowerId, optionalAssignmentId);
+    	} else {
+	    	init();
+	    	if(VIEW_MODE.equals(mode))
+	    		//populateView(id);
+	    		populateForm(id);
+	    	
+	    	if(EDIT_MODE.equals(mode))
+	    		populateEditForm(id);
+	    	
+	    	if(COMPLETE_MODE.equals(mode))
+	    		populateEditForm(id);
     	}
     		
         super.onRequest(event);         
@@ -296,7 +295,6 @@ public class DriverAssignmentForm extends Form
     	
     	TransportModule tm = (TransportModule)Application.getInstance().getModule(TransportModule.class);
 		SecurityService service = (SecurityService) Application.getInstance().getService(SecurityService.class);		
-		SetupModule SM = (SetupModule)Application.getInstance().getModule(SetupModule.class);		
 		trequest = new TransportRequest();
 		req = new SequencedHashMap();
 				
@@ -321,7 +319,6 @@ public class DriverAssignmentForm extends Form
     	
 		TransportModule tm = (TransportModule)Application.getInstance().getModule(TransportModule.class);
 		SecurityService service = (SecurityService) Application.getInstance().getService(SecurityService.class);		
-		SetupModule SM = (SetupModule)Application.getInstance().getModule(SetupModule.class);		
 		trequest = new TransportRequest();
 		req = new SequencedHashMap();
 		
@@ -396,7 +393,7 @@ public class DriverAssignmentForm extends Form
 		if (eRequest != null ) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
 			SimpleDateFormat sdfcomplete = new SimpleDateFormat("dd MMM yyyy hh:mm:ss");
-			String reqDate = sdf.format(eRequest.getRequiredFrom()) + " - " + sdf.format(eRequest.getRequiredTo());
+			//String reqDate = sdf.format(eRequest.getRequiredFrom()) + " - " + sdf.format(eRequest.getRequiredTo());
 			lbl_requestId.setText(eRequest.getRequestId());
 			assignmentId.setText(eRequest.getAssignmentCode());
 			requestTitle.setText(eRequest.getTitle());
@@ -427,8 +424,7 @@ public class DriverAssignmentForm extends Form
 		}
 	}
     
-    public void dutyView(String id, String manpowerId){
-		
+    private void dutyView(String id, String manpowerId, String optionalAssignmentId) {
     	mode = "duty";
     	
 		TransportModule tm = (TransportModule)Application.getInstance().getModule(TransportModule.class);
@@ -444,7 +440,6 @@ public class DriverAssignmentForm extends Form
         //String transportdept = Application.getInstance().getProperty("TransportDepartment");//get transport dept
         String transportdept = Application.getInstance().getProperty("ManagementService");//get transport dept
         
-        SecurityService security = (SecurityService)Application.getInstance().getService(SecurityService.class);
         AssignmentLogModule mod = (AssignmentLogModule) app.getModule(AssignmentLogModule.class);
     	try{
     		department = FRM.getUserDepartment(manpowerId);
@@ -455,7 +450,7 @@ public class DriverAssignmentForm extends Form
     	if(transportdept.equals(department)){
     		String tempAssignmentId="";
 			try{
-					tempAssignmentId = tm.getDriverAssignmentIdByRequestId(id, manpowerId);
+					tempAssignmentId = tm.getDriverAssignmentIdByRequestId(id, manpowerId, optionalAssignmentId);
 					trequest = tm.getDriverAssignmentByAssgIdUserId(tempAssignmentId, manpowerId);				
 				
 					String reqUserId = trequest.getManpowerId();
@@ -523,8 +518,8 @@ public class DriverAssignmentForm extends Form
     		
     		String assignmentId="";
     		try{
-    			assignmentId = SM.selectAssignmentIdByBookingIdUserId(id, manpowerId);	
-    			if (assignmentId!=null && !assignmentId.equals("")){
+    			assignmentId = SM.selectAssignmentIdByBookingIdUserId(id, manpowerId, optionalAssignmentId);	
+    			if (assignmentId != null && !assignmentId.equals("-")) {
     				eRequest = eM.getAssignment(assignmentId);
     			}
     			setEngineering(true);
@@ -585,14 +580,10 @@ public class DriverAssignmentForm extends Form
     	}	   
 	}
     
-    public void populateForm(String id){
+    public void populateForm(String id) {
     	Application app = Application.getInstance();
     	SecurityService service = (SecurityService) Application.getInstance().getService(SecurityService.class);		
-        TransportRequest trq = new TransportRequest();
         TransportModule tm = (TransportModule)Application.getInstance().getModule(TransportModule.class);
-        
-        String pathfile = Application.getInstance().getProperty("check.list");
-        AssignmentObject AO = new AssignmentObject();
         
         userId = getWidgetManager().getUser().getId();
         String assignmentId="";
@@ -666,7 +657,6 @@ public class DriverAssignmentForm extends Form
     public Forward onValidate(Event event)
     {
     	TransportModule TM = (TransportModule)Application.getInstance().getModule(TransportModule.class);
-    	SetupModule sm = (SetupModule) Application.getInstance().getModule(SetupModule.class);
     	ManpowerAssignmentObject mObj = new ManpowerAssignmentObject();
     	EngineeringModule eng = new EngineeringModule();
     	    	
@@ -715,7 +705,7 @@ public class DriverAssignmentForm extends Form
 	    		
 	    		mObj.setCompletionDate(start.getTime());
 	    		mObj.setReason((String) remarks.getValue());
-	    		mObj.setStatus(sm.COMPLETED_STATUS);
+	    		mObj.setStatus(SetupModule.COMPLETED_STATUS);
 	    			    		
 	    		TM.updateCompleteAssignment(mObj);
 	    	}catch(Exception er){

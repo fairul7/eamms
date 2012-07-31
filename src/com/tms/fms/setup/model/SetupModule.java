@@ -134,6 +134,11 @@ public class SetupModule extends DefaultModule{
 		    return dao.getAssignmentIdByBookingIdUserId(requestId, userId);
 	    }
 	    
+	    public String selectAssignmentIdByBookingIdUserId(String requestId, String userId, String assignmentId) throws DaoException {
+	    	SetupDao dao = (SetupDao) getDao();		    
+		    return dao.getAssignmentIdByBookingIdUserId(requestId, userId, assignmentId);
+	    }
+	    
 	    public Collection getEngineeringUserByRequestId(String requestId) throws DaoException{
 	    	SetupDao dao = (SetupDao) getDao();
 		    Collection col = dao.getEngineeringUserByRequestId(requestId);

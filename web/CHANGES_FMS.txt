@@ -1,5 +1,6 @@
 New Build
 =========
+Fixed #13705: Duty Roster - different link but same information
 
 
 fms_1.0.0_update (July 27 2012) V2.5

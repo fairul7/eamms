@@ -189,14 +189,28 @@ public class SetupDao extends DataSourceDao {
 				"VALUES(#requestId#,#status#,#startDate#,#userId#)", status);
 	}
 
-	public String getAssignmentIdByBookingIdUserId(String resourceId, String userId)throws DaoException{
+	public String getAssignmentIdByBookingIdUserId(String requestId, String userId)throws DaoException{
+		return getAssignmentIdByBookingIdUserId(requestId, userId, null);
+	}
+	
+	public String getAssignmentIdByBookingIdUserId(String requestId, String userId, String assignmentId) throws DaoException {
+		ArrayList args = new ArrayList();
+		String sql = 
+			"SELECT M.assignmentId " +
+			"FROM fms_eng_assignment_manpower M	"+
+			"INNER JOIN fms_eng_assignment A ON (A.assignmentId = M.assignmentId) "+
+			"INNER JOIN fms_eng_request R ON (R.requestId = A.requestId) " +
+			"WHERE M.userId = ? " +
+			"AND R.requestId = ? ";
+		args.add(userId);
+		args.add(requestId);
+		
+		if (assignmentId != null && !assignmentId.equals("")) {
+			sql += "AND M.assignmentId = ? ";
+			args.add(assignmentId);
+		}
 
-		String sql = "SELECT M.assignmentId as assignmentId FROM fms_eng_assignment_manpower M	"+
-		"INNER JOIN fms_eng_assignment A ON A.assignmentId=M.assignmentId	"+
-		"INNER JOIN fms_eng_request R ON R.requestId=A.requestId  WHERE		"+
-		"M.userId = ? AND R.requestId = ?";
-
-		Collection col = super.select(sql,HashMap.class,new String[]{userId,resourceId},0,-1);
+		Collection col = super.select(sql, HashMap.class, args.toArray(), 0, 1);
 		if(col.size()>0){
 			Map map = (Map) col.iterator().next();
 			return (String) map.get("assignmentId");		
