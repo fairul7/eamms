@@ -14,6 +14,9 @@
     boolean woSubmit = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woSubmit", null, null);
     boolean woAssigned = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woAssigned", null, null);
     boolean woAll = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woAll", null, null);
+    
+    boolean facilityList = service.hasPermission(userId, "com.tms.workflow.permission.viewFacilitySetup", null, null);
+    boolean facilityManage = service.hasPermission(userId, "com.tms.workflow.permission.manageFacility", null, null);
 %>
 
 <script>
@@ -107,16 +110,16 @@ function noPermission1()
         </c:if>
     </c:when>
     <c:when test="${param.addr eq 'fs01'}">
-        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//2BCEE34F26A64B4182BDD8649DA8B605"/>
-        <c:if test="<%=!woAll%>">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//facility_list_view_only"/>
+        <c:if test="<%=!facilityList%>">
             <script>
                 noPermission1();
             </script>
         </c:if>
     </c:when>
     <c:when test="${param.addr eq 'fs02'}">
-        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//2BCEE34F26A64B4182BDD8649DA8B605"/>
-        <c:if test="<%=!woAll%>">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//facility_list"/>
+        <c:if test="<%=!facilityManage%>">
             <script>
                 noPermission1();
             </script>
