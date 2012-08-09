@@ -11,8 +11,9 @@
     boolean wfAdmin = service.hasPermission(userId, "com.tms.workflow.WorkflowAdministrator", null, null);
     boolean wfUsr = service.hasPermission(userId, "com.tms.workflow.WorkflowUser", null, null);
     
-    boolean woSubmit = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woSubmit", null, null);
+    boolean woNew = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.newWo", null, null);
     boolean woAssigned = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woAssigned", null, null);
+    boolean woMy = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woMy", null, null);
     boolean woAll = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woAll", null, null);
     
     boolean facilityList = service.hasPermission(userId, "com.tms.workflow.permission.viewFacilitySetup", null, null);
@@ -47,7 +48,7 @@ function noPermission1()
     </c:when>
     <c:when test="${param.addr eq 'wo01'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/work_order_userview//wo_new"/>
-        <c:if test="<%=!woSubmit%>">
+        <c:if test="<%=!woNew%>">
             <script>
                 noPermission1();
             </script>
@@ -55,15 +56,15 @@ function noPermission1()
     </c:when>
     <c:when test="${param.addr eq 'wo02'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/work_order_userview//wo_list_assigned"/>
-        <c:if test="<%=!woSubmit%>">
+        <c:if test="<%=!woAssigned%>">
             <script>
                 noPermission1();
             </script>
         </c:if>
     </c:when>
     <c:when test="${param.addr eq 'wo03'}">
-        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/work_order_userview//wo_list_assigned"/>
-        <c:if test="<%=!woAssigned%>">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/work_order_userview//wo_list_my"/>
+        <c:if test="<%=!woMy%>">
             <script>
                 noPermission1();
             </script>

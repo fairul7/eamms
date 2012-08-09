@@ -22,9 +22,15 @@
 %>
 
 <%
-	boolean woSubmit = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woSubmit", null, null);
+	boolean woNew = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.newWo", null, null);
 	boolean woAssigned = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woAssigned", null, null);
+    boolean woMy = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woMy", null, null);
 	boolean woAll = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woAll", null, null);
+	
+	boolean dailyFeeds = service.hasPermission(userId, "com.tms.fms.permission.feed.dailyFeedsListing", null, null);
+	boolean allFeeds = service.hasPermission(userId, "com.tms.fms.permission.feed.allFeedsListing", null, null);
+	boolean feedsHistory = service.hasPermission(userId, "com.tms.fms.permission.feed.feedsHistory", null, null);
+	boolean feedsLog = service.hasPermission(userId, "com.tms.fms.permission.feed.dailyFeedsLog", null, null);
 
 	boolean hwViewList = service.hasPermission(userId, "com.tms.workflow.permission.viewHardwareListing", null, null);
 	boolean hwManage = service.hasPermission(userId, "com.tms.workflow.permission.manageHardware", null, null);	
@@ -98,21 +104,25 @@
     	items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.manageSupplier"), "index.jsp?addr=ss01", null, null, null, null));
     	
     //-- work Order start
-    if(woSubmit || woAssigned || woAll)
+    if(woNew || woMy || woAssigned || woAll)
 	{
 	    items.add(new MenuItem(app.getMessage("com.tms.workflow.workOrder.wo"), null, null, null, null, null));
 	}
 	
-	if(woSubmit)
-	{
-	    items.add(new MenuItem(app.getMessage("com.tms.workflow.workOrder.woNew"), "index.jsp?addr=wo01", null, null, null, null));
-	    items.add(new MenuItem(app.getMessage("com.tms.workflow.workOrder.woMyList"), "index.jsp?addr=wo02", null, null, null, null));
-	}
+    if(woNew)
+    {
+        items.add(new MenuItem(app.getMessage("com.tms.workflow.workOrder.woNew"), "index.jsp?addr=wo01", null, null, null, null));
+    }
 	
     if(woAssigned)
     {
-        items.add(new MenuItem(app.getMessage("com.tms.workflow.workOrder.woAssignedToMe"), "index.jsp?addr=wo03", null, null, null, null));
+        items.add(new MenuItem(app.getMessage("com.tms.workflow.workOrder.woAssignedToMe"), "index.jsp?addr=wo02", null, null, null, null));
     }
+    
+	if(woMy)
+	{
+	    items.add(new MenuItem(app.getMessage("com.tms.workflow.workOrder.woMyList"), "index.jsp?addr=wo03", null, null, null, null));
+	}
     
     if(woAll)
     {
@@ -121,11 +131,29 @@
     //-- work Order end
     
     //--dailly feeds start
-    items.add(new MenuItem(app.getMessage("eamms.feed.msg.dailyFeeds"), null, null, null, null, null));
-    items.add(new MenuItem(app.getMessage("eamms.feed.msg.dailyFeedsListing"), "#", null, null, null, null));
-    items.add(new MenuItem(app.getMessage("eamms.feed.msg.allFeedsListing"), "#", null, null, null, null));
-    items.add(new MenuItem(app.getMessage("eamms.feed.msg.feedsHistory"), "#", null, null, null, null));
-    items.add(new MenuItem(app.getMessage("eamms.feed.msg.dailyFeedsLog"), "#", null, null, null, null));
+    if(dailyFeeds || allFeeds || feedsHistory || feedsLog)
+    {
+	    items.add(new MenuItem(app.getMessage("eamms.feed.msg.dailyFeeds"), null, null, null, null, null));
+	    if(dailyFeeds)
+	    {
+		    items.add(new MenuItem(app.getMessage("eamms.feed.msg.dailyFeedsListing"), "myDailyFeedsListing.jsp", null, null, null, null));
+	    }
+	    
+	    if(allFeeds)
+	    {
+		    items.add(new MenuItem(app.getMessage("eamms.feed.msg.allFeedsListing"), "allFeedsListing.jsp", null, null, null, null));
+	    }
+	    
+	    if(feedsHistory)
+	    {
+		    items.add(new MenuItem(app.getMessage("eamms.feed.msg.feedsHistory"), "feedHistory.jsp", null, null, null, null));
+	    }
+	    
+	    if(feedsLog)
+	    {
+		    items.add(new MenuItem(app.getMessage("eamms.feed.msg.dailyFeedsLog"), "dailyFeedsLogListing.jsp", null, null, null, null));
+	    }
+    }
     //--dailly feeds end
 %>
 

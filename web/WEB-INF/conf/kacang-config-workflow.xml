@@ -13,50 +13,70 @@
         </property>
         
         <property>
-			<name>SuperAdministrator</name>
-			<value>kacang.service.security.Group_Super_Administrator</value>
-		</property>
-		
-		 <property>
-			<name>Administrator</name>
-			<value>kacang.service.security.Group_Administrator</value>
-		</property>
-		
-		<property>
-			<name>UnitHead</name>
-			<value>kacang.service.security.Group_Unit_Head</value>
-		</property>
-		
-		<property>
-			<name>SeniorEngineer</name>
-			<value>kacang.service.security.Group_Senior_Engineer</value>
-		</property>
-		
-		<property>
-			<name>Engineer</name>
-			<value>kacang.service.security.Group_Engineer</value>
-		</property>
-		
-		<property>
-			<name>NormalUser</name>
-			<value>kacang.service.security.Group_Normal_User</value>
-		</property>
-		
-		<property>
-			<name>NetworkEngineer</name>
-			<value>kacang.service.security.Group_Network_Engineer</value>
-		</property>
-		
-		<property>
-			<name>NetworkSuperUser</name>
-			<value>kacang.service.security.Group_Network_Super_User</value>
-		</property>
-		
-		<property>
-			<name>NetworkUser</name>
-			<value>kacang.service.security.Group_Network_User</value>
-		</property>
-		
+            <name>SuperAdministrator</name>
+            <value>kacang.service.security.Group_Super_Administrator</value>
+        </property>
+        
+         <property>
+            <name>Administrator</name>
+            <value>kacang.service.security.Group_Administrator</value>
+        </property>
+        
+        <property>
+            <name>UnitHead</name>
+            <value>kacang.service.security.Group_Unit_Head</value>
+        </property>
+        
+        <property>
+            <name>SeniorEngineer</name>
+            <value>kacang.service.security.Group_Senior_Engineer</value>
+        </property>
+        
+        <property>
+            <name>Engineer</name>
+            <value>kacang.service.security.Group_Engineer</value>
+        </property>
+        
+        <property>
+            <name>NormalUser</name>
+            <value>kacang.service.security.Group_Normal_User</value>
+        </property>
+        
+        <property>
+            <name>NetworkEngineer</name>
+            <value>kacang.service.security.Group_Network_Engineer</value>
+        </property>
+        
+        <property>
+            <name>NetworkSuperUser</name>
+            <value>kacang.service.security.Group_Network_Super_User</value>
+        </property>
+        
+        <property>
+            <name>NetworkUser</name>
+            <value>kacang.service.security.Group_Network_User</value>
+        </property>
+        
+        <property>
+            <name>UnitHeadEngineering</name>
+            <value>kacang.service.security.Group_Unit_Head_Engineering</value>
+        </property>
+        
+        <property>
+            <name>UnitHeadNetwork</name>
+            <value>kacang.service.security.Group_Unit_Head_Network</value>
+        </property>
+        
+        <property>
+            <name>MCR</name>
+            <value>kacang.service.security.Group_MCR</value>
+        </property>
+        
+         <property>
+            <name>Intern</name>
+            <value>kacang.service.security.Group_Intern</value>
+        </property>
+        
     </properties>
     <modules>
         <module class="com.tms.workflow.JogetClientModule">
@@ -69,8 +89,9 @@
             </menu>
             <permission>com.tms.workflow.WorkflowUser</permission>
             <permission>com.tms.workflow.WorkflowAdministrator</permission>
-            <permission>com.tms.workflow.workOrder.permission.woSubmit</permission>
+            <permission>com.tms.workflow.workOrder.permission.newWo</permission>
             <permission>com.tms.workflow.workOrder.permission.woAssigned</permission>
+            <permission>com.tms.workflow.workOrder.permission.woMy</permission>
             <permission>com.tms.workflow.workOrder.permission.woAll</permission>               
             <permission>com.tms.workflow.permission.viewHardwareListing</permission>
             <permission>com.tms.workflow.permission.manageHardware</permission>                  
@@ -94,7 +115,7 @@
         
         <module class="com.tms.fms.eamms.model.EammsModule">
             <dao-class>com.tms.fms.eamms.model.EammsDao</dao-class>
-            <datasource>jogetdb</datasource>	   
+            <datasource>jogetdb</datasource>       
         </module>
     </modules>
 </application>
