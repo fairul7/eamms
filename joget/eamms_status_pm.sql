@@ -16,7 +16,7 @@ SELECT 'N' ,'New','1' UNION ALL
 SELECT 'P' ,'In Progress','1' UNION ALL 
 SELECT 'O' ,'Overdue','1' UNION ALL 
 SELECT 'C' ,'Completed','1' UNION ALL 
-SELECT 'E' ,'Expired','1'
+SELECT 'E' ,'Expired','1' UNION ALL 
 SELECT 'NC' ,'Not Completed','1'
 
 
