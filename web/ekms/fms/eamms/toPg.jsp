@@ -18,6 +18,22 @@
     
     boolean facilityList = service.hasPermission(userId, "com.tms.workflow.permission.viewFacilitySetup", null, null);
     boolean facilityManage = service.hasPermission(userId, "com.tms.workflow.permission.manageFacility", null, null);
+    
+    boolean hwViewList = service.hasPermission(userId, "com.tms.workflow.permission.viewHardwareListing", null, null);
+    boolean hwManage = service.hasPermission(userId, "com.tms.workflow.permission.manageHardware", null, null); 
+    boolean swViewList = service.hasPermission(userId, "com.tms.workflow.permission.viewSoftwareListing", null, null);
+    boolean swManage = service.hasPermission(userId, "com.tms.workflow.permission.manageSoftware", null, null); 
+    boolean supplierViewList = service.hasPermission(userId, "com.tms.workflow.permission.viewSupplier", null, null);
+    boolean supplierManage = service.hasPermission(userId, "com.tms.workflow.permission.manageSupplier", null, null);   
+    boolean sparePartViewList = service.hasPermission(userId, "com.tms.workflow.permission.viewSparePart", null, null);
+    boolean sparePartManage = service.hasPermission(userId, "com.tms.workflow.permission.manageSparePart", null, null);
+    
+    /*boolean rentalSubmit = service.hasPermission(userId, "com.tms.workflow.permission.submitRentalRequest", null, null);
+    boolean rentalVerifyApprove = service.hasPermission(userId, "com.tms.workflow.permission.verifyApproveAssign", null, null);
+    boolean rentalViewUpdate = service.hasPermission(userId, "com.tms.workflow.permission.viewUpdate", null, null);
+    boolean rentalUpdateRental = service.hasPermission(userId, "com.tms.workflow.permission.updateRentalRequest", null, null);*/
+    boolean rentalViewRequest = service.hasPermission(userId, "com.tms.workflow.permission.viewRentalRequest", null, null);
+    boolean rentalReassign = service.hasPermission(userId, "com.tms.workflow.permission.reassignEngineer", null, null);
 %>
 
 <script>
@@ -79,8 +95,8 @@ function noPermission1()
         </c:if>
     </c:when>
     <c:when test="${param.addr eq 'sw01'}">
-        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//listingSoftware"/>
-        <c:if test="<%=!woAll%>">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//listingSoftware_read_only"/>
+        <c:if test="<%=!swViewList%>">
             <script>
                 noPermission1();
             </script>
@@ -88,7 +104,7 @@ function noPermission1()
     </c:when>
     <c:when test="${param.addr eq 'sw02'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//listingSoftware"/>
-        <c:if test="<%=!woAll%>">
+        <c:if test="<%=!swManage%>">
             <script>
                 noPermission1();
             </script>
@@ -96,7 +112,7 @@ function noPermission1()
     </c:when>   
    <c:when test="${param.addr eq 'hw01'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//hardwareViewList"/>
-        <c:if test="<%=!woAll%>">
+        <c:if test="<%=!hwViewList%>">
             <script>
                 noPermission1();
             </script>
@@ -104,7 +120,7 @@ function noPermission1()
     </c:when>
     <c:when test="${param.addr eq 'hw02'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//hardware"/>
-        <c:if test="<%=!woAll%>">
+        <c:if test="<%=!hwManage%>">
             <script>
                 noPermission1();
             </script>
@@ -127,8 +143,8 @@ function noPermission1()
         </c:if>
     </c:when>
     <c:when test="${param.addr eq 'ss01'}">
-        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/supplierSetup//supplierList"/>
-        <c:if test="<%=!woAll%>">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/supplierSetup//supplierList_read_only"/>
+        <c:if test="<%=!supplierViewList%>">
             <script>
                 noPermission1();
             </script>
@@ -136,7 +152,7 @@ function noPermission1()
     </c:when>
     <c:when test="${param.addr eq 'ss02'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/supplierSetup//supplierList"/>
-        <c:if test="<%=!woAll%>">
+        <c:if test="<%=!supplierManage%>">
             <script>
                 noPermission1();
             </script>
@@ -145,7 +161,7 @@ function noPermission1()
     
     <c:when test="${param.addr eq 'sp01'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/sparePart//spList"/>
-        <c:if test="<%=!woAll%>">
+        <c:if test="<%=!sparePartManage%>">
             <script>
                 noPermission1();
             </script>
@@ -153,7 +169,7 @@ function noPermission1()
     </c:when>
     <c:when test="${param.addr eq 'sp02'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/sparePart//spListLow"/>
-        <c:if test="<%=!woAll%>">
+        <c:if test="<%=!sparePartManage%>">
             <script>
                 noPermission1();
             </script>
@@ -161,7 +177,7 @@ function noPermission1()
     </c:when>
     <c:when test="${param.addr eq 'sp03'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/sparePart//spListHigh"/>
-        <c:if test="<%=!woAll%>">
+        <c:if test="<%=!sparePartManage%>">
             <script>
                 noPermission1();
             </script>
@@ -169,23 +185,55 @@ function noPermission1()
     </c:when>
     <c:when test="${param.addr eq 'sp04'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/sparePart//spInventoryHistoryList"/>
-        <c:if test="<%=!woAll%>">
+        <c:if test="<%=!sparePartManage%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'sp05'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/sparePart//sparePart_readonly"/>
+        <c:if test="<%=!sparePartViewList%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'sp06'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/sparePart//spListLow_readonly"/>
+        <c:if test="<%=!sparePartViewList%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'sp07'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/sparePart//spListHigh_readonly"/>
+        <c:if test="<%=!sparePartViewList%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'sp08'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/sparePart//spInventoryHistoryList"/>
+        <c:if test="<%=!sparePartViewList%>">
             <script>
                 noPermission1();
             </script>
         </c:if>
     </c:when>
     <c:when test="${param.addr eq 'rs01'}">
-        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//RentalRequest"/>
-        <c:if test="<%=!woAll%>">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//"/>
+        <c:if test="<%=!rentalViewRequest%>">
             <script>
                 noPermission1();
             </script>
         </c:if>
     </c:when>
     <c:when test="${param.addr eq 'rs02'}">
-        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//RentalListing"/>
-        <c:if test="<%=!woAll%>">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//"/>
+        <c:if test="<%=!rentalReassign%>">
             <script>
                 noPermission1();
             </script>
@@ -218,7 +266,7 @@ function noPermission1()
         </script>
     </head>
     <body onload=reSize()>
-       <iframe id=ifrm name="inlineframe" src="${address1}" frameborder="0" scrolling="auto" width="795" height="595" marginwidth="5" marginheight="5" ></iframe>
+       <iframe id=ifrm name="inlineframe" src="${address1}" frameborder="0" scrolling="auto" width="995" height="595" marginwidth="5" marginheight="5" ></iframe>
     </body>
 </html>
 

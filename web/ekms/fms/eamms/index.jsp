@@ -22,7 +22,7 @@
 
 <c:if test="${!empty param.addr}">
     <script>
-	    window.open('toPg.jsp?addr=' + '<c:out value="${param.addr}"/>' ,'mywin','scrollbars=no,menubar=no,height=600,width=800,resizable=no,toolbar=no,location=no,status=no');
+        window.open('toPg.jsp?addr=' + '<c:out value="${param.addr}"/>' ,'mywin','scrollbars=no,menubar=no,height=600,width=1000,resizable=yes,toolbar=no,location=no,status=no');
 	    document.location="index.jsp";
     </script>
 </c:if>

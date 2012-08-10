@@ -104,10 +104,12 @@
             <permission>com.tms.workflow.permission.viewSparePart</permission>
             <permission>com.tms.workflow.permission.manageSparePart</permission>
             
+            <!-- unused permission removed
             <permission>com.tms.workflow.permission.submitRentalRequest</permission>
             <permission>com.tms.workflow.permission.verifyApproveAssign</permission>
             <permission>com.tms.workflow.permission.viewUpdate</permission>
             <permission>com.tms.workflow.permission.updateRentalRequest</permission>
+            -->
             <permission>com.tms.workflow.permission.viewRentalRequest</permission>
             <permission>com.tms.workflow.permission.reassignEngineer</permission>
                         
