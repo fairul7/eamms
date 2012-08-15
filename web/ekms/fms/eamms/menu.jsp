@@ -52,6 +52,11 @@
 	boolean rentalViewRequest = service.hasPermission(userId, "com.tms.workflow.permission.viewRentalRequest", null, null);
 	boolean rentalReassign = service.hasPermission(userId, "com.tms.workflow.permission.reassignEngineer", null, null);
 	
+	boolean pmNew = service.hasPermission(userId, "com.tms.workflow.permission.newPM", null, null);
+    boolean pmListAssigned = service.hasPermission(userId, "com.tms.workflow.permission.pmAssignedToMe", null, null);
+    boolean pmListMy = service.hasPermission(userId, "com.tms.workflow.permission.myPMListing", null, null);
+    boolean pmListAll = service.hasPermission(userId, "com.tms.workflow.permission.allPMListing", null, null);
+	
     if(hwViewList || hwManage || swViewList || swManage || sparePartViewList || sparePartManage)
     {
     	items.add(new MenuItem(app.getMessage("com.tms.workflow.assetManagement"), null, null, null, null, null));    
@@ -174,6 +179,24 @@
 	    }
     }
     //--dailly feeds end
+    
+    //--preventive maintenance
+    if(pmNew || pmListAssigned || pmListMy || pmListAll){
+    	items.add(new MenuItem(app.getMessage("com.tms.workflow.PM"), null, null, null, null, null));
+    	if(pmNew){
+    		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.newPM"), "index.jsp?addr=pm01", null, null, null, null));
+    	}
+    	if(pmListAssigned){
+    		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.pmAssignedToMe"), "index.jsp?addr=pm02", null, null, null, null));
+    	}
+    	if(pmListMy){
+    		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.myPMListing"), "index.jsp?addr=pm03", null, null, null, null));
+    	}
+    	if(pmListAll){
+    		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.allPMListing"), "index.jsp?addr=pm04", null, null, null, null));
+    	}
+    }
+
 %>
 
 <%    

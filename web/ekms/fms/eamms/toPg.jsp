@@ -34,6 +34,11 @@
     boolean rentalUpdateRental = service.hasPermission(userId, "com.tms.workflow.permission.updateRentalRequest", null, null);*/
     boolean rentalViewRequest = service.hasPermission(userId, "com.tms.workflow.permission.viewRentalRequest", null, null);
     boolean rentalReassign = service.hasPermission(userId, "com.tms.workflow.permission.reassignEngineer", null, null);
+    
+    boolean pmNew = service.hasPermission(userId, "com.tms.workflow.permission.newPM", null, null);
+    boolean pmListAssigned = service.hasPermission(userId, "com.tms.workflow.permission.pmAssignedToMe", null, null);
+    boolean pmListMy = service.hasPermission(userId, "com.tms.workflow.permission.myPMListing", null, null);
+    boolean pmListAll = service.hasPermission(userId, "com.tms.workflow.permission.allPMListing", null, null);
 %>
 
 <script>
@@ -239,6 +244,39 @@ function noPermission1()
             </script>
         </c:if>
     </c:when>
+    <c:when test="${param.addr eq 'pm01'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/preventiveMaintenance//pmForm"/>
+        <c:if test="<%=!pmNew%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'pm02'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/preventiveMaintenance//assignedPMList"/>
+        <c:if test="<%=!pmListAssigned%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'pm03'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/preventiveMaintenance//myPMList"/>
+        <c:if test="<%=!pmListMy%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'pm04'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/preventiveMaintenance//allPMList"/>
+        <c:if test="<%=!pmListAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    
     <c:otherwise>
         <script>
             window.close();
