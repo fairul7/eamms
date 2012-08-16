@@ -10,6 +10,7 @@
     
     boolean wfAdmin = service.hasPermission(userId, "com.tms.workflow.WorkflowAdministrator", null, null);
     boolean wfUsr = service.hasPermission(userId, "com.tms.workflow.WorkflowUser", null, null);
+    boolean staffWorkload = service.hasPermission(userId, "com.tms.workflow.permission.staffWorkload", null, null);
     
     boolean woNew = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.newWo", null, null);
     boolean woAssigned = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woAssigned", null, null);
@@ -60,8 +61,8 @@ function noPermission1()
         </c:if>
     </c:when>
     <c:when test="${param.addr eq 'workLoad'}">
-        <c:set var="address1" value="${wurl}/jw/web/console/home"/>
-        <c:if test="<%=!wfAdmin && !wfUsr%>">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/work_order_userview//staff_workload_list"/>
+        <c:if test="<%=!staffWorkload%>">
             <script>
                 noPermission1();
             </script>

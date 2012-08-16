@@ -72,9 +72,14 @@
             <value>kacang.service.security.Group_MCR</value>
         </property>
         
-         <property>
+        <property>
             <name>Intern</name>
             <value>kacang.service.security.Group_Intern</value>
+        </property>
+        
+        <property>
+            <name>staffWorkload_scheduler_min</name>
+            <value>30</value>
         </property>
         
     </properties>
@@ -89,6 +94,7 @@
             </menu>
             <permission>com.tms.workflow.WorkflowUser</permission>
             <permission>com.tms.workflow.WorkflowAdministrator</permission>
+            <permission>com.tms.workflow.permission.staffWorkload</permission>
             <permission>com.tms.workflow.workOrder.permission.newWo</permission>
             <permission>com.tms.workflow.workOrder.permission.woAssigned</permission>
             <permission>com.tms.workflow.workOrder.permission.woMy</permission>

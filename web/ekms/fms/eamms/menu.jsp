@@ -18,11 +18,11 @@
 
 <%
 	items.add(new MenuItem(app.getMessage("com.tms.workflow.myTask"), "index.jsp?addr=myTask", null, null, null, null));
-	items.add(new MenuItem(app.getMessage("com.tms.workflow.staffWorkLoad"), "index.jsp?addr=workLoad", null, null, null, null));
 %>
 
 <%
-	boolean woNew = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.newWo", null, null);
+	boolean staffWorkload = service.hasPermission(userId, "com.tms.workflow.permission.staffWorkload", null, null);
+    boolean woNew = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.newWo", null, null);
 	boolean woAssigned = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woAssigned", null, null);
     boolean woMy = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woMy", null, null);
 	boolean woAll = service.hasPermission(userId, "com.tms.workflow.workOrder.permission.woAll", null, null);
@@ -56,6 +56,11 @@
     boolean pmListAssigned = service.hasPermission(userId, "com.tms.workflow.permission.pmAssignedToMe", null, null);
     boolean pmListMy = service.hasPermission(userId, "com.tms.workflow.permission.myPMListing", null, null);
     boolean pmListAll = service.hasPermission(userId, "com.tms.workflow.permission.allPMListing", null, null);
+	
+	if(staffWorkload)
+	{
+		items.add(new MenuItem(app.getMessage("com.tms.workflow.staffWorkLoad"), "index.jsp?addr=workLoad", null, null, null, null));
+	}
 	
     if(hwViewList || hwManage || swViewList || swManage || sparePartViewList || sparePartManage)
     {

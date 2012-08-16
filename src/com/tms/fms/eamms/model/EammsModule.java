@@ -2,15 +2,16 @@ package com.tms.fms.eamms.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.Date;
+
 import kacang.Application;
 import kacang.model.DaoException;
 import kacang.model.DefaultDataObject;
 import kacang.model.DefaultModule;
 import kacang.util.Log;
 import kacang.util.Mailer;
+import kacang.util.UuidGenerator;
+
 import com.tms.fms.util.JobUtil;
 import com.tms.util.MailUtil;
 
@@ -20,6 +21,7 @@ public class EammsModule extends DefaultModule {
 		scheduleDailyTask();
 		scheduleDailyTaskPM();
 		scheduleDailyTaskSoftware();
+		scheduleHourlyTaskStaffWorkload();
 		super.init();
 	}
 	
@@ -85,6 +87,24 @@ public class EammsModule extends DefaultModule {
 		int min =41; //default 1
 		JobUtil.removeTask(taskName, taskGroup, jobSetSoftwareExpired);
 		JobUtil.scheduleDailyTask(taskName, taskGroup, taskDesc, jobSetSoftwareExpired, hour, min);
+	}
+	
+	public void scheduleHourlyTaskStaffWorkload()
+	{
+		String taskName = StaffWorkloadCalculationTask.TASKNAME;
+		String taskGroup = StaffWorkloadCalculationTask.TASKGROUP;
+		String taskDesc = StaffWorkloadCalculationTask.TASKDESC;
+		
+		int numMinutes = 60;
+		try
+		{
+			numMinutes = Integer.parseInt(Application.getInstance().getProperty("staffWorkload_scheduler_min"));
+		}
+		catch(Exception e)
+		{
+			Log.getLog(getClass()).error(e, e);
+		}
+		JobUtil.scheduleMinuteTask(taskName, taskGroup, taskDesc, new StaffWorkloadCalculationTask(), numMinutes);
 	}
 	
 	public void sendEmailRentalDueReminder(String id)
@@ -250,6 +270,84 @@ public class EammsModule extends DefaultModule {
 			
 		} catch (DaoException e) {
 			Log.getLog(getClass()).error(e.toString(), e);
+		}
+	}
+
+	public void calculateStaffWorkload()
+	{
+		EammsDao dao = (EammsDao) getDao();
+		try 
+		{
+			Collection<DefaultDataObject> userCol = dao.getAllStaff();
+			if(userCol != null && !userCol.isEmpty())
+			{
+				Date lastUpdatedDate = new Date();
+				for(DefaultDataObject userObj : userCol)
+				{
+					String userId = (String) userObj.getProperty("userId");
+					String username = (String) userObj.getProperty("username");
+					int numOfCM = calculateCMOnHand(username);
+					int numOfPM = calculatePMOnhand(username);
+					int numOfWO = calculateWOOnhand(userId);
+					
+					userObj.setProperty("cmOnHand", numOfCM);
+					userObj.setProperty("pmOnHand", numOfPM);
+					userObj.setProperty("woOnHand", numOfWO);
+					userObj.setProperty("lastUpdatedDate", lastUpdatedDate);
+					
+					userObj.setId(UuidGenerator.getInstance().getUuid());
+					dao.insertStaffWorkload(userObj);
+				}
+			}
+		} 
+		catch (Exception e) 
+		{
+			Log.getLog(getClass()).error("error @ EammsModule.calculateStaffWorkload()" + e, e);
+		}
+	}
+
+	private int calculateWOOnhand(String userId)
+	{
+		EammsDao dao = (EammsDao) getDao();
+		try 
+		{
+			int numOfWO = dao.getCountWorkloadInWO(userId);
+			return numOfWO;
+		} 
+		catch (Exception e) 
+		{
+			Log.getLog(getClass()).error("error @ EammsModule.calculateWOOnhand(1)" + e, e);
+			return 0;
+		}
+	}
+
+	private int calculatePMOnhand(String userId)
+	{
+		EammsDao dao = (EammsDao) getDao();
+		try 
+		{
+			int numOfPM = dao.getCountWorkloadInPM(userId);
+			return numOfPM;
+		} 
+		catch (Exception e) 
+		{
+			Log.getLog(getClass()).error("error @ EammsModule.calculatePMOnhand(1)" + e, e);
+			return 0;
+		}
+	}
+
+	private int calculateCMOnHand(String userId)
+	{
+		EammsDao dao = (EammsDao) getDao();
+		try 
+		{
+			int numOfCM = dao.getCountWorkloadInCM(userId);
+			return numOfCM;
+		} 
+		catch (Exception e) 
+		{
+			Log.getLog(getClass()).error("error @ EammsModule.calculateCMOnHand(1)" + e, e);
+			return 0;
 		}
 	}
 }
