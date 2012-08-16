@@ -148,6 +148,63 @@ public class EammsDao extends DataSourceDao {
 			}				
 		return new DefaultDataObject();
 	}
+	
+	public String getActivityId(String originProcessId) throws DaoException {
+		
+		String sql = " select Id from SHKActivities a " +
+				" INNER JOIN wf_process_link l ON (l.processId = a.processId ) " +
+				" WHERE a.state ='1000003' AND l.originProcessId= ? " ;			
+	    	
+		
+		Collection col = super.select(sql, HashMap.class, new String[]{originProcessId}, 0, 1);
+		if (col.size() == 1) {
+			HashMap map = (HashMap) col.iterator().next();
+			String id = (String) map.get("Id");
+			
+			return id;
+		}
+		return "";
+	}
+	
+ public HashMap getEngineersAssignedMSR(String id) throws DaoException {
+		
+		String sql = " select c_engineer1UserId,c_engineer2UserId,c_engineer3UserId,c_engineer4UserId " +
+				" from app_fd_eamms_cm_request where id= ? "; 			
+	    	
+		
+		Collection col = super.select(sql, HashMap.class, new String[]{id}, 0, 1);
+		if (col.size() == 1) {
+			HashMap map = (HashMap) col.iterator().next();			
+			
+			return map;
+		}
+		return new HashMap();
+	}
+ 
+ public DefaultDataObject getTXMReportInfo(String id) throws DaoException {
+		String sql = " select r.id, c.name as channel, r.c_date, r.c_txStart, r.c_txEnd, r.c_shift, " +
+				" r.c_programme,c_startProg, c_progDuration, c_timeOccur, c_faultDuration, " +
+				" c_natureOfFault, c_action  from app_fd_eamms_txm_report r " +
+				" LEFT JOIN app_fd_eamms_channel_txm c ON (c.id = r.c_channel) " +
+				" WHERE r.id= ? " ;    	
+		
+			Collection col = super.select(sql, DefaultDataObject.class, new String[]{id}, 0, 1);
+			if (col.size() == 1){
+				return (DefaultDataObject) col.iterator().next();
+			}				
+		return new DefaultDataObject();
+	}
+ public Collection getTXMReportFollowupInfo(String id) throws DaoException {
+		String sql = "  select c_details from app_fd_eamms_txm_report_followup f where f.c_txmReportId= ? " ; 
+		Collection col = super.select(sql, HashMap.class, new String[]{id}, 0, -1);						
+		return col;
+	}
+ public Collection getTXMReportRemarksInfo(String id) throws DaoException {
+		String sql = "   select c_remarks from app_fd_eamms_txm_report_remarks r where r.c_txmReportId= ? " ;  		
+		Collection col = super.select(sql, HashMap.class, new String[]{id}, 0, -1);			
+		return col;
+	}
+	
 
 	public Collection<DefaultDataObject> getAllStaff() throws DaoException
 	{

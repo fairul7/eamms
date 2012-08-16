@@ -2,6 +2,10 @@ package com.tms.fms.eamms.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.Date;
 
 import kacang.Application;
@@ -233,6 +237,29 @@ public class EammsModule extends DefaultModule {
 		}
 	}
 	
+	public String getActivityId(String originProcessId) {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			return dao.getActivityId(originProcessId);
+			
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
+			return "";
+		}
+	}
+	
+	
+	public HashMap getEngineersAssignedMSR(String id) {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			return dao.getEngineersAssignedMSR(id);
+			
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
+			return new HashMap();
+		}
+	}
+	
 	public void sendEmailPMDueReminder(String id) {
 		String smtpServer = Application.getInstance().getProperty("smtp.server");
 		String adminEmail = Application.getInstance().getProperty("admin.email");
@@ -270,6 +297,52 @@ public class EammsModule extends DefaultModule {
 			
 		} catch (DaoException e) {
 			Log.getLog(getClass()).error(e.toString(), e);
+		}
+	}
+	
+	public DefaultDataObject getTXMReportInfo(String id) {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			return dao.getTXMReportInfo(id);
+			
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
+			return new DefaultDataObject();
+		}
+	}
+	
+	public String getTXMReportFollowupInfo(String id) {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			Collection col= dao.getTXMReportFollowupInfo(id);
+			String ret="";
+			
+			for(Iterator iter=col.iterator();iter.hasNext(); ){
+				HashMap map = (HashMap)iter.next();	
+				ret += map.get("c_details") +",";
+			}
+			
+			if ( !"".equals(ret) && ret.charAt(ret.length()-1)==',')
+			 {
+			  ret = ret.substring(0, ret.length()-1);
+			  
+			 }
+			
+			return ret;
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
+			return "";
+		}
+	}
+	
+	public Collection getTXMReportRemarksInfo(String id) {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			return dao.getTXMReportRemarksInfo(id);
+			
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
+			return new ArrayList();
 		}
 	}
 

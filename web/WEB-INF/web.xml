@@ -806,4 +806,33 @@
             <res-auth>Container</res-auth>
         </resource-ref>
     -->
+    
+    <!--  Servlet Test -->
+   <servlet>	
+   <servlet-name>ReassignServiceRequest</servlet-name>
+  		<servlet-class>com.tms.fms.eamms.model.ReassignServiceRequest</servlet-class>
+   </servlet>
+   <servlet-mapping>
+ 		<servlet-name>ReassignServiceRequest</servlet-name>
+ 		<url-pattern>/EAMMS/ReassignServiceRequest</url-pattern>
+   </servlet-mapping>
+   
+   <servlet>	
+   <servlet-name>TXMReport</servlet-name>
+  		<servlet-class>com.tms.fms.eamms.ui.TXMReport</servlet-class>
+   </servlet>
+   <servlet-mapping>
+ 		<servlet-name>TXMReport</servlet-name>
+ 		<url-pattern>/EAMMS/TXMReport</url-pattern>
+   </servlet-mapping>
+   
+   
+   <servlet>	
+   <servlet-name>ServletTest123</servlet-name>
+  		<servlet-class>test.ServletTest</servlet-class>
+   </servlet>
+   <servlet-mapping>
+ 		<servlet-name>ServletTest123</servlet-name>
+ 		<url-pattern>/ABC/Test</url-pattern>
+   </servlet-mapping>
 </web-app>
