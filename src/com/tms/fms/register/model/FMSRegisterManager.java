@@ -26,9 +26,13 @@ public class FMSRegisterManager extends DefaultModule {
 	public static final String GROUP_EAMMS_SENIOR_ENGINEER = Application.getInstance().getMessage("eamms.group.seniorEngineer");
 	public static final String GROUP_EAMMS_ENGINEER = Application.getInstance().getMessage("eamms.group.engineer");
 	public static final String GROUP_EAMMS_NORMAL_USER = Application.getInstance().getMessage("eamms.group.normalUser");
+	public static final String GROUP_EAMMS_UNIT_HEAD_ENGINEERING = Application.getInstance().getMessage("eamms.group.unitHeadEngineering_manager");
 	public static final String GROUP_EAMMS_NETWORK_ENGINEER = Application.getInstance().getMessage("eamms.group.networkEngineer");
+	public static final String GROUP_EAMMS_UNIT_HEAD_NETWORK = Application.getInstance().getMessage("eamms.group.unitHeadNetwork_manager");
+	public static final String GROUP_EAMMS_MCR = Application.getInstance().getMessage("eamms.group.mcr");
 	public static final String GROUP_EAMMS_NETWORK_SUPER_USER = Application.getInstance().getMessage("eamms.group.networkSuperUser");
 	public static final String GROUP_EAMMS_NETWORK_USER = Application.getInstance().getMessage("eamms.group.networkUser");
+	public static final String GROUP_EAMMS_INTERN = Application.getInstance().getMessage("eamms.group.intern");
 	
 	public static final String PENDING_FMS_USER = "0";
 	public static final String ACCEPTED_FMS_USER = "1";

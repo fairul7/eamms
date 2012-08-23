@@ -236,9 +236,13 @@ public class FMSRegisterDao extends SecurityDao {
             eammsGroups.put(Application.getInstance().getProperty("SeniorEngineer"), FMSRegisterManager.GROUP_EAMMS_SENIOR_ENGINEER);
             eammsGroups.put(Application.getInstance().getProperty("Engineer"), FMSRegisterManager.GROUP_EAMMS_ENGINEER);
             eammsGroups.put(Application.getInstance().getProperty("NormalUser"), FMSRegisterManager.GROUP_EAMMS_NORMAL_USER);
+            eammsGroups.put(Application.getInstance().getProperty("UnitHeadEngineering"), FMSRegisterManager.GROUP_EAMMS_UNIT_HEAD_ENGINEERING);
             eammsGroups.put(Application.getInstance().getProperty("NetworkEngineer"), FMSRegisterManager.GROUP_EAMMS_NETWORK_ENGINEER);
+            eammsGroups.put(Application.getInstance().getProperty("UnitHeadNetwork"), FMSRegisterManager.GROUP_EAMMS_UNIT_HEAD_NETWORK);
+            eammsGroups.put(Application.getInstance().getProperty("MCR"), FMSRegisterManager.GROUP_EAMMS_MCR);
             eammsGroups.put(Application.getInstance().getProperty("NetworkSuperUser"), FMSRegisterManager.GROUP_EAMMS_NETWORK_SUPER_USER);
             eammsGroups.put(Application.getInstance().getProperty("NetworkUser"), FMSRegisterManager.GROUP_EAMMS_NETWORK_USER);
+            eammsGroups.put(Application.getInstance().getProperty("Intern"), FMSRegisterManager.GROUP_EAMMS_INTERN);
             
             for (Iterator i = eammsGroups.keySet().iterator(); i.hasNext();) {    
             	String id = (String) i.next();
