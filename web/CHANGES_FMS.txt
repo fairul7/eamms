@@ -1,5 +1,10 @@
 New Build
 =========
+
+
+
+fms_1.0.0_update (Aug 27 2012) V2.5
+-------------------------------------
 Requirement #13678 : Feed Requisition Form
 Requirement #13680 : News Feed Log
 Fixed #13705: Duty Roster - different link but same information
