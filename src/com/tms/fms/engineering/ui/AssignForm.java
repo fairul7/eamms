@@ -1,5 +1,9 @@
 package com.tms.fms.engineering.ui;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
 import kacang.Application;
 import kacang.stdui.Button;
 import kacang.stdui.CheckBox;
@@ -9,8 +13,10 @@ import kacang.stdui.Radio;
 import kacang.ui.Event;
 import kacang.ui.Forward;
 
+import com.tms.fms.eamms.model.EammsFeedsModule;
 import com.tms.fms.engineering.model.EngineeringModule;
 import com.tms.fms.engineering.model.EngineeringRequest;
+import com.tms.fms.engineering.model.Service;
 
 /**
  * 
@@ -105,14 +111,12 @@ public class AssignForm extends Form {
 	public Forward onValidate(Event event) {
 		String charge = chargeBack.isChecked()?"1":"0";
 		String call = callBack.isChecked()?"1":"0";
+		EngineeringModule module = (EngineeringModule)Application.getInstance().getModule(EngineeringModule.class);
 		
 		if (act.equals("assign")) {
 			if (asgId!=null && userId!=null){
 				if (!"".equals(asgId) && !"".equals(userId)){
-					EngineeringModule module = (EngineeringModule)Application.getInstance().getModule(EngineeringModule.class);
-					
 					if (rdYes.isChecked()) {
-						
 						String[] asgIds = module.getOtherAssignmentId(asgId, getRequestId());
 						
 						if (asgIds != null && asgIds.length > 0) {
@@ -123,6 +127,34 @@ public class AssignForm extends Form {
 						
 					} else {
 						module.updateManpowerAssignment(asgId, userId, charge, call);
+					}
+				}
+				
+				EammsFeedsModule mod = (EammsFeedsModule)Application.getInstance().getModule(EammsFeedsModule.class);
+				if(!mod.isRequestExistInEamms(requestId))
+				{
+					EngineeringRequest request = module.getRequestWithService(requestId);
+					if(request != null) 
+					{
+						String requestTitle = request.getTitle();
+						
+						Collection services = request.getServices();
+						ArrayList serviceIdArr = new ArrayList();
+						for(Iterator itr = services.iterator();itr.hasNext();)
+						{
+							Service service=(Service)itr.next();
+							serviceIdArr.add(service.getServiceId());
+						}
+						
+						if(serviceIdArr.contains(ServiceDetailsForm.SERVICE_TVRO) &&
+								serviceIdArr.contains(ServiceDetailsForm.SERVICE_MANPOWER))
+						{
+							boolean isBothServiceAssigned = mod.isAllManpowerAndTvroAssigned(requestId);
+							if(isBothServiceAssigned)
+							{
+								mod.sendAssignmentsToEamms(requestId, requestTitle);
+							}
+						}
 					}
 				}
 			}

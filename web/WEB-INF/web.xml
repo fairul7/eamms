@@ -702,6 +702,40 @@
 	  <url-pattern>/recruit/downloadPdfReportFile</url-pattern> 
 	</servlet-mapping>
 	
+	<!-- Excel generator -->
+    <servlet>
+        <servlet-name>exportFeedsToExcel</servlet-name>
+        <servlet-class>com.tms.fms.eamms.model.ExportFeedsToExcel</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>exportFeedsToExcel</servlet-name>
+        <url-pattern>/feedsRequisition/exportFeedsToExcel</url-pattern>
+    </servlet-mapping>
+    <!-- Excel generator End -->
+    
+    <!-- CSV generator -->
+    <servlet>
+        <servlet-name>exportFeedsLogToCSV</servlet-name>
+        <servlet-class>com.tms.fms.eamms.model.ExportFeedsLogToCSV</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>exportFeedsLogToCSV</servlet-name>
+        <url-pattern>/feedsRequisition/exportFeedsLogToCSV</url-pattern>
+    </servlet-mapping>
+    <!-- Excel generator End -->
+    
+    <servlet>
+        <servlet-name>findTvroBlockBooking</servlet-name>
+        <servlet-class>com.tms.fms.eamms.model.FindTvroBlockBooking</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>findTvroBlockBooking</servlet-name>
+        <url-pattern>/tvro/blockbooking</url-pattern>
+    </servlet-mapping>
+	
     <!-- Welcome File List -->
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

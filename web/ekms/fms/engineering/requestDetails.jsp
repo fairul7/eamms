@@ -134,6 +134,11 @@
     <tr><td colspan="2" valign="TOP" bgcolor="#EFEFEF" class="contentBgColor">
         <x:display name="fms_requestDetailsPage.statusTrail"/>
     </td></tr>
+    <tr><td colspan="2" valign="TOP" bgcolor="#EFEFEF" class="contentBgColor">
+        <jsp:include page="../eamms/feedRequisitionStatus.jsp">
+            <jsp:param name="requestId" value="${requestId}"/>
+        </jsp:include>
+    </td></tr>
     <tr><td colspan="2" valign="TOP" bgcolor="#CCCCCC" class="contentStrapColor"><img src="<c:url value="/ekms/" />images/blank.gif" width="5" height="15"></td></tr>
 </table>
 

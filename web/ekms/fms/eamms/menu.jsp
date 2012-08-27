@@ -29,6 +29,7 @@
 	
 	boolean dailyFeeds = service.hasPermission(userId, "com.tms.fms.permission.feed.dailyFeedsListing", null, null);
 	boolean allFeeds = service.hasPermission(userId, "com.tms.fms.permission.feed.allFeedsListing", null, null);
+	boolean allFeedsOwn = service.hasPermission(userId, "com.tms.fms.permission.feed.allFeedsListingOwn", null, null);
 	boolean feedsHistory = service.hasPermission(userId, "com.tms.fms.permission.feed.feedsHistory", null, null);
 	boolean feedsLog = service.hasPermission(userId, "com.tms.fms.permission.feed.dailyFeedsLog", null, null);
 
@@ -160,7 +161,7 @@
     //-- work Order end
     
     //--dailly feeds start
-    if(dailyFeeds || allFeeds || feedsHistory || feedsLog)
+    if(dailyFeeds || allFeeds || allFeedsOwn || feedsHistory || feedsLog)
     {
 	    items.add(new MenuItem(app.getMessage("eamms.feed.msg.dailyFeeds"), null, null, null, null, null));
 	    if(dailyFeeds)
@@ -172,6 +173,11 @@
 	    {
 		    items.add(new MenuItem(app.getMessage("eamms.feed.msg.allFeedsListing"), "allFeedsListing.jsp", null, null, null, null));
 	    }
+	    
+	    if(allFeedsOwn)
+        {
+            items.add(new MenuItem(app.getMessage("eamms.feed.msg.allFeedsListingOwn"), "allFeedsListingOwn.jsp", null, null, null, null));
+        }
 	    
 	    if(feedsHistory)
 	    {

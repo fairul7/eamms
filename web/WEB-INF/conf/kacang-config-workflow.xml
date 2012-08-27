@@ -82,6 +82,11 @@
             <value>30</value>
         </property>
         
+        <property>
+            <name>ec_rate_card_id</name>
+            <value></value>
+        </property>
+        
     </properties>
     <modules>
         <module class="com.tms.workflow.JogetClientModule">
@@ -120,9 +125,9 @@
             <permission>com.tms.workflow.permission.reassignEngineer</permission>
             
             <permission>com.tms.workflow.permission.newPM</permission>
-			<permission>com.tms.workflow.permission.pmAssignedToMe</permission>
-			<permission>com.tms.workflow.permission.myPMListing</permission>
-			<permission>com.tms.workflow.permission.allPMListing</permission>
+            <permission>com.tms.workflow.permission.pmAssignedToMe</permission>
+            <permission>com.tms.workflow.permission.myPMListing</permission>
+            <permission>com.tms.workflow.permission.allPMListing</permission>
         </module>
         
         <module class="com.tms.fms.eamms.model.EammsModule">

@@ -36,6 +36,7 @@ public class ServiceDetailsForm extends Form {
 	protected Button delete;
 	protected boolean viewMode=true;		
 	protected boolean removeLink=false;	
+	protected boolean hideTitle=false;
 	protected CollapsiblePanel panel;
 	protected HashMap ADD_PAGES=new HashMap();
 	protected HashMap EDIT_PAGES=new HashMap();
@@ -88,6 +89,10 @@ public class ServiceDetailsForm extends Form {
 		init();
 		panel= new CollapsiblePanel("collapsiblePanel",Application.getInstance().getMessage("fms.request.label.serviceType")+": "+service.getDisplayTitle());
 		panel.setCollapsed(false);
+		if(hideTitle)
+		{
+			panel.setTemplate("");
+		}
 		addChild(panel);
 		add=new Button("add",Application.getInstance().getMessage("fms.facility.add"));
 		delete=new Button("delete",Application.getInstance().getMessage("fms.facility.delete"));
@@ -429,6 +434,11 @@ public class ServiceDetailsForm extends Form {
 
 	public void setModifyMode(boolean modifyMode) {
 		this.modifyMode = modifyMode;
+	}
+
+	public void setHideTitle(boolean hideTitle)
+	{
+		this.hideTitle = hideTitle;
 	}
 
 		

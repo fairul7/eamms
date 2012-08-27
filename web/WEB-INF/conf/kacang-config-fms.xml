@@ -120,7 +120,18 @@
          <module class="com.tms.fms.engineering.model.AssignmentLogModule">
             <dao-class>com.tms.fms.engineering.model.AssignmentLogDao</dao-class>			
             <datasource>defaultdb</datasource>          
-        </module>  
+        </module>
+                
+        <module class="com.tms.fms.eamms.model.EammsFeedsModule">
+            <dao-class>com.tms.fms.eamms.model.EammsFeedsDao</dao-class>           
+            <datasource>defaultdb</datasource>
+            <permission>com.tms.fms.permission.feed.dailyFeedsListing</permission>
+            <permission>com.tms.fms.permission.feed.allFeedsListing</permission>
+            <permission>com.tms.fms.permission.feed.allFeedsListingOwn</permission>
+            <permission>com.tms.fms.permission.feed.feedsHistory</permission>
+            <permission>com.tms.fms.permission.feed.dailyFeedsLog</permission>     
+        </module>
+          
 	  </modules>
 	  
 	  

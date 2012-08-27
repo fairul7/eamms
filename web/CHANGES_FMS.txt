@@ -1,5 +1,7 @@
 New Build
 =========
+Requirement #13678 : Feed Requisition Form
+Requirement #13680 : News Feed Log
 Fixed #13705: Duty Roster - different link but same information
 Fixed #13753: Transport Request: Should not allow modify required date after Create Assignment
 
