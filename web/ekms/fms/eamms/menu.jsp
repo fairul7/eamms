@@ -113,12 +113,12 @@
     	 
 	     if(rentalViewRequest)
          {
-             items.add(new MenuItem(app.getMessage("com.tms.workflow.rental.rentalListing"), "index.jsp?addr=rs01", null, null, null, null));
+             items.add(new MenuItem(app.getMessage("com.tms.workflow.rental.newRentalRequest"), "index.jsp?addr=rs01", null, null, null, null));
          }
 	     
 	     if(rentalReassign)
          {
-             items.add(new MenuItem(app.getMessage("com.tms.workflow.rental.newRentalRequest"), "index.jsp?addr=rs02", null, null, null, null));
+             items.add(new MenuItem(app.getMessage("com.tms.workflow.rental.rentalListing"), "index.jsp?addr=rs02", null, null, null, null));
          }
      }
 	
