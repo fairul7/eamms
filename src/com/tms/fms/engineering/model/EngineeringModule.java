@@ -823,8 +823,12 @@ public class EngineeringModule extends DefaultModule {
 			EngineeringRequest request=getRequestWithService(requestId);
 			if(ASSIGNMENT_STATUS.equals(request.getStatus()))
 				eRequest.setStatus(ASSIGNMENT_STATUS);
-			else
+			else if (DRAFT_STATUS.equals(request.getStatus())) {
 				eRequest.setStatus(PENDING_STATUS);
+			} else {
+				Log.getLog(getClass()).error("submitRequest: Invalid status " + requestId + " Status=" + request.getStatus());
+				return;
+			}
 			
 			eRequest.setRequestId(requestId);
 			dao.submitRequest(eRequest);
