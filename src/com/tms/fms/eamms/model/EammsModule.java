@@ -248,6 +248,17 @@ public class EammsModule extends DefaultModule {
 		}
 	}
 	
+	public String getActivityIdNoParent(String processId) {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			return dao.getActivityIdNoParent(processId);
+			
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
+			return "";
+		}
+	}
+	
 	
 	public HashMap getEngineersAssignedMSR(String id) {
 		EammsDao dao = (EammsDao) getDao();
@@ -421,6 +432,16 @@ public class EammsModule extends DefaultModule {
 		{
 			Log.getLog(getClass()).error("error @ EammsModule.calculateCMOnHand(1)" + e, e);
 			return 0;
+		}
+	}
+	
+	public void rentalReassign(String id, String engineer) {
+		EammsDao dao = (EammsDao) getDao();
+		try {
+			dao.rentalReassign(id, engineer);
+			
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
 		}
 	}
 }

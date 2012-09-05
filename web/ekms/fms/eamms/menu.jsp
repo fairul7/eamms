@@ -57,7 +57,14 @@
     boolean pmListAssigned = service.hasPermission(userId, "com.tms.workflow.permission.pmAssignedToMe", null, null);
     boolean pmListMy = service.hasPermission(userId, "com.tms.workflow.permission.myPMListing", null, null);
     boolean pmListAll = service.hasPermission(userId, "com.tms.workflow.permission.allPMListing", null, null);
-	
+    
+    boolean newCM = service.hasPermission(userId, "com.tms.workflow.permission.newCM", null, null);
+    boolean viewNewCM = service.hasPermission(userId, "com.tms.workflow.permission.viewNewCM", null, null);
+    boolean viewMyCM = service.hasPermission(userId, "com.tms.workflow.permission.viewMyCM", null, null);
+    boolean viewAllCM = service.hasPermission(userId, "com.tms.workflow.permission.viewAllCM", null, null);
+    
+    boolean viewTXMListing = service.hasPermission(userId, "com.tms.workflow.permission.viewTXMListing", null, null);
+    
 	if(staffWorkload)
 	{
 		items.add(new MenuItem(app.getMessage("com.tms.workflow.staffWorkLoad"), "index.jsp?addr=workLoad", null, null, null, null));
@@ -191,6 +198,23 @@
     }
     //--dailly feeds end
     
+    //-- Maintenance Service Request    
+    if(newCM || viewNewCM || viewMyCM || viewAllCM ){
+    	items.add(new MenuItem(app.getMessage("com.tms.workflow.CM"), null, null, null, null, null));
+    	if(newCM){
+    		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.newCM"), "index.jsp?addr=cm01", null, null, null, null));
+    	}
+    	if(viewNewCM){
+    		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.viewNewCM"), "index.jsp?addr=cm02", null, null, null, null));
+    	}
+    	if(viewMyCM){
+    		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.viewMyCM"), "index.jsp?addr=cm03", null, null, null, null));
+    	}
+    	if(viewAllCM){
+    		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.viewAllCM"), "index.jsp?addr=cm04", null, null, null, null));
+    	}
+    }
+    
     //--preventive maintenance
     if(pmNew || pmListAssigned || pmListMy || pmListAll){
     	items.add(new MenuItem(app.getMessage("com.tms.workflow.PM"), null, null, null, null, null));
@@ -206,6 +230,14 @@
     	if(pmListAll){
     		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.allPMListing"), "index.jsp?addr=pm04", null, null, null, null));
     	}
+    }
+    
+  //--Daily Operation Log
+    if(viewTXMListing){
+    	items.add(new MenuItem(app.getMessage("com.tms.workflow.TXM"), null, null, null, null, null));
+    	if(viewTXMListing){
+    		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.viewTXMListing"), "index.jsp?addr=txm01", null, null, null, null));
+    	}    	
     }
 
 %>

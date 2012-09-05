@@ -40,6 +40,13 @@
     boolean pmListAssigned = service.hasPermission(userId, "com.tms.workflow.permission.pmAssignedToMe", null, null);
     boolean pmListMy = service.hasPermission(userId, "com.tms.workflow.permission.myPMListing", null, null);
     boolean pmListAll = service.hasPermission(userId, "com.tms.workflow.permission.allPMListing", null, null);
+    
+    boolean newCM = service.hasPermission(userId, "com.tms.workflow.permission.newCM", null, null);
+    boolean viewNewCM = service.hasPermission(userId, "com.tms.workflow.permission.viewNewCM", null, null);
+    boolean viewMyCM = service.hasPermission(userId, "com.tms.workflow.permission.viewMyCM", null, null);
+    boolean viewAllCM = service.hasPermission(userId, "com.tms.workflow.permission.viewAllCM", null, null);
+    
+    boolean viewTXMListing = service.hasPermission(userId, "com.tms.workflow.permission.viewTXMListing", null, null);
 %>
 
 <script>
@@ -272,6 +279,51 @@ function noPermission1()
     <c:when test="${param.addr eq 'pm04'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/preventiveMaintenance//allPMList"/>
         <c:if test="<%=!pmListAll%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    
+    <%---------------------- Maintenance Service Request ----------------------------------%>
+    <c:when test="${param.addr eq 'cm01'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/MSR//NewServiceRequest"/>
+        <c:if test="<%=!newCM%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    
+    <c:when test="${param.addr eq 'cm02'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/MSR//NewMSRListing"/>
+        <c:if test="<%=!viewNewCM%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'cm03'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/MSR//MyMSRListing"/>
+        <c:if test="<%=!viewMyCM%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    <c:when test="${param.addr eq 'cm04'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/MSR//AllMSRListing"/>
+        <c:if test="<%=!viewAllCM%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
+    
+    <%---------------------- Daily Operation Log ----------------------------------%>
+    <c:when test="${param.addr eq 'txm01'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/TXM//txmReport"/>
+        <c:if test="<%=!viewTXMListing%>">
             <script>
                 noPermission1();
             </script>

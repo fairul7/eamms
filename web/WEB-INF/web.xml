@@ -842,6 +842,15 @@
     -->
     
     <!--  Servlet Test -->
+    <servlet>	
+   <servlet-name>ReassignRentalRequest</servlet-name>
+  		<servlet-class>com.tms.fms.eamms.model.ReassignRentalRequest</servlet-class>
+   </servlet>
+   <servlet-mapping>
+ 		<servlet-name>ReassignRentalRequest</servlet-name>
+ 		<url-pattern>/EAMMS/ReassignRentalRequest</url-pattern>
+   </servlet-mapping>
+   
    <servlet>	
    <servlet-name>ReassignServiceRequest</servlet-name>
   		<servlet-class>com.tms.fms.eamms.model.ReassignServiceRequest</servlet-class>

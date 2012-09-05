@@ -166,6 +166,22 @@ public class EammsDao extends DataSourceDao {
 		return "";
 	}
 	
+public String getActivityIdNoParent(String processId) throws DaoException {
+		
+		String sql = " select Id from SHKActivities " +
+				"	 WHERE state ='1000003'  AND processId= ? " ;			
+	    	
+		
+		Collection col = super.select(sql, HashMap.class, new String[]{processId}, 0, 1);
+		if (col.size() == 1) {
+			HashMap map = (HashMap) col.iterator().next();
+			String id = (String) map.get("Id");
+			
+			return id;
+		}
+		return "";
+	}
+	
  public HashMap getEngineersAssignedMSR(String id) throws DaoException {
 		
 		String sql = " select c_engineer1UserId,c_engineer2UserId,c_engineer3UserId,c_engineer4UserId " +
@@ -309,5 +325,14 @@ public class EammsDao extends DataSourceDao {
 			return total.intValue();
 		}
 		return 0;
+	}
+	
+	public void rentalReassign(String id, String engineer) throws DaoException {
+		String sql = " update app_fd_eamms_asset_rental " +
+				" SET c_engineerAssign = ? " +
+				" WHERE id = ? ";
+		
+		super.update(sql, new String[]{engineer, id});
+		
 	}
 }

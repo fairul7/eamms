@@ -128,6 +128,20 @@
             <permission>com.tms.workflow.permission.pmAssignedToMe</permission>
             <permission>com.tms.workflow.permission.myPMListing</permission>
             <permission>com.tms.workflow.permission.allPMListing</permission>
+            
+            <permission>com.tms.workflow.permission.newCM</permission>
+            <permission>com.tms.workflow.permission.viewNewCM</permission>
+            <permission>com.tms.workflow.permission.viewMyCM</permission>
+            <permission>com.tms.workflow.permission.viewAllCM</permission>
+            <permission>com.tms.workflow.permission.dropCM</permission>
+            <permission>com.tms.workflow.permission.reassignCM</permission>
+            
+            <permission>com.tms.workflow.permission.newTXM</permission>
+            <permission>com.tms.workflow.permission.viewTXMListing</permission>
+            <permission>com.tms.workflow.permission.editTXM</permission>
+            <permission>com.tms.workflow.permission.deleteTXM</permission>
+            
+            
         </module>
         
         <module class="com.tms.fms.eamms.model.EammsModule">

@@ -120,7 +120,20 @@
                                         <table cellpadding=0 cellspacing=2 border=0 width=100% class="portletBody">
                                             <tr>
                                                 <td valign=top align=left class="portletBody">
-                                                    <x:template type="TemplateDisplaySpot" properties="id=com.tms.cms.section.Section_KnowledgeBase" />
+                                                    <x:template type="TemplateDisplayChildren" properties="id=com.tms.cms.section.Section_KnowledgeBase" >
+                                                    <c:forEach items="${research.children}" var="page" varStatus="stat" end="5" >   
+                                                    <table >
+											              <tr> 
+											                <td valign="top"><font><img src="/ekms/images/document.gif"> 
+											                  <fmt:formatDate pattern="dd MMM yyyy" value="${page.date}"/></font><br>
+											                  <a href="/ekms/content/content.jsp?id=<c:out value='${page.id}'/>" ><c:out value='${page.name}'/></a><br>
+											                  <font> 
+											                  <c:out value='${page.author}'/> - <c:out value='${page.date}'/>
+											                  </font></td>
+											              </tr>
+											            </table>
+											         </c:forEach>    
+         											</x:template>
                                                 </td>
                                             </tr>
                                         </table>
