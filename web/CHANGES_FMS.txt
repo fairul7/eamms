@@ -1,5 +1,9 @@
-New Build
+
+New Build 
 =========
+
+fms_1.0.0_update (Sep 5 2012) V2.5
+-------------------------------------
 Fixed #13859 : Asset Rental - Wrong menu name, 1 of it should be rename as New Rental Request.
 
 
