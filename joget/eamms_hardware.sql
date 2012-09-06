@@ -20,6 +20,7 @@ alter table app_fd_eamms_asset_hw alter column c_attachment varchar(100)  null;
 alter table app_fd_eamms_asset_hw alter column c_notes varchar(255)  null;
 alter table app_fd_eamms_asset_hw alter column c_forRent varchar(3) not null;
 alter table app_fd_eamms_asset_hw alter column c_createdBy varchar(250) null;
+ALTER TABLE app_fd_eamms_asset_hw ALTER COLUMN c_unitId VARCHAR(40);
 
 
 alter table app_fd_eamms_asset_hw_transfer alter column c_hwId varchar(255) not null;

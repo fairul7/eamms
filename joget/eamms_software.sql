@@ -64,6 +64,8 @@ ALTER TABLE app_fd_eamms_asset_sw ALTER COLUMN c_license VARCHAR(40);
 ALTER TABLE app_fd_eamms_asset_sw DROP COLUMN c_purchasePrice;
 ALTER TABLE app_fd_eamms_asset_sw ADD c_purchasePrice NUMERIC(10,2);
 ALTER TABLE app_fd_eamms_asset_sw ALTER COLUMN c_purchasePrice VARCHAR(13);
+ALTER TABLE app_fd_eamms_asset_sw ALTER COLUMN c_unitId VARCHAR(40);
+
 
 --CREATE VIEW FOR fms_user_details FROM FMS SECURITY TABLE DB
 CREATE VIEW fms_user_details
