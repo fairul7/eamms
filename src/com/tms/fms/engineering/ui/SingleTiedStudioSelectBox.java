@@ -2,8 +2,6 @@ package com.tms.fms.engineering.ui;
 
 
 import kacang.Application;
-import kacang.model.DaoException;
-import kacang.services.security.User;
 import kacang.stdui.*;
 import kacang.ui.*;
 import kacang.util.*;
@@ -13,9 +11,6 @@ import java.util.*;
 
 import com.tms.fms.engineering.model.EngineeringDao;
 import com.tms.fms.engineering.model.EngineeringModule;
-import com.tms.fms.facility.model.FacilityDao;
-import com.tms.fms.facility.model.FacilityModule;
-import com.tms.fms.facility.model.FacilityObject;
 import com.tms.fms.facility.model.RateCard;
 import com.tms.fms.facility.model.SetupModule;
 
@@ -74,7 +69,7 @@ public class SingleTiedStudioSelectBox extends PopupSelectBox {
 	}
 	
 	public String getDefaultTemplate() {
-		return "fms/engineering/singleUserSelectBox";
+		return "fms/engineering/singleTiedStudioSelectBox";
 	}
 
 	public class SingleFacilityPopupTable extends PopupSelectBoxTable {
@@ -116,12 +111,9 @@ public class SingleTiedStudioSelectBox extends PopupSelectBox {
 			public Collection getTableRows() {
 				Collection list = new ArrayList();
 				String keyword = (String) getFilterValue("keyword");
-				User currentUser;  
-				currentUser =Application.getInstance().getCurrentUser();
-				String userId = currentUser.getId();
 				EngineeringDao dao = (EngineeringDao)Application.getInstance().getModule(EngineeringModule.class).getDao();
                 try {
-                	list=dao.selectTiedRateCardStudio(keyword,userId, getSort(), isDesc(), getStart(), getRows());
+                	list=dao.selectTiedRateCardStudio(keyword, getSort(), isDesc(), getStart(), getRows());
                 }
                 catch (Exception e) {
                     Log.getLog(getClass()).error(e.toString(), e);

@@ -1647,13 +1647,10 @@ public class EngineeringDao extends DataSourceDao {
 		}
 		return super.select(sql, HashMap.class, new String[]{serviceId}, start, rows);
 	}
-	public Collection selectTiedRateCardStudio(String search, String userId, String sort,boolean desc,int start,int rows) throws DaoException{
-		String sql=" select rc.id, rc.name, rc.remarksRequest, com.competencyName from fms_rate_card rc " +
-		" inner JOIN fms_rate_card_manpower rcm ON (rc.id = rcm.rateCardId) " +
-		" INNER JOIN competency com ON (rcm.manpower = com.competencyId) " +
-		" where rc.status!='0' AND rc.serviceTypeId='4' and com.unitId in " +
-		" (SELECT a.unitId FROM security_user su INNER JOIN fms_unit_alternate_approver a ON su.id=a.userId " +
-		" WHERE su.id = ?) ";
+	public Collection selectTiedRateCardStudio(String search, String sort,boolean desc,int start,int rows) throws DaoException{
+		String sql=" select rc.id, rc.name, rc.remarksRequest " +
+		" from fms_rate_card rc " +
+		" where rc.status!='0' AND rc.serviceTypeId='5' ";
 		if(search!=null && !"".equals(search)){
 			sql+=" AND ( rc.name like '%"+search+"%' OR rc.description like '%"+search+"%' OR rc.remarksRequest like '%"+search+"%' ) ";
 		}
@@ -1668,7 +1665,7 @@ public class EngineeringDao extends DataSourceDao {
 		if(desc){
 			sql+=" DESC ";
 		}
-		return super.select(sql, HashMap.class, new String[]{userId}, start, rows);
+		return super.select(sql, HashMap.class, null, start, rows);
 	}
 	public int selectRateCardFacilityCount(String search,String serviceId) throws DaoException{
 		String sql="select Count(*) AS COUNT " +
