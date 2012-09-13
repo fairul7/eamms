@@ -36,9 +36,9 @@ Requirement #13613 : Preventive Maintenance - scheduler
 
 fms_1.0.0_update (June 12 2012) V2.5
 -------------------------------------
-Requirement #13515 - Transport Request – Total Cost Report
+Requirement #13515 - Transport Request ï¿½ Total Cost Report
 Requirement #13513 - Store Today's Assignmnet Listing - To show the listing based on global setup
-Requirement #13510 - Resource Utilization Report – To add in filter by Request Status.
+Requirement #13510 - Resource Utilization Report ï¿½ To add in filter by Request Status.
 Requirement #13511 - Check in by assignment ID, show list of check out items in the check in page.
 Requirement #13514 - Additional info in current Transport Request Module (Programme Name / Code)
 Requirement #13509 - Add internal check in history in facilities item details page
@@ -241,7 +241,7 @@ Requirement #10990: Merging codes 2A and 2B
 Fixed Bug #10906: Script for fixing manpower 
 Change Request #10963: Checking on Rate Card & items
 Fixed Bug #10695: Conflict Page: Conflict Page: Duplicate request in the check availability
-Fixed Bug #10313: Check sound dubbing 3 – Muzik Muzik Book FCP34 but appear in Sound Dubbing 3? MM did not book any services for 13 May 2011. 
+Fixed Bug #10313: Check sound dubbing 3 ï¿½ Muzik Muzik Book FCP34 but appear in Sound Dubbing 3? MM did not book any services for 13 May 2011. 
 Requirement #10639: Changes on Required Time when 'Required Time From' and 'Required To' are same dates
 Fixed Bug #10312: Producer Usrah booked P2 172 tapi dalam check availability request dia muncul pulak dalam P2 202
 Fixed Bug #10277: Fix booking process when fc click accept button
@@ -314,10 +314,10 @@ Fixed Bug #9603: Transport Report Format: not follow the requirement.
 
 fms_1.0.0_update (March 14 2011)
 ------
-Change Request #9611 : Batch 2B Issue 7 - Store – Today assignment + Assignment Listing :: order by earliest required time  
+Change Request #9611 : Batch 2B Issue 7 - Store ï¿½ Today assignment + Assignment Listing :: order by earliest required time  
 Change Request #9609 : Batch 2B Issue 2 
 Fixed Bug #9603: Transport Report Format: not follow the requirement.
-Change Request #9612 : Batch 2B Issue 8 - If requestor didn’t submit request for selected service type, reject the whole request.
+Change Request #9612 : Batch 2B Issue 8 - If requestor didnï¿½t submit request for selected service type, reject the whole request.
 
 fms_1.0.0_update (March 09 2011)
 ------
@@ -331,7 +331,7 @@ Fixed Bug #9577 : Transport Report Format: not follow the requirement.
 fms_1.0.0_update (February 25 2011)
 ------
 Change Request #9395 : To provide the reprint option for the selected request
-Change Request #9396 : Store – Internal check out print out to follow assignment check out print out
+Change Request #9396 : Store ï¿½ Internal check out print out to follow assignment check out print out
 Change Request #9296: Report
 Fixed Bug #9149 : Check Availability cordless lavalier mic
 Fixed Bug #9345 : FMS tomcat become 98%
@@ -481,7 +481,7 @@ fms_1.0.0_update (October 18th 2010)
 
 fms_1.0.0_update (October 8th 2010)
 --------------------------------------
-- Fixed Bug #8362 : Transport report: Total mileage calculation to be Meter End – Meter Start
+- Fixed Bug #8362 : Transport report: Total mileage calculation to be Meter End ï¿½ Meter Start
 - Fixed Bug #8360 : Filter for View List base on alphabetical order
 - Fixed Bug #8352 : Registration Application: Take out inactive department from department filter.
 - Fixed Bug #8351 : Filter for User Listing and Group Listing base on Aphabetical order
