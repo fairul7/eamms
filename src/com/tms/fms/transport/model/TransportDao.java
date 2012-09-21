@@ -2213,22 +2213,15 @@ public class TransportDao extends DataSourceDao {
 	public Collection selectVehicleByRequestId(String requestId)
 			throws DaoException {
 
-		/*String sql = "SELECT DISTINCT v.vehicle_num, ca.name as category_name, r.startDate as startDate,r.endDate as endDate,r.id as requestId, "
-				+ "FROM fms_tran_vehicle v, fms_tran_category ca, fms_tran_request_assignment ra, fms_tran_request r "
-				+ "WHERE 1=1 AND "
-				+ "v.category_id=ca.setup_id AND "
-				+ "ra.vehicle_num=v.vehicle_num AND "
-				+ "ra.requestId = r.id "
-				+ "AND r.id  = ?";*/
-		String sql = "SELECT DISTINCT v.vehicle_num, ca.name as category_name, r.startDate as startDate,r.endDate as endDate,r.id as requestId," +
-				"ra.id, rad.status " +
-				"FROM fms_tran_vehicle v, fms_tran_category ca, fms_tran_request_assignment ra, fms_tran_request r, fms_tran_request_assignment_details rad " +
-				"WHERE 1=1 " +
-				"AND v.category_id=ca.setup_id " +
-				"AND ra.vehicle_num=v.vehicle_num " +
-				"AND ra.requestId = r.id " +
-				"AND ra.id=rad.assgId " +
-				"AND r.id  = ?";
+		String sql = 
+				"SELECT DISTINCT v.vehicle_num, ca.name as category_name, " +
+						"r.startDate, r.endDate, r.id as requestId, ra.id, rad.status " +
+				"FROM fms_tran_vehicle v " +
+				"INNER JOIN fms_tran_category ca ON (ca.setup_id = v.category_id) " +
+				"INNER JOIN fms_tran_request_assignment ra ON (ra.vehicle_num = v.vehicle_num) " +
+				"INNER JOIN fms_tran_request r ON (r.id = ra.requestId) " +
+				"LEFT OUTER JOIN fms_tran_request_assignment_details rad ON (rad.assgId = ra.id AND rad.vehicle_num = v.vehicle_num) " +
+				"WHERE r.id = ? ";
 		
 		return super.select(sql, VehicleObject.class,new String[] { requestId }, 0, -1);
 	}
@@ -2703,6 +2696,7 @@ public class TransportDao extends DataSourceDao {
 		 */
 
 		String sql = "SELECT DISTINCT assg.id as id, r.id as requestId, r.requestTitle,(su.firstName + ' ' + su.lastName) AS name," 
+				+ "r.startDate, r.endDate, "
 				+ "r.status,ra.vehicle_num,dept.name as department, p.programName,	"
 				+ "(SELECT TOP 1 checkin_date FROM fms_tran_request_assignment_details WHERE assgId=assg.id AND vehicle_num = ra.vehicle_num) as checkin_date,	"
 				+ "(SELECT TOP 1 checkout_date FROM fms_tran_request_assignment_details WHERE assgId=assg.id AND vehicle_num = ra.vehicle_num) as checkout_date, 	"

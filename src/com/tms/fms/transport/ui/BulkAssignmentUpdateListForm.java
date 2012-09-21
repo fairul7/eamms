@@ -285,7 +285,10 @@ public class BulkAssignmentUpdateListForm extends Form {
 					
 					AssignmentObject AO = new AssignmentObject();
 					AO.setAssgId((String) map.get("id"));		
+					AO.setRequestId((String) map.get("requestId"));
 					AO.setStatus((String) map.get("status"));
+					AO.setStartDate((Date) map.get("startDate"));
+					AO.setEndDate((Date) map.get("endDate"));
 					
 					if (!SetupModule.CLOSED_STATUS.equals((String)map.get("status"))
 							&& !SetupModule.UNFULFILLED_STATUS.equals((String)map.get("status"))){
@@ -370,6 +373,10 @@ public class BulkAssignmentUpdateListForm extends Form {
 				    			ao.setStatus(SetupModule.CLOSED_STATUS);  
 				    			TM.insertAssignmentDetails(ao);
 				    		}
+							
+							// status check & send notification
+							//Log.getLog(getClass()).info("statusCheck: assgId=" + ao.getAssgId() + " requestId=" + ao.getRequestId() + " startDate=" + ao.getStartDate() + " endDate = " + ao.getEndDate());
+							AssignmentForm.statusCheck(ao.getRequestId(), ao.getStartDate(), ao.getEndDate(), event);
 			    		}
 					} else {
 						return new Forward("update-nothing");

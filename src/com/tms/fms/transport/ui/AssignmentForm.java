@@ -291,7 +291,6 @@ public class AssignmentForm extends Form {
     public Forward onValidate(Event event) {
     	TransportModule transModule = (TransportModule)Application.getInstance().getModule(TransportModule.class);
     	AssignmentObject AO = new AssignmentObject();
-    	TransportRequest tr = new TransportRequest();
     	
     	if("n".equals(status)){
 	    	Calendar today = Calendar.getInstance(); 			
@@ -352,7 +351,7 @@ public class AssignmentForm extends Form {
 	    	if(vehicle != null){
 		    	if("M".equals(vehicle.getType())){
 		    		try {
-			    		tr = transModule.selectTransportRequest(AO.getRequestId());			
+			    		TransportRequest tr = transModule.selectTransportRequest(AO.getRequestId());			
 				    	String rateVehicle = getRateFacility(AO.getRequestId(), AO.getMeterStart(), AO.getMeterEnd(), AO.getCheckin_date(), tr.getRateVehicle(), vehicle.getCategory_name());	
 				    	transModule.updateVehicleRate(AO.getRequestId(), rateVehicle);
 			    	} catch (DaoException e) {
@@ -368,18 +367,19 @@ public class AssignmentForm extends Form {
 	    	}
 	    	
 	    	// check for both vehicles and drivers are closed 
-	    	statusCheck(AO.getRequestId(), TR, event);
+	    	AssignmentForm.statusCheck(AO.getRequestId(), TR.getStartDate(), TR.getEndDate(), event);
 
 	    	return new Forward("backToDetail", "assignment.jsp?id=" + id + "&status=f&source=" + source, true);
     	}
     	    	
         return new Forward("Back");
     }
-    
-    public void statusCheck(String requestId, TransportRequest tr, Event evt){
+
+    public static void statusCheck(String requestId, Date startDate, Date endDate, Event evt) {
     	String vehicleStatus = "";
     	String driverStatus = "";
     	TransportModule transModule = (TransportModule)Application.getInstance().getModule(TransportModule.class);
+    	
     	//------ VEHICLE STATUS -------
     	try {
     		Collection viewVehicles = transModule.getVehicleByRequestId(requestId);	    	
@@ -422,7 +422,7 @@ public class AssignmentForm extends Form {
 		}
 		
 		if(("C".equals(vehicleStatus) && "C".equals(driverStatus)) || (vehicleStatus.equals("C")&&driverStatus.equals("NULL"))){
-			sendNotification(tr, evt);
+			sendNotification(requestId, startDate, endDate, evt);
 			transModule.updateCloseReqStatus(requestId, SetupModule.CLOSED_STATUS);
 		}
     }
@@ -456,20 +456,19 @@ public class AssignmentForm extends Form {
 	
     }
     
-    public void sendNotification(TransportRequest tr, Event evt){
+    private static void sendNotification(String requestId, Date startDate, Date endDate, Event evt) {
     	//Send Notification
 		TransportModule tm = (TransportModule) Application.getInstance().getModule(TransportModule.class);
 		SecurityService security = (SecurityService)Application.getInstance().getService(SecurityService.class);
 		FMSDepartmentManager deptManager = (FMSDepartmentManager) Application.getInstance().getModule(FMSDepartmentManager.class);
 		try {
-			TransportRequest objNew = tm.selectTransportRequest(tr.getRequestId());
+			TransportRequest objNew = tm.selectTransportRequest(requestId);
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-			String sDate = sdf.format(tr.getStartDate());
-			String eDate = sdf.format(tr.getEndDate());
+			String sDate = sdf.format(startDate);
+			String eDate = sdf.format(endDate);
 			String subject = "Transport Request Feedback Form";
-			String emailTo[] = deptManager.getEmailRequestor(tr.getRequestId());
-			String requestId = tr.getRequestId();
+			String emailTo[] = deptManager.getEmailRequestor(requestId);
 			String requiredDate = sDate +" - "+eDate+".";
 			String rate = objNew.getRate();
 //			String link = "http://fms.mediaprima.com.my/ekms/fms/transport/feedbackForm.jsp?requestId="+requestId+"";
@@ -507,7 +506,7 @@ public class AssignmentForm extends Form {
 			FmsNotification notification = new FmsNotification();		
 			notification.send(emailTo, subject, body);
 		} catch (Exception er) {
-			Log.getLog(getClass()).error("ERROR sendNotification " + er);
+			Log.getLog(AssignmentForm.class).error("ERROR sendNotification " + er, er);
 		}
 	}
 
