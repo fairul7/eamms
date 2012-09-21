@@ -6,7 +6,9 @@ Fixed #13974 : Daily Operation Log> click New> Rename Save button to Submit butt
 Fixed #13969 : Daily Operation Log> Please change TV8 to 8TV and add in NTV7
 Fixed #14105 : Spare Part Listing Full> Change the filter name and remove unrelated checkbox and update inventory link
 Fixed #13972 : Daily Operation Log> Please put the correct source fault: TM,Celcom,Conty,Studio,OB, MCAR, STL
-
+Fixed #13832 : FMS:Rejected by Raju but came back into FC Incoming request (consistency check for multi-tab)
+Fixed #13962 : Unselect studio in Working Profile Duration
+Fixed #13676 : FMS-Transport Feedback form not working
 
 
 fms_1.0.0_update (Sep 5 2012) V2.5
