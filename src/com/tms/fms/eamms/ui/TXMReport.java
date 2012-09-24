@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kacang.Application;
 import kacang.model.DefaultDataObject;
+import kacang.services.security.User;
 
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.Document;
@@ -188,7 +189,17 @@ public class TXMReport  extends HttpServlet{
 		      
 			  
 			  addEmptyLine(document,2);
-			  paragraph = new Paragraph("Prepared By : User",textFont);
+			  User user = null;
+			  String preparedBy="";
+			  try {
+				  user = Application.getInstance().getCurrentUser();
+				  preparedBy = user.getProperty("firstName") +  " " + user.getProperty("lastName");
+			} catch (Exception e) {
+				
+			}
+			  
+			  
+			  paragraph = new Paragraph("Prepared By : " + preparedBy,textFont);
 			  document.add(paragraph);
 		
 		  
