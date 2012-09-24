@@ -39,10 +39,11 @@ public class TXMReport  extends HttpServlet{
 		String mode =  req.getParameter("mode");
 		String fileName =  req.getParameter("txmReportId")+"TM.pdf";
 		String reportId = req.getParameter("id");
+		String preparedBy = req.getParameter("preparedBy");
 		
 		
 		try {			
-			ByteArrayOutputStream baosPDF = createPdf(reportId);
+			ByteArrayOutputStream baosPDF = createPdf(reportId, preparedBy);
 			
 			if("print".equals(mode)){							
 				
@@ -91,9 +92,10 @@ public class TXMReport  extends HttpServlet{
 		String mode =  req.getParameter("mode");
 		String fileName =  req.getParameter("txmReportId")+"TM.pdf";
 		String reportId = req.getParameter("id");
+		String preparedBy = req.getParameter("preparedBy");
 		
 		try {			
-			ByteArrayOutputStream baosPDF = createPdf(reportId);
+			ByteArrayOutputStream baosPDF = createPdf(reportId, preparedBy);
 			
 			if("print".equals(mode)){							
 				
@@ -140,14 +142,14 @@ public class TXMReport  extends HttpServlet{
 			  
 	}
 	
-	private static ByteArrayOutputStream createPdf(String reportId) throws DocumentException{
+	private static ByteArrayOutputStream createPdf(String reportId, String preparedBy) throws DocumentException{
 		Document doc = new Document();
 		ByteArrayOutputStream baosPDF = new ByteArrayOutputStream();
 		PdfWriter docWriter = null;
 	
 		docWriter = PdfWriter.getInstance(doc, baosPDF);	
 		doc.open();
-		addContent(doc,reportId);
+		addContent(doc,reportId, preparedBy);
 		doc.close();
 		docWriter.close();
 		
@@ -155,7 +157,7 @@ public class TXMReport  extends HttpServlet{
 	}
 	
 			  
-	  private static void addContent(Document document, String reportId) throws DocumentException {
+	  private static void addContent(Document document, String reportId, String preparedBy) throws DocumentException {
 		
 		      EammsModule mod = (EammsModule)Application.getInstance().getModule(EammsModule.class);
 			  DefaultDataObject obj = mod.getTXMReportInfo(reportId); 
@@ -189,14 +191,6 @@ public class TXMReport  extends HttpServlet{
 		      
 			  
 			  addEmptyLine(document,2);
-			  User user = null;
-			  String preparedBy="";
-			  try {
-				  user = Application.getInstance().getCurrentUser();
-				  preparedBy = user.getProperty("firstName") +  " " + user.getProperty("lastName");
-			} catch (Exception e) {
-				
-			}
 			  
 			  
 			  paragraph = new Paragraph("Prepared By : " + preparedBy,textFont);
