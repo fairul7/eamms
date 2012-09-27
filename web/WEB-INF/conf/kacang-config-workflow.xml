@@ -82,11 +82,6 @@
             <value>30</value>
         </property>
         
-        <property>
-            <name>ec_rate_card_id</name>
-            <value></value>
-        </property>
-        
     </properties>
     <modules>
         <module class="com.tms.workflow.JogetClientModule">
