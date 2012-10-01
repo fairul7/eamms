@@ -559,7 +559,7 @@ public class EammsFeedsDao extends DataSourceDao
 		String sql =
 			" UPDATE fms_feeds_assignment SET requiredTimeFrom=#requiredTimeFrom#, " +
 			"	requiredTimeTo=#requiredTimeTo#, timezone=#timezone#, totalTimeReq=#totalTimeReq#, timeMeasure=#timeMeasure#, " +
-			"	remarks=#remarks#, #requiredDateFrom#, #requiredDateTo# " +
+			"	remarks=#remarks#, requiredDateFrom=#requiredDateFrom#, requiredDateTo=#requiredDateTo# " +
 			" WHERE assignmentId=#assignmentId# ";
 		
 		super.update(sql, assignObj);
