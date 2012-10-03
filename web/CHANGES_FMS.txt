@@ -1,6 +1,6 @@
 New Build 
 =========
-
+Fixed #14102 : KnowledgeBase - image icon is not appearing
 
 fms_1.0.0_update (Oct 2 2012) V2.5
 -------------------------------------
