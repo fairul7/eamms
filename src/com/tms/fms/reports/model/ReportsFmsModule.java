@@ -605,11 +605,40 @@ public class ReportsFmsModule extends DefaultModule{
 	public Collection getResourceUtil(String programType, Date fromDate, Date toDate, String programId, String serviceType, String status, 
 			String requestStatus, String sort, boolean desc, int startIndex,int maxRows){
 		ReportsFmsDao dao=(ReportsFmsDao)getDao();
+		Application app=Application.getInstance();
 		ArrayList args = new ArrayList();
 		try {
 			Collection col = dao.getResourceUtil(programType, fromDate, toDate, programId, serviceType, status, requestStatus, sort, desc, startIndex, maxRows);
 			for(Iterator iter = col.iterator(); iter.hasNext(); ){
 				ReportsObject report = (ReportsObject) iter.next();
+				if(null!=report.getRequestStatus()&&!"".equals(report.getRequestStatus())
+						&&report.getRequestStatus().equals(EngineeringModule.FC_ASSIGNED_STATUS)){
+						report.setRequestStatus(app.getMessage("fms.engineering.request.status.fcAssigned"));
+					}else if(null!=report.getRequestStatus()&&!"".equals(report.getRequestStatus())
+						&&report.getRequestStatus().equals(EngineeringModule.REJECTED_STATUS)){
+						report.setRequestStatus(app.getMessage("fms.engineering.request.status.rejected"));
+					} else if(null!=report.getRequestStatus()&&!"".equals(report.getRequestStatus())
+						&&report.getRequestStatus().equals(EngineeringModule.CANCELLED_STATUS)){
+						report.setRequestStatus(app.getMessage("fms.engineering.request.status.cancelled"));
+					}else if(null!=report.getRequestStatus()&&!"".equals(report.getRequestStatus())
+						&&report.getRequestStatus().equals(EngineeringModule.ASSIGNMENT_STATUS)){
+						report.setRequestStatus(app.getMessage("fms.engineering.request.status.assignment"));
+					}else if(null!=report.getRequestStatus()&&!"".equals(report.getRequestStatus())
+						&&report.getRequestStatus().equals(EngineeringModule.FULFILLED_STATUS)){
+						report.setRequestStatus(app.getMessage("fms.engineering.request.status.fulfilled"));
+					}else if(null!=report.getRequestStatus()&&!"".equals(report.getRequestStatus())
+						&&report.getRequestStatus().equals(EngineeringModule.CLOSED_STATUS)){
+						report.setRequestStatus(app.getMessage("fms.engineering.request.status.closed"));
+					}else if(null!=report.getRequestStatus()&&!"".equals(report.getRequestStatus())
+						&&report.getRequestStatus().equals(EngineeringModule.LATE_STATUS)){
+						report.setRequestStatus(app.getMessage("fms.engineering.request.status.fulfilledDelay"));
+					}else if(null!=report.getRequestStatus()&&!"".equals(report.getRequestStatus())
+						&&report.getRequestStatus().equals(EngineeringModule.APPLIED_CANCELLATION)){
+						report.setRequestStatus(app.getMessage("fms.engineering.request.status.appliedForCancellation"));
+					}else if(null!=report.getRequestStatus()&&!"".equals(report.getRequestStatus())
+						&&report.getRequestStatus().equals(EngineeringModule.OUTSOURCED_STATUS)){
+						report.setRequestStatus(app.getMessage("fms.engineering.request.status.outsource"));
+					}
 				if(report.getProgram()==null || report.getProgram().equals("")){
 					report.setProgram("-");
 				}
@@ -1288,37 +1317,12 @@ public class ReportsFmsModule extends DefaultModule{
 							SimpleDateFormat sdf5 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 							String fromTime = sdf4.format(formatter.parse(object.getTranAssignSDate()));
 							String toTime = sdf4.format(formatter.parse(object.getTranAssignEDate()));
-							Date startDate = formatter.parse(object.getTranAssignSDate());
-							Date endDate = formatter.parse(object.getTranAssignEDate());
 							
-							Date dateTimeFrom = sdf5.parse(object.getTransAssignmentDateStrMod() + " " + fromTime);
-							Date dateTimeTo = sdf5.parse(object.getTransAssignmentDateStrMod() + " " + toTime);
+							Date dateTimeFrom = sdf5.parse(object.getTransAssignmentDateStrMod() + " 00:00");
+							Date dateTimeTo = sdf5.parse(object.getTransAssignmentDateStrMod() + " 00:00");
 							
-							if(dateTimeFrom.compareTo(startDate) > 0){
-								dateTimeFrom.setHours(0);
-								dateTimeFrom.setMinutes(0);
-								fromTime = "00:00";
-							}
-							
-							if(!(dateTimeTo.compareTo(dateTimeFrom) > 0)){
-								Calendar calendar = Calendar.getInstance();
-								calendar.setTime(dateTimeTo);
-								long tempTime = calendar.getTimeInMillis();
-								tempTime += 24 * 60 * 60 * 1000;
-								calendar.setTimeInMillis(tempTime);
-								dateTimeTo = calendar.getTime();
-							}
-							
-							if(dateTimeTo.compareTo(endDate) < 0){
-								dateTimeTo.setHours(0);
-								dateTimeTo.setMinutes(0);
-								toTime = "00:00";
-							}
-							
-							String rateDriver = tModule.getRateDriver(object.getId(), dateTimeFrom, 
-									dateTimeTo, fromTime, toTime, object.getBlockBooking());
-							String rateVehicle = tModule.getRateFacility(object.getId(), dateTimeFrom, 
-									dateTimeTo, fromTime, toTime, object.getBlockBooking());
+							String rateDriver = tModule.getRateDriver(object.getId(), dateTimeFrom, dateTimeTo, fromTime, toTime, object.getBlockBooking());
+							String rateVehicle = tModule.getRateFacility(object.getId(), dateTimeFrom, dateTimeTo, fromTime, toTime, object.getBlockBooking());
 							double dailyTotalCost = Double.parseDouble(rateDriver) + Double.parseDouble(rateVehicle);
 							DecimalFormat df = new DecimalFormat("#.##");
 							object.setTotalCostDaily(df.format(dailyTotalCost));

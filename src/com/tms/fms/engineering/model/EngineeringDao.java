@@ -1441,7 +1441,7 @@ public class EngineeringDao extends DataSourceDao {
 		ArrayList params = new ArrayList();
 		
 		String sql="SELECT c.id, c.checkout_date, c.checkout_by, c.checkin_date, c.checkin_by, c.barcode, c.purpose, c.status, " +
-				" (u2.firstName + ' ' + u2.lastName)as createdby, c.createdby_date, c.updatedby, c.updatedby_date, c.location, c.groupId, c.takenBy, " +
+				" (u2.firstName + ' ' + u2.lastName)as requestedByName, c.createdby_date, c.updatedby, c.updatedby_date, c.location, c.groupId, c.takenBy, " +
 				"(u.firstName + ' ' + u.lastName) as checkout_by, f.name as name" +
 				", loc.name AS location_name, (u1.firstName + ' ' + u1.lastName) as checkin_by_name " +
 				" from fms_facility_item_checkout c INNER JOIN fms_facility_item i on c.barcode=i.barcode " +
@@ -1449,7 +1449,7 @@ public class EngineeringDao extends DataSourceDao {
 				"INNER JOIN fms_facility f on i.facility_id=f.id " +
 				"LEFT JOIN security_user u on c.checkout_by=u.id " +
 				"LEFT JOIN security_user u1 on c.checkin_by=u1.id " +
-				"LEFT JOIN security_user u2 on c.createdBy=u2.id " +
+				"LEFT JOIN security_user u2 on c.requestedBy=u2.id " +
 				"WHERE c.barcode=?  ";
 		params.add(barcode);		
 		
@@ -2535,11 +2535,10 @@ public class EngineeringDao extends DataSourceDao {
 		"(wpdm.workingProfileDurationId = wpd.workingProfileDurationId) " +
 		"LEFT JOIN fms_working_profile wp ON (wpd.workingProfileId = wp.workingProfileId) " +
 		"WHERE wpdm.userId = ? " +
-		"AND ((wpd.startDate BETWEEN ? AND ?) " +
-		"OR (wpd.endDate BETWEEN ? AND ?)) ";
+		"AND (wpd.startDate <= ? and wpd.endDate >= ?) ";
 
 		String workingProfile = "";
-		Collection col = super.select(sql, HashMap.class, new Object[] { userId, startDate, endDate, startDate, endDate}, 0, -1);
+		Collection col = super.select(sql, HashMap.class, new Object[] { userId, endDate, startDate}, 0, -1);
 
 		if(col != null) {
 			if(col.size() > 0) {

@@ -48,6 +48,7 @@ public class ReportsObject extends DefaultDataObject{
 	public String outsourceFlag;
 	public String driverStatus;
 	public String vehicleStatus;
+	public String requestStatus;
 	
 	
 	public String requestId, title, programType, createdBy, engManpowerBudget, facilitiesBudget, totalcost, bookFrom, bookTo;
@@ -455,6 +456,12 @@ public class ReportsObject extends DefaultDataObject{
 	}
 	public void setTransStatus(String transStatus) {
 		this.transStatus = transStatus;
+	}
+	public String getRequestStatus() {
+		return requestStatus;
+	}
+	public void setRequestStatus(String requestStatus) {
+		this.requestStatus = requestStatus;
 	}
 	
 }

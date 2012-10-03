@@ -126,6 +126,8 @@ public class ResourceUtilizationTable extends Table{
 			addColumn(column12);
 			TableColumn column13 = new TableColumn("totalDuration",Application.getInstance().getMessage("fms.report.resource.message.duration"));
 			addColumn(column13);
+			TableColumn column14 = new TableColumn("requestStatus",Application.getInstance().getMessage("fms.report.message.label.requestStatus"));
+			addColumn(column14);
 			
 //			TableColumn status = new TableColumn("status", "Status");
 //			addColumn(status);

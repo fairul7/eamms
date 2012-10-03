@@ -200,6 +200,9 @@ public class TransportReqReportTable extends Table{
 			addColumn(reqNo);
 			TableColumn progName = new TableColumn("programName", Application.getInstance().getMessage("fms.report.transport.message.programName"));
 			addColumn(progName);
+			TableColumn pfeCode = new TableColumn("pfeCode", Application.getInstance().getMessage("fms.report.transport.message.pfeCode"));
+			addColumn(pfeCode);
+			
 			reportDateFrom = new DatePopupField("reportDateFrom");
 			reportDateFrom.setOptional(true);
 			reportDateFrom.setDate(startDate);
@@ -243,6 +246,8 @@ public class TransportReqReportTable extends Table{
 			tfProgram.setWidget(sbProgram);
 			sbProgram.setSelectedOption(programId);
 			addFilter(tfProgram);
+			
+			
 			
 			/*TableFilter tfChbx1 = new TableFilter("tfChbx1");
 			internalChbx = new CheckBox("internalChbx");
@@ -334,12 +339,9 @@ public class TransportReqReportTable extends Table{
 					&& (getProgram()==null || getProgram().equals("-1"))){
 				return null;
 			} else {
-				//list = module.getTransportRequestListing(reqType,fromDate, toDate, getProgram(), getSort(), isDesc(), 0, -1);
 				list = module.getTransportRequestListing(reqType,fromDate, toDate, getProgram(), getSort(), isDesc(), 0, -1);
-				//count 	= list.size();
 				tableRowsData = list;
 				count = ReportsFmsModule.listCounter;
-				//System.out.println("INI COUNT : "+count+" dan yg ini LIST COUNT MODULE : "+ReportsFmsModule.listCounter);
             	list 	= PagingUtil.getPagedCollection(list, getStart(), getRows());
             	return list;
 			}
@@ -347,19 +349,7 @@ public class TransportReqReportTable extends Table{
 		}
 
 		public int getTotalRowCount() {
-//			Date fromDate = reportDateFrom.getDate();
-//			Date toDate = reportDateTo.getDate();
-//			String reqType = getRequestType();
-//			ReportsFmsModule module = (ReportsFmsModule)Application.getInstance().getModule(ReportsFmsModule.class);
-//			if((fromDate==null) 
-//					&& (toDate==null)
-//					&& (getRequestType().equals(""))
-//					&& (getProgram()==null || getProgram().equals("-1"))){
-//				return 0;
-//			}else{
-//				//return module.countTransportRequestListing(reqType, fromDate, toDate, getProgram());
-//				return module.countTransportRequestListingNew(reqType, fromDate, toDate, getProgram());
-//			}
+
 			totalRowCountData = ((Number) count).intValue(); 
 			return totalRowCountData;
 		}

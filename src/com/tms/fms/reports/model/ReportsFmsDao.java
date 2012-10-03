@@ -836,7 +836,7 @@ public class ReportsFmsDao extends DataSourceDao{
 		ArrayList args = new ArrayList();
 		String sqlfacility="select distinct a.code as assignmentId, r.requestId, r.title, prog.programName as program, " +
 				"e.requiredFrom, e.requiredTo, e.fromTime, e.toTime, a.serviceType, c.name as facilityEquip, " +
-				"DATEDIFF(day, e.requiredFrom, e.requiredTo) as duration, e.rateCardId " +
+				"DATEDIFF(day, e.requiredFrom, e.requiredTo) as duration, e.rateCardId, r.status as requestStatus " +
 				"FROM fms_eng_assignment a " +
 				"INNER JOIN fms_eng_request r on a.requestId=r.requestId " +
 				"LEFT JOIN fms_prog_setup prog on prog.programId=r.program " +
@@ -845,7 +845,7 @@ public class ReportsFmsDao extends DataSourceDao{
 				"LEFT JOIN fms_rate_card_equipment ce on ce.rateCardId=c.id WHERE 1=1 ";
 		String sqlManpower="select distinct a.code as assignmentId, r.requestId, r.title, prog.programName as program, " +
 				"e.requiredFrom, e.requiredTo, e.fromTime, e.toTime, a.serviceType, c.name as facilityEquip, " +
-				"DATEDIFF(day, e.requiredFrom, e.requiredTo) as duration, e.rateCardId " +
+				"DATEDIFF(day, e.requiredFrom, e.requiredTo) as duration, e.rateCardId,r.status as requestStatus " +
 				"FROM fms_eng_assignment a " +
 				"INNER JOIN fms_eng_request r on a.requestId=r.requestId " +
 				"LEFT JOIN fms_prog_setup prog on prog.programId=r.program " +
@@ -856,7 +856,7 @@ public class ReportsFmsDao extends DataSourceDao{
 		String sqlCanceled = 
 			"SELECT distinct a.code as assignmentId, r.requestId, r.title, prog.programName as program, " +
 			"a.requiredFrom, a.requiredTo, a.fromTime, a.toTime, a.serviceType, c.name as facilityEquip, " +
-			"DATEDIFF(day, a.requiredFrom, a.requiredTo) as duration, a.rateCardId " +
+			"DATEDIFF(day, a.requiredFrom, a.requiredTo) as duration, a.rateCardId,r.status as requestStatus " +
 			"from fms_eng_cancel_service_log a " +
 			"inner JOIN fms_eng_request r on a.requestId=r.requestId " +
 			"LEFT JOIN fms_prog_setup prog on prog.programId=r.program " +
@@ -1209,7 +1209,7 @@ public class ReportsFmsDao extends DataSourceDao{
 			"tr.purpose, tr.remarks, tr.status, tr.reason, tr.requestBy, tr.requestDate, tr.updatedBy, tr.updatedDate, " +
 			"tr.approvedBy, tr.approvedDate, tr.statusRequest, tr.rate, tr.engineeringRequestId, tr.blockBooking, " +
 			"su.firstname,su.lastname, d.name as department, o.id as outsourceId, ta.startDate as tranAssignSDate, ta.endDate as tranAssignEDate," +
-			"v.driver as driverRequired, (tr.id+'/'+ta.id) as reqAsssignId, ps.programName, (tr.rate + tr.rateVehicle) AS totalcost " +
+			"v.driver as driverRequired, (tr.id+'/'+ta.id) as reqAsssignId, ps.programName, (tr.rate + tr.rateVehicle) AS totalcost, ps.pfeCode " +
 			"FROM fms_tran_request tr " +
 			"left join security_user su on su.id=tr.requestBy " +
 			"left join fms_department d on su.department = d.id " +
@@ -1217,7 +1217,8 @@ public class ReportsFmsDao extends DataSourceDao{
 			"left join fms_tran_assignment ta on ta.requestId=tr.id " +
 			"left join fms_tran_request_vehicle v on v.requestId=tr.id " +
 			"LEFT JOIN fms_prog_setup ps ON ps.programId = tr.program " +
-			"WHERE 1=1 AND tr.status <> '"+SetupModule.DRAFT_STATUS+"'";
+			"WHERE 1=1 AND (tr.status = '"+SetupModule.PROCESS_STATUS+"' OR " +
+			"tr.status = '"+SetupModule.ASSIGNED_STATUS+"') ";		//Bug #13660 - only grab status HOD process and Assigned
 		
 		if(from != null && to != null){
 			sqlTransport += " AND ((ta.startDate=? AND ta.endDate=?) OR (ta.startDate >= ? AND ta.endDate <= ?))";

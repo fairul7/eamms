@@ -195,6 +195,8 @@ public class ExportTransportReqReportTable extends Table{
 			addColumn(reqNo);
 			TableColumn progName = new TableColumn("programName", Application.getInstance().getMessage("fms.report.transport.message.programName"));
 			addColumn(progName);
+			TableColumn pfeCode = new TableColumn("pfeCode", Application.getInstance().getMessage("fms.report.transport.message.pfeCode"));
+			addColumn(pfeCode);
 		}
 		
 		public Collection getTableRows() {

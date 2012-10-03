@@ -82,6 +82,7 @@
         <module class="com.tms.fms.engineering.model.UnitHeadModule">
             <dao-class>com.tms.fms.engineering.model.UnitHeadDao</dao-class>			
             <datasource>defaultdb</datasource>
+            <permission>fms.facility.autoAssign.sched.mail.receiveCrossOverMail</permission>
         </module>    
 
 	        <module class="com.tms.fms.facility.model.RequestModule">

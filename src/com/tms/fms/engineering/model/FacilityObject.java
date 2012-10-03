@@ -41,6 +41,8 @@ public class FacilityObject extends DefaultDataObject{
 	private Date checkin_date;
 	private String checkout_by;
 	private String checkin_by_name;
+	private String requestedBy;
+	private String requestedByName;
 	
 	public String getId() {
 		return id;
@@ -242,6 +244,18 @@ public class FacilityObject extends DefaultDataObject{
 	}
 	public void setCheckin_by_name(String checkin_by_name) {
 		this.checkin_by_name = checkin_by_name;
+	}
+	public String getRequestedBy() {
+		return requestedBy;
+	}
+	public void setRequestedBy(String requestedBy) {
+		this.requestedBy = requestedBy;
+	}
+	public String getRequestedByName() {
+		return requestedByName;
+	}
+	public void setRequestedByName(String requestedByName) {
+		this.requestedByName = requestedByName;
 	}
 	
 	

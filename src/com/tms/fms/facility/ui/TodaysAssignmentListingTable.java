@@ -269,24 +269,26 @@ public class TodaysAssignmentListingTable extends Table{
 			String searchBy = "";
 			searchBy = (String) getFilterValue("searchBy");
 			String dept = WidgetUtil.getSbValue(sbDepartment);
-			
+			Collection todayList = new ArrayList();
 			FacilityModule module = (FacilityModule) Application.getInstance().getModule(FacilityModule.class);
 			try {
 				//return module.getRequestListing(searchBy,dept, null, null, getSort(), isDesc(), true, getStart(), getRows());
-				return module.getRequestListingByTime(searchBy,dept, null, null, getSort(), isDesc(), true, getStart(), getRows());
+				todayList = module.getRequestListingByTime(searchBy,dept, null, null, getSort(), isDesc(), true, getStart(), getRows());
 			} catch (Exception e) {
 				Log.getLog(getClass()).error(e.toString());
-				return new ArrayList();
 			}
+			return todayList;
 		}
 
 		public int getTotalRowCount() {
 			String searchBy = "";
+			int count = 0;
 			searchBy = (String) getFilterValue("searchBy");
 			String dept = WidgetUtil.getSbValue(sbDepartment);
 			FacilityModule module = (FacilityModule) Application.getInstance().getModule(FacilityModule.class);
 			
-			return module.countRequestListing(searchBy,dept, null, null, true);
+			count = module.countRequestListing(searchBy,dept, null, null, true);
+			return count;
 			
 		}
 

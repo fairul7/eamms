@@ -42,14 +42,18 @@
 		<script>
 			alert('<fmt:message key="fms.facility.autoAssign.alert"/>');
 			document.location = "<c:url value='requestAssignmentDetails.jsp?requestId=${requestId}'/>";
-			
 		</script>
 	</c:when>
+	<c:when test="${forward.name == 'AUTOASSIGNSKIP' }">
+        <script>
+            alert('<fmt:message key="fms.facility.autoAssignSkip.alert"/>');
+            document.location = "<c:url value='requestAssignmentDetails.jsp?requestId=${requestId}'/>";
+        </script>
+    </c:when>
 	<c:when test="${forward.name == 'AUTOASSIGNNOTFOUND' }">
         <script>
             alert('<fmt:message key="fms.facility.autoAssignNotFound.alert"/>');
             document.location = "<c:url value='requestAssignmentDetails.jsp?requestId=${requestId}'/>";
-            
         </script>
     </c:when>
 	<c:when test="${forward.name == 'FAILED' }">

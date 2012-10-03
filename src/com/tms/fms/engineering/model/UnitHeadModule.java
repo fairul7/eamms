@@ -10,11 +10,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 
 import kacang.Application;
 import kacang.model.DaoException;
 import kacang.model.DefaultDataObject;
 import kacang.model.DefaultModule;
+import kacang.services.security.Group;
+import kacang.services.security.SecurityException;
+import kacang.services.security.SecurityService;
+import kacang.services.security.User;
 import kacang.util.Log;
 import kacang.util.UuidGenerator;
 
@@ -24,6 +29,7 @@ import com.tms.fms.facility.model.RateCard;
 import com.tms.fms.facility.model.SetupModule;
 import com.tms.fms.util.DateDiffUtil;
 import com.tms.fms.util.PagingUtil;
+import com.tms.util.MailUtil;
 
 /**
  * @author arunkumar
@@ -833,12 +839,13 @@ public class UnitHeadModule extends DefaultModule {
 		}
 	}
 
-	public String[] getUserIdFromWorkingProfile(String rateCardId, Date requiredFrom, Date requiredTo)
+	public String[] getUserIdFromWorkingProfile(String competencyId, String rateCardId, Date requiredFrom, Date requiredTo, 
+			String fromTime, String toTime)
 	{
 		UnitHeadDao dao = (UnitHeadDao) getDao();
 		try
 		{
-			Collection col = dao.getUserIdFromWorkingProfile(rateCardId, requiredFrom, requiredTo);
+			Collection col = dao.getUserIdFromWorkingProfile(competencyId, rateCardId, requiredFrom, requiredTo, fromTime, toTime);
 			String[] strArr = new String[col.size()];
 			if(col != null && !col.isEmpty())
 			{
@@ -874,22 +881,53 @@ public class UnitHeadModule extends DefaultModule {
 				
 				if(assignments != null && !assignments.isEmpty())
 				{
+					int match = 0;
 					for(Iterator itr = assignments.iterator(); itr.hasNext();)
 					{
 						DefaultDataObject assignmentObj = (DefaultDataObject) itr.next();
 						String assignmentId = (String) assignmentObj.getProperty("assignmentId");
+						String competencyId = (String) assignmentObj.getProperty("competencyId");
 						
 						Date requiredFrom = (Date) assignmentObj.getProperty("requiredFrom");
 						Date requiredTo = (Date) assignmentObj.getProperty("requiredTo");
 						
-						int status = autoAssignment(assignmentId, rateCardId, requiredFrom, requiredTo);
+						String fromTime = (String) assignmentObj.getProperty("fromTime");
+						String toTime = (String) assignmentObj.getProperty("toTime");
+						
+						boolean blockbooking = isAssignmentBlockbooking(assignmentId);
+						if(blockbooking)
+						{
+							if(fromTime.compareTo(toTime) > 0)
+							{
+								return 3; //date range error
+							}
+						}
+						
+						if(Application.getInstance().getCurrentUser() != null) // not scheduler
+						{
+							// only can assign own department manpower
+							if(!isHodMatchCompetency(Application.getInstance().getCurrentUser().getId(), competencyId))
+							{
+								continue;
+							}
+						}
+						match++;
+						
+						int status = autoAssignment(assignmentId, competencyId, rateCardId, 
+								requiredFrom, requiredTo, fromTime, toTime);
+						
+						if(status == 3)
+						{
+							return 3;
+						}
+						
 						if(status == 2)
 						{
 							foundAny++; 
 						}
 					}
 					
-					if(foundAny != assignments.size())
+					if(foundAny != match || match == 0)
 					{
 						return 2;
 					}
@@ -903,18 +941,21 @@ public class UnitHeadModule extends DefaultModule {
 		return 1;
 	}
 
-	private int autoAssignment(String assignmentId, String rateCardId, Date requiredFrom, Date requiredTo)
+	private int autoAssignment(String assignmentId, String competencyId, String rateCardId, 
+			Date requiredFrom, Date requiredTo, String fromTime, String toTime)
 	{
 		String assignEmpId = null;
-		String[] manpowerIds = getUserIdFromWorkingProfile(rateCardId, requiredFrom, requiredTo);
+		String[] manpowerIds = getUserIdFromWorkingProfile(competencyId, rateCardId, requiredFrom, requiredTo, fromTime, toTime);
 		int k = 0;
 		boolean stop = false;
 		if(manpowerIds!=null && manpowerIds.length>0)
 		{
 			while (!stop && k < manpowerIds.length)
 			{
+				boolean blockbooking = isAssignmentBlockbooking(assignmentId);
+				
 				/*-- Search for manpower to determine availability --*/
-				if(searchEmpAvailability(manpowerIds[k], requiredFrom, requiredTo, null))
+				if(searchEmpAvailability(manpowerIds[k], requiredFrom, requiredTo, fromTime, toTime, blockbooking))
 				{
 					/*-- If all manpower assigned on the day, choose manpower which is less busy--*/
 					if(k == manpowerIds.length-1)
@@ -949,6 +990,44 @@ public class UnitHeadModule extends DefaultModule {
 		}
 	}
 
+	private boolean isHodMatchCompetency(String userId, String competencyId)
+	{
+		UnitHeadDao dao = (UnitHeadDao) getDao();
+		try
+		{
+			Collection hodUnitIds = dao.getHodUnitId(userId);
+			if(hodUnitIds != null && !hodUnitIds.isEmpty())
+			{
+				for(Iterator itr = hodUnitIds.iterator(); itr.hasNext();)
+				{
+					DefaultDataObject obj = (DefaultDataObject) itr.next();
+					String hodUnitId = (String) obj.getProperty("unitId");
+					
+					Collection competencyIdsFound = dao.getCompetencyIdWithUnitId(hodUnitId);
+					if(competencyIdsFound != null && !competencyIdsFound.isEmpty())
+					{
+						for(Iterator itr2 = competencyIdsFound.iterator(); itr2.hasNext();)
+						{
+							DefaultDataObject obj2 = (DefaultDataObject) itr2.next();
+							String competencyIdFound = (String) obj2.getProperty("competencyId");
+							
+							if(competencyId != null && competencyId.equals(competencyIdFound))
+							{
+								return true;
+							}
+						}
+					}
+				}
+			}
+			return false;
+		}
+		catch(Exception e)
+		{
+			Log.getLog(getClass()).error("error @ UnitHeadModule.isUnitMatchCompetency(2)" + e, e);
+			throw new RuntimeException(e);
+		}
+	}
+
 	private Collection getStudioRateCardByRequestId(String requestId)
 	{
 		UnitHeadDao dao = (UnitHeadDao) getDao();
@@ -974,6 +1053,34 @@ public class UnitHeadModule extends DefaultModule {
 		{
 			Log.getLog(getClass()).error("error @ UnitHeadModule.getMostNotBusyManpower(3)" + e, e);
 			return null;
+		}
+	}
+
+	public boolean isAssignmentBlockbooking(String assignmentId)
+	{
+		UnitHeadDao dao = (UnitHeadDao) getDao();
+		try
+		{
+			return dao.isAssignmentBlockbooking(assignmentId);
+		}
+		catch(Exception e)
+		{
+			Log.getLog(getClass()).error("error @ UnitHeadModule.isAssignmentBlockbooking(1)" + e, e);
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public boolean searchEmpAvailability(String userId, Date requiredFrom, Date requiredTo, String timeFr, String timeTo, boolean blockbooking)
+	{
+		UnitHeadDao dao = (UnitHeadDao) getDao();
+		try
+		{
+			return dao.searchEmpAvailability(userId, requiredFrom, requiredTo, timeFr, timeTo, blockbooking);
+		}
+		catch(Exception e)
+		{
+			Log.getLog(getClass()).error("error @ UnitHeadModule.searchEmpAvailability(5)" + e, e);
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -1018,6 +1125,136 @@ public class UnitHeadModule extends DefaultModule {
 		{
 			Log.getLog(getClass()).error("error @ UnitHeadModule.getAutoAssignmentSchedSetting()" + e, e);
 			return null;
+		}
+	}
+
+	public void notifyRespectiveUnitHead(ArrayList<String> requestIds)
+	{
+		if(requestIds != null && !requestIds.isEmpty())
+		{
+			SecurityService ss = (SecurityService) Application.getInstance().getService(SecurityService.class);
+			UnitHeadDao dao = (UnitHeadDao) getDao();
+			Map userMap = new HashMap();
+			for(String reqId : requestIds)
+			{
+				try
+				{
+					Collection<DefaultDataObject> col = dao.getHOU_and_alternateApprovalByRequestId(reqId);
+					if(col != null && !col.isEmpty())
+					{
+						for(DefaultDataObject obj : col)
+						{
+							String hou = (String)obj.getProperty("HOU");
+							addArrMap(userMap, hou, reqId);
+							
+							String altApprov = (String)obj.getProperty("alt_approval");
+							addArrMap(userMap, altApprov, reqId);
+}
+					}
+					
+					Collection permissionGrp = ss.getGroupsByPermission(
+							"fms.facility.autoAssign.sched.mail.receiveCrossOverMail", true, null, false, 0, -1);
+					if(permissionGrp != null && !permissionGrp.isEmpty())
+					{
+						for(Iterator itr = permissionGrp.iterator(); itr.hasNext();)
+						{
+							Group grp = (Group) itr.next();
+							String groupId = grp.getId();
+							
+							Collection userCol = ss.getGroupUsers(groupId);
+							if(userCol != null && !userCol.isEmpty())
+							{
+								for(Iterator itr2 = userCol.iterator(); itr2.hasNext();)
+								{
+									User usr = (User) itr2.next();
+									String userId = usr.getId();
+									
+									addArrMap(userMap, userId, reqId);
+								}
+							}
+						}
+					}
+				}
+				catch(Exception e)
+				{
+					Log.getLog(getClass()).error("error @ UnitHeadModule.notifyUnitHead(1)" + e, e);
+				}
+			}
+			
+			sendMailToRespectiveUnitHead(userMap);
+		}
+	}
+	
+	public void addArrMap(Map map, String key, String value)
+	{
+		if(map.containsKey(key))
+		{
+			ArrayList arr = (ArrayList)map.get(key);
+			if(!arr.contains(value))
+			{
+				arr.add(value);
+			}
+		}
+		else
+		{
+			ArrayList arr = new ArrayList();
+			arr.add(value);
+			map.put(key, arr);
+		}
+	}
+	
+	private void sendMailToRespectiveUnitHead(Map userMap)
+	{
+		if(userMap != null && !userMap.isEmpty())
+		{
+			Application app = Application.getInstance();
+			String smtpServer = app.getProperty("smtp.server");
+			String adminEmail = app.getProperty("admin.email");
+			
+			SecurityService ss = (SecurityService) app.getService(SecurityService.class);
+			for(Iterator itr = userMap.keySet().iterator(); itr.hasNext();)
+			{
+				String subject = app.getMessage("fms.facility.autoAssign.sched.mail.subject");
+				String content = app.getMessage("fms.facility.autoAssign.sched.mail.content") + "<br>";
+				
+				String key = (String) itr.next();
+				ArrayList<String> arr = (ArrayList) userMap.get(key);
+				if(arr != null && !arr.isEmpty())
+				{
+					UnitHeadDao dao = (UnitHeadDao) getDao();
+					for(String reqId : arr)
+					{
+						try
+						{
+							DefaultDataObject reqObj = dao.getRequestById(reqId);
+							String requestName = (String) reqObj.getProperty("title");
+							
+							content += "<br>" + reqId + " - " + requestName;
+						}
+						catch(Exception e)
+						{
+							Log.getLog(getClass()).error("error @ UnitHeadModule.sendMailToRespectiveUnitHead(1)" + e, e);
+							continue;
+						}
+					}
+				}
+				else
+				{
+					continue;
+				}
+				
+				try
+				{
+					User user = ss.getUser(key);
+					String email = (String) user.getProperty("email1");
+					
+					MailUtil.sendEmail(smtpServer, true, adminEmail, email, null, null, subject , content);
+				}
+				catch (SecurityException e)
+				{
+					Log.getLog(getClass()).error(e, e);
+				}
+			}
 		}
 	}
 }

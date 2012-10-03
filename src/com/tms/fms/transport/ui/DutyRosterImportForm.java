@@ -49,7 +49,7 @@ public class DutyRosterImportForm extends Form {
 	private boolean newExcel;
 	public static final int CATEGORY_COLUMN = 7;
 	public static final int FACILITY_COLUMN = 18;
-	public static final int DUTY_COLUMN = 12;
+	public static final int DUTY_COLUMN = 8;
 	
 	public static final String FOLDER_EXCEL_UPLOAD = "/fmsExcel/";
 	public static final String TITLE_CELL = "UNIT";
@@ -332,21 +332,26 @@ public class DutyRosterImportForm extends Form {
 										//4th Column
 										// get the studio id assign the manpower to the studio which is 
 										// should have manpower inside the ratecard
+										
+										Collection studios = null;
+										ArrayList arrStudio = new ArrayList();
+										int counter=1;
+										
+										
 										if(!(null == contentDuty[3]|| "".equals(contentDuty[3]))){
 											String studio1 = contentDuty[3];
-											
+											String xx = "";
 											if(studio1 != null && !studio1.equals("")){
-												if(module.getStudio(houUserId, studio1)!=null && !module.getStudio(houUserId, studio1).equals("")){
-													wp.setStudio1(module.getStudio(houUserId, studio1));
-												}else{
-													int errorline = i + 1;											
-													studioLogTable = new LogTable();
-													errors = "Import for this studio : "+contentDuty[3]+" error, please check the rate card";														
-													studioLogTable.setErrors(errors);
-													studioLogTable.setErrorsLine(""+errorline);
-													errorsInFile.add(studioLogTable);
+												studios = module.getStudiosByCode(studio1);
+												if(studios!=null && studios.size()>0){
+													for (Iterator iter = studios.iterator(); iter.hasNext();) {
+														HashMap map = (HashMap) iter.next();
+														arrStudio.add((String) map.get("name"));
+														counter++;
 												}
 											}
+											
+										}
 										}
 										
 										//5th Column
@@ -354,17 +359,17 @@ public class DutyRosterImportForm extends Form {
 											String studio2 = contentDuty[4];
 											
 											if(studio2 != null && !studio2.equals("")){
-												if(module.getStudio(houUserId, studio2)!= null && !module.getStudio(houUserId, studio2).equals("")){
-													wp.setStudio2(module.getStudio(houUserId, studio2));
-												}else{
-													int errorline = i + 1;											
-													studioLogTable = new LogTable();
-													errors = "Import for this studio : "+contentDuty[4]+" error, please check the rate card";														
-													studioLogTable.setErrors(errors);
-													studioLogTable.setErrorsLine(""+errorline);
-													errorsInFile.add(studioLogTable);
+												studios = module.getStudiosByCode(studio2);
+												if(studios!=null && studios.size()>0){
+													for (Iterator iter = studios.iterator(); iter.hasNext();) {
+														HashMap map = (HashMap) iter.next();
+														if(counter<9)
+															arrStudio.add((String) map.get("name"));
+														counter++;
 												}
 											}
+												
+										}
 										}
 										
 										//6th Column
@@ -372,17 +377,18 @@ public class DutyRosterImportForm extends Form {
 											String studio3 = contentDuty[5];
 											
 											if(studio3 != null && !studio3.equals("")){
-												if(module.getStudio(houUserId, studio3)!= null && !module.getStudio(houUserId, studio3).equals("")){
-													wp.setStudio3(module.getStudio(houUserId, studio3));
-												}else{
-													int errorline = i + 1;											
-													studioLogTable = new LogTable();
-													errors = "Import for this studio : "+contentDuty[5]+" error, please check the rate card";														
-													studioLogTable.setErrors(errors);
-													studioLogTable.setErrorsLine(""+errorline);
-													errorsInFile.add(studioLogTable);
+												
+													studios = module.getStudiosByCode(studio3);
+													if(studios!=null && studios.size()>0){
+														for (Iterator iter = studios.iterator(); iter.hasNext();) {
+															HashMap map = (HashMap) iter.next();
+															if(counter<9)
+																arrStudio.add((String) map.get("name"));
+															counter++;
 												}
 											}
+												
+										}
 										}
 										
 										//7th Column
@@ -390,96 +396,85 @@ public class DutyRosterImportForm extends Form {
 											String studio4 = contentDuty[6];
 											
 											if(studio4 != null && !studio4.equals("")){
-												if(module.getStudio(houUserId, studio4)!= null && !module.getStudio(houUserId, studio4).equals("")){
-													wp.setStudio4(module.getStudio(houUserId, studio4));
-												}else{
-													int errorline = i + 1;											
-													studioLogTable = new LogTable();
-													errors = "Import for this studio : "+contentDuty[6]+" error, please check the rate card";														
-													studioLogTable.setErrors(errors);
-													studioLogTable.setErrorsLine(""+errorline);
-													errorsInFile.add(studioLogTable);
+												studios = module.getStudiosByCode(studio4);
+												if(studios!=null && studios.size()>0){
+													for (Iterator iter = studios.iterator(); iter.hasNext();) {
+														HashMap map = (HashMap) iter.next();
+														if(counter<9)
+															arrStudio.add((String) map.get("name"));
+														counter++;
 												}
 											}
+												
+												
+										}
 										}
 										
-										//8th Column
-										if(!(null == contentDuty[7]|| "".equals(contentDuty[7]))){
-											String studio5 = contentDuty[7];
+										//for (Iterator iter = studios.iterator(); iter.hasNext();) {
 											
-											if(studio5 != null && !studio5.equals("")){
-												if(module.getStudio(houUserId, studio5)!= null && !module.getStudio(houUserId, studio5).equals("")){
-													wp.setStudio5(module.getStudio(houUserId, studio5));
+										if(arrStudio.size()>0 && arrStudio.get(0)!=null && !"".equals(arrStudio.get(0)) ){
+											if(module.getStudio(houUserId, arrStudio.get(0).toString())!= null && !module.getStudio(houUserId, arrStudio.get(0).toString()).equals("")){
+												wp.setStudio1(module.getStudio(houUserId, arrStudio.get(0).toString()));
 												}else{
-													int errorline = i + 1;											
-													studioLogTable = new LogTable();
-													errors = "Import for this studio : "+contentDuty[7]+" error, please check the rate card";														
-													studioLogTable.setErrors(errors);
-													studioLogTable.setErrorsLine(""+errorline);
-													errorsInFile.add(studioLogTable);
+												logError(studioLogTable, i, errors, arrStudio.get(0).toString());
 												}
 											}
-										}
 										
-										//9th Column
-										if(!(null == contentDuty[8]|| "".equals(contentDuty[8]))){
-											String studio6 = contentDuty[8];
-											
-											if(studio6 != null && !studio6.equals("")){
-												if(module.getStudio(houUserId, studio6)!= null && !module.getStudio(houUserId, studio6).equals("")){
-													wp.setStudio6(module.getStudio(houUserId, studio6));
+										if(arrStudio.size()>1 && arrStudio.get(1)!=null && !"".equals(arrStudio.get(1)) ){
+											if(module.getStudio(houUserId, arrStudio.get(1).toString())!= null && !module.getStudio(houUserId, arrStudio.get(1).toString()).equals("")){
+												wp.setStudio2(module.getStudio(houUserId, arrStudio.get(1).toString()));
 												}else{
-													int errorline = i + 1;											
-													studioLogTable = new LogTable();
-													errors = "Import for this studio : "+contentDuty[8]+" error, please check the rate card";														
-													studioLogTable.setErrors(errors);
-													studioLogTable.setErrorsLine(""+errorline);
-													errorsInFile.add(studioLogTable);
+												logError(studioLogTable, i, errors, arrStudio.get(1).toString());
 												}
 											}
+										if(arrStudio.size()>2 && arrStudio.get(2)!=null && !"".equals(arrStudio.get(2)) ){
+											if(module.getStudio(houUserId, arrStudio.get(2).toString())!= null && !module.getStudio(houUserId, arrStudio.get(2).toString()).equals("")){
+												wp.setStudio3(module.getStudio(houUserId, arrStudio.get(2).toString()));
+											}else{
+												logError(studioLogTable, i, errors, arrStudio.get(2).toString());
 										}
-										
-										//10th Column
-										if(!(null == contentDuty[9]|| "".equals(contentDuty[9]))){
-											String studio7 = contentDuty[9];
-											
-											if(studio7 != null && !studio7.equals("")){
-												if(module.getStudio(houUserId, studio7)!= null && !module.getStudio(houUserId, studio7).equals("")){
-													wp.setStudio7(module.getStudio(houUserId, studio7));
+										}
+										if(arrStudio.size()>3 && null!=arrStudio.get(3)){
+											if(module.getStudio(houUserId, arrStudio.get(3).toString())!= null && !module.getStudio(houUserId, arrStudio.get(3).toString()).equals("")){
+												wp.setStudio4(module.getStudio(houUserId, arrStudio.get(3).toString()));
 												}else{
-													int errorline = i + 1;											
-													studioLogTable = new LogTable();
-													errors = "Import for this studio : "+contentDuty[9]+" error, please check the rate card";														
-													studioLogTable.setErrors(errors);
-													studioLogTable.setErrorsLine(""+errorline);
-													errorsInFile.add(studioLogTable);
+												logError(studioLogTable, i, errors, arrStudio.get(3).toString());
 												}
 											}
+										if(arrStudio.size()>4 && arrStudio.get(4)!=null && !"".equals(arrStudio.get(4)) ){
+											if(module.getStudio(houUserId, arrStudio.get(4).toString())!= null && !module.getStudio(houUserId, arrStudio.get(4).toString()).equals("")){
+												wp.setStudio5(module.getStudio(houUserId, arrStudio.get(4).toString()));
+											}else{
+												logError(studioLogTable, i, errors, arrStudio.get(4).toString());
 										}
-										
-										//11th Column
-										if(!(null == contentDuty[10]|| "".equals(contentDuty[10]))){
-											String studio8 = contentDuty[10];
-											
-											if(studio8 != null && !studio8.equals("")){
-												if(module.getStudio(houUserId, studio8)!= null && !module.getStudio(houUserId, studio8).equals("")){
-													wp.setStudio8(module.getStudio(houUserId, studio8));
+										}
+										if(arrStudio.size()>5 &&arrStudio.get(5)!=null && !"".equals(arrStudio.get(5)) ){	
+											if(module.getStudio(houUserId, arrStudio.get(5).toString())!= null && !module.getStudio(houUserId, arrStudio.get(5).toString()).equals("")){
+												wp.setStudio6(module.getStudio(houUserId, arrStudio.get(5).toString()));
 												}else{
-													int errorline = i + 1;											
-													studioLogTable = new LogTable();
-													errors = "Import for this studio : "+contentDuty[10]+" error, please check the rate card";														
-													studioLogTable.setErrors(errors);
-													studioLogTable.setErrorsLine(""+errorline);
-													errorsInFile.add(studioLogTable);
+												logError(studioLogTable, i, errors, arrStudio.get(5).toString());
 												}
+											}
+										if(arrStudio.size()>6 &&arrStudio.get(6)!=null && !"".equals(arrStudio.get(6)) ){
+											if(module.getStudio(houUserId, arrStudio.get(6).toString())!= null && !module.getStudio(houUserId, arrStudio.get(6).toString()).equals("")){
+												wp.setStudio7(module.getStudio(houUserId, arrStudio.get(6).toString()));
+											}else{
+												logError(studioLogTable, i, errors, arrStudio.get(6).toString());
+										}
+										}
+										if(arrStudio.size()>7 &&arrStudio.get(7)!=null && !"".equals(arrStudio.get(7)) ){
+											if(module.getStudio(houUserId, arrStudio.get(7).toString())!= null && !module.getStudio(houUserId, arrStudio.get(7).toString()).equals("")){
+												wp.setStudio8(module.getStudio(houUserId, arrStudio.get(7).toString()));
+											}else{
+												logError(studioLogTable, i, errors, arrStudio.get(7).toString());
 											}
 										}
 										
 										//12th Column
-										if(!(null == contentDuty[11]|| "".equals(contentDuty[11]))){
+										if(!(null == contentDuty[7]|| "".equals(contentDuty[7]))){
 											try{
 												Map<String, String> userMap = new HashMap<String, String>();
-												username = contentDuty[11];		
+												username = contentDuty[7];		
 												
 												try{
 													userId = manager.selectExistSecurityUser(username);
@@ -644,6 +639,14 @@ public class DutyRosterImportForm extends Form {
 		return forward;
 	}
 	
+	private void logError(LogTable studioLogTable, int i, String errors,String contentDuty){
+		int errorline = i + 1;											
+		studioLogTable = new LogTable();
+		errors = "Import for this studio : "+contentDuty+" error, please check the rate card";														
+		studioLogTable.setErrors(errors);
+		studioLogTable.setErrorsLine(""+errorline);
+		errorsInFile.add(studioLogTable);
+	}
 	
 	public boolean isDuplicate(String userId, String wpName, Date startDate, Date endDate){
 		boolean exist = false;

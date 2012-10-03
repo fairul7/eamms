@@ -1859,12 +1859,20 @@ public class UnitHeadDao extends DataSourceDao {
 		return result;
 	}
 
-	public Collection getUserIdFromWorkingProfile(String rateCardId, Date requiredFrom, Date requiredTo) throws DaoException
+	public Collection getUserIdFromWorkingProfile(String competencyId, String rateCardId, 
+			Date requiredFrom, Date requiredTo, String startTime, String endTime) throws DaoException
 	{
 		String sql =
 			" SELECT DISTINCT(m.userId) AS userId " +
 			" FROM fms_working_profile_duration_manpower m " +
 			" INNER JOIN fms_working_profile_duration d ON (d.workingProfileDurationId = m.workingProfileDurationId) " +
+			" INNER JOIN ( " +
+			"		SELECT workingProfileId, startTime, " +
+			"		CASE WHEN endTime < startTime THEN CONVERT(VARCHAR, CONVERT(INT, SUBSTRING(endTime, 1, 2)) + 24) + SUBSTRING(endTime, 3, 4) ELSE endTime END AS endTime, " +
+			"		CASE WHEN endTime < startTime THEN '1' ELSE '0' END AS 'nx' " +
+			"		FROM fms_working_profile " +
+			" ) p on (p.workingProfileId=d.workingProfileId) " +
+			" INNER JOIN competency_user cu on (m.userId=cu.userid) " +
 			" WHERE 1=1 " +
 			" AND (  studio1 = ? " +
 			"	OR studio2 = ? " +
@@ -1886,8 +1894,22 @@ public class UnitHeadDao extends DataSourceDao {
 		param.add(rateCardId);
 		param.add(rateCardId);
 		param.add(rateCardId);
+		
 		param.add(requiredFrom);
 		param.add(requiredTo);
+		
+		if(competencyId != null && !competencyId.equals(""))
+		{
+			sql += " AND cu.competencyId = ? ";
+			param.add(competencyId);
+		}
+		
+		if((startTime != null && !startTime.equals("")) && (endTime != null && !endTime.equals("")))
+		{
+			sql += " AND ( p.startTime <= ? and p.endTime >= ? ) ";
+			param.add(startTime); 
+			param.add(endTime);
+		}
 		
 		Collection result = super.select(sql, DefaultDataObject.class, param.toArray(), 0, -1);
 		return result;
@@ -1933,6 +1955,75 @@ public class UnitHeadDao extends DataSourceDao {
 			return (String) map.get("userId");
 		}
 		return null;
+	}
+
+	public boolean isAssignmentBlockbooking(String assignmentId) throws DaoException
+	{
+		String sql =
+			" SELECT m.blockbooking " +
+			" FROM fms_eng_assignment a " +
+			" INNER JOIN fms_eng_service_manpower m ON (a.serviceId=m.id) " +
+			" WHERE 1=1 " +
+			" AND assignmentId = ? ";
+		
+		Collection col = super.select(sql, HashMap.class, new Object[]{assignmentId}, 0, 1);
+		if(col != null && !col.isEmpty())
+		{
+			HashMap map = (HashMap) col.iterator().next();
+			return map != null && map.get("blockbooking").equals("1") ? true : false ;
+		}
+		return false;
+	}
+	
+	public boolean searchEmpAvailability(String userId, Date requiredFrom, Date requiredTo, 
+			String timeFr, String timeTo, boolean blockbooking) throws DaoException
+	{
+		ArrayList param = new ArrayList();
+		String sql = 
+			" SELECT userId " +
+			" FROM fms_eng_assignment_manpower am ";
+		
+		if(!blockbooking) //not block booking
+		{
+			sql +=
+				" INNER JOIN fms_eng_assignment a ON (a.assignmentId = am.assignmentId) " +
+				" INNER JOIN fms_eng_service_manpower m ON (a.serviceId = m.id) " +
+				" WHERE 1=1 " +
+				" AND am.userId = ? " +
+				" AND ( " +
+				"		CONVERT(DATETIME, (SUBSTRING(CONVERT( VARCHAR, am.requiredFrom, 121 ),1 , 10) + ' ' + am.fromTime + ':00'), 20) <= convert(DATETIME, (SUBSTRING(CONVERT( VARCHAR, ?, 121 ),1 , 10) + ' ' + ? + ':00'), 20) " +
+				"		AND " +
+				"		CONVERT(DATETIME, (SUBSTRING(CONVERT( VARCHAR, am.requiredTo, 121 ),1 , 10) + ' ' + am.toTime + ':00'), 20) >= convert(DATETIME, (SUBSTRING(CONVERT( VARCHAR, ?, 121 ),1 , 10) + ' ' + ? + ':00'), 20) " +
+				" ) ";
+			
+			param.add(userId);
+			param.add(requiredFrom);
+			param.add(timeFr);
+			param.add(requiredTo);
+			param.add(timeTo);
+		}
+		else
+		{
+			sql += 
+				" WHERE 1=1 " +
+				" AND am.userId = ? " +
+				" AND am.requiredFrom <= ? " +
+				" AND am.requiredTo >= ? " +
+				" AND ( am.fromTime >= ? AND am.toTime <= ? ) ";
+			
+			param.add(userId);
+			param.add(requiredFrom);
+			param.add(requiredTo);
+			param.add(timeFr);
+			param.add(timeTo);
+		}
+		
+		Collection col = super.select(sql, HashMap.class, param.toArray(), 0, 1);
+		if(col != null && !col.isEmpty())
+		{
+			return true;
+		}
+		return false;
 	}
 
 	public DefaultDataObject getAutoAssignmentSchedSetting() throws DaoException
@@ -1988,5 +2079,61 @@ public class UnitHeadDao extends DataSourceDao {
 			
 		Collection result = super.select(sql, DefaultDataObject.class, new Object[]{requestId}, 0, -1);
 		return result;
+	}
+
+	public Collection getHodUnitId(String userId) throws DaoException
+	{
+		String sql = 
+			" SELECT DISTINCT(a.unitId) AS unitId " +
+			" FROM fms_unit u " +
+			" LEFT JOIN fms_unit_alternate_approver a ON (u.id=a.unitId) " +
+			" WHERE (a.userId=? OR u.hou=? ) ";
+		
+		Collection result = super.select(sql, DefaultDataObject.class, new Object[]{userId, userId}, 0, -1);
+		return result;
+}
+
+	public Collection getCompetencyIdWithUnitId(String unitId) throws DaoException
+	{
+		String sql = " SELECT competencyId FROM competency WHERE unitId = ? ";
+		
+		Collection result = super.select(sql, DefaultDataObject.class, new Object[]{unitId}, 0, -1);
+		return result;
+	}
+
+	public Collection<DefaultDataObject> getHOU_and_alternateApprovalByRequestId(String reqId) throws DaoException
+	{
+		String sql = 
+			" SELECT c.competencyName, c.unitId, fu.HOU, fua.userId AS alt_approval " +
+			" FROM competency c " +
+			" INNER JOIN fms_unit fu ON (c.unitId = fu.id) " +
+			" INNER JOIN fms_unit_alternate_approver fua ON (fu.id = fua.unitId) " +
+			" WHERE 1=1 " +
+			" AND competencyId IN ( " +
+			"	 SELECT DISTINCT(am.competencyId) " +
+			"	 FROM fms_eng_assignment_manpower am  " +
+			"	 INNER JOIN fms_eng_assignment a ON (a.assignmentId = am.assignmentId) " +
+			"	 WHERE  1=1 " +
+			"	 AND a.requestId = ? " +
+			" ) " +
+			"ORDER BY c.unitId ";
+		
+		Collection result = super.select(sql, DefaultDataObject.class, new Object[]{reqId}, 0, -1);
+		return result;
+	}
+
+	public DefaultDataObject getRequestById(String requestId) throws DaoException
+	{
+		String sql =
+			" SELECT * " +
+			" FROM fms_eng_request " +
+			" WHERE requestId = ? ";
+		
+		Collection result = super.select(sql, DefaultDataObject.class, new Object[]{requestId}, 0, 1);
+		if(result != null && !result.isEmpty())
+		{
+			return (DefaultDataObject) result.iterator().next();
+		}
+		return new DefaultDataObject();
 	}
 }

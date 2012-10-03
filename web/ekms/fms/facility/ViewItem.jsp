@@ -121,13 +121,13 @@
 				<tbody>
 					<c:forEach items="${widgets[ 'ViewItem.form' ].internalCheckoutHistoryList}" var="req1">
 					    <tr>
-					        <td><c:out value="${req1.checkout_by}" /></td>
+					        <td><c:out value="${req1.requestedByName}" /></td>
 					        <td><c:out value="${req1.location_name}"/></td>
 					        <td><c:out value="${req1.purpose}" /></td>					        
 					        <td><fmt:formatDate pattern="${globalDatetimeLong}" value="${req1.checkin_date}"/></td>
 							<td><c:out value="${req1.checkin_by_name}"/></td>
 	            			<td><fmt:formatDate pattern="${globalDatetimeLong}" value="${req1.checkout_date}"/></td>
-							<td><c:out value="${req1.createdby}"/></td>
+							<td><c:out value="${req1.checkout_by}"/></td>
 	            			
 					    </tr>
 				    </c:forEach>

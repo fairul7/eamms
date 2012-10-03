@@ -1,6 +1,10 @@
-
 New Build 
 =========
+
+
+fms_1.0.0_update (Oct 2 2012) V2.5
+-------------------------------------
+MERGED FMS-EAMMS & FMS-CR
 Fixed #14144 : Add remarks but not effected although successfully submitted
 Fixed #13970 : Daily Operation Log> Please put the correct error type. Eqt Fault, Normal, TxFault, Others
 Fixed #13974 : Daily Operation Log> click New> Rename Save button to Submit button

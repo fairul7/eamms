@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import org.apache.axis.collections.SequencedHashMap;
+
+import com.tms.crm.sales.misc.DateUtil;
 import com.tms.fms.engineering.model.EngineeringModule;
 import com.tms.fms.reports.model.ReportsFmsModule;
 import com.tms.fms.setup.model.ProgramObject;
@@ -90,6 +92,8 @@ public class TransportReqReportTotalTable extends Table{
 			addColumn(requestType);
 			TableColumn progName = new TableColumn("programName", app.getMessage("fms.report.transport.message.programName"));
 			addColumn(progName);
+			TableColumn pfeCode = new TableColumn("pfeCode", app.getMessage("fms.report.transport.message.pfeCode"));
+			addColumn(pfeCode);
 			TableColumn reqNo = new TableColumn("id", app.getMessage("fms.report.transport.message.reqNo"));
 			addColumn(reqNo);
 			TableColumn reqVehicles = new TableColumn("requestedVehicles", app.getMessage("fms.report.transport.message.requestedVehicles"));
@@ -186,8 +190,8 @@ public class TransportReqReportTotalTable extends Table{
 
 		public Collection getTableRows() {
 			Collection list =null;
-			Date fromDate = reportDateFrom.getDate();
-			Date toDate = reportDateTo.getDate();
+			Date fromDate = DateUtil.getDateFromStartTime(reportDateFrom.getDate());
+			Date toDate = DateUtil.getDateWithEndTime(reportDateTo.getDate());
 			String reqType = getRequestType();
 			ReportsFmsModule module = (ReportsFmsModule)app.getModule(ReportsFmsModule.class);
 			

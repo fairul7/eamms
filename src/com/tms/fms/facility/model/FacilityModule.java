@@ -829,12 +829,14 @@ public class FacilityModule extends DefaultModule {
 	
 	public int countRequestListing(String search, String department, Date fromDate, Date toDate, boolean isToday){
 		FacilityDao dao = (FacilityDao) getDao();
+		int count = 0;
 		try {
-			return dao.countRequestListing(search, department, fromDate, toDate, isToday);
+			count = dao.countRequestListing(search, department, fromDate, toDate, isToday);
 		} catch (DaoException e) {
 			Log.getLog(getClass()).error(e.toString(), e);
-			return 0;
 		}
+		
+		return count;
 		
 	}
 	

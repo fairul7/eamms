@@ -71,6 +71,8 @@ public class TransportReqReportTotalExport extends Table{
 			addColumn(requestType);
 			TableColumn progName = new TableColumn("programName", app.getMessage("fms.report.transport.message.programName"));
 			addColumn(progName);
+			TableColumn pfeCode = new TableColumn("pfeCode", Application.getInstance().getMessage("fms.report.transport.message.pfeCode"));
+			addColumn(pfeCode);
 			TableColumn reqNo = new TableColumn("id", app.getMessage("fms.report.transport.message.reqNo"));
 			addColumn(reqNo);
 			TableColumn reqVehicles = new TableColumn("requestedVehicles", app.getMessage("fms.report.transport.message.requestedVehicles"));

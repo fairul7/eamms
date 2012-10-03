@@ -1,5 +1,6 @@
 package com.tms.fms.scheduler;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -43,9 +44,9 @@ public class ManpowerAutoAssign extends BaseJob
 		
 		Date startDate = cal.getTime();
 		HashMap requestIds = new HashMap();
-		for(int i = 0; i < numOfDays.intValue() +1; i++)
+		for(int i = 0; i < numOfDays.intValue(); i++)
 		{
-			cal.add(Calendar.DAY_OF_MONTH, 1);
+			cal.add(Calendar.DAY_OF_MONTH, 1); //start from day after current day
 			startDate = cal.getTime();
 			
 			HashMap tmpMap = mod.getRequestIdsByDateRange(startDate, null);
@@ -54,6 +55,7 @@ public class ManpowerAutoAssign extends BaseJob
 		
 		if(requestIds != null && !requestIds.isEmpty())
 		{
+			ArrayList arr = new ArrayList();
 			for(Iterator itr = requestIds.keySet().iterator(); itr.hasNext();)
 			{
 				String reqId = (String) itr.next();
@@ -61,9 +63,16 @@ public class ManpowerAutoAssign extends BaseJob
 				int status = mod.autoAssignment(reqId);
 				if(status == 0)
 				{
-					Log.getLog(getClass()).info(" requestId : " + reqId + " fails to auto-aissign ");
+					Log.getLog(getClass()).info(" requestId : " + reqId + " fails to auto-assign ");
 				}
+				else if (status == 3)
+				{
+					arr.add(reqId);
+					Log.getLog(getClass()).info(" requestId : " + reqId + " start end date error, auto-assign skip ");
 			}
 		}
+			
+			mod.notifyRespectiveUnitHead(arr);
 	}
+}
 }

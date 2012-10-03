@@ -153,6 +153,10 @@ public class AssignmentDetailsForm extends Form {
 			{
 				return new Forward("AUTOASSIGNNOTFOUND");
 			}
+			else if(status == 3)
+			{
+				return new Forward("AUTOASSIGNSKIP");
+		} 
 		} 
 		
 		return new Forward("");

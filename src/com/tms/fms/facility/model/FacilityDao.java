@@ -1513,9 +1513,27 @@ public class FacilityDao extends DataSourceDao{
 		
 		// checking on different table
 		if (isToday) {
+			
+			Date globalDate = DateUtil.getToday();
+			int globalValue = 0;			
+			try{
+				UnitHeadDao uDao = (UnitHeadDao)Application.getInstance().getModule(UnitHeadModule.class).getDao();
+				globalValue = uDao.selectAssignmentSettingValue() - 1;		// get value from global setup
+																			
+			}catch(Exception er){
+				Log.getLog(getClass()).error("Error On globalValue "+er);
+			}
+			if(globalValue >= 0){											
+				Calendar cal = Calendar.getInstance(); 		//to set today's date + value from global setup
+				cal.setTime(DateUtil.getToday());
+				cal.add(Calendar.DATE, globalValue);
+				globalDate = cal.getTime();
+			}
+			
 			fromClause += "LEFT JOIN fms_eng_assignment_equipment e ON (a.groupId=e.groupId) ";
-			whereClause += "AND ? BETWEEN e.requiredFrom AND e.requiredTo ";
+			whereClause += "AND r.requiredFrom <= ? AND r.requiredTo >= ?  ";
 			args.add(DateUtil.getToday());
+			args.add(globalDate);
 		} else if (fromDate != null && toDate != null) {
 			whereClause += "AND (r.requiredFrom <= ? AND r.requiredTo >= ?) ";
 			args.add(toDate);
@@ -2477,15 +2495,17 @@ public class FacilityDao extends DataSourceDao{
 		}
 		
 		Map map = sqlRequestListingByTime(search, department, fromDate, toDate, isToday);
+		//Map map = sqlRequestListing(search, department, fromDate, toDate, isToday);
 		String sql = (String) map.get("selectClause") + (String) map.get("fromClause") + (String) map.get("whereClause") + (String) map.get("groupByClause") + sortClause;
 		Object[] args = ((Collection) map.get("args")).toArray();
 
+		Collection reqList = new ArrayList();
 		try {
-			return super.select(sql, HashMap.class, args, start, rows);
+			reqList = super.select(sql, HashMap.class, args, start, rows);
 		} catch (DaoException e) {
 			Log.getLog(getClass()).error(e.toString(), e);
 		}
-		return new ArrayList();
+		return reqList;
 	}
 	
 	protected Map sqlRequestListingByTime(String search, String department, Date fromDate, Date toDate, boolean isToday) {
@@ -2520,19 +2540,28 @@ public class FacilityDao extends DataSourceDao{
 			args.add(department);
 		}
 		
-		// checking on different table
 		if (isToday) {
-			UnitHeadDao dao1 = (UnitHeadDao)Application.getInstance().getModule(UnitHeadModule.class).getDao();
-			int settingValue = dao1.selectAssignmentSettingValue();
-			Date dateMax = new Date();
-			Date dateMin = Calendar.getInstance().getTime();
-			dateMax.setDate(dateMax.getDate()+settingValue-1); 
+			Date globalDate = DateUtil.getToday();
+			int globalValue = 0;			
+			try{
+				UnitHeadDao uDao = (UnitHeadDao)Application.getInstance().getModule(UnitHeadModule.class).getDao();
+				globalValue = uDao.selectAssignmentSettingValue() - 1;		// get value from global setup
+			
+			}catch(Exception er){
+				Log.getLog(getClass()).error("Error On globalValue "+er);
+			}
+			if(globalValue >= 0){											
+				Calendar cal = Calendar.getInstance(); 		//to set today's date + value from global setup
+				cal.setTime(DateUtil.getDateWithEndTime(DateUtil.getToday()));
+				cal.add(Calendar.DATE, globalValue);
+				globalDate = cal.getTime();
+			}
 			
 			fromClause += "LEFT JOIN fms_eng_assignment_equipment e ON (a.groupId=e.groupId) ";
-			whereClause += "AND (r.requiredFrom <= ? AND r.requiredTo >= ?) " +
-					")a ";
-			args.add(dateMax);
-			args.add(dateMin);
+			whereClause += "AND (r.requiredFrom <= ? AND r.requiredTo >= ? ) )a ";
+			args.add(globalDate);
+			args.add(DateUtil.getToday());
+			
 		} else if (fromDate != null && toDate != null) {
 			fromClause += "LEFT JOIN fms_eng_assignment_equipment e ON (a.groupId=e.groupId) ";
 			whereClause += "AND (r.requiredFrom <= ? AND r.requiredTo >= ?) " +
@@ -2675,11 +2704,11 @@ public class FacilityDao extends DataSourceDao{
 
 	public Collection getItemNotCheckin(String requestId) throws DaoException {
     	
-    	String sql = " SELECT i.barcode,f.name as itemName  " +
+    	String sql = " SELECT distinct i.barcode,f.name as itemName  " +
     			" FROM fms_eng_assignment_equipment e " +
-    			" INNER JOIN fms_facility_item i ON (e.barcode = i.barcode ) " +
-    			" INNER JOIN fms_facility f ON (f.id=i.facility_id) " +
-    			" INNER JOIN fms_eng_assignment a ON (e.assignmentId = a.assignmentId )" +
+    			" LEFT JOIN fms_facility_item i ON (e.barcode = i.barcode ) " +
+    			" LEFT JOIN fms_facility f ON (f.id=i.facility_id) " +
+    			" LEFT JOIN fms_eng_assignment a ON (e.groupId = a.groupId )" +
     			" WHERE a.requestId= ? AND i.status = ? " ;    			
     	
     	

@@ -80,6 +80,7 @@ public class ReportsTransportObject extends DefaultDataObject implements Cloneab
 	private String requestedVehicles;
 	private String requestedDrivers;
 	private String totalCostDaily;
+	private String pfeCode;
 
 	public String getId() {
 		return id;
@@ -1007,4 +1008,12 @@ public String getRequestDateStr0() {
 		this.totalCostDaily = totalCostDaily;
 	}
 
+	public String getPfeCode() {
+		return pfeCode;
+}
+
+	public void setPfeCode(String pfeCode) {
+		this.pfeCode = pfeCode;
+	}
+	
 }

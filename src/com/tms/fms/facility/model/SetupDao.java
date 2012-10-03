@@ -564,16 +564,11 @@ public class SetupDao extends DataSourceDao {
 		}
 		
 		if (startDate != null && endDate != null) {
-			sql+=" AND (( d.startDate between ? AND ? ) OR ( d.endDate between ? AND ? )) ";
-			params.add(startDate);
+			sql+=" AND (d.startDate <= ? and d.endDate >= ?) ";
 			params.add(endDate);
 			params.add(startDate);
-			params.add(endDate);
 		}
-//		
-//		String sql = "Select d.workingProfileDurationId, p.workingProfileId, p.name, d.startDate, d.endDate "
-//				+ " FROM fms_working_profile_duration d INNER JOIN fms_working_profile p ON p.workingProfileId=d.workingProfileId "
-//				+ " where 1=1 ";
+
 		if (search != null && !"".equals(search)) {
 			sql += " AND ( " +
 					"p.name like '%" + search + "%' " +
@@ -1646,6 +1641,28 @@ public class SetupDao extends DataSourceDao {
 				HashMap map = (HashMap) col.iterator().next();
 				return (String) map.get("id");
 			}
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.getMessage(), e);
+		}
+		return null;
+	}
+	
+	public Collection getStudiosByCode(String code){
+		try {
+			code = code+"%-%";
+			String sql = 
+				" select rc.name from fms_rate_card rc " +
+				" where rc.status!='0' AND rc.serviceTypeId='5' " +
+				" AND rc.name like ?";
+	
+			Collection col = super.select(sql, HashMap.class, new String[] {code}, 0, -1);
+			//if(tempReqId!=null && tempReqId.size()>0){
+			//	for (Iterator iter = tempReqId.iterator(); iter.hasNext();) {
+			//		HashMap map = (HashMap) col.iterator().next();
+			//		return (String) map.get("id");
+			//	}
+			//}
+			return col;
 		} catch (DaoException e) {
 			Log.getLog(getClass()).error(e.getMessage(), e);
 		}

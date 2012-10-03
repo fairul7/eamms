@@ -915,6 +915,11 @@ import com.tms.fms.department.model.FMSUnit;
 		return dao.isStudioExist(userId, studioName);
 	}
 	
+	public Collection getStudiosByCode(String code){
+		SetupDao dao=(SetupDao)getDao();
+		return dao.getStudiosByCode(code);
+	}
+	
 	
 	/***** rate card checking *****/
 	public boolean requestHasValidRateCards(String requestId) {
