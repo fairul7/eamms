@@ -135,11 +135,11 @@
         }
 	}
 
-	function init()
+	/*function init()
 	{
 		//check_cb_valid(); 
 	}
 	
-	window.onload = init;
+	//window.onload = init;*/
 </script>
 
