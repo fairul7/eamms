@@ -1,5 +1,8 @@
 New Build 
 =========
+
+fms_1.0.0_update (Oct 9 2012) V2.5
+-------------------------------------
 Fixed #14102 : KnowledgeBase - image icon is not appearing
 Fixed #14262 : Corrective Maintenance> Knowledge Base> click on the link it directed to EKP page not found.
 Fixed #14266 : Remove Spare Part Inventory History List from Asset Management
