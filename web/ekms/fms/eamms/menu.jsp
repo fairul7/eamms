@@ -91,7 +91,7 @@
 	    	items.add(new MenuItem(app.getMessage("com.tms.workflow.sparePart.fullListing"), "index.jsp?addr=sp05", null, null, null, null));
 	    	items.add(new MenuItem(app.getMessage("com.tms.workflow.sparePart.lowListing"), "index.jsp?addr=sp06", null, null, null, null));
 	    	items.add(new MenuItem(app.getMessage("com.tms.workflow.sparePart.highListing"), "index.jsp?addr=sp07", null, null, null, null));
-	    	items.add(new MenuItem(app.getMessage("com.tms.workflow.sparePart.historyListing"), "index.jsp?addr=sp08", null, null, null, null));
+	    	//items.add(new MenuItem(app.getMessage("com.tms.workflow.sparePart.historyListing"), "index.jsp?addr=sp08", null, null, null, null));	commented as in Bug #14266 
 	    } 
 	    
 	    if(sparePartManage)
@@ -99,7 +99,7 @@
             items.add(new MenuItem(app.getMessage("com.tms.workflow.sparePart.mfullListing"), "index.jsp?addr=sp01", null, null, null, null));
             items.add(new MenuItem(app.getMessage("com.tms.workflow.sparePart.mlowListing"), "index.jsp?addr=sp02", null, null, null, null));
             items.add(new MenuItem(app.getMessage("com.tms.workflow.sparePart.mhighListing"), "index.jsp?addr=sp03", null, null, null, null));
-            items.add(new MenuItem(app.getMessage("com.tms.workflow.sparePart.mhistoryListing"), "index.jsp?addr=sp04", null, null, null, null));
+            //items.add(new MenuItem(app.getMessage("com.tms.workflow.sparePart.mhistoryListing"), "index.jsp?addr=sp04", null, null, null, null));	commented as in Bug #14266
         }  
     }
     
