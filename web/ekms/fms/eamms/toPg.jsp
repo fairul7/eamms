@@ -60,7 +60,7 @@ function noPermission1()
 <c-rt:set var="wurl" value="<%= workflowURL %>"/>
 <c:choose>
     <c:when test="${param.addr eq 'myTask'}">
-        <c:set var="address1" value="${wurl}/jw/web/console/home"/>
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/myTasks/"/>
         <c:if test="<%=!wfAdmin && !wfUsr%>">
             <script>
                 noPermission1();
