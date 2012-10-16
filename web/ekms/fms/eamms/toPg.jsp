@@ -252,6 +252,14 @@ function noPermission1()
             </script>
         </c:if>
     </c:when>
+    <c:when test="${param.addr eq 'rs03'}">
+        <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//myRentalListing"/>
+        <c:if test="<%=!rentalReassign%>">
+            <script>
+                noPermission1();
+            </script>
+        </c:if>
+    </c:when>
     <c:when test="${param.addr eq 'pm01'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/preventiveMaintenance//pmForm"/>
         <c:if test="<%=!pmNew%>">
