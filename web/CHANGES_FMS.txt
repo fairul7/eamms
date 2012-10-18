@@ -1,5 +1,6 @@
 New Build 
 =========
+Fixed #14353 : Non related booking in Mogan Incoming request E20121015388
 
 fms_1.0.0_update (Oct 9 2012) V2.5
 -------------------------------------

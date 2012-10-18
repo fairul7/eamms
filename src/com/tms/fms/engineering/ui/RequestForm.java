@@ -46,7 +46,6 @@ public class RequestForm extends Form {
 	protected Collection oriServices;
 	public RequestForm() {}
 	
-	protected EngineeringRequest tempRequest;
 	protected EngineeringRequest request=new EngineeringRequest();
 	protected ServiceDetailsForm[] serviceForms; 
 
@@ -479,6 +478,7 @@ public class RequestForm extends Form {
 		
 		EngineeringModule module = (EngineeringModule) app.getModule(EngineeringModule.class);
 		
+		EngineeringRequest tempRequest = null;
 		if(oldRequestId!= null && !oldRequestId.equals("")){
 			tempRequest = module.getRequestWithService(oldRequestId);
 		}
@@ -497,7 +497,7 @@ public class RequestForm extends Form {
 				for(Iterator iterate = tempServices.iterator(); iterate.hasNext(); ){
 					Service tempService = (Service) iterate.next();
 					if(service.getServiceId().equals(tempService.getServiceId())){
-						module.copyServicesForTemplate(request, oldRequestId);
+						module.copyServicesForTemplate(request, oldRequestId, service.getServiceId());
 					}
 				}
 			}

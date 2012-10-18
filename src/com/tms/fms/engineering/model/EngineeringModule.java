@@ -724,6 +724,10 @@ public class EngineeringModule extends DefaultModule {
 	 * @param oldRequestId
 	 */
 	public void copyServices(EngineeringRequest eRequest, String oldRequestId) {
+		// logging
+		TransLogModule transLog = (TransLogModule) Application.getInstance().getModule(TransLogModule.class);
+		transLog.info(eRequest.getRequestId(), "COPY_SERVICES", "oldRequestId=" + oldRequestId);
+		
 		Collection scpCol 	= getScpService(oldRequestId, ServiceDetailsForm.SERVICE_SCPMCP);
 		Collection postCol 	= getPostProductionService(oldRequestId, ServiceDetailsForm.SERVICE_POSTPRODUCTION);
 		Collection vtrCol	= getVtrService(oldRequestId, ServiceDetailsForm.SERVICE_VTR);
@@ -4657,111 +4661,129 @@ public class EngineeringModule extends DefaultModule {
 		return dao.countRequestList(keyword, userName);
 	}
 	
-	public void copyServicesForTemplate(EngineeringRequest eRequest, String oldRequestId) {
+	public void copyServicesForTemplate(EngineeringRequest eRequest, String oldRequestId, String serviceId) {
+		// logging
+		TransLogModule transLog = (TransLogModule) Application.getInstance().getModule(TransLogModule.class);
+		transLog.info(eRequest.getRequestId(), "COPY_SERVICES", "oldRequestId=" + oldRequestId + " serviceId=" +serviceId);
+		
 		EngineeringDao dao 	= (EngineeringDao)getDao();
-		Collection scpCol 	= getScpServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_SCPMCP);
-		Collection postCol 	= getPostProductionServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_POSTPRODUCTION);
-		Collection vtrCol	= getVtrServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_VTR);
-		Collection manCol 	= getManpowerServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_MANPOWER);
-		Collection stdCol	= getStudioServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_STUDIO);
-		Collection othCol	= getOtherServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_OTHER);
-		Collection tvroCol	= getTvroServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_TVRO);
-		
-		if (scpCol!=null && scpCol.size()>0 && !dao.searchScpService(eRequest.getRequestId())) {
-			for (Iterator iscp = scpCol.iterator(); iscp.hasNext();){
-				ScpService scp = (ScpService)iscp.next();
-				scp.setRequestId(eRequest.getRequestId());
-				scp.setRequiredFrom(eRequest.getRequiredFrom());
-				scp.setRequiredTo(eRequest.getRequiredTo());
-				scp.setSubmitted("0");
-				//scp.setSettingFrom(eRequest.getFromTime());
-				//scp.setSettingTo(eRequest.getToTime());
-				insertScpService(scp);
-			}
-		}
-		
-		if (postCol!=null && postCol.size()>0 && !dao.searchPostProductionService(eRequest.getRequestId())) {
-			for (Iterator ipost = postCol.iterator(); ipost.hasNext();){
-				PostProductionService post = (PostProductionService)ipost.next();
-				post.setRequestId(eRequest.getRequestId());
-				post.setRequiredDate(eRequest.getRequiredFrom());
-				post.setRequiredDateTo(eRequest.getRequiredTo());
-				post.setSubmitted("0");
-				insertPostProductionService(post);
-			}
-		}
-		
-		if (vtrCol!=null && vtrCol.size()>0 && !dao.searchVtrServiceByRequestId(eRequest.getRequestId())) {
-			for (Iterator ivtr = vtrCol.iterator(); ivtr.hasNext();) {
-				VtrService vtr = (VtrService)ivtr.next();
-				vtr.setSubmitted("0");
-				vtr.setRequestId(eRequest.getRequestId());
-				vtr.setRequiredDate(eRequest.getRequiredFrom());
-				vtr.setRequiredDateTo(eRequest.getRequiredTo());
-				
-				Collection files = getFiles(vtr.getId());
-				
-				vtr.setId(UuidGenerator.getInstance().getUuid());
-				
-				if (files!=null && files.size()>0){
-					for (Iterator vtrFiles = files.iterator(); vtrFiles.hasNext();){
-						VtrService vtrFile = (VtrService)vtrFiles.next();
-						
-						vtrFile.setId(vtr.getId());
-						vtrFile.setFileId(UuidGenerator.getInstance().getUuid());
-						vtrFile.setModifiedBy(Application.getInstance().getCurrentUser().getUsername());
-						Date now=new Date();						
-						vtrFile.setModifiedDate(now);
-						
-						insertVtrAttachment(vtrFile);
-					}
+			
+		if (serviceId.equals(ServiceDetailsForm.SERVICE_SCPMCP)) {
+			Collection scpCol = getScpServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_SCPMCP);
+			if (scpCol!=null && scpCol.size()>0 && !dao.searchScpService(eRequest.getRequestId())) {
+				for (Iterator iscp = scpCol.iterator(); iscp.hasNext();){
+					ScpService scp = (ScpService)iscp.next();
+					scp.setRequestId(eRequest.getRequestId());
+					scp.setRequiredFrom(eRequest.getRequiredFrom());
+					scp.setRequiredTo(eRequest.getRequiredTo());
+					scp.setSubmitted("0");
+					//scp.setSettingFrom(eRequest.getFromTime());
+					//scp.setSettingTo(eRequest.getToTime());
+					insertScpService(scp);
 				}
-				
-				insertCopyVtrService(vtr);
 			}
 		}
 		
-		if (manCol!=null && manCol.size()>0 && !dao.searchManpowerByRequestId(eRequest.getRequestId())) {
-			for (Iterator iman = manCol.iterator(); iman.hasNext();){
-				ManpowerService man = (ManpowerService)iman.next();
-				man.setRequestId(eRequest.getRequestId());
-				man.setRequiredFrom(eRequest.getRequiredFrom());
-				man.setRequiredTo(eRequest.getRequiredTo());
-				man.setSubmitted("0");
-				insertManpowerService(man);
+		if (serviceId.equals(ServiceDetailsForm.SERVICE_POSTPRODUCTION)) {
+			Collection postCol = getPostProductionServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_POSTPRODUCTION);
+			if (postCol!=null && postCol.size()>0 && !dao.searchPostProductionService(eRequest.getRequestId())) {
+				for (Iterator ipost = postCol.iterator(); ipost.hasNext();){
+					PostProductionService post = (PostProductionService)ipost.next();
+					post.setRequestId(eRequest.getRequestId());
+					post.setRequiredDate(eRequest.getRequiredFrom());
+					post.setRequiredDateTo(eRequest.getRequiredTo());
+					post.setSubmitted("0");
+					insertPostProductionService(post);
+				}
 			}
 		}
 		
-		if (stdCol!=null && stdCol.size()>0 && !dao.searchStudioServiceByRequestId(eRequest.getRequestId())) {
-			for (Iterator istd = stdCol.iterator(); istd.hasNext();){
-				StudioService std = (StudioService)istd.next();
-				std.setRequestId(eRequest.getRequestId());
-				std.setBookingDate(eRequest.getRequiredFrom());
-				std.setBookingDateTo(eRequest.getRequiredTo());
-				std.setSubmitted("0");
-				insertStudioService(std);
+		if (serviceId.equals(ServiceDetailsForm.SERVICE_VTR)) {
+			Collection vtrCol = getVtrServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_VTR);
+			if (vtrCol!=null && vtrCol.size()>0 && !dao.searchVtrServiceByRequestId(eRequest.getRequestId())) {
+				for (Iterator ivtr = vtrCol.iterator(); ivtr.hasNext();) {
+					VtrService vtr = (VtrService)ivtr.next();
+					vtr.setSubmitted("0");
+					vtr.setRequestId(eRequest.getRequestId());
+					vtr.setRequiredDate(eRequest.getRequiredFrom());
+					vtr.setRequiredDateTo(eRequest.getRequiredTo());
+					
+					Collection files = getFiles(vtr.getId());
+					
+					vtr.setId(UuidGenerator.getInstance().getUuid());
+					
+					if (files!=null && files.size()>0){
+						for (Iterator vtrFiles = files.iterator(); vtrFiles.hasNext();){
+							VtrService vtrFile = (VtrService)vtrFiles.next();
+							
+							vtrFile.setId(vtr.getId());
+							vtrFile.setFileId(UuidGenerator.getInstance().getUuid());
+							vtrFile.setModifiedBy(Application.getInstance().getCurrentUser().getUsername());
+							Date now=new Date();						
+							vtrFile.setModifiedDate(now);
+							
+							insertVtrAttachment(vtrFile);
+						}
+					}
+					
+					insertCopyVtrService(vtr);
+				}
 			}
 		}
 		
-		if (othCol!=null && othCol.size()>0 && !dao.searchOtherServiceByRequestId(eRequest.getRequestId())) {
-			for (Iterator ioth = othCol.iterator(); ioth.hasNext();) {
-				OtherService oth = (OtherService)ioth.next();
-				oth.setRequestId(eRequest.getRequestId());
-				oth.setRequiredFrom(eRequest.getRequiredFrom());
-				oth.setRequiredTo(eRequest.getRequiredTo());
-				oth.setSubmitted("0");
-				insertOtherService(oth);
+		if (serviceId.equals(ServiceDetailsForm.SERVICE_MANPOWER)) {
+			Collection manCol = getManpowerServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_MANPOWER);
+			if (manCol!=null && manCol.size()>0 && !dao.searchManpowerByRequestId(eRequest.getRequestId())) {
+				for (Iterator iman = manCol.iterator(); iman.hasNext();){
+					ManpowerService man = (ManpowerService)iman.next();
+					man.setRequestId(eRequest.getRequestId());
+					man.setRequiredFrom(eRequest.getRequiredFrom());
+					man.setRequiredTo(eRequest.getRequiredTo());
+					man.setSubmitted("0");
+					insertManpowerService(man);
+				}
 			}
 		}
 		
-		if (tvroCol!=null && tvroCol.size()>0){
-			for (Iterator itvro = tvroCol.iterator(); itvro.hasNext();){
-				TvroService tvro = (TvroService)itvro.next();
-				tvro.setRequestId(eRequest.getRequestId());
-				tvro.setRequiredDate(eRequest.getRequiredFrom());
-				tvro.setRequiredDateTo(eRequest.getRequiredTo());
-				tvro.setSubmitted("0");
-				insertTvroService(tvro);
+		if (serviceId.equals(ServiceDetailsForm.SERVICE_STUDIO)) {
+			Collection stdCol	= getStudioServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_STUDIO);
+			if (stdCol!=null && stdCol.size()>0 && !dao.searchStudioServiceByRequestId(eRequest.getRequestId())) {
+				for (Iterator istd = stdCol.iterator(); istd.hasNext();){
+					StudioService std = (StudioService)istd.next();
+					std.setRequestId(eRequest.getRequestId());
+					std.setBookingDate(eRequest.getRequiredFrom());
+					std.setBookingDateTo(eRequest.getRequiredTo());
+					std.setSubmitted("0");
+					insertStudioService(std);
+				}
+			}
+		}
+		
+		if (serviceId.equals(ServiceDetailsForm.SERVICE_OTHER)) {
+			Collection othCol = getOtherServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_OTHER);
+			if (othCol!=null && othCol.size()>0 && !dao.searchOtherServiceByRequestId(eRequest.getRequestId())) {
+				for (Iterator ioth = othCol.iterator(); ioth.hasNext();) {
+					OtherService oth = (OtherService)ioth.next();
+					oth.setRequestId(eRequest.getRequestId());
+					oth.setRequiredFrom(eRequest.getRequiredFrom());
+					oth.setRequiredTo(eRequest.getRequiredTo());
+					oth.setSubmitted("0");
+					insertOtherService(oth);
+				}
+			}
+		}
+		
+		if (serviceId.equals(ServiceDetailsForm.SERVICE_TVRO)) {
+			Collection tvroCol = getTvroServiceForTemplate(oldRequestId, ServiceDetailsForm.SERVICE_TVRO);
+			if (tvroCol!=null && tvroCol.size()>0 && !dao.searchTvroServiceByRequestId(eRequest.getRequestId())) {
+				for (Iterator itvro = tvroCol.iterator(); itvro.hasNext();){
+					TvroService tvro = (TvroService)itvro.next();
+					tvro.setRequestId(eRequest.getRequestId());
+					tvro.setRequiredDate(eRequest.getRequiredFrom());
+					tvro.setRequiredDateTo(eRequest.getRequiredTo());
+					tvro.setSubmitted("0");
+					insertTvroService(tvro);
+				}
 			}
 		}
 	}
