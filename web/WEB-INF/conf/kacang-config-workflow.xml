@@ -98,7 +98,9 @@
             <permission>com.tms.workflow.workOrder.permission.newWo</permission>
             <permission>com.tms.workflow.workOrder.permission.woAssigned</permission>
             <permission>com.tms.workflow.workOrder.permission.woMy</permission>
-            <permission>com.tms.workflow.workOrder.permission.woAll</permission>               
+            <permission>com.tms.workflow.workOrder.permission.woAll</permission>
+            <permission>com.tms.workflow.workOrder.permission.editWo</permission>
+                           
             <permission>com.tms.workflow.permission.viewHardwareListing</permission>
             <permission>com.tms.workflow.permission.manageHardware</permission>                  
             <permission>com.tms.workflow.permission.viewSoftwareListing</permission>
