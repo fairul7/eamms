@@ -50,6 +50,7 @@
 	boolean rentalVerifyApprove = service.hasPermission(userId, "com.tms.workflow.permission.verifyApproveAssign", null, null);
 	boolean rentalViewUpdate = service.hasPermission(userId, "com.tms.workflow.permission.viewUpdate", null, null);
 	boolean rentalUpdateRental = service.hasPermission(userId, "com.tms.workflow.permission.updateRentalRequest", null, null);*/
+	boolean rentalSubmit = service.hasPermission(userId, "com.tms.workflow.permission.submitRentalRequest", null, null);
 	boolean rentalViewRequest = service.hasPermission(userId, "com.tms.workflow.permission.viewRentalRequest", null, null);
 	boolean rentalReassign = service.hasPermission(userId, "com.tms.workflow.permission.reassignEngineer", null, null);
 	
@@ -118,12 +119,12 @@
      {
     	 items.add(new MenuItem(app.getMessage("com.tms.workflow.assetRental"), null, null, null, null, null));
     	 
-	     if(rentalViewRequest)
+	     if(rentalSubmit)
          {
              items.add(new MenuItem(app.getMessage("com.tms.workflow.rental.newRentalRequest"), "index.jsp?addr=rs01", null, null, null, null));
          }
 	     items.add(new MenuItem(app.getMessage("com.tms.workflow.rental.myRentalListing"), "index.jsp?addr=rs03", null, null, null, null));
-	     if(rentalReassign)
+	     if(rentalViewRequest)
          {
              items.add(new MenuItem(app.getMessage("com.tms.workflow.rental.rentalListing"), "index.jsp?addr=rs02", null, null, null, null));
          }
