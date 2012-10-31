@@ -115,7 +115,7 @@
 	        items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.manageFacility"), "index.jsp?addr=fs02", null, null, null, null));
     }
     
-     if(rentalViewRequest || rentalReassign || rentalSubmit)
+     if(rentalViewRequest || rentalSubmit)
      {
     	 items.add(new MenuItem(app.getMessage("com.tms.workflow.assetRental"), null, null, null, null, null));
     	 

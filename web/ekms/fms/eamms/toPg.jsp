@@ -29,10 +29,10 @@
     boolean sparePartViewList = service.hasPermission(userId, "com.tms.workflow.permission.viewSparePart", null, null);
     boolean sparePartManage = service.hasPermission(userId, "com.tms.workflow.permission.manageSparePart", null, null);
     
-    /*boolean rentalSubmit = service.hasPermission(userId, "com.tms.workflow.permission.submitRentalRequest", null, null);
-    boolean rentalVerifyApprove = service.hasPermission(userId, "com.tms.workflow.permission.verifyApproveAssign", null, null);
+    /*boolean rentalVerifyApprove = service.hasPermission(userId, "com.tms.workflow.permission.verifyApproveAssign", null, null);
     boolean rentalViewUpdate = service.hasPermission(userId, "com.tms.workflow.permission.viewUpdate", null, null);
     boolean rentalUpdateRental = service.hasPermission(userId, "com.tms.workflow.permission.updateRentalRequest", null, null);*/
+	boolean rentalSubmit = service.hasPermission(userId, "com.tms.workflow.permission.submitRentalRequest", null, null);
     boolean rentalViewRequest = service.hasPermission(userId, "com.tms.workflow.permission.viewRentalRequest", null, null);
     boolean rentalReassign = service.hasPermission(userId, "com.tms.workflow.permission.reassignEngineer", null, null);
     
@@ -238,7 +238,7 @@ function noPermission1()
     </c:when>
     <c:when test="${param.addr eq 'rs01'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//RentalRequest"/>
-        <c:if test="<%=!rentalViewRequest%>">
+        <c:if test="<%=!rentalSubmit%>">
             <script>
                 noPermission1();
             </script>
@@ -246,7 +246,7 @@ function noPermission1()
     </c:when>
     <c:when test="${param.addr eq 'rs02'}">
         <c:set var="address1" value="${wurl}/jw/web/userview/EAMMS/EAMMS//RentalListing"/>
-        <c:if test="<%=!rentalReassign%>">
+        <c:if test="<%=!rentalViewRequest%>">
             <script>
                 noPermission1();
             </script>
