@@ -1,6 +1,7 @@
 New Build 
 =========
 Fixed #14353 : Non related booking in Mogan Incoming request E20121015388
+Fixed #14477 : Check Out List page slow
 
 fms_1.0.0_update (Oct 9 2012) V2.5
 -------------------------------------

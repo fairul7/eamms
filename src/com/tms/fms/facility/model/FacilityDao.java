@@ -10,8 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -261,318 +259,108 @@ public class FacilityDao extends DataSourceDao{
 		return super.select(sql, FacilityObject.class, params.toArray(),0,-1);
 	}
 	
-	private String returnCheckoutQuery(int equal,String query){
-		if (equal==1)
-			query+="AND (SELECT COUNT(id) FROM fms_eng_assignment_equipment e WHERE e.groupId = asg.groupId and e.barcode is not null and e.checkedInBy is not null) like (SELECT COUNT(id) FROM fms_eng_assignment_equipment e WHERE e.groupId = asg.groupId AND e.barcode IS NOT NULL AND e.checkedOutBy IS NOT NULL) ";
-		else if(equal==0)
-			query+="AND (SELECT COUNT(id) FROM fms_eng_assignment_equipment e WHERE e.groupId = asg.groupId and e.barcode is not null and e.checkedInBy is not null) not like (SELECT COUNT(id) FROM fms_eng_assignment_equipment e WHERE e.groupId = asg.groupId AND e.barcode IS NOT NULL AND e.checkedOutBy IS NOT NULL) ";
-		return query;
-	}
 	public Collection selectAssignmentCheckOutList(String search, Date fromDate, Date toDate, String sort,boolean desc,int start,int rows) throws DaoException{
+		String sortSql = "";
+		if (sort != null && !"".equals(sort)) {
+			if (sort.equals("workingHours")) {
+				sort = "startTime";
+			} else if (sort.equals("createdByFullName")) {
+				sort = "createdBy";
+			}
+			sortSql += "ORDER BY " + sort + (desc ? " DESC " : "");
+		}
 
-		boolean isDefault = true;
 		String sql = 
-			"SELECT DISTINCT(asg.groupId) AS groupId, " +
-			"(SELECT TOP 1 e.checkedOutDate FROM fms_eng_assignment_equipment e WHERE e.groupId = asg.groupId ORDER BY e.checkedOutDate DESC) AS convertedCheckedOutDate," +
-			"r.requestId as requestId,title,r.createdBy,assignmentLocation " +
+			"SELECT r.requestId, MAX(r.title) AS title, MAX(r.createdBy) AS createdBy, " +
+					"MAX(asg.checkedOutDate) AS convertedCheckedOutDate, MAX(asg.assignmentLocation) AS assignmentLocation, " +
+					"COUNT(asg.checkedOutBy) AS totalCheckedOut, COUNT(asg.checkedInBy) AS totalCheckedIn " +
 			"FROM fms_eng_assignment_equipment asg " +
 			"INNER JOIN fms_eng_assignment a ON (asg.groupId = a.groupId) " +
 			"INNER JOIN fms_eng_request r ON (a.requestId = r.requestId) " +
 			"WHERE 1=1 " +
-			"AND asg.barcode IS NOT NULL AND asg.checkedOutBy IS NOT NULL  ";
+			"AND asg.barcode IS NOT NULL " +
+			"AND asg.checkedOutBy IS NOT NULL ";
 			
 		ArrayList params=new ArrayList(); 
 		
-		if(search!=null && !"".equals(search)){
-			sql+=" AND (r.requestId like '%"+search+"%' " +
-					"OR r.title like '%"+search+"%' " +
-					"OR r.createdBy like '%"+search+"%' " +
-					"OR asg.groupId like '%"+search+"%' " +
-					") ";
+		if (search != null && !"".equals(search)) {
+			sql += "AND (r.requestId like ? OR r.title like ? OR r.createdBy like ?) ";
+			params.add("%" + search + "%");
+			params.add("%" + search + "%");
+			params.add("%" + search + "%");
 		}
 		
-		if(fromDate!=null && toDate!=null){
-			//sql+=" AND ( checkedOutDate between ? AND ? ) ";
-			sql+=" AND ( asg.requiredFrom between ? AND ? ) AND (asg.requiredTo between ? AND ?) ";
-			params.add(fromDate);
+		// date filtering
+		if (fromDate != null && toDate != null) {
+			sql += "AND (asg.requiredFrom < ?) ";
+			sql += "AND (asg.requiredTo >= ?) ";
 			params.add(toDate);
 			params.add(fromDate);
-			params.add(toDate);
-		} else if (fromDate!=null){
-			sql+=" AND ( asg.requiredFrom <= ? ) ";
+		} else if (fromDate != null) {
+			sql+=" AND (asg.requiredFrom >= ?) ";
 			params.add(fromDate);
-		}else{
-				//if date are empty fix it to 7days 
-			 	Calendar startD = Calendar.getInstance();
-			 	startD.setTime(new Date());                
-			 	startD.add(Calendar.DAY_OF_WEEK, -7);
-			 	startD.set(Calendar.HOUR_OF_DAY, 23);
-			 	startD.set(Calendar.MINUTE, 59);
-			 	startD.set(Calendar.SECOND, 59);
-		        
-		        Calendar endD = Calendar.getInstance();
-		        endD.setTime(new Date());                
-		        endD.set(Calendar.HOUR_OF_DAY, 23);
-		        endD.set(Calendar.MINUTE, 59);
-		        endD.set(Calendar.SECOND, 59);
-		        
-		        sql+=" AND ( asg.requiredFrom between ? AND ? ) AND (asg.requiredTo between ? AND ?) ";
-		        params.add(startD.getTime());
-				params.add(endD.getTime());
-				params.add(startD.getTime());
-				params.add(endD.getTime());
-		}
-		
-		if(sort!=null && !"".equals(sort)){
-			isDefault = false;
-			if(sort.equals("workingHours")){
-				sort="startTime";
-			}else if(sort.equals("createdByFullName")){
-				sort = "r.createdBy";
-			}
-			if(sort.equals("totalCheckedOut") || sort.equals("totalCheckedIn")){
-				sql+="";
-			}else{
-				sql+=" order by "+sort+" ";
-			}
+		} else {
+			sql += "AND (asg.requiredFrom < ?) ";
+			sql += "AND (asg.requiredTo >= ?) ";
 			
+			Date today = DateUtil.getToday();
+			Date startD = DateUtil.dateAdd(today, Calendar.DATE, -7);
+			Date endD = DateUtil.dateAdd(today, Calendar.DATE, 1);
+			params.add(endD);
+			params.add(startD);
 		}
 		
-		if(desc){
-			if(sort.equals("totalCheckedOut") || sort.equals("totalCheckedIn")){
-				isDefault = false;
-				sql+="";
-			}else{
-				isDefault = false;
-				sql+=" DESC ";
-			}
-			
-		}
+		sql += "GROUP BY r.requestId ";
+		sql += sortSql;
 		
-		if (isDefault){
-			sql = "select requestId from(("+returnCheckoutQuery(0,sql)+") " +
-					" UNION ALL " +
-					" ("+returnCheckoutQuery(1,sql)+")) as combination " +
-				  "group by combination.requestId ";
-		
-				if(fromDate!=null && toDate!=null){
-					// sql+=" AND ( checkedOutDate between ? AND ? ) ";
-					params.add(fromDate);
-					params.add(toDate);
-					params.add(fromDate);
-					params.add(toDate);
-				} else if (fromDate!=null){
-					// sql+=" AND ( checkedOutDate >= ? ) ";
-					params.add(fromDate);
-				}else{
-					//if date are empty fix it to 7days 
-				 	Calendar startD = Calendar.getInstance();
-				 	startD.setTime(new Date());                
-				 	startD.add(Calendar.DAY_OF_WEEK, -7);
-				 	startD.set(Calendar.HOUR_OF_DAY, 23);
-				 	startD.set(Calendar.MINUTE, 59);
-				 	startD.set(Calendar.SECOND, 59);
-			        
-			        Calendar endD = Calendar.getInstance();
-			        endD.setTime(new Date());                
-			        endD.set(Calendar.HOUR_OF_DAY, 23);
-			        endD.set(Calendar.MINUTE, 59);
-			        endD.set(Calendar.SECOND, 59);
-			        
-			        //sql+=" AND ( asg.requiredFrom <= ? AND asg.requiredTo >= ? ) ";
-			        params.add(startD.getTime());
-					params.add(endD.getTime());
-					params.add(startD.getTime());
-					params.add(endD.getTime());
-			}
-		}
-		
-		ArrayList list = new ArrayList();
-		int totalCheckedOut=0;
-		int totalCheckedIn=0;
-		try{
-			Collection tempReqId = super.select(sql, HashMap.class, params.toArray(), start, rows);
-			if(tempReqId!=null && tempReqId.size()>0){
-				for (Iterator iter = tempReqId.iterator(); iter.hasNext();) {
-					HashMap map=(HashMap)iter.next();
-					Assignment assgn = selectAssignmentCheckOutListDetails(map.get("requestId").toString());
-					totalCheckedOut=countAssignmentCheckOutDetailsAll(map.get("requestId").toString(),"","");
-					totalCheckedIn=countAssignmentCheckOutDetailsAll(map.get("requestId").toString(),"","IN");
-					assgn.setTotalCheckedOut(totalCheckedOut);
-					assgn.setTotalCheckedIn(totalCheckedIn);
-					//int total=((Number) map.get("total")).intValue();
-					//return total;
-					list.add(assgn);
-				}
-			}
-			
-			//to sort totalCheckedIn and totalCheckedOut
-			if (sort != null && !"".equals(sort)) {
-				if (sort.equals("totalCheckedIn")) {
-					if (desc) {
-						Collections.sort(list, new Comparator() {
-							public int compare(Object o1, Object o2) {
-								Assignment p1 = (Assignment) o1;
-								Assignment p2 = (Assignment) o2;
-								/*String p1v = String.valueOf(p1.getTotalCheckedIn());
-								String p2v = String.valueOf(p2.getTotalCheckedIn());
-								return p1v.compareToIgnoreCase(p2v);*/
-								
-								if (p1.getTotalCheckedIn() < p2.getTotalCheckedIn()) {
-									return 1;
-								} else if (p1.getTotalCheckedIn() > p2.getTotalCheckedIn()) {
-									return -1;
-								} else {
-									return 0;
-								}
-							}
-						});
-					}else{
-						Collections.sort(list, new Comparator() {
-							public int compare(Object o1, Object o2) {
-								Assignment p1 = (Assignment) o1;
-								Assignment p2 = (Assignment) o2;
-								if (p1.getTotalCheckedIn() > p2.getTotalCheckedIn()) {
-									return 1;
-								} else if (p1.getTotalCheckedIn() < p2.getTotalCheckedIn()) {
-									return -1;
-								} else {
-									return 0;
-								}
-							}
-						});
-					}
-				} else if (sort.equals("totalCheckedOut")) {
-					if (desc) {
-						Collections.sort(list, new Comparator() {
-							public int compare(Object o1, Object o2) {
-								Assignment p1 = (Assignment) o1;
-								Assignment p2 = (Assignment) o2;
-								if (p1.getTotalCheckedOut() < p2.getTotalCheckedOut()) {
-									return 1;
-								} else if (p1.getTotalCheckedOut() > p2.getTotalCheckedOut()) {
-									return -1;
-								} else {
-									return 0;
-								}
-							}
-						});
-					} else {
-						Collections.sort(list, new Comparator() {
-							public int compare(Object o1, Object o2) {
-								Assignment p1 = (Assignment) o1;
-								Assignment p2 = (Assignment) o2;
-
-								if (p1.getTotalCheckedOut() > p2.getTotalCheckedOut()) {
-									return 1;
-								} else if (p1.getTotalCheckedOut() < p2.getTotalCheckedOut()) {
-									return -1;
-								} else {
-									return 0;
-								}
-							}
-						});
-					}
-				}
-			}
-
-		}catch(Exception e){
+		Collection list = null;
+		try {
+			list = super.select(sql, Assignment.class, params.toArray(), start, rows);
+		} catch(Exception e) {
 			Log.getLog(getClass()).error(e.getMessage(),e);
 		}
+		
 		return list;
 	}
 	
-	private Assignment selectAssignmentCheckOutListDetails(String requestId) throws DaoException{
-		//boolean isDefault = true;
-		String sql = 
-			" select top 1 requestId, convertedCheckedOutDate, createdBy, title, assignmentLocation " +
-			" from(select distinct(eq.groupId) , " +
-			" CONVERT(VARCHAR, " +
-			" (SELECT TOP 1 e.checkedOutDate " +
-			"FROM fms_eng_assignment_equipment e " +
-			"WHERE e.groupId = eq.groupId ORDER BY e.checkedOutDate DESC), 0) AS convertedCheckedOutDate" +
-			", ea.requestId, " +
-			"(SELECT TOP 1 e.assignmentLocation FROM fms_eng_assignment_equipment e " +
-			"WHERE e.groupId = eq.groupId  ORDER BY e.assignmentLocation DESC) AS assignmentLocation, " +
-			"r.createdBy as createdBy, r.title as title " +
-			"FROM fms_eng_request r " +
-			"INNER JOIN fms_eng_assignment ea ON (ea.requestId = r.requestId) " +
-			"INNER JOIN fms_eng_assignment_equipment eq on (eq.groupId = ea.groupid) " +
-			"where ea.requestId=? AND eq.barcode IS NOT NULL AND eq.checkedOutBy IS NOT NULL)as cdetails " +
-			"group by cdetails.requestId, cdetails.createdBy, cdetails.convertedCheckedOutDate,cdetails.assignmentLocation,cdetails.title";
-			
-		Assignment detail = new Assignment();
-		try{
-			Collection tempReqId = super.select(sql, Assignment.class, new String[] {requestId}, 0, -1);
-			if(tempReqId!=null){
-				 detail=(Assignment)tempReqId.iterator().next();
-				//int total=((Number) map.get("total")).intValue();
-				//return total;
-			}
-		}catch(Exception e){
-			Log.getLog(getClass()).error(e.getMessage(),e);
-		}
-		return detail;
-	}
 	public int selectAssignmentCheckOutListCount(String search, Date fromDate, Date toDate) throws DaoException{
-		//String equaliser = " like ";
 		String sql = 
 			"SELECT COUNT (DISTINCT r.requestId) AS total " +
 			"FROM fms_eng_assignment_equipment asg " +
 			"INNER JOIN fms_eng_assignment a ON (asg.groupId = a.groupId) " +
 			"INNER JOIN fms_eng_request r ON (a.requestId = r.requestId) " +
 			"WHERE 1=1 " +
-			"AND asg.barcode IS NOT NULL AND asg.checkedOutBy IS NOT NULL ";
-		
-			
-//			sql+="AND (SELECT COUNT(id) " +
-//			"FROM fms_eng_assignment_equipment e " +
-//			"WHERE e.groupId = asg.groupId and e.barcode is not null and e.checkedInBy is not null) " +
-//			equaliser + " (SELECT COUNT(id) " +
-//			"FROM fms_eng_assignment_equipment e " +
-//			"WHERE e.groupId = asg.groupId AND e.barcode IS NOT NULL AND e.checkedOutBy IS NOT NULL)";
+			"AND asg.barcode IS NOT NULL " +
+			"AND asg.checkedOutBy IS NOT NULL ";
 		
 		ArrayList params=new ArrayList();
 		
-		if(search!=null && !"".equals(search)){
-			sql+=" AND (r.requestId like '%"+search+"%' " +
-			"OR r.title like '%"+search+"%' " +
-			"OR r.createdBy like '%"+search+"%' " +
-			"OR asg.groupId like '%"+search+"%' " +
-			") ";
+		if (search != null && !"".equals(search)) {
+			sql += "AND (r.requestId like ? OR r.title like ? OR r.createdBy like ?) ";
+			params.add("%" + search + "%");
+			params.add("%" + search + "%");
+			params.add("%" + search + "%");
 		}
 		
-		if(fromDate!=null && toDate!=null){
-			sql+=" AND ( asg.requiredFrom between ? AND ? ) AND (asg.requiredTo between ? AND ?) ";
-			params.add(fromDate);
+		// date filtering
+		if (fromDate != null && toDate != null) {
+			sql += "AND (asg.requiredFrom < ?) ";
+			sql += "AND (asg.requiredTo >= ?) ";
 			params.add(toDate);
 			params.add(fromDate);
-			params.add(toDate);
-		}else if (fromDate!=null){
-			sql+=" AND ( checkedOutDate >= ? ) ";
+		} else if (fromDate != null) {
+			sql+=" AND (asg.requiredFrom >= ?) ";
 			params.add(fromDate);
-		}else{
-			//if date are empty fix it to 7days 
-		 	Calendar startD = Calendar.getInstance();
-		 	startD.setTime(new Date());                
-		 	startD.add(Calendar.DAY_OF_WEEK, -7);
-		 	startD.set(Calendar.HOUR_OF_DAY, 23);
-		 	startD.set(Calendar.MINUTE, 59);
-		 	startD.set(Calendar.SECOND, 59);
-	        
-	        Calendar endD = Calendar.getInstance();
-	        endD.setTime(new Date());                
-	        endD.set(Calendar.HOUR_OF_DAY, 23);
-	        endD.set(Calendar.MINUTE, 59);
-	        endD.set(Calendar.SECOND, 59);
-	        
-	        sql+=" AND ( asg.requiredFrom between ? AND ? ) AND (asg.requiredTo between ? AND ?) ";
-	        params.add(startD.getTime());
-			params.add(endD.getTime());
-			params.add(startD.getTime());
-			params.add(endD.getTime());
-	}
-	
+		} else {
+			sql += "AND (asg.requiredFrom < ?) ";
+			sql += "AND (asg.requiredTo >= ?) ";
+			
+			Date today = DateUtil.getToday();
+			Date startD = DateUtil.dateAdd(today, Calendar.DATE, -7);
+			Date endD = DateUtil.dateAdd(today, Calendar.DATE, 1);
+			params.add(endD);
+			params.add(startD);
+		}
 
 		try{
 			Collection col=super.select(sql, HashMap.class, params.toArray(), 0, -1);

@@ -56,6 +56,13 @@ public class UnitHeadDao extends DataSourceDao {
 			super.update(sql, null);
 		} catch (Exception e) {
 		}
+		
+		// create index for fms_eng_assignment(groupId) INCLUDE (requestId)
+		try {
+			String sql = "CREATE INDEX groupId_inc_requestId ON fms_eng_assignment (groupId) INCLUDE (requestId)";
+			super.update(sql, null);
+		} catch (Exception e) {
+		}
 
 		try {
 			String sql = "CREATE TABLE fms_eng_assignment_manpower(" +
@@ -177,6 +184,12 @@ public class UnitHeadDao extends DataSourceDao {
 		// create index for fms_eng_assignment_equipment(requiredFrom, requiredTo)
 		try {
 			super.update("CREATE INDEX requiredFrom_requiredTo ON fms_eng_assignment_equipment(requiredFrom, requiredTo)", null);
+		} catch (Exception e) {
+		}
+		
+		// create index for fms_eng_assignment_equipment(requiredFrom, requiredTo, barcode, checkedOutBy)
+		try {
+			super.update("CREATE INDEX required_barcode_checkedOutBy ON fms_eng_assignment_equipment (requiredFrom, requiredTo, barcode, checkedOutBy)", null);
 		} catch (Exception e) {
 		}
 
