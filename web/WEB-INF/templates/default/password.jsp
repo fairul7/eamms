@@ -17,7 +17,7 @@
     </c:when>
     <c:otherwise>
     !<input
-       style="border:1 solid #de123e"
+       style="border:1px solid #de123e"
        type="password"
        name="<c:out value="${password.absoluteName}"/>"
        onBlur="<c:out value="${password.onBlur}"/>"

@@ -196,7 +196,7 @@ public class FMSDepartmentDao extends DataSourceDao
     }
     
     public Collection selectUnitBaseOnDepartment(String id) throws DaoException{
-    	String sql = "select id, name from fms_unit where department_id=? and status='1'";
+    	String sql = "select id, name from fms_unit where department_id=? and status='1' order by name";
     	return super.select(sql, FMSUnit.class, new String[]{id}, 0, -1);
     }
     

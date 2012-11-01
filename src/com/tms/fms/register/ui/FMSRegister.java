@@ -84,36 +84,7 @@ public class FMSRegister extends Form
 	}
 	public void initFMS()
 	{
-		
-		Map cmap = null;
-        try {
-            cmap = ((FMSDepartmentManager) Application.getInstance().getModule(FMSDepartmentManager.class)).getFMSDepartments();
-        }
-        catch (DaoException e) {
-            Log.getLog(getClass()).error(e);  //To change body of catch statement use Options | File Templates.
-        }
-        
-        for (Iterator i = cmap.keySet().iterator(); i.hasNext();) {
-            String key = (String) i.next();
-           
-        }
-        
-       try {
-	    	FMSDepartmentDao dao = (FMSDepartmentDao)Application.getInstance().getModule(FMSDepartmentManager.class).getDao();
-			Collection lstUnit = dao.selectUnit();
-			//unit.addOption("-1", "-- Please Select --");			
-		    if (lstUnit.size() > 0) {
-		    	for (Iterator i=lstUnit.iterator(); i.hasNext();) {
-		        	FMSUnit o = (FMSUnit)i.next();
-		        	//unit.addOption(o.getId(),o.getName());
-		        }
-		    }
-		}catch (Exception e) {
-		    Log.getLog(getClass()).error(e.toString());
-		}
-		
-		
-
+		setMethod("POST");
 		
 		fname = new TextField("fname");
 		fname.setSize("60");		
@@ -129,6 +100,7 @@ public class FMSRegister extends Form
         email.addChild(new ValidatorEmail("validEmail"));
 		
         designation = new TextField("designation");
+        designation.addChild(new ValidatorNotEmpty("vne_designation", Application.getInstance().getMessage("asset.message.vNotEmpty")));
         designation.setSize("60");		
            
         saveButton = new Button("saveButton", Application.getInstance().getMessage("security.label.submit", "Submit"));   
@@ -232,12 +204,33 @@ public class FMSRegister extends Form
         String cpwd = (String) confirmPassword.getValue();
 
         Application app = Application.getInstance();
+        FMSDepartmentDao dao = (FMSDepartmentDao) app.getModule(FMSDepartmentManager.class).getDao();
         
         if (!pwd.equals(cpwd)) {
 			this.setInvalid(true);
 			password_vmsg.showError(app.getMessage("fms.password.notsame.error"));
 			confirmPassword_vmsg.showError(app.getMessage("fms.password.notsame.error"));
 		}
+        
+        // populate Unit SelectBox based on the Department selection
+        if (isInvalid()) {
+        	String initialSelect = "-1="+Application.getInstance().getMessage("fms.tran.msg.initialSelect", "--- NONE ---");
+        	sbUnit.removeAllOptions();
+        	sbUnit.setOptions(initialSelect);
+        	
+        	String deptVal = getSelectBoxValue(sbDepartment);
+        	if (deptVal != null && !deptVal.equals("-1")) {
+        		try {
+					Collection col = dao.selectUnitBaseOnDepartment(deptVal);
+					for (Iterator iterator = col.iterator(); iterator.hasNext();) {
+						FMSUnit unit = (FMSUnit) iterator.next();
+						sbUnit.addOption(unit.getId(), unit.getName());
+					}
+				} catch (DaoException e) {
+					Log.getLog(getClass()).error(e.toString(), e);
+				}
+        	}
+        }
        
         return fwd;
     }
@@ -369,7 +362,6 @@ public class FMSRegister extends Form
 		unit = (String) user.getProperty("unit");
 		}catch(Exception er){}
 		
-		FMSRegisterManager manager = (FMSRegisterManager) Application.getInstance().getModule(FMSRegisterManager.class);
 		FMSDepartmentManager deptman = (FMSDepartmentManager) Application.getInstance().getModule(FMSDepartmentManager.class);
 		Map map = new HashMap();
 		if(!(null == dept || null == unit)){

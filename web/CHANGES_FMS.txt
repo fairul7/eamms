@@ -2,6 +2,7 @@ New Build
 =========
 Fixed #14353 : Non related booking in Mogan Incoming request E20121015388
 Fixed #14477 : Check Out List page slow
+Fixed #14633: New User Registration: unit not populated on error
 
 fms_1.0.0_update (Oct 9 2012) V2.5
 -------------------------------------
