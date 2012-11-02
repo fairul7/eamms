@@ -130,6 +130,7 @@ public class AssignForm extends Form {
 					}
 				}
 				
+				/* #14661 temporary comment Feed Requisition codes on 02th Nov 2012
 				EammsFeedsModule mod = (EammsFeedsModule)Application.getInstance().getModule(EammsFeedsModule.class);
 				if(!mod.isRequestExistInEamms(requestId))
 				{
@@ -156,7 +157,7 @@ public class AssignForm extends Form {
 							}
 						}
 					}
-				}
+				}*/
 			}
 		}
 		
