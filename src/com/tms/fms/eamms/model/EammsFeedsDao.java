@@ -621,7 +621,8 @@ public class EammsFeedsDao extends DataSourceDao
 			" FROM fms_feeds_status s " +
 			" LEFT JOIN fms_user_details ud ON (s.createdBy=ud.userId) " +
 			" LEFT JOIN fms_feed_network_status ns ON (s.status=ns.id) " +
-			" WHERE feedsDetailsId = ? ";
+			" WHERE feedsDetailsId = ? " +
+			" ORDER BY s.createdDate DESC ";
 		
 		Collection result = super.select(sql, StatusTrail.class, new Object[]{feedsDetailsId}, 0, -1);
 		return result;

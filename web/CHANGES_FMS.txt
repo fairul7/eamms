@@ -1,5 +1,6 @@
 New Build 
 =========
+Fixed #14614 : P2 096 All Status trail - Need to arrange the status in Descending order. Latest status show on the top.
 Requirement #14661 : Comment codes for Feed Requisition
 Fixed #14353 : Non related booking in Mogan Incoming request E20121015388
 Fixed #14477 : Check Out List page slow
