@@ -1,5 +1,9 @@
 New Build 
 =========
+
+fms_1.0.0_update (Nov 10 2012) V2.5
+-------------------------------------
+Fixed #14777 - P048 Menu> to arrange CM and PM menu (above asset management )
 Fixed #14614 : P2 096 All Status trail - Need to arrange the status in Descending order. Latest status show on the top.
 Requirement #14661 : Comment codes for Feed Requisition
 Fixed #14353 : Non related booking in Mogan Incoming request E20121015388
