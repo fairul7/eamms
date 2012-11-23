@@ -1,6 +1,10 @@
 New Build 
 =========
 
+fms_1.0.0_update (Nov 23 2012) V2.5
+-------------------------------------
+Patch to Staging Server 
+
 fms_1.0.0_update (Nov 10 2012) V2.5
 -------------------------------------
 Fixed #14777 - P048 Menu> to arrange CM and PM menu (above asset management )
