@@ -99,7 +99,7 @@ public class EammsModule extends DefaultModule {
 		String taskGroup = StaffWorkloadCalculationTask.TASKGROUP;
 		String taskDesc = StaffWorkloadCalculationTask.TASKDESC;
 		
-		int numMinutes = 60;
+		int numMinutes = 2;
 		try
 		{
 			numMinutes = Integer.parseInt(Application.getInstance().getProperty("staffWorkload_scheduler_min"));
@@ -380,7 +380,7 @@ public class EammsModule extends DefaultModule {
 					userObj.setProperty("lastUpdatedDate", lastUpdatedDate);
 					
 					userObj.setId(UuidGenerator.getInstance().getUuid());
-					dao.insertStaffWorkload(userObj);
+					dao.addStaffWorkload(userObj);
 				}
 			}
 		} 

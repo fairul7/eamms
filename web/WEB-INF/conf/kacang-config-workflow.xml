@@ -79,7 +79,8 @@
         
         <property>
             <name>staffWorkload_scheduler_min</name>
-            <value>30</value>
+            <!--<value>240</value> -->
+            <value>10</value>
         </property>
         
     </properties>

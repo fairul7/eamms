@@ -235,15 +235,40 @@ public String getActivityIdNoParent(String processId) throws DaoException {
 		Collection result = super.select(sql, DefaultDataObject.class, null, 0, -1);
 		return result;
 	}
+	
+	public void addStaffWorkload(DefaultDataObject userObj) throws DaoException
+	{
+		int staffExist = 0;
+		String sqlStaff = "SELECT COUNT(userId) AS totalUser  FROM staff_workload " +
+				"WHERE userId =  #userId# ";
+		
+		HashMap staffMap = (HashMap) super.select(sqlStaff, HashMap.class, userObj, 0, 1).iterator().next();
+		staffExist = ((Number)staffMap.get("totalUser")).intValue();
+		if(staffExist > 0){
+			String sql = 
+					" UPDATE staff_workload SET " +					
+					" cmOnHand = #cmOnHand#, " +
+					" pmOnHand = #pmOnHand#, " +
+					" woOnHand = #woOnHand#, " +
+					" lastUpdatedDate = #lastUpdatedDate# " +
+					" WHERE userId = #userId# ";
+			
+			super.update(sql, userObj);
+		}		
+		else
+			insertStaffWorkload(userObj);
+		
+	}
 
 	public void insertStaffWorkload(DefaultDataObject userObj) throws DaoException
-	{
+	{		
+		
 		String sql = 
 			" INSERT INTO staff_workload ( " +
 			"	id, userId, cmOnHand, pmOnHand, woOnHand, lastUpdatedDate ) " +
 			" VALUES ( " +
 			"	#id#, #userId#, #cmOnHand#, #pmOnHand#, #woOnHand#, #lastUpdatedDate# ) ";
-		
+			
 		super.update(sql, userObj);
 	}
 
@@ -257,7 +282,7 @@ public String getActivityIdNoParent(String processId) throws DaoException {
 			" WHERE 1=1 " +
 			" AND (c_engineer1UserId = ? OR c_engineer2UserId = ? OR " +
 			"		c_engineer3UserId = ? OR c_engineer4UserId = ?) " +
-			" AND (swo.c_id = '01' OR swo.c_id = '02') ";
+			" AND (swo.c_id = '02' OR swo.c_id = '03') ";
 		param.add(userId);
 		param.add(userId);
 		param.add(userId);
