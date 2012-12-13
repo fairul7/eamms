@@ -113,7 +113,7 @@ public class FacilityDao extends DataSourceDao{
 		} catch (Exception e) {}
 		
 		try {
-			super.update("ALTER TABLE fms_facility_item_checkout ADD requestedBy VARCHAR(255) NULL", null);//TODO:
+			super.update("ALTER TABLE fms_facility_item_checkout ADD requestedBy VARCHAR(255) NULL", null);
 		} catch (Exception e) {}
 		
 		try{super.update("ALTER TABLE fms_eng_assignment_equipment add utilized char(1) null", null);
@@ -2497,10 +2497,11 @@ public class FacilityDao extends DataSourceDao{
     			" LEFT JOIN fms_facility_item i ON (e.barcode = i.barcode ) " +
     			" LEFT JOIN fms_facility f ON (f.id=i.facility_id) " +
     			" LEFT JOIN fms_eng_assignment a ON (e.groupId = a.groupId )" +
-    			" WHERE a.requestId= ? AND i.status = ? " ;    			
+    			" WHERE a.requestId= ? " +
+    			" AND e.checkedInDate IS NULL AND e.checkedOutDate IS NOT NULL " ;    			
     	
     	
-    	Collection col = super.select(sql, DefaultDataObject.class, new String[]{requestId,FacilityModule.ITEM_STATUS_CHECKED_OUT}, 0, -1);
+    	Collection col = super.select(sql, DefaultDataObject.class, new String[]{requestId}, 0, -1);
     	return col;
 	}
 

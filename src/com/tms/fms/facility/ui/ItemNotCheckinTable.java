@@ -14,7 +14,6 @@ import kacang.ui.Event;
 public class ItemNotCheckinTable extends Table {
 	
 	private String requestId;
-	private int count;
 	public void onRequest(Event evt) {
 		setModel(new ItemNotCheckinTableModel());
 		//setPageSize(20);
@@ -60,12 +59,11 @@ public class ItemNotCheckinTable extends Table {
 		public Collection getTableRows() {
 			FacilityModule mod = (FacilityModule)Application.getInstance().getModule(FacilityModule.class);
 			Collection col = mod.getItemNotCheckin(requestId);
-			count = col.size();
 			return col;
 		}
 
 		public int getTotalRowCount() {
-			return count;
+			return 1; // show as one page only (show all records)
 		}
 		
 	}

@@ -1,5 +1,6 @@
 New Build 
 =========
+Fixed #15123: Checked In item shown as Checked out in "Check In (Assignment)" screen
 
 fms_1.0.0_update (Nov 23 2012) V2.5
 -------------------------------------
