@@ -309,7 +309,7 @@ public String getActivityIdNoParent(String processId) throws DaoException {
 			" WHERE 1=1 " +
 			" AND (c_engineer1UserId = ? OR c_engineer2UserId = ? OR  " +
 			"		c_engineer3UserId = ? OR c_engineer4UserId = ?) " +
-			" AND spm.id <> 'E' ";
+			" AND spm.id <> 'E' AND spm.id <> 'C' ";
 		param.add(userId);
 		param.add(userId);
 		param.add(userId);
