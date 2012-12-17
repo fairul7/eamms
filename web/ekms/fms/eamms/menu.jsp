@@ -17,6 +17,7 @@
 %>
 
 <%
+    items.add(new MenuItem(app.getMessage("com.tms.workflow.myEAMMS"), null, null, null, null, null));
 	items.add(new MenuItem(app.getMessage("com.tms.workflow.myTask"), "index.jsp?addr=myTask", null, null, null, null));
 %>
 
@@ -66,20 +67,31 @@
     
     boolean viewTXMListing = service.hasPermission(userId, "com.tms.workflow.permission.viewTXMListing", null, null);
     
+    if(viewNewCM){
+		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.viewNewCM"), "index.jsp?addr=cm02", null, null, null, null));
+	}
 	if(staffWorkload)
 	{
 		items.add(new MenuItem(app.getMessage("com.tms.workflow.staffWorkLoad"), "index.jsp?addr=workLoad", null, null, null, null));
 	}
+	if(pmListAssigned){
+		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.pmAssignedToMe"), "index.jsp?addr=pm02", null, null, null, null));
+	}
+	if(woAssigned)
+    {
+        items.add(new MenuItem(app.getMessage("com.tms.workflow.workOrder.woAssignedToMe"), "index.jsp?addr=wo02", null, null, null, null));
+    }
+	
 	
 	//-- Maintenance Service Request    
-    if(newCM || viewNewCM || viewMyCM || viewAllCM ){
+    if(newCM || viewMyCM || viewAllCM ){
     	items.add(new MenuItem(app.getMessage("com.tms.workflow.CM"), null, null, null, null, null));
     	if(newCM){
     		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.newCM"), "index.jsp?addr=cm01", null, null, null, null));
     	}
-    	if(viewNewCM){
+    	/*if(viewNewCM){
     		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.viewNewCM"), "index.jsp?addr=cm02", null, null, null, null));
-    	}
+    	}*/
     	if(viewMyCM){
     		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.viewMyCM"), "index.jsp?addr=cm03", null, null, null, null));
     	}
@@ -89,14 +101,14 @@
     }
     
     //--preventive maintenance
-    if(pmNew || pmListAssigned || pmListMy || pmListAll){
+    if(pmNew  || pmListMy || pmListAll){
     	items.add(new MenuItem(app.getMessage("com.tms.workflow.PM"), null, null, null, null, null));
     	if(pmNew){
     		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.newPM"), "index.jsp?addr=pm01", null, null, null, null));
     	}
-    	if(pmListAssigned){
+    	/*if(pmListAssigned){
     		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.pmAssignedToMe"), "index.jsp?addr=pm02", null, null, null, null));
-    	}
+    	}*/
     	if(pmListMy){
     		items.add(new MenuItem(app.getMessage("com.tms.workflow.permission.myPMListing"), "index.jsp?addr=pm03", null, null, null, null));
     	}
@@ -178,7 +190,7 @@
     }
     	
     //-- work Order start
-    if(woNew || woMy || woAssigned || woAll)
+    if(woNew || woMy || woAll)
 	{
 	    items.add(new MenuItem(app.getMessage("com.tms.workflow.workOrder.wo"), null, null, null, null, null));
 	    
@@ -187,10 +199,10 @@
 	        items.add(new MenuItem(app.getMessage("com.tms.workflow.workOrder.woNew"), "index.jsp?addr=wo01", null, null, null, null));
 	    }
 		
-	    if(woAssigned)
+	    /*if(woAssigned)
 	    {
 	        items.add(new MenuItem(app.getMessage("com.tms.workflow.workOrder.woAssignedToMe"), "index.jsp?addr=wo02", null, null, null, null));
-	    }
+	    }*/
 	    
 		if(woMy)
 		{
