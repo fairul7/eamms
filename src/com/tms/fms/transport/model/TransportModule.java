@@ -2228,6 +2228,8 @@ public class TransportModule extends DefaultModule {
 				}
 		}
 		
-
-
+	public Collection getUnassigned(String requestId) throws DaoException {
+		TransportDao dao = (TransportDao) getDao();
+		return dao.getUnassigned(requestId);
+	}
 }

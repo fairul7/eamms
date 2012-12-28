@@ -11,6 +11,7 @@ import java.util.Map;
 import kacang.Application;
 import kacang.model.DaoException;
 import kacang.model.DataSourceDao;
+import kacang.model.DefaultDataObject;
 import kacang.services.security.User;
 import kacang.util.Log;
 
@@ -4067,4 +4068,13 @@ public class TransportDao extends DataSourceDao {
 		super.update(sql, tr);
 	}
 
+	public Collection getUnassigned(String requestId) throws DaoException {
+		String sql = 
+				"SELECT id " +
+				"FROM fms_tran_assignment a " +
+				"WHERE a.requestId = ? " +
+				"AND NOT EXISTS(SELECT * FROM fms_tran_request_assignment ra WHERE a.id = ra.id)";
+		
+		return super.select(sql, DefaultDataObject.class, new String[] {requestId}, 0, -1);
+	}
 }

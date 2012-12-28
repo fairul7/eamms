@@ -421,7 +421,16 @@ public class AssignmentForm extends Form {
 			// TODO: handle exception Could not find driver status
 		}
 		
-		if(("C".equals(vehicleStatus) && "C".equals(driverStatus)) || (vehicleStatus.equals("C")&&driverStatus.equals("NULL"))){
+		//------ CHECK ASSIGNMENT -------
+		int numUnassigned = 0;
+		try {
+			Collection unAssignment = transModule.getUnassigned(requestId);
+			numUnassigned = unAssignment.size();
+		} catch (Exception e) {}
+		
+		
+		//------ CLOSE REQUEST -------
+		if (numUnassigned == 0 && (("C".equals(vehicleStatus) && "C".equals(driverStatus)) || (vehicleStatus.equals("C")&&driverStatus.equals("NULL")))){
 			sendNotification(requestId, startDate, endDate, evt);
 			transModule.updateCloseReqStatus(requestId, SetupModule.CLOSED_STATUS);
 		}
