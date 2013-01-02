@@ -33,7 +33,7 @@ public class EammsDao extends DataSourceDao {
 	public void setOverdueStatus() throws DaoException {
 		String sql = " update app_fd_eamms_asset_rental " +
 				" SET c_status ='Overdue' " +
-				" WHERE Convert(datetime,c_toDate) < getdate() " +
+				" WHERE c_toDate < CONVERT(VARCHAR(10), GETDATE(), 120) " +
 				" AND c_status='Rent Out' ";
 		
 		super.update(sql, null);
@@ -59,8 +59,7 @@ public class EammsDao extends DataSourceDao {
 	public Collection getRentalReqestDueReminderListing() throws DaoException {
 		String sql = " select id " +
 				" from app_fd_eamms_asset_rental " +
-				" WHERE  c_status='Rent Out' AND Convert(datetime,c_toDate,103) = Convert(datetime,DATEADD(day, 1, DATEDIFF(dd, 0, GETDATE())),103)" +
-				"  " ;    	
+				" WHERE  c_status='Rent Out' AND c_toDate = CONVERT(VARCHAR(10),DateAdd(dd, 1, GetDate()), 120) " ;    	
 		
 			Collection col = super.select(sql, DefaultDataObject.class, null, 0, -1);
 			return col;
@@ -68,7 +67,7 @@ public class EammsDao extends DataSourceDao {
 	
 	public Collection getOverdueItemsListing() throws DaoException {
 		String sql = " SELECT c_rentalId AS rentalId FROM  app_fd_eamms_asset_rental " +
-				" WHERE Convert(datetime,c_toDate) < getdate()AND c_status='Rent Out' " ;    	
+				" WHERE c_toDate < CONVERT(VARCHAR(10), GETDATE(), 120)  AND c_status='Rent Out' " ;    	
 		
 			Collection col = super.select(sql, DefaultDataObject.class, null, 0, -1);
 			return col;
@@ -86,8 +85,8 @@ public class EammsDao extends DataSourceDao {
 	public Collection getPMOverdueItemsListing() throws DaoException {
 		String sql = "SELECT c_pmRequestId,c_status, c_endDate " +
 			"FROM app_fd_eamms_pm_request " +
-			"WHERE CONVERT(datetime,c_endDate,103) <= getdate() " +
-			"AND c_status = 'N' OR c_status = 'P'" ;    	
+			"WHERE c_endDate <= CONVERT(VARCHAR(10), GETDATE(), 120) " +
+			"AND c_status = 'N' OR c_status = 'P' " ;    	
 		
 		Collection col = super.select(sql, DefaultDataObject.class, null, 0, -1);
 		return col;
@@ -111,7 +110,7 @@ public class EammsDao extends DataSourceDao {
 	
 	public Collection getSoftwareExpiredDate() throws DaoException {
 		String sql = "SELECT id from app_fd_eamms_asset_sw "+ 
-					"WHERE CONVERT(datetime,c_licenseExpiryDate,103) <= getdate() "+
+					"WHERE c_licenseExpiryDate <= CONVERT(VARCHAR(10), GETDATE(), 120) "+
 					"and c_status <> ? ";
 							
 		Collection col = super.select(sql, DefaultDataObject.class, new String[]{SoftwareExpiredDate.EXPIRED_STATUS}, 0, -1);
@@ -121,7 +120,7 @@ public class EammsDao extends DataSourceDao {
 	public Collection getPMReqestDueReminderListing() throws DaoException {
 		String sql = "SELECT id " +
 				"FROM app_fd_eamms_pm_request " +
-				"WHERE CONVERT(datetime,c_endDate,103) = CONVERT(datetime,DATEADD(day, 7, DATEDIFF(dd, 0, GETDATE())),103)" ;
+				"WHERE c_endDate = CONVERT(VARCHAR(10),DateAdd(dd, 7, GetDate()), 120) " ;
 		
 		Collection col = super.select(sql, DefaultDataObject.class, null, 0, -1);
 		return col;
