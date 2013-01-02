@@ -1,7 +1,12 @@
 New Build 
 =========
+
+fms_1.0.0_update (Jan 2 2013) V2.5
+-------------------------------------
 Fixed #15123: Checked In item shown as Checked out in "Check In (Assignment)" screen
 Fixed #15247: Transport Request closed when there are still un-closed assignment
+Fixed #15281: PM > Status Not Change To Overdue
+Fixed #15278: Rental > Status Not Change To Overdue
 
 fms_1.0.0_update (Nov 23 2012) V2.5
 -------------------------------------
