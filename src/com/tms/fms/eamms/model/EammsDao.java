@@ -83,10 +83,17 @@ public class EammsDao extends DataSourceDao {
 	
 	//-------- PM -------------------
 	public Collection getPMOverdueItemsListing() throws DaoException {
-		String sql = "SELECT c_pmRequestId,c_status, c_endDate " +
+		/*String sql = "SELECT c_pmRequestId,c_status, c_endDate " +
 			"FROM app_fd_eamms_pm_request " +
 			"WHERE c_endDate <= CONVERT(VARCHAR(10), GETDATE(), 120) " +
-			"AND c_status = 'N' OR c_status = 'P' " ;    	
+			"AND c_status = 'N' OR c_status = 'P' " ;    	*/
+		
+		String sql = "SELECT DISTINCT(c_pmRequestId),d.serviceStatus " +
+				"FROM app_fd_eamms_pm_request_dates d " +
+				"INNER JOIN app_fd_eamms_pm_request r ON (r.c_pmRequestId=d.pmRequestId) " +
+				"INNER JOIN security_user u ON (u.username = d.engineerAssigned) " +
+				"WHERE d.serviceStatus = 'N' " +
+				"AND pmDate <= CONVERT(VARCHAR(10), GETDATE(), 120) ";
 		
 		Collection col = super.select(sql, DefaultDataObject.class, null, 0, -1);
 		return col;
