@@ -1,6 +1,10 @@
 New Build 
 =========
 
+fms_1.0.0_update (Jan 4 2013) V2.5
+-------------------------------------
+Give patch to MediaPrima for staging update
+
 fms_1.0.0_update (Jan 2 2013) V2.5
 -------------------------------------
 Fixed #15123: Checked In item shown as Checked out in "Check In (Assignment)" screen
@@ -128,7 +132,7 @@ fms_1.0.0_update (March 15 2012 5PM)
 -----------------------------------
 Fixed #13021 : Rate Card Listing
 Fixed #13014 : Rate Card Update
-Fixed #13015 : Transfer Cost - block booking indicator should be Y or N 
+Fixed #13015 : Transfer Cost - block booking indicator should be Y or N ;
 Fixed #13016 : Transfer Cost - should only transfer facilities related to program only
 Fixed #13019 : Transfer Cost - Cancellation charge createdDate should be the date when scheduler run
 Fixed #13018 : Transfer Cost - Cancellation charge required date from and to should be at the service level
