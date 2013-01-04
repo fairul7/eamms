@@ -92,7 +92,7 @@ public class EammsDao extends DataSourceDao {
 				"FROM app_fd_eamms_pm_request_dates d " +
 				"INNER JOIN app_fd_eamms_pm_request r ON (r.c_pmRequestId=d.pmRequestId) " +
 				"INNER JOIN security_user u ON (u.username = d.engineerAssigned) " +
-				"WHERE d.serviceStatus = 'N' " +
+				"WHERE d.serviceStatus = 'N' AND r.c_status = 'N' " +
 				"AND pmDate <= CONVERT(VARCHAR(10), GETDATE(), 120) ";
 		
 		Collection col = super.select(sql, DefaultDataObject.class, null, 0, -1);
