@@ -1,6 +1,10 @@
 New Build 
 =========
 
+fms_1.0.0_update (Jan 10 2013) V2.5
+-------------------------------------
+Fixed #15247: Transport Request closed when there are still un-closed assignment
+
 fms_1.0.0_update (Jan 4 2013) V2.5
 -------------------------------------
 Give patch to MediaPrima for staging update

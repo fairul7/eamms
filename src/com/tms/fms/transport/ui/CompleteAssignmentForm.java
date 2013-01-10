@@ -1,14 +1,10 @@
 package com.tms.fms.transport.ui;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.Map;
 import kacang.Application;
 import kacang.services.security.SecurityService;
-import kacang.services.security.User;
 import kacang.services.storage.StorageFile;
 import kacang.services.storage.StorageService;
 import kacang.stdui.Button;
@@ -25,15 +21,11 @@ import kacang.util.Log;
 import kacang.util.UuidGenerator;
 import org.apache.commons.collections.SequencedHashMap;
 import com.tms.ekms.manpowertemp.model.ManpowerAssignmentObject;
-import com.tms.ekms.manpowertemp.model.ManpowerLeaveObject;
-import com.tms.fms.department.model.FMSDepartmentManager;
 import com.tms.fms.engineering.model.EngineeringModule;
 import com.tms.fms.engineering.model.EngineeringRequest;
 import com.tms.fms.setup.model.SetupModule;
-import com.tms.fms.transport.model.FmsNotification;
 import com.tms.fms.transport.model.TransportModule;
 import com.tms.fms.transport.model.TransportRequest;
-import com.tms.fms.transport.model.VehicleObject;
 
 
 public class CompleteAssignmentForm extends Form
@@ -283,123 +275,13 @@ public class CompleteAssignmentForm extends Form
 	    		TM.updateCompleteAssignment(mObj);
 	    		
 	    		//check for both vehicles and drivers are closed 
-		    	statusCheck(tr.getRequestId(),tr, event);
+	    		AssignmentForm.statusCheck(tr.getRequestId(), tr.getStartDate(), tr.getEndDate(), event);
 	    		
 	    	}catch(Exception er){
 	    		Log.getLog(getClass()).error(er);
 	    	}
         return new Forward("Ok");
     }
-    
-    
-    public void statusCheck(String requestId, TransportRequest tr, Event evt){
-    	String vehicleStatus = "";
-    	String driverStatus = "";
-    	TransportModule transModule = (TransportModule)Application.getInstance().getModule(TransportModule.class);
-    	//------ VEHICLE STATUS -------
-    	try {
-    		Collection viewVehicles = transModule.getVehicleByRequestId(requestId);	    	
-//    		Collection completedAssg = transModule.selectAssignments(tr.getId(), "E");
-    		if(viewVehicles.size() > 0){
-    			int countV = 0;
-        		for (Iterator iterator = viewVehicles.iterator(); iterator.hasNext();) {
-        			VehicleObject object = (VehicleObject) iterator.next();
-    				if(object.getStatus()!= null && object.getStatus().equals("E")){
-    					countV++;
-    				}
-    			}
-        		
-            	if(countV == viewVehicles.size()){
-            		vehicleStatus = "C";
-            	}    			
-    		}
-    		
-		} catch (Exception e) {}
-    	
-		//------ DRIVER STATUS -------
-		try {
-			Collection viewDrivers = transModule.getDriverByRequestId(requestId);
-    		int countD = 0;
-    		for (Iterator iterator = viewDrivers.iterator(); iterator.hasNext();) {
-				ManpowerLeaveObject object = (ManpowerLeaveObject) iterator.next();
-				object.getProperty("status");
-				if(object.getProperty("status")!= null && object.getProperty("status").equals("M")){
-					countD++;
-				}
-			}
-    		// check all vehicles closed
-    		if(viewDrivers.size() > 0){
-        		if(countD == viewDrivers.size()){
-        			driverStatus = "C";
-        		}    			
-    		}else driverStatus = "NULL";
-		} catch (Exception e) {
-			// TODO: handle exception Could not find driver status
-		}
-		
-		if(("C".equals(vehicleStatus) && "C".equals(driverStatus)) || (vehicleStatus.equals("C")&&driverStatus.equals("NULL"))){
-			sendNotification(tr, evt);
-			transModule.updateCloseReqStatus(requestId, SetupModule.CLOSED_STATUS);
-		}
-    }
-    
-    
-    public void sendNotification(TransportRequest tr,Event evt){
-    	//Send Notification
-		TransportModule tm = (TransportModule) Application.getInstance().getModule(TransportModule.class);
-		SecurityService security = (SecurityService)Application.getInstance().getService(SecurityService.class);
-		FMSDepartmentManager deptManager = (FMSDepartmentManager) Application.getInstance().getModule(FMSDepartmentManager.class);
-		try {
-			TransportRequest objNew = tm.selectTransportRequest(tr.getRequestId());
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-			String sDate = sdf.format(tr.getStartDate());
-			String eDate = sdf.format(tr.getEndDate());
-			String subject = "Transport Request Feedback Form";
-			String emailTo[] = deptManager.getEmailRequestor(tr.getRequestId());
-			String requestId = tr.getRequestId();
-			String requiredDate = sDate +" - "+eDate+".";
-			String rate = objNew.getRate();
-//			String link = "http://fms.mediaprima.com.my/ekms/fms/transport/feedbackForm.jsp?requestId="+requestId+"";
-			//String serverUrl = "http://" + evt.getRequest().getServerName() + ":" + evt.getRequest().getServerPort() + evt.getRequest().getContextPath() + "/ekms/cmsadmin";
-			String link = "http://" + evt.getRequest().getServerName() + ":" + evt.getRequest().getServerPort() + evt.getRequest().getContextPath() + "/ekms/fms/transport/request/feedbackForm.jsp?requestId="+requestId+"";
-			String requestorName = "";
-			for(String id:emailTo){
-				User usrObj = security.getUsersEmail(id);
-				requestorName = (String)usrObj.getProperty("firstName") +" "+ (String)usrObj.getProperty("lastName");
-			}
-			
-			String body=
-					"<table width=\"100%\" cellpadding=\"5\" cellspacing=\"0\"> " +
-					"<tr><td>Dear "+requestorName+",</td></tr>" +
-					"<tr><td><td></tr>" +
-					"<tr><td>Your request has been completed. Request detail is shown below.<td></tr>" +
-					"<tr><td><td></tr>" +
-					"</table>" +
-					"<table width=\"100%\" cellpadding=\"4\" cellspacing=\"1\" border=\"0\">" +					
-					"<tr><td><b>Request ID : </b>"+requestId+"</td></tr>" +
-					"<tr><td><b>Request Title : </b>Completed</td></tr>" +
-					"<tr><td><b>Required Date : </b>"+requiredDate+"</td></tr>" +
-					"<tr><td><b>Total amount : </b>RM "+rate+".</td></tr>" +
-					"<tr><td><td></tr>" +
-					"</table>" +
-					"<table width=\"100%\" cellpadding=\"5\" cellspacing=\"0\">" +
-			    	"<tr><td>Thank you for signing off the job done by us. As a measure of continuous improvements, " +
-			    	"we wish you can feedback to us on the work quality and feel free to suggest to us on how we can improve our services to you " +
-			    	"in the near future. Please click link below.</td></tr>" +
-			    	"<tr><td><td></tr>" +
-			    	"<tr><td><a href="+link+">"+link+"</a>.<td></tr>" +
-			    	"<tr><td><td></tr>" +
-			    	"<tr><td>Thank You.<td></tr>" +
-			    	"</table>";
-
-			FmsNotification notification = new FmsNotification();		
-			notification.send(emailTo, subject, body);
-		} catch (Exception er) {
-			Log.getLog(getClass()).error("ERROR sendNotification " + er);
-		}
-	}
-    
 
     public String getDefaultTemplate()
     {    	
