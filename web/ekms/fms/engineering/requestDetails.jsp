@@ -101,6 +101,12 @@
   <c:when test="${forward.name == 'INVALID_RATE_CARD'}">
     <script>alert('<fmt:message key="fms.facility.msg.invalidRateCardCannotAccept"/>');</script>
   </c:when>
+  <c:when test="${forward.name == 'DUPLICATE_ACCEPT'}">
+    <script>
+    	alert('<fmt:message key="fms.facility.msg.duplicateAccept"/>');
+    	document.location = "<c:url value="requestDetails.jsp"/>";
+    </script>
+  </c:when>
 </c:choose>
 
 <%@include file="/ekms/includes/header.jsp" %>

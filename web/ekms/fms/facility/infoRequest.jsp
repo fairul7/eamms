@@ -37,10 +37,12 @@
 		2.3 verbose feature (2011-11-17)
 		2.4 added unit info for Requested Manpower (2012-04-30)
 		2.5 added total internal rate / total external rate (2012-06-08)
+		2.6 improved sorting for booking, requested items & manpower, extra items (2012-11-09)
+		2.7 add service type to extra items listing (2013-02-08)
 --%>
 
 <%!
-	public static final String CURRENT_VERSION = "2.5";
+	public static final String CURRENT_VERSION = "2.7";
 	public static final String DATE_PATTERN = "dd-MMM-yyyy";
 	public static final String DATE_TIME_PATTERN = "dd-MMM-yyyy hh:mm'&nbsp;'a";
 	
@@ -281,7 +283,7 @@
 				"LEFT OUTER JOIN fms_eng_rate_card_category cat ON (fb.facilityId = cat.id) " +
 				"LEFT OUTER JOIN competency com ON (com.competencyId = fb.facilityId) " +
 				"WHERE requestId = ? " +
-				"ORDER BY bookFrom, timeFrom, bookTo, timeTo, fb.bookingType ";
+				"ORDER BY bookFrom, timeFrom, bookTo, timeTo, fb.bookingType, cat.name, com.competencyName ";
 		Collection colFacilityBooking = dao.select(sqlFacilityBooking, FacilityObject.class, new String[] {requestId}, 0, -1);
 		pageContext.setAttribute("colFacilityBooking", colFacilityBooking);
 	} catch (Exception e) {
@@ -297,7 +299,7 @@
 				"INNER JOIN fms_eng_assignment_equipment ae ON (ae.assignmentId = a.assignmentId) " + 
 				"LEFT OUTER JOIN fms_eng_rate_card_category c ON (c.id = ae.rateCardCategoryId) " +
 				"WHERE a.requestId = ? " +
-				"ORDER BY ae.requiredFrom, ae.requiredTo ";
+				"ORDER BY ae.requiredFrom, ae.fromTime, ae.requiredTo, ae.toTime, c.name ";
 		Collection colRequestedItems = dao.select(sqlRequestedItems, EngineeringRequest.class, new String[] {requestId}, 0, -1);
 		pageContext.setAttribute("colRequestedItems", colRequestedItems);
 	} catch (Exception e) {
@@ -313,7 +315,7 @@
 				"INNER JOIN fms_eng_assignment_equipment ae ON (ae.assignmentId = a.assignmentId) " +   
 				"LEFT OUTER JOIN fms_eng_rate_card_category c ON (c.id = ae.rateCardCategoryId) " +
 				"WHERE a.requestId = ? " +
-				"ORDER BY ae.requiredFrom, ae.requiredTo ";
+				"ORDER BY ae.requiredFrom, ae.fromTime, ae.requiredTo, ae.toTime, c.name ";
 		Collection colCancelledItems = dao.select(sqlCancelledItems, EngineeringRequest.class, new String[] {requestId}, 0, -1);
 		pageContext.setAttribute("colCancelledItems", colCancelledItems);
 	} catch (Exception e) {
@@ -332,7 +334,7 @@
 				"LEFT OUTER JOIN security_user u ON (man.userId = u.id) " +
 				"LEFT OUTER JOIN fms_unit fu ON (c.unitId = fu.id) " +
 				"WHERE a.requestId = ? " +
-				"ORDER BY man.requiredFrom, man.requiredTo ";
+				"ORDER BY man.requiredFrom, man.fromTime, man.requiredTo, man.toTime, c.competencyName ";
 		Collection colRequestedManpower = dao.select(sqlRequestedManpower, Assignment.class, new String[] {requestId}, 0, -1);
 		pageContext.setAttribute("colRequestedManpower", colRequestedManpower);
 	} catch (Exception e) {
@@ -350,7 +352,7 @@
 				"LEFT OUTER JOIN security_user u ON (man.userId = u.id) " +
 				"LEFT OUTER JOIN fms_unit fu ON (c.unitId = fu.id) " +
 				"WHERE man.requestId = ? " +
-				"ORDER BY man.requiredFrom, man.requiredTo ";
+				"ORDER BY man.requiredFrom, man.fromTime, man.requiredTo, man.toTime, c.competencyName ";
 		Collection colCancelledManpower = dao.select(sqlCancelledManpower, Assignment.class, new String[] {requestId}, 0, -1);
 		pageContext.setAttribute("colCancelledManpower", colCancelledManpower);
 	} catch (Exception e) {
@@ -361,21 +363,20 @@
 	try {
 		String sqlExtraItems = 
 				"SELECT " + topStr + " DISTINCT ae.id, ae.requiredTo, ae.requiredFrom, ae.barcode, " +
-				"       checkedOutBy, checkedOutDate, checkedInBy, checkedInDate, takenBy, createdDate " +
+				"       checkedOutBy, checkedOutDate, checkedInBy, checkedInDate, takenBy, createdDate, " +
+				"       a.serviceType, " +
+				"       (" +
+				"           SELECT TOP 1 cc.name as rateCardCategoryName " + 
+				"           FROM fms_facility_item i  " +
+				"           INNER JOIN fms_eng_rate_card_cat_item c ON (i.facility_id = c.facilityId) " + 
+				"           INNER JOIN fms_eng_rate_card_category cc ON (c.categoryId = cc.id) " + 
+				"           WHERE i.barcode = ae.barcode " +
+				"       ) AS catName " +
 				"FROM fms_eng_assignment a " +
 				"INNER JOIN fms_eng_assignment_equipment ae ON (ae.groupId = a.groupId AND ae.assignmentId = '-') " + 
 				"WHERE a.requestId = ? " +
-				"ORDER BY ae.requiredFrom, ae.requiredTo ";
+				"ORDER BY ae.requiredFrom, ae.requiredTo, catName ";
 		Collection colExtraItems = dao.select(sqlExtraItems, EngineeringRequest.class, new String[] {requestId}, 0, -1);
-		
-		// get category
-		UnitHeadModule uhm = (UnitHeadModule) Application.getInstance().getModule(UnitHeadModule.class);
-		for (Iterator iterator = colExtraItems.iterator(); iterator.hasNext();) {
-			EngineeringRequest er = (EngineeringRequest) iterator.next();
-			String catName = uhm.getRateCardCategoryName(er.getBarcode());
-			er.setProperty("catName", catName);
-		}
-		
 		pageContext.setAttribute("colExtraItems", colExtraItems);
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -403,6 +404,11 @@
 			}
 			
 			.cancelledStyle {
+				background-color: #FF3333;
+				color: #FFFFFF;
+			}
+			
+			.anomalyStyle {
 				background-color: #FF3333;
 				color: #FFFFFF;
 			}
@@ -1184,6 +1190,7 @@
 					<td rowspan="2">Required From</td>
 					<td rowspan="2">Required To</td>
 					<td rowspan="2">Type</td>
+					<td rowspan="2">Service Type</td>
 					<td rowspan="2">Barcode</td>
 					<td align="center" colspan="2">Checked Out</td>
 					<td align="center" colspan="2">Checked In</td>
@@ -1203,6 +1210,14 @@
 						<td><fmt:formatDate value="${req.requiredFrom}" pattern="<%= DATE_PATTERN %>"/></td>
 						<td><fmt:formatDate value="${req.requiredTo}" pattern="<%= DATE_PATTERN %>"/></td>
 						<td><c:out value="${req.propertyMap['catName']}" />&nbsp;</td>
+						<c:choose>
+							<c:when test="${req.serviceType == '1' or req.serviceType == '6'}">
+								<td><c:out value="${req.serviceType}" /></td>
+							</c:when>
+							<c:otherwise>
+								<td class="anomalyStyle"><c:out value="${req.serviceType}" /></td>
+							</c:otherwise>
+						</c:choose>
 						<td><c:out value="${req.barcode}" />&nbsp;</td>
 						
 						<td><c:out value="${req.checkedOutBy}" />&nbsp;</td>

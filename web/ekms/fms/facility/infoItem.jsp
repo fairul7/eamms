@@ -16,11 +16,12 @@
 			added user to Internal Check Out
 			added status to Assignment Check Out & Internal Check Out
 		1.5 added Requested By to Internal Check Out
+		1.6 added rate card (2013-02-08)
 			
 --%>
 
 <%!
-	public static final String CURRENT_VERSION = "1.5";
+	public static final String CURRENT_VERSION = "1.6";
 	public static final String DATE_TIME_PATTERN = "dd-MMM-yyyy hh:mm'&nbsp;'a";
 %>
 
@@ -72,12 +73,14 @@
 			FacilityObject facility = (FacilityObject) colFacility.iterator().next();
 			String categoryId = facility.getCategory_id();
 			pageContext.setAttribute("categoryId", categoryId);
+			String facilityId = facility.getId();
+			pageContext.setAttribute("facilityId", facilityId);
 		}
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
 	
-	// get sub category & parent category
+	// get facility sub category & parent category
 	try {
 		String categoryId = (String) pageContext.getAttribute("categoryId");
 		if (categoryId != null) {
@@ -99,6 +102,26 @@
 			}
 			
 			pageContext.setAttribute("colCategory", colCategory);
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+	// get rate card
+	try {
+		String facilityId = (String) pageContext.getAttribute("facilityId");
+		System.out.println("facilityId: " + facilityId); //TODO:
+		if (facilityId != null) {
+			String sqlRateCard = 
+				"SELECT cat.id AS idCategory, cat.name AS categoryName, equip.rateCardId, " +
+				"       rc.name AS rateCardName, rc.serviceTypeId, rc.status " +
+				"FROM fms_eng_rate_card_cat_item item " +
+				"INNER JOIN fms_eng_rate_card_category cat ON (cat.id = item.categoryId) " +
+				"INNER JOIN fms_rate_card_equipment equip ON (equip.equipment = cat.id) " +
+				"LEFT OUTER JOIN fms_rate_card rc ON (rc.id = equip.rateCardId) " +
+				"WHERE item.facilityId = ? ";
+			Collection colRateCard = dao.select(sqlRateCard, RateCard.class, new String[] {facilityId}, 0, -1);
+			pageContext.setAttribute("colRateCard", colRateCard);
 		}
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -253,7 +276,7 @@
 		<br>
 		
 		<c:if test="${not empty(colCategory)}">
-			Category:<br>
+			Facility Category:<br>
 			<table border="1" cellpadding="3" cellspacing="0">
 				<thead class="niceStyle">
 					<tr>
@@ -279,6 +302,29 @@
 			<br>
 		</c:if>
 		
+		Rate Card:<br>
+		<table border="1" cellpadding="3" cellspacing="0">
+			<thead class="niceStyle">
+				<tr>
+					<td>Rate Card Name</td>
+					<td>Item Category Name</td>
+					<td>Service Type</td>
+					<td>Status</td>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${colRateCard}" var="rc" varStatus="status">
+					<tr>
+						<td><a href="rateCardView.jsp?id=<c:out value="${rc.propertyMap['rateCardId']}" />"><c:out value="${rc.propertyMap['rateCardName']}" /></a>&nbsp;</td>
+						<td><a href="rateCardCategoryEdit.jsp?id=<c:out value="${rc.idCategory}" />"><c:out value="${rc.categoryName}" /></a>&nbsp;</td>
+						<td><c:out value="${rc.serviceTypeId}" /></td>
+						<td><c:out value="${rc.status}" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<br>
+		
 		Assignment Check Out:<br>
 		<table align="center" border="1" cellpadding="3" cellspacing="0" width="100%">
 			<thead class="niceStyle">
@@ -302,18 +348,26 @@
 				<c:forEach items="${colAssignCheckout}" var="req" varStatus="status">
 					<tr>
 						<td><c:out value="${status.count}" /></td>
-						<td><c:out value="${req.checkedOutBy}" /></td>
-						<td><fmt:formatDate value="${req.checkedOutDate}" pattern="<%= DATE_TIME_PATTERN %>" /></td>
-						
-						<c:choose>
-							<c:when test="${not empty(req.checkedInDate)}">
-								<td><c:out value="${req.checkedInBy}" />&nbsp;</td>
-								<td><fmt:formatDate value="${req.checkedInDate}" pattern="<%= DATE_TIME_PATTERN %>" />&nbsp;</td>
-							</c:when>
-							<c:otherwise>
-								<td colspan="2" class="checkedOutStyle">&nbsp;</td>
-							</c:otherwise>
-						</c:choose>
+						<c:if test="${not empty(req.checkedOutDate)}">
+							<td><c:out value="${req.checkedOutBy}" /></td>
+							<td><fmt:formatDate value="${req.checkedOutDate}" pattern="<%= DATE_TIME_PATTERN %>" /></td>
+							
+							<c:choose>
+								<c:when test="${not empty(req.checkedInDate)}">
+									<td><c:out value="${req.checkedInBy}" /></td>
+									<td><fmt:formatDate value="${req.checkedInDate}" pattern="<%= DATE_TIME_PATTERN %>" /></td>
+								</c:when>
+								<c:otherwise>
+									<td colspan="2" class="checkedOutStyle">&nbsp;</td>
+								</c:otherwise>
+							</c:choose>
+						</c:if>
+						<c:if test="${empty(req.checkedOutDate)}">
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</c:if>
 						
 						<td><c:out value="${req.status}" /></td>
 						<td><c:out value="${req.takenBy}" /></td>

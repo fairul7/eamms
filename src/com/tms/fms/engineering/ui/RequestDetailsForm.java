@@ -24,6 +24,7 @@ import com.tms.fms.engineering.model.EngineeringRequest;
 import com.tms.fms.engineering.model.FacilitiesCoordinatorModule;
 import com.tms.fms.engineering.model.Sequence;
 import com.tms.fms.engineering.model.Service;
+import com.tms.fms.engineering.model.TransLogModule;
 import com.tms.fms.engineering.model.UnitHeadDao;
 import com.tms.fms.engineering.model.UnitHeadModule;
 import com.tms.fms.facility.model.SetupModule;
@@ -616,6 +617,14 @@ public class RequestDetailsForm extends Form {
 				}
 			} catch (DaoException e) {
 				Log.getLog(getClass()).error("requestId = " + requestId + " " + e.toString(), e);
+			}
+			
+			// check status
+			String reqStatus = eRequest.getStatus();
+			if (reqStatus != null && reqStatus.equals(EngineeringModule.ASSIGNMENT_STATUS)) {
+				TransLogModule transLog = (TransLogModule) Application.getInstance().getModule(TransLogModule.class);
+				transLog.error(requestId, "DUPLICATE_ACCEPT", "status=" + reqStatus);
+				return new Forward("DUPLICATE_ACCEPT");
 			}
 			
 			// flag to allow invalid rate cards

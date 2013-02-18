@@ -19,7 +19,42 @@ public class TransLogModule extends DefaultModule {
 		dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	}
 	
+	public void error(String requestId, String action, String text) {
+		String message = formatText(requestId, action, text);
+
+		Log.getLog(getClass()).error(message);
+	}
+	
 	public void info(String requestId, String action, String text) {
+		String message = formatText(requestId, action, text);
+
+		Log.getLog(getClass()).info(message);
+	}
+	
+	public void info(EngineeringRequest eRequest, String action, String text) {
+		try {
+			text = formatText(eRequest, text);
+		} catch (Exception e) {
+			Log.getLog(getClass()).error("Logging Error", e);
+		}
+		info(eRequest.getRequestId(), action, text.trim());
+	}
+	
+	public void info(Service service, String action, String text) {
+		try {
+			text = formatText(service, text);
+		} catch (Exception e) {
+			Log.getLog(getClass()).error("Logging Error", e);
+		}
+		info(service.getRequestId(), action, text.trim());
+	}
+	
+	public String formatDate(Date date) {
+		return dateFormat.format(date);
+	}
+	
+	
+	protected String formatText(String requestId, String action, String text) {
 		Application application = Application.getInstance();
 		
 		String message = "";
@@ -49,29 +84,7 @@ public class TransLogModule extends DefaultModule {
 			message += "(username=" + username + ")";
 		}
 		
-		Log.getLog(getClass()).info(message);
-	}
-	
-	public void info(EngineeringRequest eRequest, String action, String text) {
-		try {
-			text = formatText(eRequest, text);
-		} catch (Exception e) {
-			Log.getLog(getClass()).error("Logging Error", e);
-		}
-		info(eRequest.getRequestId(), action, text.trim());
-	}
-	
-	public void info(Service service, String action, String text) {
-		try {
-			text = formatText(service, text);
-		} catch (Exception e) {
-			Log.getLog(getClass()).error("Logging Error", e);
-		}
-		info(service.getRequestId(), action, text.trim());
-	}
-	
-	public String formatDate(Date date) {
-		return dateFormat.format(date);
+		return message;
 	}
 	
 	protected String formatText(EngineeringRequest eRequest, String text) {
