@@ -197,7 +197,11 @@ public class AbwDao extends DataSourceDao {
 	public Collection abw_projectListing( String sort,
 			boolean desc, int start, int rows) throws DaoException {
     	Collection col = new ArrayList();    	
-    	String sql = "SELECT name as namax FROM sys.Tables";
+    	String sql = 
+    			"SELECT name as namax " +
+    			"FROM sys.Tables " +
+    			"WHERE name IN ('abw_project', 'fms_eng_transfer_cost', 'fms_trans_transfer_cost', 'rate_card') " +
+    			"ORDER BY name ";
     	
     	if(sort!=null && !"".equals(sort)){
     		sql += " ORDER BY " + sort + (desc ? " DESC" : "");
@@ -209,7 +213,10 @@ public class AbwDao extends DataSourceDao {
 	}
 	public int abw_projectCount() throws DaoException {
 		Collection col = new ArrayList();		
-		String sql = " SELECT count(*) as total FROM sys.Tables " ;	
+		String sql = 
+				"SELECT count(*) as total " +
+				"FROM sys.Tables " +
+				"WHERE name IN ('abw_project', 'fms_eng_transfer_cost', 'fms_trans_transfer_cost', 'rate_card') ";
 		
     	col = super.select(sql, HashMap.class, null, 0, 1);
 		if (col.size() == 1) {

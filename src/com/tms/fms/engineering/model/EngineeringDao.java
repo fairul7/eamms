@@ -5271,11 +5271,12 @@ public class EngineeringDao extends DataSourceDao {
 	public Collection getManpowerByRequestId(String requestId) throws DaoException
 	{
 		String sql =
-			" SELECT man.id, serviceId, abw_code AS ratecardAbwCode, quantity AS noOfUnit, requiredFrom AS requiredDateFrom, " +
+			" SELECT man.id, man.serviceId, abw_code AS ratecardAbwCode, quantity AS noOfUnit, requiredFrom AS requiredDateFrom, " +
 			" requiredTo AS requiredDateTo, internalRate AS cost, blockBooking AS blockBooking " +
 			" FROM Fms_eng_service_manpower man " +
+			" INNER JOIN fms_eng_request_services srv ON (man.requestId = srv.requestId AND man.serviceId = srv.serviceId) " +
 			" LEFT JOIN Fms_rate_card frc ON (frc.id = man.competencyId) " +
-			" WHERE requestId = ? ";
+			" WHERE man.requestId = ? ";
 		
 		Collection result = super.select(sql, DefaultDataObject.class, new Object[]{requestId}, 0, -1);
 		return result;
@@ -5284,11 +5285,12 @@ public class EngineeringDao extends DataSourceDao {
 	public Collection getScpByRequestId(String requestId) throws DaoException
 	{
 		String sql =
-			" SELECT scp.id, serviceId, abw_code AS ratecardAbwCode, 1 AS noOfUnit, requiredFrom AS requiredDateFrom, " +
+			" SELECT scp.id, scp.serviceId, abw_code AS ratecardAbwCode, 1 AS noOfUnit, requiredFrom AS requiredDateFrom, " +
 			" requiredTo AS requiredDateTo, internalRate AS cost, blockBooking AS blockBooking " +
 			" FROM fms_eng_service_scp scp " +
+			" INNER JOIN fms_eng_request_services srv ON (scp.requestId = srv.requestId AND scp.serviceId = srv.serviceId) " +
 			" LEFT JOIN Fms_rate_card frc ON (frc.id = scp.facilityId) " +
-			" WHERE requestId = ? ";
+			" WHERE scp.requestId = ? ";
 		
 		Collection result = super.select(sql, DefaultDataObject.class, new Object[]{requestId}, 0, -1);
 		return result;
@@ -5297,11 +5299,12 @@ public class EngineeringDao extends DataSourceDao {
 	public Collection getOtherByRequestId(String requestId) throws DaoException
 	{
 		String sql =
-			" SELECT other.id, serviceId, abw_code AS ratecardAbwCode, quantity AS noOfUnit, requiredFrom AS requiredDateFrom, " +
+			" SELECT other.id, other.serviceId, abw_code AS ratecardAbwCode, quantity AS noOfUnit, requiredFrom AS requiredDateFrom, " +
 			" requiredTo AS requiredDateTo, internalRate AS cost, blockBooking AS blockBooking " +
 			" FROM Fms_eng_service_other other " +
+			" INNER JOIN fms_eng_request_services srv ON (other.requestId = srv.requestId AND other.serviceId = srv.serviceId) " +
 			" LEFT JOIN Fms_rate_card frc on (frc.id = other.facilityId) " +
-			" WHERE requestId = ? ";
+			" WHERE other.requestId = ? ";
 		
 		Collection result = super.select(sql, DefaultDataObject.class, new Object[]{requestId}, 0, -1);
 		return result;
@@ -5310,11 +5313,12 @@ public class EngineeringDao extends DataSourceDao {
 	public Collection getPostproductionByRequestId(String requestId) throws DaoException
 	{
 		String sql =
-			" SELECT pp.id, serviceId, abw_code AS ratecardAbwCode, 1 AS noOfUnit, requiredDate AS requiredDateFrom, " +
+			" SELECT pp.id, pp.serviceId, abw_code AS ratecardAbwCode, 1 AS noOfUnit, requiredDate AS requiredDateFrom, " +
 			" requiredDateTo AS requiredDateTo, internalRate AS cost, blockBooking AS blockBooking " +
 			" FROM Fms_eng_service_postproduction pp " +
+			" INNER JOIN fms_eng_request_services srv ON (pp.requestId = srv.requestId AND pp.serviceId = srv.serviceId) " +
 			" LEFT JOIN Fms_rate_card frc on (frc.id = pp.facilityId) " +
-			" WHERE requestId = ? ";
+			" WHERE pp.requestId = ? ";
 		
 		Collection result = super.select(sql, DefaultDataObject.class, new Object[]{requestId}, 0, -1);
 		return result;
@@ -5323,11 +5327,12 @@ public class EngineeringDao extends DataSourceDao {
 	public Collection getStudioByRequestId(String requestId) throws DaoException
 	{
 		String sql =
-			" SELECT studio.id, serviceId, abw_code AS ratecardAbwCode, 1 AS noOfUnit, bookingDate AS requiredDateFrom, " +
+			" SELECT studio.id, studio.serviceId, abw_code AS ratecardAbwCode, 1 AS noOfUnit, bookingDate AS requiredDateFrom, " +
 			" bookingDateTo AS requiredDateTo, internalRate AS cost, blockBooking AS blockBooking " +
 			" FROM Fms_eng_service_studio studio " +
+			" INNER JOIN fms_eng_request_services srv ON (studio.requestId = srv.requestId AND studio.serviceId = srv.serviceId) " +
 			" LEFT JOIN Fms_rate_card frc on (frc.id = studio.facilityId) " +
-			" WHERE requestId = ? ";
+			" WHERE studio.requestId = ? ";
 		
 		Collection result = super.select(sql, DefaultDataObject.class, new Object[]{requestId}, 0, -1);
 		return result;
@@ -5336,11 +5341,12 @@ public class EngineeringDao extends DataSourceDao {
 	public Collection getTvroByRequestId(String requestId) throws DaoException
 	{
 		String sql =
-			" SELECT tvro.id, serviceId, abw_code AS ratecardAbwCode, 1 AS noOfUnit, requiredDate AS requiredDateFrom, " +
+			" SELECT tvro.id, tvro.serviceId, abw_code AS ratecardAbwCode, 1 AS noOfUnit, requiredDate AS requiredDateFrom, " +
 			" requiredDateTo AS requiredDateTo, internalRate AS cost, blockBooking AS blockBooking " +
 			" FROM Fms_eng_service_tvro tvro " +
+			" INNER JOIN fms_eng_request_services srv ON (tvro.requestId = srv.requestId AND tvro.serviceId = srv.serviceId) " +
 			" LEFT JOIN Fms_rate_card frc on (frc.id = tvro.facilityId) " +
-			" WHERE requestId = ? ";
+			" WHERE tvro.requestId = ? ";
 		
 		Collection result = super.select(sql, DefaultDataObject.class, new Object[]{requestId}, 0, -1);
 		return result;
@@ -5349,11 +5355,12 @@ public class EngineeringDao extends DataSourceDao {
 	public Collection getVtrByRequestId(String requestId) throws DaoException
 	{
 		String sql =
-			" SELECT vtr.id, serviceId, abw_code AS ratecardAbwCode, 1 AS noOfUnit, requiredDate AS requiredDateFrom, " +
+			" SELECT vtr.id, vtr.serviceId, abw_code AS ratecardAbwCode, 1 AS noOfUnit, requiredDate AS requiredDateFrom, " +
 			" requiredDateTo AS requiredDateTo, internalRate AS cost, blockBooking AS blockBooking " +
 			" FROM Fms_eng_service_vtr vtr " +
+			" INNER JOIN fms_eng_request_services srv ON (vtr.requestId = srv.requestId AND vtr.serviceId = srv.serviceId) " +
 			" LEFT JOIN Fms_rate_card frc on (frc.id = vtr.facilityId) " +
-			" WHERE requestId = ? ";
+			" WHERE vtr.requestId = ? ";
 		
 		Collection result = super.select(sql, DefaultDataObject.class, new Object[]{requestId}, 0, -1);
 		return result;
