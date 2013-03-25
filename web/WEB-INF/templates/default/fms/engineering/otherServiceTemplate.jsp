@@ -8,6 +8,7 @@
 <x:display name="${widget.panel.absoluteName}" body="custom">
 <br>
 <c:set var="colSpanValue" value="8"/>
+<x:display name="${widget.validateRequestId.absoluteName}" />
 <table align="center" class="borderTable" cellpadding="3" cellspacing="1" width="95%">
 	<tr>
 		<th><fmt:message key="fms.facility.label.sNo"/></th>

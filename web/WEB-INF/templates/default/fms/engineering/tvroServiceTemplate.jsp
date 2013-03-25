@@ -12,6 +12,7 @@
 			<c:set var="colSpanValue" value="9"/>
 		</c:if>
 
+<x:display name="${widget.validateRequestId.absoluteName}" />
 <table align="center" class="borderTable" cellpadding="3" cellspacing="1" width="95%">
 	<tr>
 		<td colspan="3" align="right" valign="top"><b><fmt:message key="fms.facility.label.feedType"/>&nbsp;</td>

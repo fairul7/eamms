@@ -9,6 +9,7 @@ import kacang.Application;
 import kacang.stdui.Button;
 import kacang.stdui.CheckBox;
 import kacang.stdui.Form;
+import kacang.stdui.Hidden;
 import kacang.stdui.Radio;
 import kacang.ui.Event;
 import kacang.ui.Forward;
@@ -34,6 +35,7 @@ public class ServiceDetailsForm extends Form {
 	protected Service service=new Service();
 	protected Button add;
 	protected Button delete;
+	protected Hidden validateRequestId;
 	protected boolean viewMode=true;		
 	protected boolean removeLink=false;	
 	protected boolean hideTitle=false;
@@ -243,6 +245,11 @@ public class ServiceDetailsForm extends Form {
 				addChild(feedType[j]);
 			}
 		}
+		
+		// hidden field validateRequestId
+	    validateRequestId = new Hidden("validateRequestId");
+		validateRequestId.setValue(requestId);
+		addChild(validateRequestId);
 	}
 	
 	public String getDefaultTemplate() {
@@ -271,7 +278,17 @@ public class ServiceDetailsForm extends Form {
 	}
 	
 	public Forward onSubmit(Event arg0) {
+		Forward fwd = super.onSubmit(arg0);
 		try{
+			// consistency checking
+	    	String postedRequestId = (String) validateRequestId.getValue();
+			if (postedRequestId != null && !postedRequestId.equals(requestId)) {
+				arg0.getRequest().setAttribute("postedRequestId", postedRequestId);
+				setInvalid(true);
+				Log.getLog(getClass()).error("consistencyError: postedRequestId=" + postedRequestId + " requestId=" + requestId + " serviceId=" + serviceId);
+				return new Forward("consistencyError");
+			}
+			
 			String buttonName = findButtonClicked(arg0);
 			if (buttonName != null){
 				if(SERVICE_TVRO.equals(serviceId)){
@@ -285,7 +302,7 @@ public class ServiceDetailsForm extends Form {
 		}catch(Exception e){
 			Log.getLog(getClass()).error(e.getMessage(),e);
 		}
-		return super.onSubmit(arg0);
+		return fwd;
 	}
 	
 	public Forward onValidate(Event event) {
@@ -441,5 +458,7 @@ public class ServiceDetailsForm extends Form {
 		this.hideTitle = hideTitle;
 	}
 
-		
+	public Hidden getValidateRequestId() {
+		return validateRequestId;
+	}		
 }

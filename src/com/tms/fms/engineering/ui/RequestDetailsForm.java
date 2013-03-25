@@ -102,6 +102,7 @@ public class RequestDetailsForm extends Form {
 	public RequestDetailsForm(String s) {super(s);}
 
 	public void init() {
+		removeChildren();
 		Application app=Application.getInstance();
 		
 		submit = new Button("submit", app.getMessage("fms.facility.submit"));

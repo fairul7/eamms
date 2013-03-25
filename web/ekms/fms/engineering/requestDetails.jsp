@@ -22,6 +22,12 @@
 <x:set name="fms_requestDetailsPage.statusTrail" property="requestId" value="${requestId}"/>
 
 <c:choose>
+  <c:when test="${forward.name == 'consistencyError'}">
+    <script type="text/javascript">
+      alert("Consistency Error: Please do not use multi-tab.");
+      document.location = "<c:url value="requestDetails.jsp?requestId=${requestScope.postedRequestId}"/>";
+    </script>
+  </c:when>
   <c:when test="${forward.name == 'ADDED'}">
     <script>alert('<fmt:message key="fms.facility.msg.requestUpdated"/>'); 
     document.location = "<c:url value="requestListing.jsp"/>";</script>
