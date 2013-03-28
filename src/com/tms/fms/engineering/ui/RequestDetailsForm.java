@@ -450,6 +450,12 @@ public class RequestDetailsForm extends Form {
 	public Forward onSubmit(Event evt) {
 		String buttonName = findButtonClicked(evt);
 		kacang.ui.Forward result = super.onSubmit(evt);
+		
+		// check whether the form is already invalid
+		if (isInvalid()) {
+			return result;
+		}
+		
 		if (buttonName != null && cancel.getAbsoluteName().equals(buttonName)) {
 			return new Forward(Form.CANCEL_FORM_ACTION, "requestListing.jsp", true);
 		} else if (buttonName != null && outSource.getAbsoluteName().equals(buttonName)) {
