@@ -750,6 +750,33 @@ public class EngineeringDao extends DataSourceDao {
 			super.update(" ALTER TABLE fms_global_setup ADD email5 VARCHAR(255) ", null);
 		} 
         catch (Exception e){}
+        
+        try {
+        	// create fms_eng_undo_log
+        	super.update(
+        			"CREATE TABLE fms_eng_undo_log (" +
+        					"undoId VARCHAR(100) NOT NULL PRIMARY KEY, " +
+        					"undoBy VARCHAR(100) NOT NULL, " +
+        					"undoDate DATETIME NOT NULL, " +
+        					"undoType VARCHAR(25) NOT NULL, " +
+        					"barcode VARCHAR(255) NOT NULL, " +
+        					"requestId VARCHAR(255), " +
+        					"checkedOutBy VARCHAR(100), " +
+        					"checkedOutDate DATETIME " +
+        			")", null);
+        } catch (Exception e) {
+        }
+        
+        // indexes for fms_eng_undo_log
+        try {
+			super.update("CREATE INDEX barcode ON fms_eng_undo_log(barcode)", null);
+		} catch (Exception e){
+		}
+        
+        try {
+			super.update("CREATE INDEX requestId ON fms_eng_undo_log(requestId)", null);
+		} catch (Exception e){
+		}
 
 		JobUtil.scheduleDailyTask("PendingRequestNotificationTask", "Notification", "Sending email to alternate approver", 
 				new PendingRequestNotificationTask(), 20, 00);
@@ -1455,6 +1482,20 @@ public class EngineeringDao extends DataSourceDao {
 		
 		sql += "order by c.checkout_date desc ";
 		return super.select(sql, FacilityObject.class, params.toArray(),0,-1);
+	}
+	
+	public Collection getUndoCheckoutListByBarcode(String barcode) throws DaoException {
+		ArrayList params = new ArrayList();
+		
+		String sql =
+			"SELECT undoId, undoBy AS checkedInBy, undoDate AS checkedInDate, undoType, barcode, ul.requestId, r.title, checkedOutBy, checkedOutDate " + 
+			"FROM fms_eng_undo_log ul " +
+			"LEFT OUTER JOIN fms_eng_request r ON (ul.requestId = r.requestId) " +
+			"WHERE barcode = ? " +
+			"ORDER BY undoDate DESC ";
+		params.add(barcode);		
+		
+		return super.select(sql, EngineeringRequest.class, params.toArray(), 0, -1);
 	}
 
 	public Collection selectFCHeadAllRequest(Date requiredFrom, Date requiredTo, String departmentId, String search, String status, String sort, boolean desc, int start, int rows) throws DaoException{
@@ -3086,7 +3127,7 @@ public class EngineeringDao extends DataSourceDao {
 	}
 
 	public Collection selectEquipmentByBc(String barcode) throws DaoException {
-		String sql = "SELECT ae.id AS assignmentEquipmentId, ae.assignmentId, ae.groupId " +
+		String sql = "SELECT ae.id AS assignmentEquipmentId, ae.assignmentId, ae.groupId, ae.checkedOutBy, ae.checkedOutDate " +
 		"FROM fms_eng_assignment_equipment ae " +
 		"WHERE ae.barcode=? " +
 		"AND ae.checkedInBy IS NULL AND ae.status=? ";
@@ -5470,5 +5511,18 @@ public class EngineeringDao extends DataSourceDao {
 			Log.getLog(getClass()).error(e.getMessage(), e);
 		}
 		return remark;
+	}
+	
+	public void insertUndoLog(String undoId, String undoBy, Date undoDate, String undoType, String barcode, String requestId, String checkedOutBy, Date checkedOutDate) {
+		String sql =
+				"INSERT INTO fms_eng_undo_log " +
+					"(undoId, undoBy, undoDate, undoType, barcode, requestId, checkedOutBy, checkedOutDate)" +
+				"VALUES " +
+					"(?, ?, ?, ?, ?, ?, ?, ?)";
+		try {
+			super.update(sql, new Object[] {undoId, undoBy, undoDate, undoType, barcode, requestId, checkedOutBy, checkedOutDate});
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.toString(), e);
+		}
 	}
 }

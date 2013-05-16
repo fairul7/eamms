@@ -221,6 +221,20 @@ public class FacilityDao extends DataSourceDao{
 		return super.update("DELETE FROM fms_facility_item_checkout WHERE barcode=? and status='O'", new String[] {id});
 	}
 	
+	public Collection selectInternalCheckOut(String barcode) throws DaoException {
+		String sql = 
+				"SELECT id, checkout_date, checkout_by " +
+				"FROM fms_facility_item_checkout " +
+				"WHERE barcode = ? " +
+				"AND status='O' ";
+		Collection col = new ArrayList();
+		try {
+			col = super.select(sql, FacilityObject.class, new String[] {barcode}, 0, -1);
+		} catch (DaoException e) {
+		}
+		return col;
+	}
+	
 	public boolean hasInternalCheckOut(String barcode) throws DaoException {
 		String sql = "SELECT barcode FROM fms_facility_item_checkout WHERE barcode=? and status='O'";
 		Collection col = super.select(sql, DefaultDataObject.class, new String[] {barcode}, 0, 1);
@@ -1058,6 +1072,19 @@ public class FacilityDao extends DataSourceDao{
 			Log.getLog(getClass()).error(e.getMessage(), e);
 		}
 		return name;
+	}
+	
+	public String getUserName(String userId) {
+		try {
+			String sql = "SELECT username FROM security_user WHERE id = ? ";
+			Collection col = super.select(sql, DefaultDataObject.class, new String[] {userId}, 0, 1);
+			if (col.size() == 1) {
+				return (String) ((DefaultDataObject) col.iterator().next()).getProperty("username");
+			}
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.getMessage(), e);
+		}
+		return null;
 	}
 	
 	public Collection getRateCardByGroupId(String groupId) throws DaoException {

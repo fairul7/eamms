@@ -417,6 +417,8 @@ public class FacilitiesCoordinatorModule extends DefaultModule {
 						for (Iterator iterator = checkedOutList.iterator(); iterator.hasNext();) {
 							Assignment checkedOutItem = (Assignment) iterator.next();
 							String barcode = checkedOutItem.getBarcode();
+							String checkedOutBy = checkedOutItem.getCheckedOutBy();
+							Date checkedOutDate = checkedOutItem.getCheckedOutDate();
 							
 							boolean extraCheckout = ("-".equals(checkedOutItem.getAssignmentId()));
 							if (extraCheckout) {
@@ -432,6 +434,9 @@ public class FacilitiesCoordinatorModule extends DefaultModule {
 							
 							// undo check out for item
 							facilityModule.updateEquipmentStatus2CheckedIn(barcode, userId);
+							
+							// record to undo log
+							module.insertUndoLog("Cancel Request", barcode, er.getRequestId(), checkedOutBy, checkedOutDate);
 						}
 						
 						// delete assignment equipment

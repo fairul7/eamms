@@ -1,8 +1,28 @@
 New Build 
 =========
 
+fms_1.0.0_update (May 14 2013) V2.5
+-----------------------------------
+Fixed #16541: Check In and Check Out Issue
+
+fms_1.0.0_update (Apr 4 2013) V2.5
+-----------------------------------
+Fixed #16257: FMS-ABW figures does not tally / duplicate figures
+
+fms_1.0.0_update (Mar 25 2013) V2.5
+-----------------------------------
+Fixed #16080: Information missing for E20130304592 and E20130202343
+
+fms_1.0.0_update (Mar 22 2013) V2.5
+-----------------------------------
+Fixed #15822: FMS-ABW transfering orphan figures
+
+fms_1.0.0_update (Feb 18 2013) V2.5
+-----------------------------------
+Fixed #15615: Check availability error - Canary Cable (E20130100197)
+
 fms_1.0.0_update (Jan 10 2013) V2.5
--------------------------------------
+-----------------------------------
 Fixed #15247: Transport Request closed when there are still un-closed assignment
 
 fms_1.0.0_update (Jan 4 2013) V2.5

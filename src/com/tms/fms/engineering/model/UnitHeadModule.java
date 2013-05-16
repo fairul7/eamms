@@ -25,6 +25,7 @@ import kacang.util.UuidGenerator;
 
 import com.tms.crm.sales.misc.DateUtil;
 import com.tms.fms.engineering.ui.ServiceDetailsForm;
+import com.tms.fms.facility.model.FacilityModule;
 import com.tms.fms.facility.model.RateCard;
 import com.tms.fms.facility.model.SetupModule;
 import com.tms.fms.util.DateDiffUtil;
@@ -519,15 +520,48 @@ public class UnitHeadModule extends DefaultModule {
 	
 	public void assignRateCardFacility(Assignment assignment, String rateCardId,int qty){
 		try{
-			EngineeringDao eDao=(EngineeringDao)Application.getInstance().getModule(EngineeringModule.class).getDao();
-			Collection updateAssignments = eDao.selectAssignmentByServiceId(assignment.getServiceId());
-			
 			Application application = Application.getInstance();
-			SetupModule module = (SetupModule)application.getModule(SetupModule.class);
+			SetupModule module = (SetupModule) application.getModule(SetupModule.class);
+			EngineeringModule eModule = (EngineeringModule) application.getModule(EngineeringModule.class);
+			EngineeringDao eDao = (EngineeringDao) application.getModule(EngineeringModule.class).getDao();
+			FacilitiesCoordinatorDao fcDao = (FacilitiesCoordinatorDao) application.getModule(FacilitiesCoordinatorModule.class).getDao();
+			FacilityModule facilityModule = (FacilityModule) application.getModule(FacilityModule.class);
+			
+			Collection updateAssignments = eDao.selectAssignmentByServiceId(assignment.getServiceId());
 			Collection facilities = module.getRateCardEquipment(rateCardId, "");
 			Collection manpower = module.getRateCardManpower(rateCardId, "");
 			
 			String facilityId = null;
+			User user = Application.getInstance().getCurrentUser();
+			String userId = null;
+			if (user != null) {
+				userId = user.getUsername();
+			}
+			
+			// undo check out (for Modified Request)
+			for (Iterator iter = updateAssignments.iterator(); iter.hasNext();) {
+				EngineeringRequest erq = (EngineeringRequest) iter.next();
+				String assignmentId = erq.getAssignmentId();
+				
+				Collection col = fcDao.getCheckedOutEquipmentForCancelledRequest(assignmentId);
+				for (Iterator iterCheckedOut = col.iterator(); iterCheckedOut.hasNext();) {
+					Assignment assign = (Assignment) iterCheckedOut.next();
+					String requestId = assign.getRequestId();
+					String barcode = assign.getBarcode();
+					String checkedOutBy = assign.getCheckedOutBy();
+					Date checkedOutDate = assign.getCheckedOutDate();
+					
+					boolean extraCheckout = ("-".equals(assign.getAssignmentId()));
+					if (extraCheckout) {
+						// delete extra check out record
+						eDao.deleteEquipmentAssignmentById(assign.getId());
+					}
+					facilityModule.updateEquipmentStatus2CheckedIn(barcode, userId);
+					
+					// record to undo log
+					eModule.insertUndoLog("Modify Request", barcode, requestId, checkedOutBy, checkedOutDate);
+				}
+			}
 			
 			if(facilities != null && facilities.size() > 0){
 				for(Iterator it = facilities.iterator(); it.hasNext(); ){
@@ -989,7 +1023,7 @@ public class UnitHeadModule extends DefaultModule {
 			return 0; // #0 fail
 		}
 	}
-
+	
 	private boolean isHodMatchCompetency(String userId, String competencyId)
 	{
 		UnitHeadDao dao = (UnitHeadDao) getDao();
@@ -1055,7 +1089,7 @@ public class UnitHeadModule extends DefaultModule {
 			return null;
 		}
 	}
-
+	
 	public boolean isAssignmentBlockbooking(String assignmentId)
 	{
 		UnitHeadDao dao = (UnitHeadDao) getDao();
@@ -1149,7 +1183,7 @@ public class UnitHeadModule extends DefaultModule {
 							
 							String altApprov = (String)obj.getProperty("alt_approval");
 							addArrMap(userMap, altApprov, reqId);
-}
+						}
 					}
 					
 					Collection permissionGrp = ss.getGroupsByPermission(

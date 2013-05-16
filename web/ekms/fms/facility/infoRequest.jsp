@@ -39,10 +39,15 @@
 		2.5 added total internal rate / total external rate (2012-06-08)
 		2.6 improved sorting for booking, requested items & manpower, extra items (2012-11-09)
 		2.7 add service type to extra items listing (2013-02-08)
+		2.8 add ABW code to listing (2013-04-01)
+		2.9 added link to infoItem.jsp (2013-04-22)
+		    added mini form to prompt for barcode
+		    change title bar
+		3.0 added Undo Log (2013-05-13)
 --%>
 
 <%!
-	public static final String CURRENT_VERSION = "2.7";
+	public static final String CURRENT_VERSION = "3.0";
 	public static final String DATE_PATTERN = "dd-MMM-yyyy";
 	public static final String DATE_TIME_PATTERN = "dd-MMM-yyyy hh:mm'&nbsp;'a";
 	
@@ -72,7 +77,7 @@
 	String requestId = request.getParameter("requestId");
 	
 	if (requestId == null || requestId.equals("")) {
-		out.println("Please enter requestId");
+		out.println("<form>Please enter requestId: <input name=\"requestId\"></form>");
 		return;
 	}
 	
@@ -174,7 +179,7 @@
 						"SELECT p.id, p.requestId, p.serviceId, p.facilityId, " +
 							"p.requiredFrom, p.requiredTo, p.departureTime, p.location, p.segment, " +
 							"p.settingFrom, p.settingTo, p.rehearsalFrom, p.rehearsalTo, p.recordingFrom, p.recordingTo, " +
-							"p.createdBy, p.createdDate, p.modifiedBy, p.modifiedDate, f.name as facility, " +
+							"p.createdBy, p.createdDate, p.modifiedBy, p.modifiedDate, f.name as facility, f.abw_code, " +
 							"p.internalRate, p.externalRate, p.blockBooking, p.submitted " +
 						"FROM fms_eng_service_scp p " +
 						"LEFT OUTER JOIN fms_rate_card f ON (f.id = p.facilityId) " +
@@ -187,7 +192,7 @@
 				String sql =
 						"SELECT p.id, p.requestId, p.serviceId, p.facilityId, p.quantity, " +
 							"p.requiredFrom, p.requiredTo, p.remarks, p.fromTime, p.toTime, " +
-							"p.createdBy, p.createdDate, p.modifiedBy, p.modifiedDate, f.name as facility, " +
+							"p.createdBy, p.createdDate, p.modifiedBy, p.modifiedDate, f.name as facility, f.abw_code, " +
 							"p.internalRate, p.externalRate, " +
 							"p.blockBooking, p.location, p.submitted " +
 						"FROM fms_eng_service_other p " +
@@ -201,7 +206,7 @@
 				String sql =
 						"SELECT p.id, p.requestId, p.serviceId, p.competencyId, p.quantity," +
 							"p.requiredFrom, p.requiredTo, p.remarks, p.fromTime, p.toTime," +
-							"p.createdBy, p.createdDate, p.modifiedBy, p.modifiedDate, f.name as competencyName, " +
+							"p.createdBy, p.createdDate, p.modifiedBy, p.modifiedDate, f.name as competencyName, f.abw_code, " +
 							"p.internalRate, p.externalRate," +
 							"p.blockBooking, p.location, p.submitted " +
 						"FROM fms_eng_service_manpower p " +
@@ -217,7 +222,7 @@
 							"p.requiredDate, p.requiredDateTo, p.requiredFrom, p.requiredTo, p.formatFrom, p.formatTo, " +
 							"p.conversionFrom, p.conversionTo, p.duration, p.noOfCopies, p.remarks, " +
 							"p.createdBy, p.createdDate, p.modifiedBy, p.modifiedDate, " +
-							"p.facilityId, f.name as facility, " +
+							"p.facilityId, f.name as facility, f.abw_code, " +
 							"p.internalRate, p.externalRate, p.blockBooking, p.location, p.submitted " +
 						"FROM fms_eng_service_vtr p " +
 						"LEFT OUTER JOIN fms_rate_card f ON (f.id = p.facilityId) " +
@@ -232,7 +237,7 @@
 							"p.requiredDate, p.requiredDateTo, p.timezone, p.totalTimeReq, p.timeMeasure, p.remarks, p.fromTime, p.toTime, " +
 							"p.createdBy, p.createdDate, p.modifiedBy, p.modifiedDate, p.feedType," +
 							"p.internalRate, p.externalRate," +
-							"p.facilityId, f.name as facility, p.blockBooking, p.submitted  " +
+							"p.facilityId, f.name as facility, f.abw_code, p.blockBooking, p.submitted  " +
 						"FROM fms_eng_service_tvro p " +
 						"LEFT OUTER JOIN fms_rate_card f ON (f.id = p.facilityId) " +
 						"WHERE p.requestId = ? " + 
@@ -245,7 +250,7 @@
 						"SELECT p.id, p.requestId, p.serviceId, p.facilityId, p.bookingDate, p.bookingDateTo, " +
 							"p.requiredFrom, p.requiredTo, p.segment, " +
 							"p.settingFrom, p.settingTo, p.rehearsalFrom, p.rehearsalTo, p.vtrFrom, p.vtrTo, " +
-							"p.createdBy, p.createdDate, p.modifiedBy, p.modifiedDate, f.name as facility, " +
+							"p.createdBy, p.createdDate, p.modifiedBy, p.modifiedDate, f.name as facility, f.abw_code, " +
 							"p.internalRate, p.externalRate, " +
 							"p.blockBooking, p.location, p.submitted " +
 						"FROM fms_eng_service_studio p " +
@@ -258,7 +263,7 @@
 				//Collection col = module.getPostProductionService(requestId, serviceId);
 				String sql =
 						"SELECT p.id, p.requestId, p.serviceId, p.facilityId, p.requiredDate, p.fromTime, " +
-							"p.toTime, p.createdBy, p.createdDate, p.modifiedBy, p.modifiedDate, f.name as facility, " +
+							"p.toTime, p.createdBy, p.createdDate, p.modifiedBy, p.modifiedDate, f.name as facility, f.abw_code, " +
 							"p.internalRate, p.externalRate, p.blockBooking, p.submitted, p.requiredDateTo, p.location " +
 						"FROM fms_eng_service_postproduction p " +
 						"LEFT OUTER JOIN fms_rate_card f ON (f.id = p.facilityId) " +
@@ -382,6 +387,21 @@
 		e.printStackTrace();
 	}
 	
+	// undo log
+	try {
+		String sqlUndoLog = 
+			"SELECT " + topStr + " undoId, undoBy, undoDate, undoType, ul.barcode, checkedOutBy, checkedOutDate, fc.name AS itemName " + 
+			"FROM fms_eng_undo_log ul " +
+			"LEFT OUTER JOIN fms_facility_item fi ON (fi.barcode = ul.barcode) " +
+			"LEFT OUTER JOIN fms_facility fc ON (fc.id = fi.facility_id) " +
+			"WHERE ul.requestId = ? " +
+			"ORDER BY undoDate DESC ";
+		Collection colUndoLog = dao.select(sqlUndoLog, EngineeringRequest.class, new String[] {requestId}, 0, -1);
+		pageContext.setAttribute("colUndoLog", colUndoLog);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
 	// check rate cards
 	SetupModule setupModule = (SetupModule) Application.getInstance().getModule(SetupModule.class);
 	boolean validRateCards = setupModule.requestHasValidRateCards(requestId);
@@ -414,7 +434,7 @@
 			}
 		</style>
 		
-		<title>Engineering Request: <%= requestId %></title>
+		<title><%= requestId %> Engineering Request</title>
 	</head>
 	<body>
 		<b style="font-size:1.5em;">Engineering Request: <%= requestId %></b><br>
@@ -566,6 +586,7 @@
 							<td align="center" colspan="2">Created</td>
 							<td align="center" colspan="2">Modified</td>
 							<% if (verboseMode) { %>
+								<td rowspan="2">ABW Code</td>
 								<% if (internalRequest) { %>
 									<td align="right" rowspan="2">Internal Rate</td>
 								<% } else { %>
@@ -596,6 +617,7 @@
 								<td><c:out value="${rs2.modifiedBy}" />&nbsp;</td>
 								<td><fmt:formatDate value="${rs2.modifiedDate}" pattern="<%= DATE_TIME_PATTERN %>"/></td>
 								<% if (verboseMode) { %>
+									<td><c:out value="${rs2.propertyMap['abw_code']}" />&nbsp;</td>
 									<% if (internalRequest) { %>
 										<td align="right">&nbsp;<fmt:formatNumber value="${rs2.internalRate}" minFractionDigits="2" /></td>
 									<% } else { %>
@@ -624,6 +646,7 @@
 							<td align="center" colspan="2">Created</td>
 							<td align="center" colspan="2">Modified</td>
 							<% if (verboseMode) { %>
+								<td rowspan="2">ABW Code</td>
 								<% if (internalRequest) { %>
 									<td align="right" rowspan="2">Internal Rate</td>
 								<% } else { %>
@@ -660,6 +683,7 @@
 								<td><c:out value="${rs2.modifiedBy}" />&nbsp;</td>
 								<td><fmt:formatDate value="${rs2.modifiedDate}" pattern="<%= DATE_TIME_PATTERN %>"/></td>
 								<% if (verboseMode) { %>
+									<td><c:out value="${rs2.propertyMap['abw_code']}" />&nbsp;</td>
 									<% if (internalRequest) { %>
 										<td align="right">&nbsp;<fmt:formatNumber value="${rs2.internalRate}" minFractionDigits="2" /></td>
 									<% } else { %>
@@ -688,6 +712,7 @@
 							<td align="center" colspan="2">Created</td>
 							<td align="center" colspan="2">Modified</td>
 							<% if (verboseMode) { %>
+								<td rowspan="2">ABW Code</td>
 								<% if (internalRequest) { %>
 									<td align="right" rowspan="2">Internal Rate</td>
 								<% } else { %>
@@ -724,6 +749,7 @@
 								<td><c:out value="${rs2.modifiedBy}" />&nbsp;</td>
 								<td><fmt:formatDate value="${rs2.modifiedDate}" pattern="<%= DATE_TIME_PATTERN %>"/></td>
 								<% if (verboseMode) { %>
+									<td><c:out value="${rs2.propertyMap['abw_code']}" />&nbsp;</td>
 									<% if (internalRequest) { %>
 										<td align="right">&nbsp;<fmt:formatNumber value="${rs2.internalRate}" minFractionDigits="2" /></td>
 									<% } else { %>
@@ -752,6 +778,7 @@
 							<td align="center" colspan="2">Created</td>
 							<td align="center" colspan="2">Modified</td>
 							<% if (verboseMode) { %>
+								<td rowspan="2">ABW Code</td>
 								<% if (internalRequest) { %>
 									<td align="right" rowspan="2">Internal Rate</td>
 								<% } else { %>
@@ -788,6 +815,7 @@
 								<td><c:out value="${rs2.modifiedBy}" />&nbsp;</td>
 								<td><fmt:formatDate value="${rs2.modifiedDate}" pattern="<%= DATE_TIME_PATTERN %>"/></td>
 								<% if (verboseMode) { %>
+									<td><c:out value="${rs2.propertyMap['abw_code']}" />&nbsp;</td>
 									<% if (internalRequest) { %>
 										<td align="right">&nbsp;<fmt:formatNumber value="${rs2.internalRate}" minFractionDigits="2" /></td>
 									<% } else { %>
@@ -815,6 +843,7 @@
 							<td align="center" colspan="2">Created</td>
 							<td align="center" colspan="2">Modified</td>
 							<% if (verboseMode) { %>
+								<td rowspan="2">ABW Code</td>
 								<% if (internalRequest) { %>
 									<td align="right" rowspan="2">Internal Rate</td>
 								<% } else { %>
@@ -850,6 +879,7 @@
 								<td><c:out value="${rs2.modifiedBy}" />&nbsp;</td>
 								<td><fmt:formatDate value="${rs2.modifiedDate}" pattern="<%= DATE_TIME_PATTERN %>"/></td>
 								<% if (verboseMode) { %>
+									<td><c:out value="${rs2.propertyMap['abw_code']}" />&nbsp;</td>
 									<% if (internalRequest) { %>
 										<td align="right">&nbsp;<fmt:formatNumber value="${rs2.internalRate}" minFractionDigits="2" /></td>
 									<% } else { %>
@@ -877,6 +907,7 @@
 							<td align="center" colspan="2">Created</td>
 							<td align="center" colspan="2">Modified</td>
 							<% if (verboseMode) { %>
+								<td rowspan="2">ABW Code</td>
 								<% if (internalRequest) { %>
 									<td align="right" rowspan="2">Internal Rate</td>
 								<% } else { %>
@@ -912,6 +943,7 @@
 								<td><c:out value="${rs2.modifiedBy}" />&nbsp;</td>
 								<td><fmt:formatDate value="${rs2.modifiedDate}" pattern="<%= DATE_TIME_PATTERN %>"/></td>
 								<% if (verboseMode) { %>
+									<td><c:out value="${rs2.propertyMap['abw_code']}" />&nbsp;</td>
 									<% if (internalRequest) { %>
 										<td align="right">&nbsp;<fmt:formatNumber value="${rs2.internalRate}" minFractionDigits="2" /></td>
 									<% } else { %>
@@ -939,6 +971,7 @@
 							<td align="center" colspan="2">Created</td>
 							<td align="center" colspan="2">Modified</td>
 							<% if (verboseMode) { %>
+								<td rowspan="2">ABW Code</td>
 								<% if (internalRequest) { %>
 									<td align="right" rowspan="2">Internal Rate</td>
 								<% } else { %>
@@ -974,6 +1007,7 @@
 								<td><c:out value="${rs2.modifiedBy}" />&nbsp;</td>
 								<td><fmt:formatDate value="${rs2.modifiedDate}" pattern="<%= DATE_TIME_PATTERN %>"/></td>
 								<% if (verboseMode) { %>
+									<td><c:out value="${rs2.propertyMap['abw_code']}" />&nbsp;</td>
 									<% if (internalRequest) { %>
 										<td align="right">&nbsp;<fmt:formatNumber value="${rs2.internalRate}" minFractionDigits="2" /></td>
 									<% } else { %>
@@ -1070,7 +1104,7 @@
 						<td><fmt:formatDate value="${req.requiredTo}" pattern="<%= DATE_PATTERN %>"/></td>
 						<td><c:out value="${req.toTime}" /></td>
 						<td><c:out value="${req.propertyMap['catName']}" />&nbsp;</td>
-						<td><c:out value="${req.barcode}" />&nbsp;</td>
+						<td><a href="infoItem.jsp?barcode=<c:out value="${req.barcode}" />"><c:out value="${req.barcode}" /></a>&nbsp;</td>
 						
 						<td><c:out value="${req.checkedOutBy}" />&nbsp;</td>
 						<td><fmt:formatDate value="${req.checkedOutDate}" pattern="<%= DATE_TIME_PATTERN %>"/>&nbsp;</td>
@@ -1095,7 +1129,7 @@
 						<td><fmt:formatDate value="${req.requiredTo}" pattern="<%= DATE_PATTERN %>"/></td>
 						<td><c:out value="${req.toTime}" /></td>
 						<td><c:out value="${req.propertyMap['catName']}" />&nbsp;</td>
-						<td><c:out value="${req.barcode}" />&nbsp;</td>
+						<td><a href="infoItem.jsp?barcode=<c:out value="${req.barcode}" />"><c:out value="${req.barcode}" /></a>&nbsp;</td>
 						
 						<td><c:out value="${req.checkedOutBy}" />&nbsp;</td>
 						<td><fmt:formatDate value="${req.checkedOutDate}" pattern="<%= DATE_TIME_PATTERN %>"/>&nbsp;</td>
@@ -1218,7 +1252,7 @@
 								<td class="anomalyStyle"><c:out value="${req.serviceType}" /></td>
 							</c:otherwise>
 						</c:choose>
-						<td><c:out value="${req.barcode}" />&nbsp;</td>
+						<td><a href="infoItem.jsp?barcode=<c:out value="${req.barcode}" />"><c:out value="${req.barcode}" /></a>&nbsp;</td>
 						
 						<td><c:out value="${req.checkedOutBy}" />&nbsp;</td>
 						<td><fmt:formatDate value="${req.checkedOutDate}" pattern="<%= DATE_TIME_PATTERN %>"/>&nbsp;</td>
@@ -1256,6 +1290,50 @@
 						<td><c:out value="${tr.propertyMap['username']}" />&nbsp;</td>
 						<td><fmt:formatDate value="${tr.requestDate}" pattern="<%= DATE_TIME_PATTERN %>"/></td>
 						<td><c:out value="${tr.requestTitle}" />&nbsp;</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<br>
+		
+		Undo Log:<br>
+		<table border="1" cellpadding="3" cellspacing="0">
+			<thead class="niceStyle">
+				<tr>
+					<td rowspan="2">No.</td>
+					<td align="center" colspan="2">Checked Out</td>
+					<td align="center" colspan="2">Undo</td>
+					<td rowspan="2">Undo Type</td>
+					<td rowspan="2">Barcode</td>
+					<td rowspan="2">Item Name</td>
+				</tr>
+				<tr>
+					<td align="center">User</td>
+					<td align="center">Date</td>
+					<td align="center">User</td>
+					<td align="center">Date</td>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${colUndoLog}" var="req" varStatus="status">
+					<tr>
+						<td><c:out value="${status.count}" /></td>
+						<c:if test="${not empty(req.checkedOutDate)}">
+							<td><c:out value="${req.checkedOutBy}" /></td>
+							<td><fmt:formatDate value="${req.checkedOutDate}" pattern="<%= DATE_TIME_PATTERN %>" /></td>							
+							<td><c:out value="${req.propertyMap['undoBy']}" /></td>
+							<td><fmt:formatDate value="${req.propertyMap['undoDate']}" pattern="<%= DATE_TIME_PATTERN %>" /></td>
+						</c:if>
+						<c:if test="${empty(req.checkedOutDate)}">
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</c:if>
+						
+						<td><c:out value="${req.propertyMap['undoType']}" /></td>
+						<td><a href="infoItem.jsp?barcode=<c:out value="${req.barcode}" />"><c:out value="${req.barcode}" /></a></td>
+						<td><c:out value="${req.propertyMap['itemName']}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -105,8 +105,6 @@ public class FacilityModule extends DefaultModule {
 	}
 	
 	public void undoCheckOut(String id) {
-		TransLogModule transLog = (TransLogModule) Application.getInstance().getModule(TransLogModule.class);
-		
 		User user = Application.getInstance().getCurrentUser();
 		String username = null;
 		String userId = null;
@@ -118,19 +116,37 @@ public class FacilityModule extends DefaultModule {
 		Log.getLog(getClass()).warn("Undo check out barcode=" + id + " username=" + username);
 		
 		try{
-			FacilityDao dao = (FacilityDao) getDao();
-			int undoInternal = dao.undoInternalCheckOut(id);
-			if (undoInternal > 0) {
-				// logging
-				transLog.info("N/A", "UNDO_CHECK_OUT", "Internal: barcode=" + id);
-			}
+			// undo internal checkout
+			undoInternalCheckOut(id);
 			
+			// check in item
 			updateEquipmentStatus2CheckedIn(id, userId);
 			
+			// undo assignment & extra checkout
 			updateCheckOutEquipment(id);
 		}catch(DaoException e){
 			Log.getLog(getClass()).error("Error undoCheckOut(1)", e);
 			throw new RuntimeException("DAO Error");
+		}
+	}
+	
+	protected void undoInternalCheckOut(String barcode) throws DaoException {
+		TransLogModule transLog = (TransLogModule) Application.getInstance().getModule(TransLogModule.class);
+		EngineeringModule engModule = (EngineeringModule) Application.getInstance().getModule(EngineeringModule.class);
+		FacilityDao dao = (FacilityDao) getDao();
+		
+		Collection colCheckOut = dao.selectInternalCheckOut(barcode);
+		int undoInternal = dao.undoInternalCheckOut(barcode);
+		if (undoInternal > 0) {
+			// logging
+			transLog.info("N/A", "UNDO_CHECK_OUT", "Internal: barcode=" + barcode);
+			
+			// record to undo log
+			for (Iterator iterator = colCheckOut.iterator(); iterator.hasNext();) {
+				FacilityObject o = (FacilityObject) iterator.next();
+				String checkedOutBy = dao.getUserName(o.getCheckout_by());
+				engModule.insertUndoLog("Undo Check Out", barcode, null, checkedOutBy, o.getCheckout_date());
+			}
 		}
 	}
 	
@@ -154,6 +170,7 @@ public class FacilityModule extends DefaultModule {
 	
 	public void updateCheckOutEquipment(String barcode) {
 		EngineeringDao dao = (EngineeringDao) Application.getInstance().getModule(EngineeringModule.class).getDao();
+		EngineeringModule engModule = (EngineeringModule) Application.getInstance().getModule(EngineeringModule.class);
 		TransLogModule transLog = (TransLogModule) Application.getInstance().getModule(TransLogModule.class);
 		try {
 			// get equipment checked out
@@ -164,11 +181,14 @@ public class FacilityModule extends DefaultModule {
 				String id = er.getAssignmentEquipmentId();
 				String assignmentId = er.getAssignmentId();
 				String groupId = er.getGroupId();
+				String checkedOutBy = er.getCheckedOutBy();
+				Date checkedOutDate = er.getCheckedOutDate();
 				
+				String requestId;
 				boolean extraCheckout = ("-".equals(assignmentId));
 				if (extraCheckout) {
 					// get requestId by groupId
-					String requestId = dao.selectRequestIdByGroupId(groupId);
+					requestId = dao.selectRequestIdByGroupId(groupId);
 					
 					// logging
 					transLog.info(requestId, "UNDO_CHECK_OUT", "Extra: barcode=" + barcode + " groupId=" + groupId + " id=" + id);
@@ -185,7 +205,7 @@ public class FacilityModule extends DefaultModule {
 					eRequest.setId(id);
 					
 					// get requestId by assignmentId
-					String requestId = dao.selectRequestId(assignmentId);
+					requestId = dao.selectRequestId(assignmentId);
 					
 					// logging
 					transLog.info(requestId, "UNDO_CHECK_OUT", "Assignment: barcode=" + barcode + " assignmentId=" + assignmentId + " id=" + id);
@@ -193,6 +213,8 @@ public class FacilityModule extends DefaultModule {
 					dao.undoCheckOutEquipment(eRequest);
 				}
 
+				// record to undo log
+				engModule.insertUndoLog("Undo Check Out", barcode, requestId, checkedOutBy, checkedOutDate);
 			}
 		} catch (DaoException e) {
 			Log.getLog(getClass()).error(e.getMessage(), e);

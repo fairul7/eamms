@@ -163,6 +163,11 @@ public class ItemForm extends Form{
 		return mod.getInternalCheckoutListByBarcode(lbItemCode.getText());
 	}
 	
+	public Collection getUndoCheckoutListByBarcode() {
+		EngineeringModule mod = (EngineeringModule)Application.getInstance().getModule(EngineeringModule.class);
+		return mod.getUndoCheckoutListByBarcode(lbItemCode.getText());
+	}
+	
 	public void initForm() {
 		
 	    Application application = Application.getInstance();

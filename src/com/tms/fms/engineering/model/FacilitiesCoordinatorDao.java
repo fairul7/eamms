@@ -1124,14 +1124,14 @@ public class FacilitiesCoordinatorDao extends DataSourceDao {
 	
 	public Collection getCheckedOutEquipmentForCancelledRequest(String assignmentId) {
 		String sql =
-				"SELECT ae.id, ae.assignmentId, ae.barcode, ae.checkedOutBy, ae.checkedOutDate " +
+				"SELECT ae.id, ae.assignmentId, ae.barcode, ae.checkedOutBy, ae.checkedOutDate, a.requestId " +
 				"FROM fms_eng_assignment a " +
 				"INNER JOIN fms_eng_assignment_equipment ae ON (ae.assignmentId = a.assignmentId) " +
 				"WHERE a.assignmentId = ? " +
 				"AND ae.barcode IS NOT NULL " +
 				"AND ae.checkedInDate IS NULL " +
 					"UNION " +
-				"SELECT ae.id, ae.assignmentId, ae.barcode, ae.checkedOutBy, ae.checkedOutDate " +
+				"SELECT ae.id, ae.assignmentId, ae.barcode, ae.checkedOutBy, ae.checkedOutDate, a.requestId " +
 				"FROM fms_eng_assignment a " +
 				"INNER JOIN fms_eng_assignment_equipment ae ON (ae.groupId = a.groupId AND ae.assignmentId = '-') " +
 				"WHERE a.assignmentId = ? " +

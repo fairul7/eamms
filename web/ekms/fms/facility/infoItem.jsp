@@ -17,11 +17,16 @@
 			added status to Assignment Check Out & Internal Check Out
 		1.5 added Requested By to Internal Check Out
 		1.6 added rate card (2013-02-08)
-			
+		1.7 added Service Type to Assignment Check Out (2013-04-22)
+		    added verbose feature
+		    added link to infoRequest.jsp
+		    added mini form to prompt for barcode
+		1.8 added more barcode in screen (2013-05-03)
+		1.9 added Undo Log (2013-05-10)
 --%>
 
 <%!
-	public static final String CURRENT_VERSION = "1.6";
+	public static final String CURRENT_VERSION = "1.9";
 	public static final String DATE_TIME_PATTERN = "dd-MMM-yyyy hh:mm'&nbsp;'a";
 %>
 
@@ -32,8 +37,14 @@
 	String barcode = request.getParameter("barcode");
 	
 	if (barcode == null || barcode.equals("")) {
-		out.println("Please enter barcode");
+		out.println("<form>Please enter barcode: <input name=\"barcode\"></form>");
 		return;
+	}
+	
+	boolean verboseMode = false;
+	String verbose = request.getParameter("verbose");
+	if (verbose != null && verbose.equals("1")) {
+		verboseMode = true;
 	}
 	
 	String top = request.getParameter("top");
@@ -110,7 +121,6 @@
 	// get rate card
 	try {
 		String facilityId = (String) pageContext.getAttribute("facilityId");
-		System.out.println("facilityId: " + facilityId); //TODO:
 		if (facilityId != null) {
 			String sqlRateCard = 
 				"SELECT cat.id AS idCategory, cat.name AS categoryName, equip.rateCardId, " +
@@ -131,14 +141,14 @@
 	try {
 		String sqlAssignCheckout = 
 				"SELECT ae.id, ae.assignmentId, checkedOutBy, checkedOutDate, checkedInBy, checkedInDate, " +
-				"       takenBy, createdDate, a.requestId, a.code AS assignmentCode, r.title, ae.status " +
+				"       takenBy, createdDate, a.requestId, a.code AS assignmentCode, r.title, ae.status, a.serviceType " +
 				"FROM fms_eng_assignment_equipment ae " +
 				"INNER JOIN fms_eng_assignment a ON (ae.assignmentId = a.assignmentId) " +
 				"INNER JOIN fms_eng_request r ON (a.requestId = r.requestId) " + 
 				"WHERE barcode = ? " +
 				"UNION " +
 				"SELECT DISTINCT ae.id, ae.assignmentId, checkedOutBy, checkedOutDate, checkedInBy, checkedInDate, " +
-				"       takenBy, createdDate, a.requestId, '', r.title, ae.status " +
+				"       takenBy, createdDate, a.requestId, '', r.title, ae.status, a.serviceType " +
 				"FROM fms_eng_assignment_equipment ae " +
 				"INNER JOIN fms_eng_assignment a ON (ae.groupId = a.groupId AND ae.assignmentId = '-') " +
 				"INNER JOIN fms_eng_request r ON (a.requestId = r.requestId) " + 
@@ -164,6 +174,20 @@
 				"ORDER BY checkout_date DESC ";
 		Collection colInternalCheckout = dao.select(sqlInternalCheckout, DefaultDataObject.class, new String[] {barcode}, 0, -1);
 		pageContext.setAttribute("colInternalCheckout", colInternalCheckout);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+	// undo log
+	try {
+		String sqlUndoLog = 
+			"SELECT " + topStr + " undoId, undoBy, undoDate, undoType, barcode, ul.requestId, r.title, checkedOutBy, checkedOutDate " + 
+			"FROM fms_eng_undo_log ul " +
+			"LEFT OUTER JOIN fms_eng_request r ON (ul.requestId = r.requestId) " +
+			"WHERE barcode = ? " +
+			"ORDER BY undoDate DESC ";
+		Collection colUndoLog = dao.select(sqlUndoLog, EngineeringRequest.class, new String[] {barcode}, 0, -1);
+		pageContext.setAttribute("colUndoLog", colUndoLog);
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
@@ -208,6 +232,13 @@
 			[show all]
 		<% } else { %>
 			<a href="?barcode=<%=barcode%>">show all</a>
+		<% } %>
+		<br>
+		Verbose mode: 
+		<% if (verboseMode) { %>
+			ON [ <a href="?barcode=<%=barcode%>">toggle</a> ]
+		<% } else { %>
+			OFF [ <a href="?verbose=1&barcode=<%=barcode%>">toggle</a> ]
 		<% } %>
 		<br><br>
 		
@@ -325,7 +356,7 @@
 		</table>
 		<br>
 		
-		Assignment Check Out:<br>
+		Assignment Check Out [<%= barcode %>]:<br>
 		<table align="center" border="1" cellpadding="3" cellspacing="0" width="100%">
 			<thead class="niceStyle">
 				<tr>
@@ -333,8 +364,14 @@
 					<td align="center" colspan="2">Checked Out</td>
 					<td align="center" colspan="2">Checked In</td>
 					<td rowspan="2">Status</td>
-					<td rowspan="2">Taken By</td>
+					<% if (verboseMode) { %>
+						<td rowspan="2">Taken By</td>
+					<% } %>
 					<td rowspan="2">Assignment No</td>
+					<td rowspan="2">Service Type</td>
+					<% if (verboseMode) { %>
+						<td rowspan="2">Request ID</td>
+					<% } %>
 					<td rowspan="2">Request Title</td>
 				</tr>
 				<tr>
@@ -370,14 +407,21 @@
 						</c:if>
 						
 						<td><c:out value="${req.status}" /></td>
-						<td><c:out value="${req.takenBy}" /></td>
 						
-						<td>
+						<% if (verboseMode) { %>
+							<td><c:out value="${req.takenBy}" /></td>
+						<% } %>
+						
+						<td style="white-space: nowrap;">
 							<c:out value="${req.assignmentCode}" />
 							<c:if test="${req.assignmentId == '-'}" >
 								<i>-- Extra Check Out --</i>
 							</c:if>
 						</td>
+						<td><c:out value="${req.serviceType}" /></td>
+						<% if (verboseMode) { %>
+							<td><a href="infoRequest.jsp?requestId=${req.requestId}"><c:out value="${req.requestId}" /></a></td>
+						<% } %>
 						<td><a href="requestDetails.jsp?page=all&requestId=${req.requestId}"><c:out value="${req.title}" /></a>&nbsp;</td>
 					</tr>
 				</c:forEach>
@@ -385,7 +429,7 @@
 		</table>
 		<br>
 		
-		Internal Check Out:<br>
+		Internal Check Out [<%= barcode %>]:<br>
 		<table align="center" border="1" cellpadding="3" cellspacing="0" width="100%">
 			<thead class="niceStyle">
 				<tr>
@@ -427,6 +471,55 @@
 						<td><c:out value="${ic.propertyMap['purpose']}" />&nbsp;</td>
 						<td><c:out value="${ic.propertyMap['requestedByUsername']}" />&nbsp;</td>
 						<td><a href="checkOutDetails.jsp?groupId=<c:out value="${ic.propertyMap['groupId']}" />"><c:out value="${ic.propertyMap['groupId']}" /></a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<br>
+		
+		Undo Log [<%= barcode %>]:<br>
+		<table border="1" cellpadding="3" cellspacing="0">
+			<thead class="niceStyle">
+				<tr>
+					<td rowspan="2">No.</td>
+					<td align="center" colspan="2">Checked Out</td>
+					<td align="center" colspan="2">Undo</td>
+					<td rowspan="2">Undo Type</td>
+					<% if (verboseMode) { %>
+						<td rowspan="2">Request ID</td>
+					<% } %>
+					<td rowspan="2">Request Title</td>
+				</tr>
+				<tr>
+					<td align="center">User</td>
+					<td align="center">Date</td>
+					<td align="center">User</td>
+					<td align="center">Date</td>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${colUndoLog}" var="req" varStatus="status">
+					<tr>
+						<td><c:out value="${status.count}" /></td>
+						<c:if test="${not empty(req.checkedOutDate)}">
+							<td><c:out value="${req.checkedOutBy}" /></td>
+							<td><fmt:formatDate value="${req.checkedOutDate}" pattern="<%= DATE_TIME_PATTERN %>" /></td>							
+							<td><c:out value="${req.propertyMap['undoBy']}" /></td>
+							<td><fmt:formatDate value="${req.propertyMap['undoDate']}" pattern="<%= DATE_TIME_PATTERN %>" /></td>
+						</c:if>
+						<c:if test="${empty(req.checkedOutDate)}">
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</c:if>
+						
+						<td><c:out value="${req.propertyMap['undoType']}" /></td>
+						
+						<% if (verboseMode) { %>
+							<td><a href="infoRequest.jsp?requestId=${req.requestId}"><c:out value="${req.requestId}" /></a></td>
+						<% } %>
+						<td><a href="requestDetails.jsp?page=all&requestId=${req.requestId}"><c:out value="${req.title}" /></a>&nbsp;</td>
 					</tr>
 				</c:forEach>
 			</tbody>

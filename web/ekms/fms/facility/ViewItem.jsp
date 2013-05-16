@@ -135,6 +135,40 @@
 			</table>
     	</td>
     </tr>
+    <tr valign="middle">
+	    <td height="22" bgcolor="#003366" class="contentTitleFont"><b><font color="#FFCF63" class="contentTitleFont">Undo History</font></b></td>
+	    <td align="right" bgcolor="#003366" class="contentTitleFont">&nbsp;</td>
+	</tr>
+    <tr>
+    	<td colspan="2">
+    		<table align="center" class="borderTable" cellpadding="3" cellspacing="1" width="100%">
+				<thead>
+					<tr class="tableHeader">
+						<td style="padding:5px"><fmt:message key='fms.facility.title.trailRequestTitle'/></td>
+						<td style="padding:5px"><fmt:message key='fms.request.label.requestId'/></td>
+						<td style="padding:5px">Undo Date</td>
+						<td style="padding:5px">Undo By</td>
+						<td style="padding:5px"><fmt:message key='fms.facility.title.trailDateCheckedOut'/></td>
+						<td style="padding:5px"><fmt:message key='fms.facility.title.trailCheckedOutBy' /></td>
+						<td style="padding:5px">Undo Type</td>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${widgets[ 'ViewItem.form' ].undoCheckoutListByBarcode}" var="req">
+					    <tr>
+					        <td><c:out value="${req.title}" /></td>
+					        <td><a href="requestDetails.jsp?page=all&requestId=${req.requestId}"><c:out value="${req.requestId}" /></a></td>
+					        <td><fmt:formatDate value="${req.checkedInDate}" pattern="d MMM yyyy h:mm a" /></td>
+					        <td><c:out value="${req.checkedInBy}" /></td>
+					        <td><fmt:formatDate value="${req.checkedOutDate}" pattern="d MMM yyyy h:mm a"/></td>
+					        <td><c:out value="${req.checkedOutBy}" /></td>
+					        <td><c:out value="${req.propertyMap['undoType']}" /></td>
+					    </tr>
+				    </c:forEach>
+			    </tbody>
+			</table>
+    	</td>
+    </tr>
     <tr><td colspan="2" valign="TOP" bgcolor="#CCCCCC" class="contentStrapColor"><img src="<c:url value="/ekms/" />images/blank.gif" width="5" height="15"></td></tr>
 </table>
 <c:if test="${widgets['ViewItem.form'].status == 'W' or widgets['ViewItem.form'].status == 'M'}">

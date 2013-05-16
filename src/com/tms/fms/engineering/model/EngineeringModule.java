@@ -1714,6 +1714,16 @@ public class EngineeringModule extends DefaultModule {
 		
 	}
 	
+	public Collection getUndoCheckoutListByBarcode(String barcode) {
+		EngineeringDao dao = (EngineeringDao) getDao();
+		try {			
+			return dao.getUndoCheckoutListByBarcode(barcode);
+		} catch (DaoException e) {
+			Log.getLog(getClass()).error(e.getMessage(),e);
+		}
+		return new ArrayList();
+	}
+	
 	public Collection getFCHeadAllRequest(Date requiredFrom, Date requiredTo, String departmentId, String search, String status, String sort,boolean desc,int start,int rows) throws DaoException{
 		Collection col=new ArrayList();
 		EngineeringDao dao=(EngineeringDao)getDao();
@@ -5646,5 +5656,20 @@ public class EngineeringModule extends DefaultModule {
 			Log.getLog(getClass()).error(e.getMessage(),e);
 		}
 		return remark;
+	}
+	
+	public void insertUndoLog(String undoType, String barcode, String requestId, String checkedOutBy, Date checkedOutDate) {
+		EngineeringDao dao = (EngineeringDao) getDao();
+		
+		String undoId = UuidGenerator.getInstance().getUuid();
+		String undoBy = "";
+		Date undoDate = new Date();
+		
+		User user = Application.getInstance().getCurrentUser();
+		if (user != null) {
+			undoBy = user.getUsername();
+		}
+				
+		dao.insertUndoLog(undoId, undoBy, undoDate, undoType, barcode, requestId, checkedOutBy, checkedOutDate);
 	}
 }
