@@ -205,6 +205,12 @@ public class CheckOutRequestForm extends Form{
 			if (!"".equals(code.trim())) {
 				empty = false;
 				FacilityObject item = mod.getItem(code);
+				
+				// checks that the item is not already Checked Out
+				if (FacilityModule.ITEM_STATUS_CHECKED_OUT.equals(item.getStatus())) {
+					Log.getLog(getClass()).info("Item already checked out. requestId=" + requestId + " barcode=" + code);
+					continue;
+				}
 
 				if (!(item.getBarcode() == null || "".equals(item.getBarcode()))) {
 					Collection col = module.getCategoryByBarcode(item.getBarcode());
@@ -217,8 +223,6 @@ public class CheckOutRequestForm extends Form{
 					if (isInRateCard) {
 							RateCard rc = (RateCard) col.iterator().next();
 
-							// checks if the item status is not Check Out or Check In
-							if (!FacilityModule.ITEM_STATUS_CHECKED_OUT.equals(item.getStatus())) {
 								boolean showTodayOnly = (page != null && page.equals("today"));
 								Collection checkEquipmentCol = module.getEquipmentListFromRequestId(requestId, rc.getCategoryId(), showTodayOnly);
 
@@ -258,8 +262,6 @@ public class CheckOutRequestForm extends Form{
 									Collection extraEquipmentCol = module.getExtraEquipmentListFromRequestId(requestId, null ,rc.getCategoryId());
 									doExtraCheckOutItem(extraEquipmentCol, user, item, rc.getCategoryId());
 								}
-
-							}
 					} else {
 						//do extra checkout 
 						Collection extraEquipmentCol = module.getExtraEquipmentListFromRequestId(requestId,code, null);

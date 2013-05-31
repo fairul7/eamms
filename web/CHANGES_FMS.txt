@@ -1,6 +1,10 @@
 New Build 
 =========
 
+fms_1.0.0_update (May 30 2013) V2.5
+-----------------------------------
+Fixed #16801: Store Admin able to scan 2x during check out
+
 fms_1.0.0_update (May 14 2013) V2.5
 -----------------------------------
 Fixed #16541: Check In and Check Out Issue
